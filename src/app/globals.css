@@ -47,17 +47,50 @@ body {
   }
 }
 
-/* SVG landscape transitions */
+/* ── Node shape transitions ── */
 .landscape-node {
-  transition: opacity 0.35s ease, transform 0.2s ease;
-}
-
-.landscape-node:hover {
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 }
 
+.landscape-node--dimmed {
+  opacity: 0.12;
+  transform: scale(0.75);
+  pointer-events: none;
+}
+
+/* ── Cluster fields ── */
+.cluster-field {
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+.cluster-contour {
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+/* ── Connection lines ── */
+.connection-line {
+  transition: stroke-opacity 0.4s ease;
+  pointer-events: none;
+}
+
+/* ── Labels ── */
+.cluster-label-text {
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Node labels ── */
 .landscape-label {
   transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+/* ── Node glow ── */
+.node-glow {
   pointer-events: none;
 }
 
@@ -95,7 +128,7 @@ body {
 
 /* Cluster hull transitions */
 .cluster-hull {
-  transition: fill-opacity 0.4s ease, stroke-opacity 0.4s ease;
+  transition: fill-opacity 0.5s ease, stroke-opacity 0.5s ease;
 }
 
 /* Tooltip */

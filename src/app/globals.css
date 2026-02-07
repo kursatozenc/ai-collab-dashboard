@@ -93,6 +93,11 @@ body {
   background: #b8b0a6;
 }
 
+/* Cluster hull transitions */
+.cluster-hull {
+  transition: fill-opacity 0.4s ease, stroke-opacity 0.4s ease;
+}
+
 /* Tooltip */
 .landscape-tooltip {
   animation: tooltipIn 0.15s ease-out;

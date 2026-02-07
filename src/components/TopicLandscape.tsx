@@ -1,7 +1,159 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback, useEffect, useMemo } from "react";
 import { RadarItem, Cluster } from "../types";
+
+// ── Cluster colors ──────────────────────────────────────────────
+const CLUSTER_COLORS: Record<string, string> = {
+  trust: "#6366f1",
+  teamwork: "#2563eb",
+  delegation: "#0891b2",
+  communication: "#059669",
+  learning: "#d97706",
+  ethics: "#dc2626",
+  creativity: "#7c3aed",
+};
+
+// ── Geometry helpers ────────────────────────────────────────────
+
+/** Cross product of vectors OA and OB */
+function cross(O: [number, number], A: [number, number], B: [number, number]) {
+  return (A[0] - O[0]) * (B[1] - O[1]) - (A[1] - O[1]) * (B[0] - O[0]);
+}
+
+/** Graham scan convex hull — returns CCW ordered polygon */
+function convexHull(points: [number, number][]): [number, number][] {
+  if (points.length <= 1) return [...points];
+  if (points.length === 2) return [...points];
+
+  const sorted = [...points].sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+  const lower: [number, number][] = [];
+  for (const p of sorted) {
+    while (lower.length >= 2 && cross(lower[lower.length - 2], lower[lower.length - 1], p) <= 0)
+      lower.pop();
+    lower.push(p);
+  }
+  const upper: [number, number][] = [];
+  for (const p of sorted.reverse()) {
+    while (upper.length >= 2 && cross(upper[upper.length - 2], upper[upper.length - 1], p) <= 0)
+      upper.pop();
+    upper.push(p);
+  }
+  // Remove last point of each half because it's repeated
+  lower.pop();
+  upper.pop();
+  return [...lower, ...upper];
+}
+
+/** Expand a convex polygon outward by `pad` pixels */
+function expandHull(hull: [number, number][], pad: number): [number, number][] {
+  if (hull.length < 3) return hull;
+  const expanded: [number, number][] = [];
+  const n = hull.length;
+
+  for (let i = 0; i < n; i++) {
+    const prev = hull[(i - 1 + n) % n];
+    const curr = hull[i];
+    const next = hull[(i + 1) % n];
+
+    // Outward bisector
+    const dx1 = curr[0] - prev[0], dy1 = curr[1] - prev[1];
+    const dx2 = next[0] - curr[0], dy2 = next[1] - curr[1];
+
+    // Outward normals (rotate edge direction 90° CCW)
+    const len1 = Math.sqrt(dx1 * dx1 + dy1 * dy1) || 1;
+    const len2 = Math.sqrt(dx2 * dx2 + dy2 * dy2) || 1;
+    const nx1 = -dy1 / len1, ny1 = dx1 / len1;
+    const nx2 = -dy2 / len2, ny2 = dx2 / len2;
+
+    // Average normal
+    let nx = nx1 + nx2, ny = ny1 + ny2;
+    const nLen = Math.sqrt(nx * nx + ny * ny) || 1;
+    nx /= nLen;
+    ny /= nLen;
+
+    expanded.push([curr[0] + nx * pad, curr[1] + ny * pad]);
+  }
+
+  // Re-hull to clean up any self-intersections
+  return convexHull(expanded);
+}
+
+/** Catmull-Rom-to-Bézier: converts polygon to smooth closed SVG path */
+function catmullRomPath(points: [number, number][], alpha = 0.35): string {
+  if (points.length < 3) return "";
+  const n = points.length;
+
+  // Start with moveTo first point
+  let d = `M ${points[0][0].toFixed(1)} ${points[0][1].toFixed(1)} `;
+
+  for (let i = 0; i < n; i++) {
+    const p0 = points[(i - 1 + n) % n];
+    const p1 = points[i];
+    const p2 = points[(i + 1) % n];
+    const p3 = points[(i + 2) % n];
+
+    // Convert Catmull-Rom to cubic Bézier control points
+    const cp1x = p1[0] + (p2[0] - p0[0]) * alpha;
+    const cp1y = p1[1] + (p2[1] - p0[1]) * alpha;
+    const cp2x = p2[0] - (p3[0] - p1[0]) * alpha;
+    const cp2y = p2[1] - (p3[1] - p1[1]) * alpha;
+
+    d += `C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${p2[0].toFixed(1)} ${p2[1].toFixed(1)} `;
+  }
+
+  return d + "Z";
+}
+
+// ── Overlap relaxation ──────────────────────────────────────────
+
+function relaxPositions(
+  items: RadarItem[],
+  minDist = 16,
+  iterations = 4,
+  maxShift = 4
+): Map<string, [number, number]> {
+  // Initialize with original positions
+  const pos = new Map<string, [number, number]>();
+  items.forEach((item) => pos.set(item.id, [...item.embedding] as [number, number]));
+
+  // Group by cluster
+  const clusterGroups = new Map<string, string[]>();
+  items.forEach((item) => {
+    const group = clusterGroups.get(item.cluster) || [];
+    group.push(item.id);
+    clusterGroups.set(item.cluster, group);
+  });
+
+  for (let iter = 0; iter < iterations; iter++) {
+    for (const [, ids] of clusterGroups) {
+      for (let i = 0; i < ids.length; i++) {
+        for (let j = i + 1; j < ids.length; j++) {
+          const a = pos.get(ids[i])!;
+          const b = pos.get(ids[j])!;
+          const dx = b[0] - a[0];
+          const dy = b[1] - a[1];
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < minDist && dist > 0.01) {
+            const overlap = (minDist - dist) / 2;
+            const shift = Math.min(overlap, maxShift);
+            const ux = dx / dist;
+            const uy = dy / dist;
+            a[0] -= ux * shift;
+            a[1] -= uy * shift;
+            b[0] += ux * shift;
+            b[1] += uy * shift;
+          }
+        }
+      }
+    }
+  }
+
+  return pos;
+}
+
+// ── Component ───────────────────────────────────────────────────
 
 interface TopicLandscapeProps {
   items: RadarItem[];
@@ -29,6 +181,98 @@ export default function TopicLandscape({
   const isPanning = useRef(false);
   const panStart = useRef({ x: 0, y: 0 });
 
+  // ── Step 2: Relaxed positions ──
+  const relaxedPositions = useMemo(() => relaxPositions(items), [items]);
+
+  // ── Step 1 & 3: Hull data + label positions ──
+  const clusterHulls = useMemo(() => {
+    const grouped = new Map<string, { points: [number, number][]; ids: string[] }>();
+
+    items.forEach((item) => {
+      const pos = relaxedPositions.get(item.id) || item.embedding;
+      const g = grouped.get(item.cluster) || { points: [], ids: [] };
+      g.points.push(pos);
+      g.ids.push(item.id);
+      grouped.set(item.cluster, g);
+    });
+
+    const hulls: {
+      clusterId: string;
+      path: string;
+      color: string;
+      centroid: [number, number];
+      labelY: number;
+      count: number;
+      label: string;
+    }[] = [];
+
+    for (const [clusterId, { points, ids }] of grouped) {
+      const color = CLUSTER_COLORS[clusterId] || "#888";
+      const clusterInfo = clusters.find((c) => c.id === clusterId);
+      const label = clusterInfo?.label || clusterId;
+
+      // Centroid
+      const cx = points.reduce((s, p) => s + p[0], 0) / points.length;
+      const cy = points.reduce((s, p) => s + p[1], 0) / points.length;
+
+      // Y-extent for label placement
+      const minY = Math.min(...points.map((p) => p[1]));
+
+      // Label sits above the point cloud, inside the hull
+      const labelY = minY - 18;
+
+      if (points.length < 3) {
+        // Defensive: draw circle or pill
+        const r = 50;
+        if (points.length === 1) {
+          const [px, py] = points[0];
+          hulls.push({
+            clusterId,
+            path: `M ${px - r} ${py} A ${r} ${r} 0 1 1 ${px + r} ${py} A ${r} ${r} 0 1 1 ${px - r} ${py} Z`,
+            color,
+            centroid: [cx, cy],
+            labelY,
+            count: ids.length,
+            label,
+          });
+        } else {
+          // 2 points → pill
+          const [p1, p2] = points;
+          const midX = (p1[0] + p2[0]) / 2;
+          const midY = (p1[1] + p2[1]) / 2;
+          hulls.push({
+            clusterId,
+            path: `M ${midX - r} ${midY - r} L ${midX + r} ${midY - r} A ${r} ${r} 0 0 1 ${midX + r} ${midY + r} L ${midX - r} ${midY + r} A ${r} ${r} 0 0 1 ${midX - r} ${midY - r} Z`,
+            color,
+            centroid: [cx, cy],
+            labelY,
+            count: ids.length,
+            label,
+          });
+        }
+        continue;
+      }
+
+      const hull = convexHull(points);
+      const expanded = expandHull(hull, 40);
+      const pathD = catmullRomPath(expanded);
+
+      hulls.push({
+        clusterId,
+        path: pathD,
+        color,
+        centroid: [cx, cy],
+        labelY,
+        count: ids.length,
+        label,
+      });
+    }
+
+    return hulls;
+  }, [items, clusters, relaxedPositions]);
+
+  // ── Zoom & pan handlers ──
+
   const handleWheel = useCallback(
     (e: React.WheelEvent) => {
       e.preventDefault();
@@ -50,18 +294,14 @@ export default function TopicLandscape({
     [viewBox]
   );
 
-  const handleMouseDown = useCallback(
-    (e: React.MouseEvent) => {
-      if (e.button !== 0) return;
-      isPanning.current = true;
-      panStart.current = { x: e.clientX, y: e.clientY };
-    },
-    []
-  );
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    if (e.button !== 0) return;
+    isPanning.current = true;
+    panStart.current = { x: e.clientX, y: e.clientY };
+  }, []);
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
-      // Track mouse for tooltip
       setMousePos({ x: e.clientX, y: e.clientY });
 
       if (!isPanning.current) return;
@@ -106,31 +346,53 @@ export default function TopicLandscape({
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
       >
-        {/* Cluster region labels (background) */}
-        {clusters.map((cluster) => {
-          const anchor = clusterAnchors[cluster.id];
-          if (!anchor) return null;
-          return (
+        {/* ── Layer 1: Cluster hulls (soft background blobs) ── */}
+        {clusterHulls.map((hull) => (
+          <path
+            key={`hull-${hull.clusterId}`}
+            className="cluster-hull"
+            d={hull.path}
+            fill={hull.color}
+            fillOpacity={0.045}
+            stroke={hull.color}
+            strokeOpacity={0.12}
+            strokeWidth={1}
+          />
+        ))}
+
+        {/* ── Layer 2: Cluster labels (inside hulls) ── */}
+        {clusterHulls.map((hull) => (
+          <g key={`label-${hull.clusterId}`}>
             <text
-              key={`label-${cluster.id}`}
-              x={anchor[0]}
-              y={anchor[1] - 65}
+              x={hull.centroid[0]}
+              y={hull.labelY}
               textAnchor="middle"
-              fill="var(--foreground)"
-              opacity={0.07}
-              fontSize={28}
+              fill={hull.color}
+              opacity={0.14}
+              fontSize={20}
               fontFamily="var(--font-dm-serif), Georgia, serif"
               fontWeight={400}
+              letterSpacing={0.5}
             >
-              {cluster.label}
+              {hull.label}
             </text>
-          );
-        })}
+            <text
+              x={hull.centroid[0]}
+              y={hull.labelY + 15}
+              textAnchor="middle"
+              fill={hull.color}
+              opacity={0.22}
+              fontSize={9}
+              fontFamily="var(--font-inter), sans-serif"
+            >
+              {hull.count} {hull.count === 1 ? "item" : "items"}
+            </text>
+          </g>
+        ))}
 
-        {/* Links (very subtle) */}
-
-        {/* Nodes */}
+        {/* ── Layer 3: Nodes ── */}
         {items.map((item) => {
+          const pos = relaxedPositions.get(item.id) || item.embedding;
           const isVisible = visibleItemIds.size === 0 || visibleItemIds.has(item.id);
           const isSelected = selectedItem?.id === item.id;
           const isHovered = hoveredItem?.id === item.id;
@@ -157,8 +419,8 @@ export default function TopicLandscape({
               {/* Selection ring */}
               {isSelected && (
                 <circle
-                  cx={item.embedding[0]}
-                  cy={item.embedding[1]}
+                  cx={pos[0]}
+                  cy={pos[1]}
                   r={11}
                   fill="none"
                   stroke={color}
@@ -170,8 +432,8 @@ export default function TopicLandscape({
               {/* Hover glow */}
               {isHovered && !isSelected && (
                 <circle
-                  cx={item.embedding[0]}
-                  cy={item.embedding[1]}
+                  cx={pos[0]}
+                  cy={pos[1]}
                   r={10}
                   fill={color}
                   opacity={0.1}
@@ -180,8 +442,8 @@ export default function TopicLandscape({
 
               {/* Node dot */}
               <circle
-                cx={item.embedding[0]}
-                cy={item.embedding[1]}
+                cx={pos[0]}
+                cy={pos[1]}
                 r={isSelected ? 6 : isHovered ? 5.5 : 4.5}
                 fill={color}
                 opacity={0.85}
@@ -191,8 +453,8 @@ export default function TopicLandscape({
               {(isHovered || isSelected) && (
                 <text
                   className="landscape-label"
-                  x={item.embedding[0]}
-                  y={item.embedding[1] + 14}
+                  x={pos[0]}
+                  y={pos[1] + 14}
                   textAnchor="middle"
                   fill="var(--foreground)"
                   fontSize={9}

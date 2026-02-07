@@ -1,13 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0f1117;
-  --foreground: #e5e7eb;
-  --surface: #1a1d27;
-  --surface-hover: #242836;
-  --border: #2a2e3a;
-  --accent: #147ea8;
-  --accent-light: #1a9fd4;
+  --background: #f5f0eb;
+  --foreground: #2d2926;
+  --surface: #fffbf7;
+  --surface-hover: #f0ebe5;
+  --border: #e0d8cf;
+  --text-secondary: #6b6560;
+  --research-color: #2563eb;
+  --industry-color: #d97706;
+  --accent: #2563eb;
+  --accent-light: #3b82f6;
 }
 
 @theme inline {
@@ -19,25 +22,16 @@
   --color-accent: var(--accent);
   --color-accent-light: var(--accent-light);
   --font-sans: var(--font-inter);
+  --font-serif: var(--font-dm-serif);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
-  overflow: hidden;
 }
 
-/* Graph canvas styling */
-.force-graph-container canvas {
-  cursor: grab;
-}
-
-.force-graph-container canvas:active {
-  cursor: grabbing;
-}
-
-/* Node detail panel */
+/* Detail panel animation */
 .detail-panel {
   animation: slideIn 0.25s ease-out;
 }
@@ -53,13 +47,18 @@ body {
   }
 }
 
-/* Cluster tag */
-.cluster-tag {
-  transition: all 0.15s ease;
+/* SVG landscape transitions */
+.landscape-node {
+  transition: opacity 0.35s ease, transform 0.2s ease;
 }
 
-.cluster-tag:hover {
-  transform: scale(1.05);
+.landscape-node:hover {
+  cursor: pointer;
+}
+
+.landscape-label {
+  transition: opacity 0.35s ease;
+  pointer-events: none;
 }
 
 /* Search bar */
@@ -67,13 +66,22 @@ body {
   box-shadow: 0 0 0 2px var(--accent);
 }
 
+/* Filter pills */
+.filter-pill {
+  transition: all 0.15s ease;
+}
+
+.filter-pill:hover {
+  transform: scale(1.03);
+}
+
 /* Scrollbar styling */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--surface);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -82,5 +90,22 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3a3e4a;
+  background: #b8b0a6;
+}
+
+/* Tooltip */
+.landscape-tooltip {
+  animation: tooltipIn 0.15s ease-out;
+  pointer-events: none;
+}
+
+@keyframes tooltipIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

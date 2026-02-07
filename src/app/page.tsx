@@ -1,123 +1,199 @@
 "use client";
 
 import { useState, useMemo, useCallback } from "react";
-import ForceGraph, { ResearchNode } from "../components/ForceGraph";
-import NodeDetail from "../components/NodeDetail";
-import ClusterLegend from "../components/ClusterLegend";
+import { RadarItem, DesignLever, DesignerIntent } from "../types";
+import TopicLandscape from "../components/TopicLandscape";
+import ItemDetail from "../components/ItemDetail";
+import FilterPanel from "../components/FilterPanel";
 import SearchBar from "../components/SearchBar";
+import ThemeCandidates from "../components/ThemeCandidates";
 import graphData from "../data/research-graph.json";
 
-export default function Home() {
-  const [selectedNode, setSelectedNode] = useState<ResearchNode | null>(null);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeCluster, setActiveCluster] = useState<string | null>(null);
+const CLUSTER_ANCHORS: Record<string, [number, number]> = {
+  trust: [200, 150],
+  teamwork: [500, 300],
+  delegation: [800, 150],
+  communication: [200, 500],
+  learning: [500, 550],
+  ethics: [800, 500],
+  creativity: [350, 120],
+};
 
-  const nodes = graphData.nodes as ResearchNode[];
-  const links = graphData.links;
+export default function Home() {
+  const [selectedItem, setSelectedItem] = useState<RadarItem | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sourceFilter, setSourceFilter] = useState<"all" | "research" | "industry">("all");
+  const [activeLeverFilters, setActiveLeverFilters] = useState<Set<DesignLever>>(new Set());
+  const [activeIntentFilters, setActiveIntentFilters] = useState<Set<DesignerIntent>>(new Set());
+
+  const items = graphData.nodes as RadarItem[];
   const clusters = graphData.clusters;
 
-  // Search filtering
-  const highlightedNodes = useMemo(() => {
-    if (!searchQuery.trim()) return new Set<string>();
-    const q = searchQuery.toLowerCase();
-    const matched = nodes.filter(
-      (n) =>
-        n.title.toLowerCase().includes(q) ||
-        n.authors.toLowerCase().includes(q) ||
-        n.summary.toLowerCase().includes(q) ||
-        n.cluster.toLowerCase().includes(q)
-    );
-    return new Set(matched.map((n) => n.id));
-  }, [searchQuery, nodes]);
+  // Source counts
+  const researchCount = useMemo(() => items.filter((i) => i.source === "research").length, [items]);
+  const industryCount = useMemo(() => items.filter((i) => i.source === "industry").length, [items]);
 
-  const searchResultCount = highlightedNodes.size || nodes.length;
-
-  // Cluster node counts
-  const nodeCounts = useMemo(() => {
-    const counts: Record<string, number> = {};
-    nodes.forEach((n) => {
-      counts[n.cluster] = (counts[n.cluster] || 0) + 1;
+  // Combined filtering
+  const visibleItemIds = useMemo(() => {
+    const filtered = items.filter((item) => {
+      // Search
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase();
+        if (
+          !item.title.toLowerCase().includes(q) &&
+          !item.authors.toLowerCase().includes(q) &&
+          !item.summary.toLowerCase().includes(q) &&
+          !item.designQuestion?.toLowerCase().includes(q) &&
+          !item.tags?.some((t) => t.toLowerCase().includes(q))
+        ) {
+          return false;
+        }
+      }
+      // Source
+      if (sourceFilter !== "all" && item.source !== sourceFilter) return false;
+      // Design levers (OR)
+      if (
+        activeLeverFilters.size > 0 &&
+        !item.designLevers?.some((l) => activeLeverFilters.has(l))
+      )
+        return false;
+      // Designer intents (OR)
+      if (
+        activeIntentFilters.size > 0 &&
+        !item.designerIntents?.some((i) => activeIntentFilters.has(i))
+      )
+        return false;
+      return true;
     });
-    return counts;
-  }, [nodes]);
+    return new Set(filtered.map((i) => i.id));
+  }, [items, searchQuery, sourceFilter, activeLeverFilters, activeIntentFilters]);
 
-  const handleNodeClick = useCallback((node: ResearchNode) => {
-    setSelectedNode(node);
+  const hasActiveFilters =
+    searchQuery.trim() !== "" ||
+    sourceFilter !== "all" ||
+    activeLeverFilters.size > 0 ||
+    activeIntentFilters.size > 0;
+
+  const handleItemClick = useCallback((item: RadarItem) => {
+    setSelectedItem(item);
   }, []);
 
   const handleSearch = useCallback((query: string) => {
     setSearchQuery(query);
   }, []);
 
-  const handleClusterClick = useCallback((clusterId: string | null) => {
-    setActiveCluster(clusterId);
+  const handleLeverToggle = useCallback((lever: DesignLever) => {
+    setActiveLeverFilters((prev) => {
+      const next = new Set(prev);
+      if (next.has(lever)) next.delete(lever);
+      else next.add(lever);
+      return next;
+    });
+  }, []);
+
+  const handleIntentToggle = useCallback((intent: DesignerIntent) => {
+    setActiveIntentFilters((prev) => {
+      const next = new Set(prev);
+      if (next.has(intent)) next.delete(intent);
+      else next.add(intent);
+      return next;
+    });
+  }, []);
+
+  const handleClearAll = useCallback(() => {
+    setSearchQuery("");
+    setSourceFilter("all");
+    setActiveLeverFilters(new Set());
+    setActiveIntentFilters(new Set());
   }, []);
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden">
-      {/* Header bar */}
-      <div className="absolute top-0 left-0 right-0 z-10 p-4 pb-3">
-        <div className="flex items-start justify-between gap-4 mb-3">
-          <div className="flex-1 min-w-0">
-            <h1 className="text-lg font-semibold text-white flex items-center gap-2">
-              <span className="text-2xl">🔬</span>
-              Human-AI Collaboration Research
-            </h1>
-            <p className="text-xs text-gray-500 mt-0.5">
-              {nodes.length} papers across {clusters.length} research clusters
-            </p>
-          </div>
-          <div className="w-[340px] flex-shrink-0">
+    <div className="h-screen flex flex-col" style={{ backgroundColor: "var(--background)" }}>
+      {/* Header */}
+      <header
+        className="flex-shrink-0 px-6 py-4 border-b"
+        style={{ borderColor: "var(--border)" }}
+      >
+        <h1
+          className="text-xl"
+          style={{
+            fontFamily: "var(--font-dm-serif), Georgia, serif",
+            color: "var(--foreground)",
+          }}
+        >
+          AI Collaboration Radar
+        </h1>
+        <p className="text-xs mt-0.5" style={{ color: "var(--text-secondary)" }}>
+          A sensemaking instrument for designing AI-supported teams
+        </p>
+      </header>
+
+      {/* Main content */}
+      <div className="flex flex-1 overflow-hidden">
+        {/* Left sidebar: filters */}
+        <aside
+          className="flex-shrink-0 w-56 p-5 border-r overflow-y-auto"
+          style={{ borderColor: "var(--border)" }}
+        >
+          {/* Search */}
+          <div className="mb-6">
             <SearchBar
               onSearch={handleSearch}
-              resultCount={searchResultCount}
-              totalCount={nodes.length}
+              resultCount={visibleItemIds.size}
+              totalCount={items.length}
             />
           </div>
-        </div>
 
-        {/* Cluster legend */}
-        <ClusterLegend
-          clusters={clusters}
-          activeCluster={activeCluster}
-          onClusterClick={handleClusterClick}
-          nodeCounts={nodeCounts}
-        />
-      </div>
+          {/* Filters */}
+          <FilterPanel
+            sourceFilter={sourceFilter}
+            onSourceFilterChange={setSourceFilter}
+            activeLeverFilters={activeLeverFilters}
+            onLeverToggle={handleLeverToggle}
+            activeIntentFilters={activeIntentFilters}
+            onIntentToggle={handleIntentToggle}
+            researchCount={researchCount}
+            industryCount={industryCount}
+            onClearAll={handleClearAll}
+            hasActiveFilters={hasActiveFilters}
+          />
 
-      {/* Graph */}
-      <div
-        className="w-full h-full"
-        style={{ paddingRight: selectedNode ? 380 : 0, transition: "padding-right 0.25s ease" }}
-      >
-        <ForceGraph
-          nodes={nodes}
-          links={links}
-          clusters={clusters}
-          highlightedNodes={highlightedNodes}
-          selectedNode={selectedNode}
-          onNodeClick={handleNodeClick}
-          activeCluster={activeCluster}
-        />
-      </div>
+          {/* Divider */}
+          <div className="h-px my-6" style={{ backgroundColor: "var(--border)" }} />
 
-      {/* Node detail panel */}
-      {selectedNode && (
-        <NodeDetail
-          node={selectedNode}
-          clusters={clusters}
-          onClose={() => setSelectedNode(null)}
-        />
-      )}
+          {/* Emerging Themes */}
+          <ThemeCandidates items={items} onItemClick={handleItemClick} />
 
-      {/* Footer */}
-      <div className="absolute bottom-3 left-4 text-xs text-gray-600">
-        Click a node to explore | Scroll to zoom | Drag to pan
-      </div>
+          {/* Footer credit */}
+          <div className="mt-8 text-[10px]" style={{ color: "var(--text-secondary)" }}>
+            Curated by Kursat Ozenc
+          </div>
+        </aside>
 
-      {/* Author credit */}
-      <div className="absolute bottom-3 right-4 text-xs text-gray-600">
-        Curated by Kursat Ozenc
+        {/* Center: Topic landscape */}
+        <main className="flex-1 relative overflow-hidden">
+          <TopicLandscape
+            items={items}
+            clusters={clusters}
+            visibleItemIds={hasActiveFilters ? visibleItemIds : new Set()}
+            selectedItem={selectedItem}
+            onItemClick={handleItemClick}
+            clusterAnchors={CLUSTER_ANCHORS}
+          />
+        </main>
+
+        {/* Right: Detail panel */}
+        {selectedItem && (
+          <aside
+            className="flex-shrink-0 w-[360px] border-l overflow-hidden"
+            style={{ borderColor: "var(--border)" }}
+          >
+            <ItemDetail
+              item={selectedItem}
+              onClose={() => setSelectedItem(null)}
+            />
+          </aside>
+        )}
       </div>
     </div>
   );

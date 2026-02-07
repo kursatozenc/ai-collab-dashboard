@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, DM_Serif_Text } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -7,10 +7,16 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+const dmSerif = DM_Serif_Text({
+  variable: "--font-dm-serif",
+  weight: "400",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
-  title: "Human-AI Collaboration Research — Knowledge Graph",
+  title: "AI Collaboration Radar",
   description:
-    "Interactive knowledge graph exploring the frontier of human-AI teamwork. Curated research on trust, delegation, communication, and team dynamics.",
+    "A sensemaking instrument for designing AI-supported teams. Explore the frontier of human-AI collaboration research across trust, delegation, communication, and team dynamics.",
 };
 
 export default function RootLayout({
@@ -20,7 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} antialiased`}>{children}</body>
+      <body className={`${inter.variable} ${dmSerif.variable} antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }

@@ -59,14 +59,27 @@ body {
   pointer-events: none;
 }
 
-/* ── Cluster fields ── */
-.cluster-field {
-  transition: opacity 0.6s ease;
+/* ── Cluster Pads (emotion-picker style) ── */
+.cluster-pad {
+  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   pointer-events: none;
 }
 
-.cluster-contour {
-  transition: opacity 0.5s ease;
+.cluster-pad-inner-glow {
+  transition: fill-opacity 0.3s ease, stroke-opacity 0.3s ease;
+  pointer-events: none;
+}
+
+/* ── Cluster Pad Labels ── */
+.cluster-pad-label {
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Node hover ring ── */
+.node-hover-ring {
   pointer-events: none;
 }
 
@@ -76,21 +89,9 @@ body {
   pointer-events: none;
 }
 
-/* ── Labels ── */
-.cluster-label-text {
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-  user-select: none;
-}
-
 /* ── Node labels ── */
 .landscape-label {
   transition: opacity 0.35s ease;
-  pointer-events: none;
-}
-
-/* ── Node glow ── */
-.node-glow {
   pointer-events: none;
 }
 
@@ -124,11 +125,6 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #b8b0a6;
-}
-
-/* Cluster hull transitions */
-.cluster-hull {
-  transition: fill-opacity 0.5s ease, stroke-opacity 0.5s ease;
 }
 
 /* Tooltip */

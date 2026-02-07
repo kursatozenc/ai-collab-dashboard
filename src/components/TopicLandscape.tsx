@@ -81,16 +81,32 @@ function catmullRomPath(points: [number, number][], alpha = 0.35): string {
   return d + "Z";
 }
 
-/** Scale hull points toward centroid to create inner contour */
-function innerContour(
-  expandedHull: [number, number][],
-  centroid: [number, number],
-  scale = 0.55
-): [number, number][] {
-  return expandedHull.map((p) => [
-    centroid[0] + (p[0] - centroid[0]) * scale,
-    centroid[1] + (p[1] - centroid[1]) * scale,
-  ]);
+// ── Point-in-polygon (ray-casting) ─────────────────────────────
+
+function pointInPolygon(pt: [number, number], poly: [number, number][]): boolean {
+  let inside = false;
+  const n = poly.length;
+  for (let i = 0, j = n - 1; i < n; j = i++) {
+    const xi = poly[i][0], yi = poly[i][1];
+    const xj = poly[j][0], yj = poly[j][1];
+    if (
+      ((yi > pt[1]) !== (yj > pt[1])) &&
+      (pt[0] < ((xj - xi) * (pt[1] - yi)) / (yj - yi) + xi)
+    ) {
+      inside = !inside;
+    }
+  }
+  return inside;
+}
+
+/** Synthesize polygon points around a circle (for hit-testing small clusters) */
+function circlePoints(cx: number, cy: number, r: number, n = 12): [number, number][] {
+  const pts: [number, number][] = [];
+  for (let i = 0; i < n; i++) {
+    const a = (2 * Math.PI * i) / n;
+    pts.push([cx + r * Math.cos(a), cy + r * Math.sin(a)]);
+  }
+  return pts;
 }
 
 // ── Overlap relaxation ──────────────────────────────────────────
@@ -166,6 +182,7 @@ export default function TopicLandscape({
 }: TopicLandscapeProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const [hoveredItem, setHoveredItem] = useState<RadarItem | null>(null);
+  const [hoveredCluster, setHoveredCluster] = useState<string | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [viewBox, setViewBox] = useState({ x: -50, y: -30, w: 1100, h: 760 });
   const isPanning = useRef(false);
@@ -174,8 +191,8 @@ export default function TopicLandscape({
   // ── Relaxed positions (once) ──
   const relaxedPositions = useMemo(() => relaxPositions(items), [items]);
 
-  // ── Hull computation with inner contours + bounding boxes ──
-  const clusterHulls = useMemo(() => {
+  // ── Pad hull computation ──
+  const clusterPads = useMemo(() => {
     const grouped = new Map<string, { points: [number, number][]; ids: string[] }>();
     items.forEach((item) => {
       const pos = relaxedPositions.get(item.id) || item.embedding;
@@ -185,18 +202,14 @@ export default function TopicLandscape({
       grouped.set(item.cluster, g);
     });
 
-    const hulls: {
+    const pads: {
       clusterId: string;
-      path: string;
-      innerPath: string;
+      padPath: string;
+      hullPoints: [number, number][];
       color: string;
       centroid: [number, number];
-      labelY: number;
-      hullTopY: number;
       count: number;
       label: string;
-      bboxRx: number;
-      bboxRy: number;
     }[] = [];
 
     for (const [clusterId, { points, ids }] of grouped) {
@@ -206,8 +219,6 @@ export default function TopicLandscape({
 
       const cx = points.reduce((s, p) => s + p[0], 0) / points.length;
       const cy = points.reduce((s, p) => s + p[1], 0) / points.length;
-      const minY = Math.min(...points.map((p) => p[1]));
-      const labelY = minY - 22;
 
       if (points.length < 3) {
         const r = 55;
@@ -219,18 +230,16 @@ export default function TopicLandscape({
                 const my = (points[0][1] + points[1][1]) / 2;
                 return `M ${mx - r} ${my - r} L ${mx + r} ${my - r} A ${r} ${r} 0 0 1 ${mx + r} ${my + r} L ${mx - r} ${my + r} A ${r} ${r} 0 0 1 ${mx - r} ${my - r} Z`;
               })();
-        hulls.push({
+        // Synthesize hit-test polygon for small clusters
+        const hitPoly = circlePoints(cx, cy, r, 12);
+        pads.push({
           clusterId,
-          path: fallbackPath,
-          innerPath: "",
+          padPath: fallbackPath,
+          hullPoints: hitPoly,
           color,
           centroid: [cx, cy],
-          labelY,
-          hullTopY: minY,
           count: ids.length,
           label,
-          bboxRx: r,
-          bboxRy: r,
         });
         continue;
       }
@@ -239,48 +248,47 @@ export default function TopicLandscape({
       const expanded = expandHull(hull, 40);
       const pathD = catmullRomPath(expanded);
 
-      // Inner contour
-      const inner = innerContour(expanded, [cx, cy], 0.55);
-      const innerD = catmullRomPath(inner);
-
-      // Bounding box for gradient halo ellipse
-      const allX = expanded.map((p) => p[0]);
-      const allY = expanded.map((p) => p[1]);
-      const bboxRx = (Math.max(...allX) - Math.min(...allX)) / 2 * 0.65;
-      const bboxRy = (Math.max(...allY) - Math.min(...allY)) / 2 * 0.65;
-
-      hulls.push({
+      pads.push({
         clusterId,
-        path: pathD,
-        innerPath: innerD,
+        padPath: pathD,
+        hullPoints: expanded,
         color,
         centroid: [cx, cy],
-        labelY,
-        hullTopY: Math.min(...expanded.map((p) => p[1])),
         count: ids.length,
         label,
-        bboxRx,
-        bboxRy,
       });
     }
 
-    return hulls;
+    return pads;
   }, [items, clusters, relaxedPositions]);
 
   // ── Cluster visibility for filter-responsive labels ──
   const clusterVisibility = useMemo(() => {
     const vis = new Map<string, { visible: number; total: number }>();
-    const hasFilters = visibleItemIds.size > 0;
+    const hasFiltersLocal = visibleItemIds.size > 0;
     items.forEach((item) => {
       const entry = vis.get(item.cluster) || { visible: 0, total: 0 };
       entry.total++;
-      if (!hasFilters || visibleItemIds.has(item.id)) entry.visible++;
+      if (!hasFiltersLocal || visibleItemIds.has(item.id)) entry.visible++;
       vis.set(item.cluster, entry);
     });
     return vis;
   }, [items, visibleItemIds]);
 
   const hasFilters = visibleItemIds.size > 0;
+
+  // ── SVG coordinate conversion ──
+  const svgPointFromClient = useCallback(
+    (clientX: number, clientY: number): [number, number] | null => {
+      const svg = svgRef.current;
+      if (!svg) return null;
+      const rect = svg.getBoundingClientRect();
+      const x = ((clientX - rect.left) / rect.width) * viewBox.w + viewBox.x;
+      const y = ((clientY - rect.top) / rect.height) * viewBox.h + viewBox.y;
+      return [x, y];
+    },
+    [viewBox]
+  );
 
   // ── Zoom & pan ──
 
@@ -312,6 +320,23 @@ export default function TopicLandscape({
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
       setMousePos({ x: e.clientX, y: e.clientY });
+
+      // Pad hover detection (only when not panning)
+      if (!isPanning.current) {
+        const svgPt = svgPointFromClient(e.clientX, e.clientY);
+        if (svgPt) {
+          let found: string | null = null;
+          for (const h of clusterPads) {
+            if (pointInPolygon(svgPt, h.hullPoints)) {
+              found = h.clusterId;
+              break;
+            }
+          }
+          setHoveredCluster((prev) => (prev === found ? prev : found));
+        }
+      }
+
+      // Pan logic
       if (!isPanning.current) return;
       const svg = svgRef.current;
       if (!svg) return;
@@ -321,7 +346,7 @@ export default function TopicLandscape({
       setViewBox((prev) => ({ ...prev, x: prev.x - dx, y: prev.y - dy }));
       panStart.current = { x: e.clientX, y: e.clientY };
     },
-    [viewBox.w, viewBox.h]
+    [viewBox.w, viewBox.h, svgPointFromClient, clusterPads]
   );
 
   const handleMouseUp = useCallback(() => {
@@ -348,16 +373,16 @@ export default function TopicLandscape({
       >
         {/* ══════════ DEFS ══════════ */}
         <defs>
-          {/* Radial gradient per cluster */}
-          {clusterHulls.map((h) => (
+          {/* Pad radial gradient per cluster (center-bright, edge-fade) */}
+          {clusterPads.map((h) => (
             <radialGradient
-              key={`grad-${h.clusterId}`}
-              id={`grad-${h.clusterId}`}
-              cx="50%" cy="50%" r="50%" fx="50%" fy="50%"
+              key={`pad-grad-${h.clusterId}`}
+              id={`pad-grad-${h.clusterId}`}
+              cx="50%" cy="45%" r="55%" fx="50%" fy="45%"
             >
-              <stop offset="0%" stopColor={h.color} stopOpacity={0.13} />
-              <stop offset="55%" stopColor={h.color} stopOpacity={0.05} />
-              <stop offset="100%" stopColor={h.color} stopOpacity={0.015} />
+              <stop offset="0%" stopColor={h.color} stopOpacity={0.28} />
+              <stop offset="60%" stopColor={h.color} stopOpacity={0.18} />
+              <stop offset="100%" stopColor={h.color} stopOpacity={0.12} />
             </radialGradient>
           ))}
 
@@ -366,9 +391,30 @@ export default function TopicLandscape({
             <circle cx="20" cy="20" r="0.6" fill="var(--foreground)" opacity="0.035" />
           </pattern>
 
-          {/* Glow filter for hover */}
-          <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="4" />
+          {/* Pad soft shadow */}
+          <filter id="pad-shadow" x="-20%" y="-15%" width="140%" height="145%">
+            <feDropShadow dx="0" dy="4" stdDeviation="16" floodColor="#000" floodOpacity="0.08" />
+          </filter>
+
+          {/* Pad hover glow */}
+          <filter id="pad-glow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur" />
+            <feFlood floodOpacity="0.12" result="color" />
+            <feComposite in="color" in2="blur" operator="in" result="glow" />
+            <feMerge>
+              <feMergeNode in="glow" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+
+          {/* Node micro-shadow */}
+          <filter id="node-shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="1" stdDeviation="2" floodColor="#000" floodOpacity="0.15" />
+          </filter>
+
+          {/* Node hover ring glow */}
+          <filter id="node-hover-glow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
           </filter>
         </defs>
 
@@ -379,60 +425,53 @@ export default function TopicLandscape({
           className="pointer-events-none"
         />
 
-        {/* ══════════ LAYER 1a: Gradient halo ellipses ══════════ */}
-        {clusterHulls.map((h) => {
+        {/* ══════════ LAYER 1a: Cluster Pads ══════════ */}
+        {clusterPads.map((h) => {
+          const isHoveredPad = hoveredCluster === h.clusterId;
+          const isActivePad = selectedItem?.cluster === h.clusterId;
+          const isFadedPad = hoveredCluster !== null && !isHoveredPad;
           const cv = clusterVisibility.get(h.clusterId);
           const dimmed = hasFilters && cv && cv.visible === 0;
+
           return (
-            <ellipse
-              key={`field-${h.clusterId}`}
-              cx={h.centroid[0]}
-              cy={h.centroid[1]}
-              rx={h.bboxRx}
-              ry={h.bboxRy}
-              fill={`url(#grad-${h.clusterId})`}
-              opacity={dimmed ? 0.2 : 1}
-              className="cluster-field"
+            <path
+              key={`pad-${h.clusterId}`}
+              className="cluster-pad"
+              d={h.padPath}
+              fill={`url(#pad-grad-${h.clusterId})`}
+              filter={isHoveredPad ? "url(#pad-glow)" : "url(#pad-shadow)"}
+              opacity={dimmed ? 0.2 : isFadedPad ? 0.35 : 1}
+              style={{
+                transform: isHoveredPad
+                  ? "scale(1.04)"
+                  : isActivePad
+                    ? "scale(1.03)"
+                    : "scale(1)",
+                transformOrigin: `${h.centroid[0]}px ${h.centroid[1]}px`,
+              }}
+              pointerEvents="none"
             />
           );
         })}
 
-        {/* ══════════ LAYER 1b: Hull paths (territory outlines) ══════════ */}
-        {clusterHulls.map((h) => {
-          const isActiveCluster = selectedItem?.cluster === h.clusterId;
-          const cv = clusterVisibility.get(h.clusterId);
-          const dimmed = hasFilters && cv && cv.visible === 0;
+        {/* ══════════ LAYER 1b: Inner glow overlay (pressed state) ══════════ */}
+        {clusterPads.map((h) => {
+          const isActivePad = selectedItem?.cluster === h.clusterId;
+          if (!isActivePad) return null;
           return (
             <path
-              key={`hull-${h.clusterId}`}
-              className="cluster-hull"
-              d={h.path}
+              key={`pad-glow-${h.clusterId}`}
+              className="cluster-pad-inner-glow"
+              d={h.padPath}
               fill={h.color}
-              fillOpacity={dimmed ? 0.02 : isActiveCluster ? 0.10 : 0.06}
+              fillOpacity={0.06}
               stroke={h.color}
-              strokeOpacity={dimmed ? 0.05 : isActiveCluster ? 0.25 : 0.18}
-              strokeWidth={1.2}
-              strokeDasharray="8 4"
+              strokeOpacity={0.15}
+              strokeWidth={1.5}
+              pointerEvents="none"
             />
           );
         })}
-
-        {/* ══════════ LAYER 1c: Inner contours (topographic depth) ══════════ */}
-        {clusterHulls.map((h) =>
-          h.innerPath ? (
-            <path
-              key={`contour-${h.clusterId}`}
-              className="cluster-contour"
-              d={h.innerPath}
-              fill={h.color}
-              fillOpacity={0.035}
-              stroke={h.color}
-              strokeOpacity={0.09}
-              strokeWidth={0.7}
-              strokeDasharray="4 6"
-            />
-          ) : null
-        )}
 
         {/* ══════════ LAYER 2: Connection lines (selected node) ══════════ */}
         {selectedItem &&
@@ -459,49 +498,50 @@ export default function TopicLandscape({
               );
             })}
 
-        {/* ══════════ LAYER 3: Cluster labels ══════════ */}
-        {clusterHulls.map((h) => {
-          const isActiveCluster = selectedItem?.cluster === h.clusterId;
+        {/* ══════════ LAYER 3: Cluster labels (inside pads) ══════════ */}
+        {clusterPads.map((h) => {
+          const isFadedPad = hoveredCluster !== null && hoveredCluster !== h.clusterId;
           const cv = clusterVisibility.get(h.clusterId);
           const showFiltered = hasFilters && cv;
+
+          // Two-line split for labels containing "&"
+          const parts = h.label.includes(" & ")
+            ? h.label.split(" & ")
+            : [h.label];
+
           return (
             <g key={`label-${h.clusterId}`}>
-              {/* Connector whisker */}
-              <line
-                x1={h.centroid[0]}
-                y1={h.labelY + 20}
-                x2={h.centroid[0]}
-                y2={h.hullTopY}
-                stroke={h.color}
-                strokeOpacity={0.08}
-                strokeWidth={0.5}
-                strokeDasharray="2 3"
-              />
-              {/* Cluster name */}
-              <text
-                x={h.centroid[0]}
-                y={h.labelY}
-                textAnchor="middle"
-                fill={h.color}
-                opacity={isActiveCluster ? 0.50 : 0.28}
-                fontSize={18}
-                fontWeight={700}
-                fontFamily="var(--font-dm-serif), Georgia, serif"
-                letterSpacing={0.5}
-                className="cluster-label-text"
-              >
-                {h.label}
-              </text>
+              {parts.map((line, i) => (
+                <text
+                  key={i}
+                  x={h.centroid[0]}
+                  y={h.centroid[1] + (i - (parts.length - 1) / 2) * 18}
+                  textAnchor="middle"
+                  dominantBaseline="central"
+                  fill={h.color}
+                  opacity={isFadedPad ? 0.25 : 0.9}
+                  fontSize={14}
+                  fontWeight={700}
+                  fontFamily="var(--font-dm-serif), Georgia, serif"
+                  letterSpacing={0.3}
+                  className="cluster-pad-label"
+                  pointerEvents="none"
+                >
+                  {parts.length > 1 && i === 0 ? line + " &" : line}
+                </text>
+              ))}
               {/* Count badge */}
               <text
                 x={h.centroid[0]}
-                y={h.labelY + 16}
+                y={h.centroid[1] + ((parts.length - 1) / 2) * 18 + 18}
                 textAnchor="middle"
+                dominantBaseline="central"
                 fill={h.color}
-                opacity={0.28}
+                opacity={isFadedPad ? 0.15 : 0.45}
                 fontSize={9}
                 fontFamily="var(--font-inter), sans-serif"
-                className="cluster-label-text"
+                className="cluster-pad-label"
+                pointerEvents="none"
               >
                 {showFiltered
                   ? `${cv!.visible} of ${cv!.total}`
@@ -533,16 +573,17 @@ export default function TopicLandscape({
               onMouseEnter={() => setHoveredItem(item)}
               onMouseLeave={() => setHoveredItem(null)}
             >
-              {/* Hover glow halo */}
-              {(isHovered || isSelected) && (
+              {/* Hover ring (faint expanding ring) */}
+              {isHovered && (
                 <circle
                   cx={pos[0]}
                   cy={pos[1]}
-                  r={r * 2.8}
-                  fill={clusterColor}
-                  opacity={0.12}
-                  filter="url(#glow)"
-                  className="node-glow"
+                  r={r * 2.2}
+                  fill="none"
+                  stroke={clusterColor}
+                  strokeWidth={1}
+                  opacity={0.2}
+                  className="node-hover-ring"
                 />
               )}
 
@@ -572,34 +613,22 @@ export default function TopicLandscape({
                 </circle>
               )}
 
-              {/* Node shape: circle (research) or diamond (industry) */}
-              {item.source === "research" ? (
-                <circle
-                  cx={pos[0]}
-                  cy={pos[1]}
-                  r={isHovered ? r * 1.3 : r}
-                  fill={clusterColor}
-                  opacity={baseOpacity}
-                />
-              ) : (
-                <rect
-                  x={pos[0] - (isHovered ? r * 1.3 : r)}
-                  y={pos[1] - (isHovered ? r * 1.3 : r)}
-                  width={(isHovered ? r * 1.3 : r) * 2}
-                  height={(isHovered ? r * 1.3 : r) * 2}
-                  rx={2}
-                  fill={clusterColor}
-                  opacity={baseOpacity}
-                  transform={`rotate(45 ${pos[0]} ${pos[1]})`}
-                />
-              )}
+              {/* Node circle (unified — all dots are circles) */}
+              <circle
+                cx={pos[0]}
+                cy={pos[1]}
+                r={isHovered ? r * 1.25 : r}
+                fill={clusterColor}
+                opacity={baseOpacity}
+                filter="url(#node-shadow)"
+              />
 
               {/* Label (on hover or selected) */}
               {(isHovered || isSelected) && (
                 <text
                   className="landscape-label"
                   x={pos[0]}
-                  y={pos[1] + (r * 1.3 + 10)}
+                  y={pos[1] + (r * 1.25 + 10)}
                   textAnchor="middle"
                   fill="var(--foreground)"
                   fontSize={9}
@@ -629,11 +658,9 @@ export default function TopicLandscape({
         >
           <div className="flex items-center gap-2 mb-1.5">
             <span
-              className="w-2 h-2 flex-shrink-0"
+              className="w-2 h-2 flex-shrink-0 rounded-full"
               style={{
                 backgroundColor: CLUSTER_COLORS[hoveredItem.cluster] || "var(--research-color)",
-                borderRadius: hoveredItem.source === "research" ? "50%" : "2px",
-                transform: hoveredItem.source === "industry" ? "rotate(45deg)" : "none",
                 width: 8,
                 height: 8,
               }}

@@ -109,6 +109,48 @@ function circlePoints(cx: number, cy: number, r: number, n = 12): [number, numbe
   return pts;
 }
 
+/** Subdivide hull edges to increase control point density for smoother curves */
+function interpolateHull(
+  hull: [number, number][],
+  subdivisions = 2
+): [number, number][] {
+  if (hull.length < 3) return hull;
+  const result: [number, number][] = [];
+  for (let i = 0; i < hull.length; i++) {
+    const a = hull[i];
+    const b = hull[(i + 1) % hull.length];
+    result.push(a);
+    for (let s = 1; s <= subdivisions; s++) {
+      const t = s / (subdivisions + 1);
+      result.push([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]);
+    }
+  }
+  return result;
+}
+
+/** Apply sine-harmonic radial perturbations for organic blob shapes */
+function addRadialWobble(
+  points: [number, number][],
+  cx: number,
+  cy: number,
+  amplitude = 0.12,
+  seed = 0
+): [number, number][] {
+  return points.map((p) => {
+    const dx = p[0] - cx;
+    const dy = p[1] - cy;
+    const angle = Math.atan2(dy, dx);
+    // Deterministic wobble using 3 sine harmonics at decreasing amplitudes
+    const wobble =
+      1 +
+      amplitude *
+        (Math.sin(angle * 3 + seed) * 0.6 +
+          Math.sin(angle * 5 + seed * 1.7) * 0.3 +
+          Math.sin(angle * 7 + seed * 2.3) * 0.1);
+    return [cx + dx * wobble, cy + dy * wobble] as [number, number];
+  });
+}
+
 // ── Overlap relaxation ──────────────────────────────────────────
 
 function relaxPositions(
@@ -246,7 +288,11 @@ export default function TopicLandscape({
 
       const hull = convexHull(points);
       const expanded = expandHull(hull, 40);
-      const pathD = catmullRomPath(expanded);
+      // Organic blob pipeline: interpolate → wobble → smooth
+      const interpolated = interpolateHull(expanded, 2);
+      const seed = clusterId.charCodeAt(0) + clusterId.charCodeAt(clusterId.length - 1);
+      const wobbled = addRadialWobble(interpolated, cx, cy, 0.12, seed);
+      const pathD = catmullRomPath(wobbled, 0.55);
 
       pads.push({
         clusterId,

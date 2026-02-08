@@ -171,7 +171,7 @@ export default function Home() {
         </aside>
 
         {/* Center: Topic landscape */}
-        <main className="flex-1 relative overflow-hidden">
+        <main className="flex-1 relative overflow-hidden" style={{ backgroundColor: "#0a0a14" }}>
           <TopicLandscape
             items={items}
             clusters={clusters}

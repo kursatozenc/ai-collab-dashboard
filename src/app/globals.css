@@ -106,6 +106,18 @@ body {
   pointer-events: none;
 }
 
+.cluster-pad-halo {
+  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+.cluster-pad-specular {
+  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
 .cluster-pad-inner-glow {
   transition: fill-opacity 0.3s ease, stroke-opacity 0.3s ease;
   pointer-events: none;

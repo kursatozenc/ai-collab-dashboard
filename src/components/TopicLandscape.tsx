@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect, useMemo } from "react";
+import React, { useState, useRef, useCallback, useEffect, useMemo } from "react";
 import { RadarItem, Cluster } from "../types";
 
 // ── Cluster colors ──────────────────────────────────────────────
@@ -373,53 +373,110 @@ export default function TopicLandscape({
       >
         {/* ══════════ DEFS ══════════ */}
         <defs>
-          {/* Pad radial gradient per cluster (watercolor wash) */}
+          {/* Three gradient layers per cluster for glass effect */}
           {clusterPads.map((h) => (
-            <radialGradient
-              key={`pad-grad-${h.clusterId}`}
-              id={`pad-grad-${h.clusterId}`}
-              cx="50%" cy="42%" r="60%" fx="45%" fy="40%"
-            >
-              <stop offset="0%" stopColor={h.color} stopOpacity={0.50} />
-              <stop offset="45%" stopColor={h.color} stopOpacity={0.38} />
-              <stop offset="80%" stopColor={h.color} stopOpacity={0.28} />
-              <stop offset="100%" stopColor={h.color} stopOpacity={0.18} />
-            </radialGradient>
+            <React.Fragment key={`grads-${h.clusterId}`}>
+              {/* Primary fill: rich glass interior */}
+              <radialGradient
+                id={`pad-grad-${h.clusterId}`}
+                cx="50%" cy="42%" r="60%" fx="44%" fy="38%"
+              >
+                <stop offset="0%" stopColor="#ffffff" stopOpacity={0.25} />
+                <stop offset="12%" stopColor={h.color} stopOpacity={0.75} />
+                <stop offset="45%" stopColor={h.color} stopOpacity={0.50} />
+                <stop offset="75%" stopColor={h.color} stopOpacity={0.28} />
+                <stop offset="100%" stopColor={h.color} stopOpacity={0.10} />
+              </radialGradient>
+              {/* Halo: ambient glow bleeding beyond shape */}
+              <radialGradient
+                id={`pad-halo-${h.clusterId}`}
+                cx="50%" cy="50%" r="70%"
+              >
+                <stop offset="0%" stopColor={h.color} stopOpacity={0.30} />
+                <stop offset="50%" stopColor={h.color} stopOpacity={0.12} />
+                <stop offset="100%" stopColor={h.color} stopOpacity={0.0} />
+              </radialGradient>
+              {/* Specular highlight: bright spot for 3D curvature */}
+              <radialGradient
+                id={`pad-specular-${h.clusterId}`}
+                cx="38%" cy="32%" r="30%" fx="36%" fy="28%"
+              >
+                <stop offset="0%" stopColor="#ffffff" stopOpacity={0.40} />
+                <stop offset="40%" stopColor="#ffffff" stopOpacity={0.08} />
+                <stop offset="100%" stopColor="#ffffff" stopOpacity={0.0} />
+              </radialGradient>
+            </React.Fragment>
           ))}
 
-          {/* Dot-grid background pattern */}
+          {/* Dot-grid background pattern (faint white on dark) */}
           <pattern id="dot-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <circle cx="20" cy="20" r="0.6" fill="var(--foreground)" opacity="0.035" />
+            <circle cx="20" cy="20" r="0.5" fill="#ffffff" opacity="0.04" />
           </pattern>
 
-          {/* Pad soft shadow */}
-          <filter id="pad-shadow" x="-20%" y="-15%" width="140%" height="145%">
-            <feDropShadow dx="0" dy="4" stdDeviation="16" floodColor="#000" floodOpacity="0.08" />
-          </filter>
-
-          {/* Pad hover glow */}
-          <filter id="pad-glow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur" />
-            <feFlood floodOpacity="0.12" result="color" />
-            <feComposite in="color" in2="blur" operator="in" result="glow" />
+          {/* Blob ambient halo filter */}
+          <filter id="pad-ambient-halo" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="18" result="halo-blur" />
+            <feColorMatrix in="halo-blur" type="matrix" result="halo-bright"
+              values="1.3 0 0 0 0
+                      0 1.3 0 0 0
+                      0 0 1.3 0 0
+                      0 0 0 0.6 0" />
             <feMerge>
-              <feMergeNode in="glow" />
+              <feMergeNode in="halo-bright" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
 
-          {/* Node micro-shadow */}
-          <filter id="node-shadow" x="-50%" y="-50%" width="200%" height="200%">
-            <feDropShadow dx="0" dy="1" stdDeviation="2" floodColor="#000" floodOpacity="0.15" />
+          {/* Pad hover glow (intensified) */}
+          <filter id="pad-glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="24" result="big-glow" />
+            <feColorMatrix in="big-glow" type="matrix" result="bright-glow"
+              values="1.5 0 0 0 0.05
+                      0 1.5 0 0 0.05
+                      0 0 1.5 0 0.05
+                      0 0 0 0.8 0" />
+            <feMerge>
+              <feMergeNode in="bright-glow" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+
+          {/* Node luminous glow (replaces shadow for dark bg) */}
+          <filter id="node-glow" x="-150%" y="-150%" width="400%" height="400%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="node-blur" />
+            <feColorMatrix in="node-blur" type="matrix" result="node-bright"
+              values="1.2 0 0 0 0.1
+                      0 1.2 0 0 0.1
+                      0 0 1.2 0 0.1
+                      0 0 0 0.9 0" />
+            <feMerge>
+              <feMergeNode in="node-bright" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
           </filter>
 
           {/* Node hover ring glow */}
-          <filter id="node-hover-glow" x="-100%" y="-100%" width="300%" height="300%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+          <filter id="node-hover-glow" x="-200%" y="-200%" width="500%" height="500%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+          </filter>
+
+          {/* Connection line glow */}
+          <filter id="connection-glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="line-blur" />
+            <feMerge>
+              <feMergeNode in="line-blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
           </filter>
         </defs>
 
-        {/* ══════════ LAYER 0: Background texture ══════════ */}
+        {/* ══════════ LAYER 0: Dark background + texture ══════════ */}
+        <rect
+          x={viewBox.x - viewBox.w} y={viewBox.y - viewBox.h}
+          width={viewBox.w * 3} height={viewBox.h * 3}
+          fill="#0a0a14"
+          className="pointer-events-none"
+        />
         <rect
           x={-50} y={-30} width={1100} height={760}
           fill="url(#dot-grid)"
@@ -430,7 +487,8 @@ export default function TopicLandscape({
         {clusterPads.map((h, index) => {
           const isHoveredPad = hoveredCluster === h.clusterId;
           const isActivePad = selectedItem?.cluster === h.clusterId;
-          const isFadedPad = hoveredCluster !== null && !isHoveredPad;
+          const isFadedByHover = hoveredCluster !== null && !isHoveredPad && !selectedItem;
+          const isFadedBySelection = selectedItem !== null && !isActivePad;
           const cv = clusterVisibility.get(h.clusterId);
           const dimmed = hasFilters && cv && cv.visible === 0;
           const showFiltered = hasFilters && cv;
@@ -452,17 +510,54 @@ export default function TopicLandscape({
                 transformOrigin: `${h.centroid[0]}px ${h.centroid[1]}px`,
               } as React.CSSProperties}
             >
-              {/* Pad path (watercolor fill + outline) */}
+              {/* Layer A: Ambient halo (blurred glow behind shape) */}
+              <path
+                className="cluster-pad-halo"
+                d={h.padPath}
+                fill={`url(#pad-halo-${h.clusterId})`}
+                stroke="none"
+                filter="url(#pad-ambient-halo)"
+                opacity={dimmed ? 0.08 : isFadedBySelection ? 0.10 : isFadedByHover ? 0.15 : 0.7}
+                style={{
+                  transform: isHoveredPad
+                    ? "scale(1.08)"
+                    : isActivePad
+                      ? "scale(1.06)"
+                      : "scale(1.02)",
+                  transformOrigin: `${h.centroid[0]}px ${h.centroid[1]}px`,
+                }}
+                pointerEvents="none"
+              />
+
+              {/* Layer B: Main glass body */}
               <path
                 className="cluster-pad"
                 d={h.padPath}
                 fill={`url(#pad-grad-${h.clusterId})`}
                 stroke={h.color}
-                strokeWidth={2}
-                strokeOpacity={isHoveredPad ? 0.7 : 0.45}
+                strokeWidth={1.5}
+                strokeOpacity={isHoveredPad ? 0.55 : 0.30}
                 strokeLinejoin="round"
-                filter={isHoveredPad ? "url(#pad-glow)" : "url(#pad-shadow)"}
-                opacity={dimmed ? 0.2 : isFadedPad ? 0.35 : 1}
+                filter={isHoveredPad ? "url(#pad-glow)" : undefined}
+                opacity={dimmed ? 0.15 : isFadedBySelection ? 0.20 : isFadedByHover ? 0.30 : 1}
+                style={{
+                  transform: isHoveredPad
+                    ? "scale(1.04)"
+                    : isActivePad
+                      ? "scale(1.03)"
+                      : "scale(1)",
+                  transformOrigin: `${h.centroid[0]}px ${h.centroid[1]}px`,
+                }}
+                pointerEvents="none"
+              />
+
+              {/* Layer C: Specular highlight (3D curvature) */}
+              <path
+                className="cluster-pad-specular"
+                d={h.padPath}
+                fill={`url(#pad-specular-${h.clusterId})`}
+                stroke="none"
+                opacity={dimmed ? 0.05 : isFadedBySelection ? 0.08 : isFadedByHover ? 0.12 : 0.6}
                 style={{
                   transform: isHoveredPad
                     ? "scale(1.04)"
@@ -480,30 +575,30 @@ export default function TopicLandscape({
                   className="cluster-pad-inner-glow"
                   d={h.padPath}
                   fill={h.color}
-                  fillOpacity={0.06}
+                  fillOpacity={0.12}
                   stroke={h.color}
-                  strokeOpacity={0.15}
-                  strokeWidth={1.5}
+                  strokeOpacity={0.30}
+                  strokeWidth={2}
                   pointerEvents="none"
                 />
               )}
 
-              {/* Label text (white halo + colored fill) */}
+              {/* Label text (dark halo + white fill for dark bg) */}
               {parts.map((line, i) => {
                 const labelText = parts.length > 1 && i === 0 ? line + " &" : line;
                 const ly = h.centroid[1] + (i - (parts.length - 1) / 2) * 20;
                 return (
                   <g key={`label-line-${i}`}>
-                    {/* White halo for readability */}
+                    {/* Dark halo for readability on dark bg */}
                     <text
                       x={h.centroid[0]}
                       y={ly}
                       textAnchor="middle"
                       dominantBaseline="central"
                       fill="none"
-                      stroke="white"
+                      stroke="#0a0a14"
                       strokeWidth={4}
-                      strokeOpacity={0.5}
+                      strokeOpacity={isFadedBySelection ? 0.3 : isFadedByHover ? 0.4 : 0.7}
                       strokeLinejoin="round"
                       fontSize={16}
                       fontWeight={700}
@@ -513,14 +608,14 @@ export default function TopicLandscape({
                     >
                       {labelText}
                     </text>
-                    {/* Colored label */}
+                    {/* White label */}
                     <text
                       x={h.centroid[0]}
                       y={ly}
                       textAnchor="middle"
                       dominantBaseline="central"
-                      fill={h.color}
-                      opacity={isFadedPad ? 0.25 : 0.95}
+                      fill="#ffffff"
+                      opacity={isFadedBySelection ? 0.25 : isFadedByHover ? 0.30 : 0.95}
                       fontSize={16}
                       fontWeight={700}
                       fontFamily="var(--font-dm-serif), Georgia, serif"
@@ -540,8 +635,8 @@ export default function TopicLandscape({
                 y={h.centroid[1] + ((parts.length - 1) / 2) * 20 + 20}
                 textAnchor="middle"
                 dominantBaseline="central"
-                fill={h.color}
-                opacity={isFadedPad ? 0.15 : 0.45}
+                fill="#ffffff"
+                opacity={isFadedBySelection ? 0.12 : isFadedByHover ? 0.18 : 0.40}
                 fontSize={9}
                 fontFamily="var(--font-inter), sans-serif"
                 className="cluster-pad-label"
@@ -572,9 +667,10 @@ export default function TopicLandscape({
                   x2={sibPos[0]}
                   y2={sibPos[1]}
                   stroke={CLUSTER_COLORS[selectedItem.cluster] || "#888"}
-                  strokeOpacity={0.15}
-                  strokeWidth={0.75}
+                  strokeOpacity={0.35}
+                  strokeWidth={1}
                   strokeDasharray="3 5"
+                  filter="url(#connection-glow)"
                   className="connection-line"
                 />
               );
@@ -589,6 +685,21 @@ export default function TopicLandscape({
           const clusterColor = CLUSTER_COLORS[item.cluster] || "#888";
           const r = nodeRadius(item);
           const baseOpacity = yearOpacity(item.year);
+          const isEmerging = item.tags?.includes("emerging");
+
+          // Region-first interaction: dots outside hovered cluster fade to 35%
+          const isOutsideHoveredCluster = hoveredCluster !== null && item.cluster !== hoveredCluster;
+
+          // Selection: non-selected cluster dots fade to 20%
+          const isOutsideSelectedCluster = selectedItem !== null && item.cluster !== selectedItem.cluster;
+
+          // Compute final dot opacity
+          let dotOpacity = baseOpacity;
+          if (isOutsideSelectedCluster && !isSelected) {
+            dotOpacity = 0.20;
+          } else if (isOutsideHoveredCluster && !selectedItem) {
+            dotOpacity = 0.35;
+          }
 
           return (
             <g
@@ -602,6 +713,32 @@ export default function TopicLandscape({
               onMouseEnter={() => setHoveredItem(item)}
               onMouseLeave={() => setHoveredItem(null)}
             >
+              {/* Emerging / novelty pulse ring (always-on for emerging items) */}
+              {isEmerging && (
+                <circle
+                  cx={pos[0]}
+                  cy={pos[1]}
+                  r={r * 1.8}
+                  fill="none"
+                  stroke={clusterColor}
+                  strokeWidth={1.5}
+                  opacity={0.25}
+                >
+                  <animate
+                    attributeName="r"
+                    values={`${r * 1.0};${r * 1.15 * 2.2};${r * 1.0}`}
+                    dur="2.5s"
+                    repeatCount="indefinite"
+                  />
+                  <animate
+                    attributeName="opacity"
+                    values="0.25;0.06;0.25"
+                    dur="2.5s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+              )}
+
               {/* Hover ring (faint expanding ring) */}
               {isHovered && (
                 <circle
@@ -610,8 +747,9 @@ export default function TopicLandscape({
                   r={r * 2.2}
                   fill="none"
                   stroke={clusterColor}
-                  strokeWidth={1}
-                  opacity={0.2}
+                  strokeWidth={1.5}
+                  opacity={0.35}
+                  filter="url(#node-hover-glow)"
                   className="node-hover-ring"
                 />
               )}
@@ -624,8 +762,9 @@ export default function TopicLandscape({
                   r={12}
                   fill="none"
                   stroke={clusterColor}
-                  strokeWidth={1.5}
-                  opacity={0.35}
+                  strokeWidth={2}
+                  opacity={0.50}
+                  filter="url(#node-hover-glow)"
                 >
                   <animate
                     attributeName="r"
@@ -635,34 +774,34 @@ export default function TopicLandscape({
                   />
                   <animate
                     attributeName="opacity"
-                    values="0.35;0.08;0.35"
+                    values="0.50;0.12;0.50"
                     dur="2.5s"
                     repeatCount="indefinite"
                   />
                 </circle>
               )}
 
-              {/* Node circle (unified — all dots are circles) */}
+              {/* Node circle (unified — all dots are circles, luminous glow) */}
               <circle
                 cx={pos[0]}
                 cy={pos[1]}
                 r={isHovered ? r * 1.25 : r}
                 fill={clusterColor}
-                opacity={baseOpacity}
-                filter="url(#node-shadow)"
+                opacity={dotOpacity}
+                filter="url(#node-glow)"
               />
 
-              {/* Label (on hover or selected) */}
+              {/* Label (on hover or selected — white text for dark bg) */}
               {(isHovered || isSelected) && (
                 <text
                   className="landscape-label"
                   x={pos[0]}
                   y={pos[1] + (r * 1.25 + 10)}
                   textAnchor="middle"
-                  fill="var(--foreground)"
+                  fill="#ffffff"
                   fontSize={9}
                   fontFamily="var(--font-inter), sans-serif"
-                  opacity={0.75}
+                  opacity={0.85}
                 >
                   {item.title.length > 45
                     ? item.title.slice(0, 42) + "..."
@@ -674,20 +813,23 @@ export default function TopicLandscape({
         })}
       </svg>
 
-      {/* Hover tooltip */}
+      {/* Hover card (dark glassmorphic) */}
       {hoveredItem && !selectedItem && (
         <div
-          className="landscape-tooltip fixed z-50 max-w-xs p-3 rounded-lg shadow-lg border"
+          className="landscape-tooltip fixed z-50 max-w-sm p-4 rounded-xl shadow-xl border"
           style={{
             left: mousePos.x + 16,
             top: mousePos.y - 10,
-            backgroundColor: "var(--surface)",
-            borderColor: "var(--border)",
+            backgroundColor: "rgba(12, 12, 22, 0.92)",
+            borderColor: "rgba(255, 255, 255, 0.08)",
+            backdropFilter: "blur(12px)",
+            color: "#e8e6e2",
           }}
         >
+          {/* Source + year */}
           <div className="flex items-center gap-2 mb-1.5">
             <span
-              className="w-2 h-2 flex-shrink-0 rounded-full"
+              className="flex-shrink-0 rounded-full"
               style={{
                 backgroundColor: CLUSTER_COLORS[hoveredItem.cluster] || "var(--research-color)",
                 width: 8,
@@ -696,29 +838,46 @@ export default function TopicLandscape({
             />
             <span
               className="text-[10px] uppercase tracking-wider"
-              style={{ color: "var(--text-secondary)" }}
+              style={{ color: "rgba(255, 255, 255, 0.5)" }}
             >
               {hoveredItem.source} · {hoveredItem.year}
             </span>
           </div>
+
+          {/* Title */}
           <p
-            className="text-sm font-medium leading-snug mb-2"
+            className="text-sm font-semibold leading-snug mb-1.5"
             style={{
-              color: "var(--foreground)",
+              color: "#f0ece8",
               fontFamily: "var(--font-dm-serif), Georgia, serif",
             }}
           >
             {hoveredItem.title}
           </p>
+
+          {/* One-line summary */}
+          {hoveredItem.summary && (
+            <p
+              className="text-xs leading-relaxed mb-2"
+              style={{ color: "rgba(255, 255, 255, 0.55)" }}
+            >
+              {hoveredItem.summary.length > 140
+                ? hoveredItem.summary.slice(0, 137) + "..."
+                : hoveredItem.summary}
+            </p>
+          )}
+
+          {/* Design question (emphasized) */}
           {hoveredItem.designQuestion && (
             <p
-              className="text-xs italic leading-relaxed"
+              className="text-xs italic leading-relaxed pt-1.5"
               style={{
-                color: "var(--text-secondary)",
+                color: CLUSTER_COLORS[hoveredItem.cluster] || "rgba(255, 255, 255, 0.6)",
+                borderTop: "1px solid rgba(255, 255, 255, 0.08)",
                 fontFamily: "var(--font-dm-serif), Georgia, serif",
               }}
             >
-              {hoveredItem.designQuestion}
+              &ldquo;{hoveredItem.designQuestion}&rdquo;
             </p>
           )}
         </div>
@@ -727,7 +886,7 @@ export default function TopicLandscape({
       {/* Item count */}
       <div
         className="absolute bottom-3 left-3 text-xs"
-        style={{ color: "var(--text-secondary)" }}
+        style={{ color: "rgba(255, 255, 255, 0.4)" }}
       >
         {visibleItemIds.size > 0
           ? `Showing ${visibleItemIds.size} of ${items.length} items`

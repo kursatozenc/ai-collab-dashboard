@@ -373,16 +373,17 @@ export default function TopicLandscape({
       >
         {/* ══════════ DEFS ══════════ */}
         <defs>
-          {/* Pad radial gradient per cluster (center-bright, edge-fade) */}
+          {/* Pad radial gradient per cluster (watercolor wash) */}
           {clusterPads.map((h) => (
             <radialGradient
               key={`pad-grad-${h.clusterId}`}
               id={`pad-grad-${h.clusterId}`}
-              cx="50%" cy="45%" r="55%" fx="50%" fy="45%"
+              cx="50%" cy="42%" r="60%" fx="45%" fy="40%"
             >
-              <stop offset="0%" stopColor={h.color} stopOpacity={0.28} />
-              <stop offset="60%" stopColor={h.color} stopOpacity={0.18} />
-              <stop offset="100%" stopColor={h.color} stopOpacity={0.12} />
+              <stop offset="0%" stopColor={h.color} stopOpacity={0.50} />
+              <stop offset="45%" stopColor={h.color} stopOpacity={0.38} />
+              <stop offset="80%" stopColor={h.color} stopOpacity={0.28} />
+              <stop offset="100%" stopColor={h.color} stopOpacity={0.18} />
             </radialGradient>
           ))}
 
@@ -425,51 +426,132 @@ export default function TopicLandscape({
           className="pointer-events-none"
         />
 
-        {/* ══════════ LAYER 1a: Cluster Pads ══════════ */}
-        {clusterPads.map((h) => {
+        {/* ══════════ LAYER 1: Cluster Animated Groups ══════════ */}
+        {clusterPads.map((h, index) => {
           const isHoveredPad = hoveredCluster === h.clusterId;
           const isActivePad = selectedItem?.cluster === h.clusterId;
           const isFadedPad = hoveredCluster !== null && !isHoveredPad;
           const cv = clusterVisibility.get(h.clusterId);
           const dimmed = hasFilters && cv && cv.visible === 0;
+          const showFiltered = hasFilters && cv;
+          const floatVariant = ["a", "b", "c"][index % 3];
+
+          // Two-line split for labels containing "&"
+          const parts = h.label.includes(" & ")
+            ? h.label.split(" & ")
+            : [h.label];
 
           return (
-            <path
-              key={`pad-${h.clusterId}`}
-              className="cluster-pad"
-              d={h.padPath}
-              fill={`url(#pad-grad-${h.clusterId})`}
-              filter={isHoveredPad ? "url(#pad-glow)" : "url(#pad-shadow)"}
-              opacity={dimmed ? 0.2 : isFadedPad ? 0.35 : 1}
+            <g
+              key={`cluster-group-${h.clusterId}`}
+              className={`cluster-group cluster-group--float-${floatVariant}${isHoveredPad ? " cluster-group--hovered" : ""}`}
               style={{
-                transform: isHoveredPad
-                  ? "scale(1.04)"
-                  : isActivePad
-                    ? "scale(1.03)"
-                    : "scale(1)",
+                "--float-delay": `${index * -1.7}s`,
+                "--centroid-x": `${h.centroid[0]}px`,
+                "--centroid-y": `${h.centroid[1]}px`,
                 transformOrigin: `${h.centroid[0]}px ${h.centroid[1]}px`,
-              }}
-              pointerEvents="none"
-            />
-          );
-        })}
+              } as React.CSSProperties}
+            >
+              {/* Pad path (watercolor fill + outline) */}
+              <path
+                className="cluster-pad"
+                d={h.padPath}
+                fill={`url(#pad-grad-${h.clusterId})`}
+                stroke={h.color}
+                strokeWidth={2}
+                strokeOpacity={isHoveredPad ? 0.7 : 0.45}
+                strokeLinejoin="round"
+                filter={isHoveredPad ? "url(#pad-glow)" : "url(#pad-shadow)"}
+                opacity={dimmed ? 0.2 : isFadedPad ? 0.35 : 1}
+                style={{
+                  transform: isHoveredPad
+                    ? "scale(1.04)"
+                    : isActivePad
+                      ? "scale(1.03)"
+                      : "scale(1)",
+                  transformOrigin: `${h.centroid[0]}px ${h.centroid[1]}px`,
+                }}
+                pointerEvents="none"
+              />
 
-        {/* ══════════ LAYER 1b: Inner glow overlay (pressed state) ══════════ */}
-        {clusterPads.map((h) => {
-          const isActivePad = selectedItem?.cluster === h.clusterId;
-          if (!isActivePad) return null;
-          return (
-            <path
-              key={`pad-glow-${h.clusterId}`}
-              className="cluster-pad-inner-glow"
-              d={h.padPath}
-              fill={h.color}
-              fillOpacity={0.06}
-              stroke={h.color}
-              strokeOpacity={0.15}
-              strokeWidth={1.5}
-              pointerEvents="none"
-            />
+              {/* Inner glow overlay (pressed/selected state) */}
+              {isActivePad && (
+                <path
+                  className="cluster-pad-inner-glow"
+                  d={h.padPath}
+                  fill={h.color}
+                  fillOpacity={0.06}
+                  stroke={h.color}
+                  strokeOpacity={0.15}
+                  strokeWidth={1.5}
+                  pointerEvents="none"
+                />
+              )}
+
+              {/* Label text (white halo + colored fill) */}
+              {parts.map((line, i) => {
+                const labelText = parts.length > 1 && i === 0 ? line + " &" : line;
+                const ly = h.centroid[1] + (i - (parts.length - 1) / 2) * 20;
+                return (
+                  <g key={`label-line-${i}`}>
+                    {/* White halo for readability */}
+                    <text
+                      x={h.centroid[0]}
+                      y={ly}
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      fill="none"
+                      stroke="white"
+                      strokeWidth={4}
+                      strokeOpacity={0.5}
+                      strokeLinejoin="round"
+                      fontSize={16}
+                      fontWeight={700}
+                      fontFamily="var(--font-dm-serif), Georgia, serif"
+                      letterSpacing={0.5}
+                      pointerEvents="none"
+                    >
+                      {labelText}
+                    </text>
+                    {/* Colored label */}
+                    <text
+                      x={h.centroid[0]}
+                      y={ly}
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      fill={h.color}
+                      opacity={isFadedPad ? 0.25 : 0.95}
+                      fontSize={16}
+                      fontWeight={700}
+                      fontFamily="var(--font-dm-serif), Georgia, serif"
+                      letterSpacing={0.5}
+                      className="cluster-pad-label"
+                      pointerEvents="none"
+                    >
+                      {labelText}
+                    </text>
+                  </g>
+                );
+              })}
+
+              {/* Count badge */}
+              <text
+                x={h.centroid[0]}
+                y={h.centroid[1] + ((parts.length - 1) / 2) * 20 + 20}
+                textAnchor="middle"
+                dominantBaseline="central"
+                fill={h.color}
+                opacity={isFadedPad ? 0.15 : 0.45}
+                fontSize={9}
+                fontFamily="var(--font-inter), sans-serif"
+                className="cluster-pad-label"
+                pointerEvents="none"
+              >
+                {showFiltered
+                  ? `${cv!.visible} of ${cv!.total}`
+                  : `${h.count} ${h.count === 1 ? "item" : "items"}`}
+              </text>
+            </g>
           );
         })}
 
@@ -498,60 +580,7 @@ export default function TopicLandscape({
               );
             })}
 
-        {/* ══════════ LAYER 3: Cluster labels (inside pads) ══════════ */}
-        {clusterPads.map((h) => {
-          const isFadedPad = hoveredCluster !== null && hoveredCluster !== h.clusterId;
-          const cv = clusterVisibility.get(h.clusterId);
-          const showFiltered = hasFilters && cv;
-
-          // Two-line split for labels containing "&"
-          const parts = h.label.includes(" & ")
-            ? h.label.split(" & ")
-            : [h.label];
-
-          return (
-            <g key={`label-${h.clusterId}`}>
-              {parts.map((line, i) => (
-                <text
-                  key={i}
-                  x={h.centroid[0]}
-                  y={h.centroid[1] + (i - (parts.length - 1) / 2) * 18}
-                  textAnchor="middle"
-                  dominantBaseline="central"
-                  fill={h.color}
-                  opacity={isFadedPad ? 0.25 : 0.9}
-                  fontSize={14}
-                  fontWeight={700}
-                  fontFamily="var(--font-dm-serif), Georgia, serif"
-                  letterSpacing={0.3}
-                  className="cluster-pad-label"
-                  pointerEvents="none"
-                >
-                  {parts.length > 1 && i === 0 ? line + " &" : line}
-                </text>
-              ))}
-              {/* Count badge */}
-              <text
-                x={h.centroid[0]}
-                y={h.centroid[1] + ((parts.length - 1) / 2) * 18 + 18}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fill={h.color}
-                opacity={isFadedPad ? 0.15 : 0.45}
-                fontSize={9}
-                fontFamily="var(--font-inter), sans-serif"
-                className="cluster-pad-label"
-                pointerEvents="none"
-              >
-                {showFiltered
-                  ? `${cv!.visible} of ${cv!.total}`
-                  : `${h.count} ${h.count === 1 ? "item" : "items"}`}
-              </text>
-            </g>
-          );
-        })}
-
-        {/* ══════════ LAYER 4: Nodes ══════════ */}
+        {/* ══════════ LAYER 3: Nodes ══════════ */}
         {items.map((item) => {
           const pos = relaxedPositions.get(item.id) || item.embedding;
           const isVisible = visibleItemIds.size === 0 || visibleItemIds.has(item.id);

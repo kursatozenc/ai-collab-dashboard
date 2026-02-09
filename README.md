@@ -20,6 +20,25 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Paper Ingestion
+
+You can auto-fill missing paper references and optionally download open-access PDFs.
+
+```bash
+npm run ingest:papers -- --dry-run
+npm run ingest:papers
+```
+
+Notes:
+- Uses Semantic Scholar search to resolve titles.
+- Downloads open-access PDFs into `public/papers` when available.
+- Sets `citation` and `url` for missing entries in `src/data/research-graph.json`.
+- Provide `SEMANTIC_SCHOLAR_API_KEY` for higher rate limits if needed.
+- Writes feed candidates to `src/data/ingest-candidates.json`.
+- Customize feeds with `ACM_FEED_URL`, `ANTHROPIC_FEED_URL`, `META_FEED_URL`, `MANUS_FEED_URL`, `DEEPSEEK_FEED_URL`, or `EXTRA_FEEDS` (comma-separated).
+- Limit feed items per source with `--feed-limit=50`.
+- Anthropic falls back to parsing the Newsroom page if no RSS works.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

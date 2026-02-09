@@ -14,7 +14,7 @@ const dmSerif = DM_Serif_Text({
 });
 
 export const metadata: Metadata = {
-  title: "AI Collaboration Radar",
+  title: "Human-AI Collaboration Radar",
   description:
     "A sensemaking instrument for designing AI-supported teams. Explore the frontier of human-AI collaboration research across trust, delegation, communication, and team dynamics.",
 };

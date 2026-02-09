@@ -21,6 +21,7 @@ export interface RadarItem {
   authors: string;
   year: number;
   url: string;
+  citation?: string;
   summary: string;
   cluster: string;
   source: "research" | "industry";

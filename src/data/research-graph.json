@@ -1,12 +1,33 @@
 {
   "clusters": [
-    { "id": "trust", "label": "Trust & Reliability" },
-    { "id": "delegation", "label": "Task Delegation & Autonomy" },
-    { "id": "communication", "label": "Human-AI Communication" },
-    { "id": "teamwork", "label": "Team Dynamics & Coordination" },
-    { "id": "learning", "label": "Learning & Adaptation" },
-    { "id": "ethics", "label": "Ethics & Responsible AI" },
-    { "id": "creativity", "label": "Co-Creativity & Innovation" }
+    {
+      "id": "trust",
+      "label": "Trust & Reliability"
+    },
+    {
+      "id": "delegation",
+      "label": "Task Delegation & Autonomy"
+    },
+    {
+      "id": "communication",
+      "label": "Human-AI Communication"
+    },
+    {
+      "id": "teamwork",
+      "label": "Team Dynamics & Coordination"
+    },
+    {
+      "id": "learning",
+      "label": "Learning & Adaptation"
+    },
+    {
+      "id": "ethics",
+      "label": "Ethics & Responsible AI"
+    },
+    {
+      "id": "creativity",
+      "label": "Co-Creativity & Innovation"
+    }
   ],
   "nodes": [
     {
@@ -16,13 +37,26 @@
       "year": 2024,
       "cluster": "trust",
       "summary": "Systematic review synthesizing trust dynamics in digital human-AI teams, identifying key factors like transparency, predictability, and shared mental models that influence trust calibration.",
-      "url": "",
+      "url": "/papers/Trust%20in%20Digital%20Human-AI%20Team%20Collaboration_%20A%20Systematic%20Review_Publishers_Version.pdf",
       "source": "research",
-      "designLevers": ["interface", "governance"],
-      "designerIntents": ["team_structure", "governance_policy"],
+      "designLevers": [
+        "interface",
+        "governance"
+      ],
+      "designerIntents": [
+        "team_structure",
+        "governance_policy"
+      ],
       "designQuestion": "How might we design transparency mechanisms that help teams calibrate trust appropriately rather than defaulting to over- or under-trust?",
-      "tags": ["trust", "systematic-review", "transparency"],
-      "embedding": [185, 130]
+      "tags": [
+        "trust",
+        "systematic-review",
+        "transparency"
+      ],
+      "embedding": [
+        185,
+        130
+      ]
     },
     {
       "id": "shaping-trust",
@@ -31,13 +65,26 @@
       "year": 2024,
       "cluster": "trust",
       "summary": "Proposes a theoretical framework bridging organizational psychology and AI research to understand how trust develops, erodes, and is repaired in human-AI team contexts.",
-      "url": "",
+      "url": "/papers/Shaping%20a%20multidisciplinary%20understanding%20of%20team%20trust%20in%20human-AI%20teams%20%20a%20theoretical%20framework%20(1).pdf",
       "source": "research",
-      "designLevers": ["ritual", "role"],
-      "designerIntents": ["team_structure", "ritual_design"],
+      "designLevers": [
+        "ritual",
+        "role"
+      ],
+      "designerIntents": [
+        "team_structure",
+        "ritual_design"
+      ],
       "designQuestion": "What rituals could help teams repair trust after an AI teammate makes a significant error?",
-      "tags": ["trust", "framework", "emerging"],
-      "embedding": [220, 170]
+      "tags": [
+        "trust",
+        "framework",
+        "emerging"
+      ],
+      "embedding": [
+        220,
+        170
+      ]
     },
     {
       "id": "impacts-trust-model",
@@ -46,13 +93,26 @@
       "year": 2021,
       "cluster": "trust",
       "summary": "Introduces the IMPACTS trust model for human-autonomy teaming, decomposing trust into measurable factors including intent, measurability, performance, adaptability, communication, transparency, and security.",
-      "url": "",
+      "url": "/papers/Hou_2021_IMPACTS_A_Trust_Model_Human-Autonomy_Teaming.pdf",
       "source": "research",
-      "designLevers": ["interface", "governance"],
-      "designerIntents": ["governance_policy", "tooling_selection"],
+      "designLevers": [
+        "interface",
+        "governance"
+      ],
+      "designerIntents": [
+        "governance_policy",
+        "tooling_selection"
+      ],
       "designQuestion": "Which of the seven IMPACTS trust factors is most critical for your team's context, and how would you measure it?",
-      "tags": ["trust", "model", "measurement"],
-      "embedding": [170, 185]
+      "tags": [
+        "trust",
+        "model",
+        "measurement"
+      ],
+      "embedding": [
+        170,
+        185
+      ]
     },
     {
       "id": "trust-ai-team-member",
@@ -61,13 +121,27 @@
       "year": 2024,
       "cluster": "trust",
       "summary": "Empirical study on trust formation with AI team members, finding that trust in AI teammates follows different trajectories than interpersonal trust and requires distinct calibration.",
-      "url": "",
+      "url": "/papers/J%20Occupat%20%20%20Organ%20Psyc%20-%202024%20-%20Georganta%20-%20Would%20you%20trust%20an%20AI%20team%20member%20%20Team%20trust%20in%20human%20AI%20teams.pdf",
       "source": "research",
-      "designLevers": ["ritual", "interface"],
-      "designerIntents": ["team_structure", "ritual_design"],
+      "designLevers": [
+        "ritual",
+        "interface"
+      ],
+      "designerIntents": [
+        "team_structure",
+        "ritual_design"
+      ],
       "designQuestion": "How should onboarding rituals differ when a new AI teammate joins versus a new human teammate?",
-      "tags": ["trust", "empirical", "calibration", "emerging"],
-      "embedding": [230, 140]
+      "tags": [
+        "trust",
+        "empirical",
+        "calibration",
+        "emerging"
+      ],
+      "embedding": [
+        230,
+        140
+      ]
     },
     {
       "id": "ideal-human",
@@ -76,13 +150,26 @@
       "year": 2024,
       "cluster": "teamwork",
       "summary": "Investigates what humans expect from AI teammates, finding that people project human-like qualities onto AI partners and that unmet expectations significantly impact team performance.",
-      "url": "",
+      "url": "/papers/22AnIdealHuman22ExpectationsofAITeammatesinHuman-AITeaming.pdf",
       "source": "research",
-      "designLevers": ["role", "interface"],
-      "designerIntents": ["role_definition", "team_structure"],
+      "designLevers": [
+        "role",
+        "interface"
+      ],
+      "designerIntents": [
+        "role_definition",
+        "team_structure"
+      ],
       "designQuestion": "How might we set realistic expectations for AI teammates to avoid the disappointment cycle of anthropomorphic projection?",
-      "tags": ["expectations", "anthropomorphism", "performance"],
-      "embedding": [480, 280]
+      "tags": [
+        "expectations",
+        "anthropomorphism",
+        "performance"
+      ],
+      "embedding": [
+        480,
+        280
+      ]
     },
     {
       "id": "tools-to-teammates",
@@ -93,11 +180,24 @@
       "summary": "Explores the paradigm shift from viewing AI as a tool to treating it as a teammate, examining implications for organizational design, team composition, and management practices.",
       "url": "",
       "source": "research",
-      "designLevers": ["role", "governance"],
-      "designerIntents": ["team_structure", "role_definition"],
+      "designLevers": [
+        "role",
+        "governance"
+      ],
+      "designerIntents": [
+        "team_structure",
+        "role_definition"
+      ],
       "designQuestion": "Where on the tool-to-teammate spectrum should AI sit in your organization, and what changes as you move along that spectrum?",
-      "tags": ["paradigm-shift", "organizational-design", "emerging"],
-      "embedding": [520, 320]
+      "tags": [
+        "paradigm-shift",
+        "organizational-design",
+        "emerging"
+      ],
+      "embedding": [
+        520,
+        320
+      ]
     },
     {
       "id": "beyond-tool-teammate",
@@ -108,11 +208,24 @@
       "summary": "Argues against the binary tool/teammate framing, proposing a spectrum of AI integration levels in teams with distinct interaction patterns and design requirements at each level.",
       "url": "",
       "source": "research",
-      "designLevers": ["role", "workflow"],
-      "designerIntents": ["role_definition", "workflow_redesign"],
+      "designLevers": [
+        "role",
+        "workflow"
+      ],
+      "designerIntents": [
+        "role_definition",
+        "workflow_redesign"
+      ],
       "designQuestion": "What does each level of the AI integration spectrum look like in practice for your team's daily workflows?",
-      "tags": ["spectrum", "integration-levels", "framework"],
-      "embedding": [540, 285]
+      "tags": [
+        "spectrum",
+        "integration-levels",
+        "framework"
+      ],
+      "embedding": [
+        540,
+        285
+      ]
     },
     {
       "id": "who-what-teammate",
@@ -121,13 +234,26 @@
       "year": 2023,
       "cluster": "teamwork",
       "summary": "Examines how introducing AI agents changes team composition dynamics, including role allocation, expertise distribution, and the emergence of new coordination challenges.",
-      "url": "",
+      "url": "/papers/Who-What%2BIs%2BMy%2BTeammate-Team%2BComposition%2BConsiderations%2Bin%2BHuman-AI%2BTeaming.pdf",
       "source": "research",
-      "designLevers": ["role", "workflow"],
-      "designerIntents": ["team_structure", "role_definition"],
+      "designLevers": [
+        "role",
+        "workflow"
+      ],
+      "designerIntents": [
+        "team_structure",
+        "role_definition"
+      ],
       "designQuestion": "How does adding an AI agent change the optimal size and composition of your team?",
-      "tags": ["composition", "coordination", "role-allocation"],
-      "embedding": [465, 330]
+      "tags": [
+        "composition",
+        "coordination",
+        "role-allocation"
+      ],
+      "embedding": [
+        465,
+        330
+      ]
     },
     {
       "id": "when-ai-joins",
@@ -136,13 +262,27 @@
       "year": 2024,
       "cluster": "teamwork",
       "summary": "Reviews literature on how AI integration affects intragroup processes including communication patterns, conflict resolution, decision-making, and group identity formation.",
-      "url": "",
+      "url": "https://www.semanticscholar.org/paper/b1f0abc44ed30f180232b93f77fde15e7775d1b2",
       "source": "research",
-      "designLevers": ["ritual", "workflow"],
-      "designerIntents": ["team_structure", "workflow_redesign"],
+      "designLevers": [
+        "ritual",
+        "workflow"
+      ],
+      "designerIntents": [
+        "team_structure",
+        "workflow_redesign"
+      ],
       "designQuestion": "Which intragroup processes need to be redesigned when AI becomes a permanent team member?",
-      "tags": ["intragroup", "processes", "literature-review"],
-      "embedding": [510, 345]
+      "tags": [
+        "intragroup",
+        "processes",
+        "literature-review"
+      ],
+      "embedding": [
+        510,
+        345
+      ],
+      "citation": "Désirée Zercher et al. (2023). When AI joins the Team: A Literature Review on Intragroup Processes and their Effect on Team Performance in Team-AI Collaboration. European Conference on Information Systems."
     },
     {
       "id": "defining-hat",
@@ -151,13 +291,26 @@
       "year": 2023,
       "cluster": "teamwork",
       "summary": "Provides a comprehensive definition of human-AI teaming that distinguishes it from human-AI interaction, emphasizing interdependence, shared goals, and adaptive coordination.",
-      "url": "",
+      "url": "/papers/Defining-HumanAI-Teaming.pdf",
       "source": "research",
-      "designLevers": ["role", "governance"],
-      "designerIntents": ["team_structure", "governance_policy"],
+      "designLevers": [
+        "role",
+        "governance"
+      ],
+      "designerIntents": [
+        "team_structure",
+        "governance_policy"
+      ],
       "designQuestion": "Does your team's AI use qualify as 'teaming' or just 'interaction'? What would need to change to reach true interdependence?",
-      "tags": ["definition", "interdependence", "coordination"],
-      "embedding": [490, 260]
+      "tags": [
+        "definition",
+        "interdependence",
+        "coordination"
+      ],
+      "embedding": [
+        490,
+        260
+      ]
     },
     {
       "id": "survey-hat-lpm",
@@ -166,13 +319,27 @@
       "year": 2024,
       "cluster": "teamwork",
       "summary": "Surveys how large language models are transforming human-AI teaming, from code generation to creative collaboration, identifying new patterns of human-AI task division.",
-      "url": "",
+      "url": "/papers/A%20Survey%20on%20Human-AI%20Teaming%20with%20Large%20Pre-Trained%20Models.pdf",
       "source": "research",
-      "designLevers": ["workflow", "capability_boundary"],
-      "designerIntents": ["workflow_redesign", "tooling_selection"],
+      "designLevers": [
+        "workflow",
+        "capability_boundary"
+      ],
+      "designerIntents": [
+        "workflow_redesign",
+        "tooling_selection"
+      ],
       "designQuestion": "How should task division patterns change now that LLMs can handle increasingly complex knowledge work?",
-      "tags": ["LLMs", "survey", "task-division", "emerging"],
-      "embedding": [535, 310]
+      "tags": [
+        "LLMs",
+        "survey",
+        "task-division",
+        "emerging"
+      ],
+      "embedding": [
+        535,
+        310
+      ]
     },
     {
       "id": "hat-empirical",
@@ -181,13 +348,26 @@
       "year": 2020,
       "cluster": "teamwork",
       "summary": "Comprehensive meta-analysis of empirical studies on human-autonomy teaming, identifying key moderators of team effectiveness including task complexity and automation level.",
-      "url": "",
+      "url": "/papers/o-neill-et-al-2020-human-autonomy-teaming-a-review-and-analysis-of-the-empirical-literature.pdf",
       "source": "research",
-      "designLevers": ["workflow", "capability_boundary"],
-      "designerIntents": ["team_structure", "workflow_redesign"],
+      "designLevers": [
+        "workflow",
+        "capability_boundary"
+      ],
+      "designerIntents": [
+        "team_structure",
+        "workflow_redesign"
+      ],
       "designQuestion": "At what level of task complexity does human-AI teaming outperform either humans or AI working alone?",
-      "tags": ["meta-analysis", "empirical", "effectiveness"],
-      "embedding": [475, 310]
+      "tags": [
+        "meta-analysis",
+        "empirical",
+        "effectiveness"
+      ],
+      "embedding": [
+        475,
+        310
+      ]
     },
     {
       "id": "superteams",
@@ -196,13 +376,26 @@
       "year": 2024,
       "cluster": "teamwork",
       "summary": "Examines how organizations can build AI superteams through strategic augmentation, identifying patterns where AI amplifies human strengths rather than replacing human capabilities.",
-      "url": "",
+      "url": "/papers/Artificial%20Intelligence%20Superteams%20%26%20Augmentation%20Strategies_%20Inc.pdf",
       "source": "industry",
-      "designLevers": ["role", "workflow"],
-      "designerIntents": ["team_structure", "workflow_redesign"],
+      "designLevers": [
+        "role",
+        "workflow"
+      ],
+      "designerIntents": [
+        "team_structure",
+        "workflow_redesign"
+      ],
       "designQuestion": "Which of your team's strengths could AI amplify, and which capabilities should remain exclusively human?",
-      "tags": ["augmentation", "superteams", "strategy"],
-      "embedding": [550, 270]
+      "tags": [
+        "augmentation",
+        "superteams",
+        "strategy"
+      ],
+      "embedding": [
+        550,
+        270
+      ]
     },
     {
       "id": "team-challenges-ai",
@@ -211,13 +404,26 @@
       "year": 2024,
       "cluster": "teamwork",
       "summary": "Evaluates whether AI can address common team challenges including coordination failures, social loafing, and groupthink, finding mixed results depending on implementation.",
-      "url": "",
+      "url": "/papers/Team%20challenges_%20Is%20artificial%20intelligence%20the%20solution_.pdf",
       "source": "research",
-      "designLevers": ["workflow", "governance"],
-      "designerIntents": ["team_structure", "governance_policy"],
+      "designLevers": [
+        "workflow",
+        "governance"
+      ],
+      "designerIntents": [
+        "team_structure",
+        "governance_policy"
+      ],
       "designQuestion": "Which of your team's recurring challenges could AI help solve, and which might it inadvertently worsen?",
-      "tags": ["challenges", "coordination", "groupthink"],
-      "embedding": [455, 355]
+      "tags": [
+        "challenges",
+        "coordination",
+        "groupthink"
+      ],
+      "embedding": [
+        455,
+        355
+      ]
     },
     {
       "id": "hello-mate",
@@ -226,13 +432,26 @@
       "year": 2022,
       "cluster": "teamwork",
       "summary": "Field study of organizations using AI teammates, revealing practical insights about onboarding AI into existing teams, managing expectations, and sustaining engagement.",
-      "url": "",
+      "url": "/papers/PACIS2022_HelloMateInsightsfromtheFieldonLeveragingMachineTeammates_cameraready.pdf",
       "source": "research",
-      "designLevers": ["ritual", "role"],
-      "designerIntents": ["team_structure", "ritual_design"],
+      "designLevers": [
+        "ritual",
+        "role"
+      ],
+      "designerIntents": [
+        "team_structure",
+        "ritual_design"
+      ],
       "designQuestion": "What does a good 'first week' look like when onboarding an AI teammate into an established team?",
-      "tags": ["field-study", "onboarding", "engagement"],
-      "embedding": [525, 350]
+      "tags": [
+        "field-study",
+        "onboarding",
+        "engagement"
+      ],
+      "embedding": [
+        525,
+        350
+      ]
     },
     {
       "id": "antecedents-hat",
@@ -243,11 +462,24 @@
       "summary": "Identifies key antecedents of effective human-AI teaming including task design, team composition, communication protocols, and organizational support structures.",
       "url": "",
       "source": "research",
-      "designLevers": ["workflow", "governance"],
-      "designerIntents": ["team_structure", "governance_policy"],
+      "designLevers": [
+        "workflow",
+        "governance"
+      ],
+      "designerIntents": [
+        "team_structure",
+        "governance_policy"
+      ],
       "designQuestion": "Which organizational support structures are prerequisites for effective human-AI teaming?",
-      "tags": ["antecedents", "effectiveness", "organizational-support"],
-      "embedding": [495, 370]
+      "tags": [
+        "antecedents",
+        "effectiveness",
+        "organizational-support"
+      ],
+      "embedding": [
+        495,
+        370
+      ]
     },
     {
       "id": "genai-colleague",
@@ -256,13 +488,27 @@
       "year": 2024,
       "cluster": "delegation",
       "summary": "Examines how generative AI is being integrated as a virtual colleague in knowledge work, analyzing delegation patterns and the evolution of human-AI work distribution.",
-      "url": "",
+      "url": "/papers/GenAI-NewColleague.pdf",
       "source": "industry",
-      "designLevers": ["workflow", "role"],
-      "designerIntents": ["workflow_redesign", "role_definition"],
+      "designLevers": [
+        "workflow",
+        "role"
+      ],
+      "designerIntents": [
+        "workflow_redesign",
+        "role_definition"
+      ],
       "designQuestion": "What tasks are your knowledge workers already informally delegating to GenAI, and should those delegation patterns be formalized?",
-      "tags": ["genai", "delegation", "knowledge-work", "emerging"],
-      "embedding": [790, 135]
+      "tags": [
+        "genai",
+        "delegation",
+        "knowledge-work",
+        "emerging"
+      ],
+      "embedding": [
+        790,
+        135
+      ]
     },
     {
       "id": "when-should-i-lead",
@@ -271,13 +517,27 @@
       "year": 2024,
       "cluster": "delegation",
       "summary": "Investigates dynamic leadership allocation between humans and AI in team settings, finding that optimal performance requires flexible leadership transitions based on task context.",
-      "url": "",
+      "url": "https://www.semanticscholar.org/paper/8e19f8e79b61502556674204a186e121966e3213",
       "source": "research",
-      "designLevers": ["role", "governance"],
-      "designerIntents": ["role_definition", "governance_policy"],
+      "designLevers": [
+        "role",
+        "governance"
+      ],
+      "designerIntents": [
+        "role_definition",
+        "governance_policy"
+      ],
       "designQuestion": "Under what conditions should AI take the lead in your team's workflow, and how do you signal those transitions?",
-      "tags": ["leadership", "dynamics", "transitions"],
-      "embedding": [815, 160]
+      "tags": [
+        "leadership",
+        "dynamics",
+        "transitions"
+      ],
+      "embedding": [
+        815,
+        160
+      ],
+      "citation": "Inês Lobo et al. (2024). When Should I Lead or Follow: Understanding Initiative Levels in Human-AI Collaborative Gameplay. Conference on Designing Interactive Systems."
     },
     {
       "id": "requirements-ai-teammates",
@@ -286,13 +546,26 @@
       "year": 2023,
       "cluster": "delegation",
       "summary": "Identifies core requirements for AI systems to function as effective teammates, including situational awareness, explainability, adaptability, and appropriate autonomy levels.",
-      "url": "",
+      "url": "/papers/Requirements-for-AI-teammates.pdf",
       "source": "research",
-      "designLevers": ["capability_boundary", "interface"],
-      "designerIntents": ["tooling_selection", "role_definition"],
+      "designLevers": [
+        "capability_boundary",
+        "interface"
+      ],
+      "designerIntents": [
+        "tooling_selection",
+        "role_definition"
+      ],
       "designQuestion": "Which capability requirements should be non-negotiable before deploying an AI teammate in your context?",
-      "tags": ["requirements", "autonomy", "capabilities"],
-      "embedding": [835, 140]
+      "tags": [
+        "requirements",
+        "autonomy",
+        "capabilities"
+      ],
+      "embedding": [
+        835,
+        140
+      ]
     },
     {
       "id": "human-loop-orgs",
@@ -301,13 +574,27 @@
       "year": 2023,
       "cluster": "delegation",
       "summary": "Analyzes different models of human-in-the-loop AI deployment in organizations, from human oversight to human-AI co-decision making, with implications for accountability.",
-      "url": "",
+      "url": "https://www.semanticscholar.org/paper/f8956dff3ee8a15ef8a7060b5efc08a522552671",
       "source": "research",
-      "designLevers": ["governance", "workflow"],
-      "designerIntents": ["governance_policy", "workflow_redesign"],
+      "designLevers": [
+        "governance",
+        "workflow"
+      ],
+      "designerIntents": [
+        "governance_policy",
+        "workflow_redesign"
+      ],
       "designQuestion": "Where should the human-in-the-loop boundary sit in your organization's AI deployment, and who decides when to move it?",
-      "tags": ["HITL", "oversight", "accountability"],
-      "embedding": [775, 175]
+      "tags": [
+        "HITL",
+        "oversight",
+        "accountability"
+      ],
+      "embedding": [
+        775,
+        175
+      ],
+      "citation": "Y. Hua (2000). Double-loop learning control (DLC) model for reengineering: a \"yin\" and \"yang\" balanced approach for effective organizational change. Proceedings of the 2000 IEEE International Conference on Management of Innovation and Technology. ICMIT 2000. 'Management in the 21st Century' (Cat. No.00EX457)."
     },
     {
       "id": "algorithmic-management",
@@ -316,13 +603,26 @@
       "year": 2023,
       "cluster": "delegation",
       "summary": "Examines how algorithmic management reshapes workplace dynamics, exploring both efficiency gains and concerns about worker autonomy, surveillance, and dehumanization.",
-      "url": "",
+      "url": "/papers/WorkingWithMachines-algorithmic_management.pdf",
       "source": "research",
-      "designLevers": ["governance", "workflow"],
-      "designerIntents": ["governance_policy", "workflow_redesign"],
+      "designLevers": [
+        "governance",
+        "workflow"
+      ],
+      "designerIntents": [
+        "governance_policy",
+        "workflow_redesign"
+      ],
       "designQuestion": "How do you ensure algorithmic management amplifies worker agency rather than constraining it?",
-      "tags": ["algorithmic-management", "autonomy", "surveillance"],
-      "embedding": [820, 185]
+      "tags": [
+        "algorithmic-management",
+        "autonomy",
+        "surveillance"
+      ],
+      "embedding": [
+        820,
+        185
+      ]
     },
     {
       "id": "state-ai-work-anthropic",
@@ -331,13 +631,27 @@
       "year": 2025,
       "cluster": "delegation",
       "summary": "Anthropic's industry report on current AI adoption patterns in workplaces, covering usage trends, productivity impacts, and emerging challenges in human-AI collaboration.",
-      "url": "",
+      "url": "/papers/FY25_Q2_State%20of%20AI%20at%20Work-Anthropic_Final.pdf",
       "source": "industry",
-      "designLevers": ["workflow", "capability_boundary"],
-      "designerIntents": ["workflow_redesign", "tooling_selection"],
+      "designLevers": [
+        "workflow",
+        "capability_boundary"
+      ],
+      "designerIntents": [
+        "workflow_redesign",
+        "tooling_selection"
+      ],
       "designQuestion": "How do your team's AI adoption patterns compare to industry benchmarks, and what gaps should you address first?",
-      "tags": ["industry-report", "adoption", "productivity", "emerging"],
-      "embedding": [760, 145]
+      "tags": [
+        "industry-report",
+        "adoption",
+        "productivity",
+        "emerging"
+      ],
+      "embedding": [
+        760,
+        145
+      ]
     },
     {
       "id": "structuring-ai-comm",
@@ -346,13 +660,27 @@
       "year": 2024,
       "cluster": "communication",
       "summary": "Explores how AI teammates should structure their communication, finding that proactive updates, explanation depth, and communication timing significantly affect team coordination.",
-      "url": "",
+      "url": "https://www.semanticscholar.org/paper/e24abbf7ed3ec09eabe326a999df0afd3de4278a",
       "source": "research",
-      "designLevers": ["interface", "ritual"],
-      "designerIntents": ["workflow_redesign", "ritual_design"],
+      "designLevers": [
+        "interface",
+        "ritual"
+      ],
+      "designerIntents": [
+        "workflow_redesign",
+        "ritual_design"
+      ],
       "designQuestion": "What communication cadence and format should your AI teammate use to keep the team informed without creating noise?",
-      "tags": ["communication", "proactive-updates", "coordination"],
-      "embedding": [190, 490]
+      "tags": [
+        "communication",
+        "proactive-updates",
+        "coordination"
+      ],
+      "embedding": [
+        190,
+        490
+      ],
+      "citation": "Hyosun An and Minjung Park (2026). AI tools and fashion design education: instructor perspectives on student challenges and design process tool support. Fashion and Textiles."
     },
     {
       "id": "investigating-comm",
@@ -361,13 +689,27 @@
       "year": 2024,
       "cluster": "communication",
       "summary": "Studies communication strategies in human-AI teams, revealing that effective AI teammates adapt communication style based on task urgency, team member expertise, and cognitive load.",
-      "url": "",
+      "url": "https://www.semanticscholar.org/paper/80b22833df9438fafd209f8338ac062eeaf971eb",
       "source": "research",
-      "designLevers": ["interface", "workflow"],
-      "designerIntents": ["workflow_redesign", "tooling_selection"],
+      "designLevers": [
+        "interface",
+        "workflow"
+      ],
+      "designerIntents": [
+        "workflow_redesign",
+        "tooling_selection"
+      ],
       "designQuestion": "How should your AI teammate adjust its communication style based on the urgency of the situation?",
-      "tags": ["communication", "adaptive", "cognitive-load"],
-      "embedding": [215, 520]
+      "tags": [
+        "communication",
+        "adaptive",
+        "cognitive-load"
+      ],
+      "embedding": [
+        215,
+        520
+      ],
+      "citation": "Rui Zhang et al. (2023). Investigating AI Teammate Communication Strategies and Their Impact in Human-AI Teams for Effective Teamwork. Proc. ACM Hum. Comput. Interact.."
     },
     {
       "id": "purposeful-presentation",
@@ -376,13 +718,26 @@
       "year": 2024,
       "cluster": "communication",
       "summary": "Demonstrates that how AI teammates are introduced and framed significantly influences human acceptance, with anthropomorphic presentations increasing trust but also raising expectations.",
-      "url": "",
+      "url": "/papers/ThePurposefulPresentationofAITeammatesImpactsonHumanAcceptanceandPerception.pdf",
       "source": "research",
-      "designLevers": ["interface", "role"],
-      "designerIntents": ["role_definition", "team_structure"],
+      "designLevers": [
+        "interface",
+        "role"
+      ],
+      "designerIntents": [
+        "role_definition",
+        "team_structure"
+      ],
       "designQuestion": "How should you introduce and frame your AI teammate to set appropriate expectations from day one?",
-      "tags": ["framing", "acceptance", "anthropomorphism"],
-      "embedding": [175, 530]
+      "tags": [
+        "framing",
+        "acceptance",
+        "anthropomorphism"
+      ],
+      "embedding": [
+        175,
+        530
+      ]
     },
     {
       "id": "pursuit-happiness",
@@ -391,13 +746,27 @@
       "year": 2024,
       "cluster": "communication",
       "summary": "Investigates how emotional expressions by AI teammates influence team dynamics, finding that AI emotional displays can boost morale but may also feel manipulative if perceived as inauthentic.",
-      "url": "",
+      "url": "/papers/ThepursuitofhappinessthepowerandinfluenceofAIteammateemotioninhuman-AIteamwork.pdf",
       "source": "research",
-      "designLevers": ["interface", "role"],
-      "designerIntents": ["role_definition", "ritual_design"],
+      "designLevers": [
+        "interface",
+        "role"
+      ],
+      "designerIntents": [
+        "role_definition",
+        "ritual_design"
+      ],
       "designQuestion": "Should your AI teammate express emotions, and how do you prevent emotional displays from feeling manipulative?",
-      "tags": ["emotion", "authenticity", "morale", "emerging"],
-      "embedding": [225, 475]
+      "tags": [
+        "emotion",
+        "authenticity",
+        "morale",
+        "emerging"
+      ],
+      "embedding": [
+        225,
+        475
+      ]
     },
     {
       "id": "politeness-llms",
@@ -406,13 +775,27 @@
       "year": 2024,
       "cluster": "communication",
       "summary": "Analyzes politeness norms in LLM interactions, finding that social conventions like politeness significantly influence AI output quality and user satisfaction in collaborative settings.",
-      "url": "",
+      "url": "https://www.semanticscholar.org/paper/752adcfa738ae00407efe43fa17aaace16a0c5aa",
       "source": "research",
-      "designLevers": ["interface", "ritual"],
-      "designerIntents": ["ritual_design", "tooling_selection"],
+      "designLevers": [
+        "interface",
+        "ritual"
+      ],
+      "designerIntents": [
+        "ritual_design",
+        "tooling_selection"
+      ],
       "designQuestion": "What social norms should govern how your team communicates with AI, and how does that shape AI behavior?",
-      "tags": ["politeness", "social-norms", "LLMs"],
-      "embedding": [165, 510]
+      "tags": [
+        "politeness",
+        "social-norms",
+        "LLMs"
+      ],
+      "embedding": [
+        165,
+        510
+      ],
+      "citation": "Taoufiq Zarra and R. Chiheb (2025). The Influence of Prompt Politeness on Response Quality in Large Language Models. IEEE International Conference on Circuits and Systems for Communications."
     },
     {
       "id": "ai-explaining",
@@ -421,13 +804,26 @@
       "year": 2023,
       "cluster": "communication",
       "summary": "Reviews approaches to AI explainability in team contexts, finding that explanation format, timing, and detail level must be calibrated to the user's expertise and decision criticality.",
-      "url": "",
+      "url": "/papers/AI-explaining-decisions.pdf",
       "source": "research",
-      "designLevers": ["interface", "capability_boundary"],
-      "designerIntents": ["tooling_selection", "governance_policy"],
+      "designLevers": [
+        "interface",
+        "capability_boundary"
+      ],
+      "designerIntents": [
+        "tooling_selection",
+        "governance_policy"
+      ],
       "designQuestion": "What level of explanation does your team actually need from AI, and when does too much explanation become a burden?",
-      "tags": ["explainability", "decision-making", "calibration"],
-      "embedding": [235, 545]
+      "tags": [
+        "explainability",
+        "decision-making",
+        "calibration"
+      ],
+      "embedding": [
+        235,
+        545
+      ]
     },
     {
       "id": "amershi-guidelines",
@@ -436,13 +832,27 @@
       "year": 2019,
       "cluster": "communication",
       "summary": "Foundational set of 18 design guidelines for human-AI interaction, covering initial interaction, during interaction, when wrong, and over time, widely adopted across the industry.",
-      "url": "",
+      "url": "https://www.semanticscholar.org/paper/ad3cf68bae32d21f25ac142287d4a556155619d2",
       "source": "industry",
-      "designLevers": ["interface", "workflow"],
-      "designerIntents": ["tooling_selection", "workflow_redesign"],
+      "designLevers": [
+        "interface",
+        "workflow"
+      ],
+      "designerIntents": [
+        "tooling_selection",
+        "workflow_redesign"
+      ],
       "designQuestion": "Which of the 18 guidelines does your AI product violate, and what would it take to bring it into alignment?",
-      "tags": ["guidelines", "design-patterns", "foundational"],
-      "embedding": [205, 555]
+      "tags": [
+        "guidelines",
+        "design-patterns",
+        "foundational"
+      ],
+      "embedding": [
+        205,
+        555
+      ],
+      "citation": "Saleema Amershi et al. (2019). Guidelines for Human-AI Interaction. International Conference on Human Factors in Computing Systems."
     },
     {
       "id": "how-make-agents",
@@ -453,11 +863,25 @@
       "summary": "Studies social influence dynamics in human-AI teams, finding that AI agents can shape team behavior through suggestion framing, timing, and social proof mechanisms.",
       "url": "",
       "source": "research",
-      "designLevers": ["interface", "governance"],
-      "designerIntents": ["governance_policy", "role_definition"],
+      "designLevers": [
+        "interface",
+        "governance"
+      ],
+      "designerIntents": [
+        "governance_policy",
+        "role_definition"
+      ],
       "designQuestion": "How do you prevent AI social influence from undermining human autonomy in team decision-making?",
-      "tags": ["social-influence", "agents", "decision-making", "emerging"],
-      "embedding": [245, 490]
+      "tags": [
+        "social-influence",
+        "agents",
+        "decision-making",
+        "emerging"
+      ],
+      "embedding": [
+        245,
+        490
+      ]
     },
     {
       "id": "mutual-tom",
@@ -466,13 +890,26 @@
       "year": 2024,
       "cluster": "learning",
       "summary": "Proposes that effective human-AI teaming requires mutual theory of mind where both humans and AI maintain models of each other's knowledge, intentions, and capabilities.",
-      "url": "",
+      "url": "/papers/MutualTheoryOfMind-AI.pdf",
       "source": "research",
-      "designLevers": ["interface", "capability_boundary"],
-      "designerIntents": ["tooling_selection", "learning_upskilling"],
+      "designLevers": [
+        "interface",
+        "capability_boundary"
+      ],
+      "designerIntents": [
+        "tooling_selection",
+        "learning_upskilling"
+      ],
       "designQuestion": "How well does your AI understand what you know and don't know, and how well do you understand what your AI can and can't do?",
-      "tags": ["theory-of-mind", "mutual-modeling", "emerging"],
-      "embedding": [490, 540]
+      "tags": [
+        "theory-of-mind",
+        "mutual-modeling",
+        "emerging"
+      ],
+      "embedding": [
+        490,
+        540
+      ]
     },
     {
       "id": "shared-mental-models",
@@ -481,13 +918,27 @@
       "year": 2024,
       "cluster": "learning",
       "summary": "Examines how shared mental models develop between humans and AI, finding that explicit model sharing and calibration exercises improve team decision-making accuracy.",
-      "url": "",
+      "url": "https://www.semanticscholar.org/paper/f5c507643d84d73aea70aac546009dc72a4a72f2",
       "source": "research",
-      "designLevers": ["ritual", "interface"],
-      "designerIntents": ["learning_upskilling", "ritual_design"],
+      "designLevers": [
+        "ritual",
+        "interface"
+      ],
+      "designerIntents": [
+        "learning_upskilling",
+        "ritual_design"
+      ],
       "designQuestion": "What exercises or rituals could help your team build shared mental models with AI?",
-      "tags": ["shared-mental-models", "calibration", "decision-making"],
-      "embedding": [520, 560]
+      "tags": [
+        "shared-mental-models",
+        "calibration",
+        "decision-making"
+      ],
+      "embedding": [
+        520,
+        560
+      ],
+      "citation": "Beau G. Schelble et al. (2022). Let's Think Together! Assessing Shared Mental Models, Performance, and Trust in Human-Agent Teams. Proc. ACM Hum. Comput. Interact.."
     },
     {
       "id": "collective-attention",
@@ -496,13 +947,26 @@
       "year": 2024,
       "cluster": "learning",
       "summary": "Studies how attention is distributed across human-AI teams, revealing patterns of collective attention allocation that predict team performance and error rates.",
-      "url": "",
+      "url": "/papers/CollectiveAttention-HumanAI-Teams.pdf",
       "source": "research",
-      "designLevers": ["workflow", "interface"],
-      "designerIntents": ["workflow_redesign", "team_structure"],
+      "designLevers": [
+        "workflow",
+        "interface"
+      ],
+      "designerIntents": [
+        "workflow_redesign",
+        "team_structure"
+      ],
       "designQuestion": "How do you ensure critical information gets the right attention when it's distributed across human and AI team members?",
-      "tags": ["attention", "performance", "error-rates"],
-      "embedding": [475, 575]
+      "tags": [
+        "attention",
+        "performance",
+        "error-rates"
+      ],
+      "embedding": [
+        475,
+        575
+      ]
     },
     {
       "id": "collective-intelligence",
@@ -511,13 +975,27 @@
       "year": 2024,
       "cluster": "learning",
       "summary": "Explores how human-AI teams can achieve collective intelligence that exceeds either human or AI capabilities alone through complementary expertise and adaptive coordination.",
-      "url": "",
+      "url": "/papers/human-AI-CollectiveIntelligence.pdf",
       "source": "research",
-      "designLevers": ["workflow", "role"],
-      "designerIntents": ["team_structure", "workflow_redesign"],
+      "designLevers": [
+        "workflow",
+        "role"
+      ],
+      "designerIntents": [
+        "team_structure",
+        "workflow_redesign"
+      ],
       "designQuestion": "What unique forms of collective intelligence emerge when humans and AI combine their complementary strengths?",
-      "tags": ["collective-intelligence", "complementarity", "synergy", "emerging"],
-      "embedding": [540, 545]
+      "tags": [
+        "collective-intelligence",
+        "complementarity",
+        "synergy",
+        "emerging"
+      ],
+      "embedding": [
+        540,
+        545
+      ]
     },
     {
       "id": "leveraging-team-cognition",
@@ -526,13 +1004,27 @@
       "year": 2024,
       "cluster": "learning",
       "summary": "Investigates how AI can support team cognitive processes including shared situational awareness, transactive memory, and collective sensemaking in complex environments.",
-      "url": "",
+      "url": "https://www.semanticscholar.org/paper/ad13022b5d0e966ff5fa555895a4a6939d4ba70c",
       "source": "research",
-      "designLevers": ["workflow", "interface"],
-      "designerIntents": ["learning_upskilling", "workflow_redesign"],
+      "designLevers": [
+        "workflow",
+        "interface"
+      ],
+      "designerIntents": [
+        "learning_upskilling",
+        "workflow_redesign"
+      ],
       "designQuestion": "How could AI serve as a team's cognitive amplifier rather than a cognitive crutch?",
-      "tags": ["team-cognition", "situational-awareness", "sensemaking"],
-      "embedding": [505, 585]
+      "tags": [
+        "team-cognition",
+        "situational-awareness",
+        "sensemaking"
+      ],
+      "embedding": [
+        505,
+        585
+      ],
+      "citation": "Jessica Williams et al. (2023). The Role of Artificial Theory of Mind in Supporting Human-Agent Teaming Interactions. Human Factors and Simulation."
     },
     {
       "id": "we-train-ai",
@@ -541,13 +1033,27 @@
       "year": 2024,
       "cluster": "learning",
       "summary": "Argues for bidirectional training in human-AI teams where humans learn to work effectively with AI while AI systems are calibrated to team-specific interaction patterns.",
-      "url": "",
+      "url": "https://www.semanticscholar.org/paper/60e3fe29c300b4e44958188158b8773c7cb7dfb4",
       "source": "research",
-      "designLevers": ["ritual", "capability_boundary"],
-      "designerIntents": ["learning_upskilling", "ritual_design"],
+      "designLevers": [
+        "ritual",
+        "capability_boundary"
+      ],
+      "designerIntents": [
+        "learning_upskilling",
+        "ritual_design"
+      ],
       "designQuestion": "What does a training program for human-AI teaming look like, and who designs the curriculum?",
-      "tags": ["training", "bidirectional", "upskilling"],
-      "embedding": [460, 555]
+      "tags": [
+        "training",
+        "bidirectional",
+        "upskilling"
+      ],
+      "embedding": [
+        460,
+        555
+      ],
+      "citation": "Shuai Chen and Yang Zhao (2025). Why am I willing to collaborate with AI? Exploring the desire for collaboration in human-AI hybrid group brainstorming. Kybernetes."
     },
     {
       "id": "improving-collab",
@@ -556,13 +1062,27 @@
       "year": 2024,
       "cluster": "learning",
       "summary": "Demonstrates that specific AI behavioral patterns including proactive information sharing, uncertainty communication, and adaptive pacing significantly improve collaboration outcomes.",
-      "url": "",
+      "url": "https://www.semanticscholar.org/paper/f0f6d133b4ea26fc656733042774e878bef34fd0",
       "source": "research",
-      "designLevers": ["interface", "workflow"],
-      "designerIntents": ["tooling_selection", "workflow_redesign"],
+      "designLevers": [
+        "interface",
+        "workflow"
+      ],
+      "designerIntents": [
+        "tooling_selection",
+        "workflow_redesign"
+      ],
       "designQuestion": "Which AI behavioral patterns most improve collaboration in your specific work context?",
-      "tags": ["AI-behaviors", "collaboration", "uncertainty"],
-      "embedding": [530, 525]
+      "tags": [
+        "AI-behaviors",
+        "collaboration",
+        "uncertainty"
+      ],
+      "embedding": [
+        530,
+        525
+      ],
+      "citation": "Ángel Alexander Cabrera et al. (2023). Improving Human-AI Collaboration With Descriptions of AI Behavior. Proc. ACM Hum. Comput. Interact.."
     },
     {
       "id": "skills-humans-need",
@@ -571,13 +1091,26 @@
       "year": 2020,
       "cluster": "learning",
       "summary": "Identifies essential human skills for effective human-machine teaming including AI literacy, adaptive coordination, calibrated trust, and collaborative problem-solving.",
-      "url": "",
+      "url": "/papers/DubrowOrvis2020Human-MachineTeams-Whatskillsdothehumansneed.pdf",
       "source": "research",
-      "designLevers": ["capability_boundary", "ritual"],
-      "designerIntents": ["learning_upskilling", "team_structure"],
+      "designLevers": [
+        "capability_boundary",
+        "ritual"
+      ],
+      "designerIntents": [
+        "learning_upskilling",
+        "team_structure"
+      ],
       "designQuestion": "Which human skills does your team need to develop to work effectively alongside AI?",
-      "tags": ["skills", "AI-literacy", "human-development"],
-      "embedding": [485, 595]
+      "tags": [
+        "skills",
+        "AI-literacy",
+        "human-development"
+      ],
+      "embedding": [
+        485,
+        595
+      ]
     },
     {
       "id": "hcai-hat",
@@ -586,13 +1119,27 @@
       "year": 2023,
       "cluster": "ethics",
       "summary": "Demonstrates how human-centered AI principles can guide the development of effective human-AI teams, balancing automation benefits with human agency and oversight.",
-      "url": "",
+      "url": "/papers/applying-human-centered-ai-in-developing-effective-human-ai-teaming.pdf",
       "source": "research",
-      "designLevers": ["governance", "interface"],
-      "designerIntents": ["governance_policy", "tooling_selection"],
+      "designLevers": [
+        "governance",
+        "interface"
+      ],
+      "designerIntents": [
+        "governance_policy",
+        "tooling_selection"
+      ],
       "designQuestion": "How do you ensure your AI teammate's design keeps humans centered rather than sidelined?",
-      "tags": ["human-centered-AI", "agency", "oversight"],
-      "embedding": [790, 485]
+      "tags": [
+        "human-centered-AI",
+        "agency",
+        "oversight"
+      ],
+      "embedding": [
+        790,
+        485
+      ],
+      "citation": "Wei Xu and Zaifeng Gao (2023). Applying HCAI in Developing Effective Human-AI Teaming: A Perspective from Human-AI Joint Cognitive Systems. Interactions."
     },
     {
       "id": "ethics-hat",
@@ -601,13 +1148,27 @@
       "year": 2024,
       "cluster": "ethics",
       "summary": "Maps the ethical landscape of human-AI teaming including questions of accountability, bias amplification, power dynamics, and the moral status of AI teammates.",
-      "url": "",
+      "url": "/papers/Ethics-in-HumanAI_Teaming.pdf",
       "source": "research",
-      "designLevers": ["governance", "role"],
-      "designerIntents": ["governance_policy", "role_definition"],
+      "designLevers": [
+        "governance",
+        "role"
+      ],
+      "designerIntents": [
+        "governance_policy",
+        "role_definition"
+      ],
       "designQuestion": "Who is accountable when an AI teammate's action causes harm, and how do you establish that chain of responsibility?",
-      "tags": ["ethics", "accountability", "bias", "power-dynamics"],
-      "embedding": [815, 510]
+      "tags": [
+        "ethics",
+        "accountability",
+        "bias",
+        "power-dynamics"
+      ],
+      "embedding": [
+        815,
+        510
+      ]
     },
     {
       "id": "towards-ethical-ai",
@@ -616,13 +1177,28 @@
       "year": 2024,
       "cluster": "ethics",
       "summary": "Proposes an ethical framework for AI integration in teams that addresses fairness in task allocation, transparency in AI reasoning, and preservation of human dignity.",
-      "url": "",
+      "url": "https://www.semanticscholar.org/paper/8ceaa12aaf37fa2bdbb67f9271adc85f5555b895",
       "source": "research",
-      "designLevers": ["governance", "workflow"],
-      "designerIntents": ["governance_policy", "workflow_redesign"],
+      "designLevers": [
+        "governance",
+        "workflow"
+      ],
+      "designerIntents": [
+        "governance_policy",
+        "workflow_redesign"
+      ],
       "designQuestion": "How do you ensure AI task allocation is fair and doesn't systematically disadvantage certain team members?",
-      "tags": ["ethics", "fairness", "dignity", "framework"],
-      "embedding": [835, 490]
+      "tags": [
+        "ethics",
+        "fairness",
+        "dignity",
+        "framework"
+      ],
+      "embedding": [
+        835,
+        490
+      ],
+      "citation": "Beau G. Schelble et al. (2022). Towards Ethical AI: Empirically Investigating Dimensions of AI Ethics, Trust Repair, and Performance in Human-AI Teaming. Hum. Factors."
     },
     {
       "id": "synthetic-authority",
@@ -633,11 +1209,25 @@
       "summary": "Examines how AI introduces new forms of authority in organizations, potentially disrupting traditional power structures and creating novel accountability challenges.",
       "url": "",
       "source": "research",
-      "designLevers": ["governance", "role"],
-      "designerIntents": ["governance_policy", "team_structure"],
+      "designLevers": [
+        "governance",
+        "role"
+      ],
+      "designerIntents": [
+        "governance_policy",
+        "team_structure"
+      ],
       "designQuestion": "How does AI redistribute power in your organization, and who gains or loses authority?",
-      "tags": ["authority", "power-dynamics", "organizational-change", "emerging"],
-      "embedding": [775, 520]
+      "tags": [
+        "authority",
+        "power-dynamics",
+        "organizational-change",
+        "emerging"
+      ],
+      "embedding": [
+        775,
+        520
+      ]
     },
     {
       "id": "ai-culture",
@@ -646,13 +1236,26 @@
       "year": 2024,
       "cluster": "ethics",
       "summary": "Explores the bidirectional relationship between AI and organizational culture, examining how cultural values shape AI adoption and how AI in turn transforms workplace culture.",
-      "url": "",
+      "url": "/papers/ai_and_culture_-_goldberg_and_srivastava.pdf",
       "source": "research",
-      "designLevers": ["ritual", "governance"],
-      "designerIntents": ["ritual_design", "governance_policy"],
+      "designLevers": [
+        "ritual",
+        "governance"
+      ],
+      "designerIntents": [
+        "ritual_design",
+        "governance_policy"
+      ],
       "designQuestion": "How is AI reshaping your team's culture, and are those cultural shifts intentional or accidental?",
-      "tags": ["culture", "values", "organizational-change"],
-      "embedding": [825, 540]
+      "tags": [
+        "culture",
+        "values",
+        "organizational-change"
+      ],
+      "embedding": [
+        825,
+        540
+      ]
     },
     {
       "id": "soul-of-work",
@@ -661,13 +1264,27 @@
       "year": 2024,
       "cluster": "ethics",
       "summary": "Philosophical exploration of how AI integration challenges fundamental concepts of meaningful work, professional identity, and human purpose in the workplace.",
-      "url": "",
+      "url": "/papers/Soul-of-Work-AI.pdf",
       "source": "research",
-      "designLevers": ["role", "governance"],
-      "designerIntents": ["role_definition", "governance_policy"],
+      "designLevers": [
+        "role",
+        "governance"
+      ],
+      "designerIntents": [
+        "role_definition",
+        "governance_policy"
+      ],
       "designQuestion": "What makes work meaningful when AI can do many of the tasks that once defined your professional identity?",
-      "tags": ["meaning", "identity", "philosophy", "emerging"],
-      "embedding": [805, 555]
+      "tags": [
+        "meaning",
+        "identity",
+        "philosophy",
+        "emerging"
+      ],
+      "embedding": [
+        805,
+        555
+      ]
     },
     {
       "id": "human-ai-cocreation",
@@ -676,13 +1293,26 @@
       "year": 2024,
       "cluster": "creativity",
       "summary": "Studies co-creative processes between humans and AI, identifying patterns where human creativity and AI capabilities combine to produce outcomes neither could achieve alone.",
-      "url": "",
+      "url": "/papers/Human-AI-Cocreation.pdf",
       "source": "research",
-      "designLevers": ["workflow", "interface"],
-      "designerIntents": ["workflow_redesign", "tooling_selection"],
+      "designLevers": [
+        "workflow",
+        "interface"
+      ],
+      "designerIntents": [
+        "workflow_redesign",
+        "tooling_selection"
+      ],
       "designQuestion": "What does a truly co-creative workflow between humans and AI look like, beyond just 'human prompts, AI generates'?",
-      "tags": ["co-creation", "creative-process", "synergy"],
-      "embedding": [340, 110]
+      "tags": [
+        "co-creation",
+        "creative-process",
+        "synergy"
+      ],
+      "embedding": [
+        340,
+        110
+      ]
     },
     {
       "id": "human-ai-cocreativity",
@@ -691,13 +1321,27 @@
       "year": 2024,
       "cluster": "creativity",
       "summary": "Examines shared creative processes in human-AI teams, finding that iterative cycles of human ideation and AI elaboration produce the most novel creative outcomes.",
-      "url": "",
+      "url": "https://www.semanticscholar.org/paper/7be23d2f5af3c043322cc161714a4755a038347d",
       "source": "research",
-      "designLevers": ["workflow", "ritual"],
-      "designerIntents": ["workflow_redesign", "ritual_design"],
+      "designLevers": [
+        "workflow",
+        "ritual"
+      ],
+      "designerIntents": [
+        "workflow_redesign",
+        "ritual_design"
+      ],
       "designQuestion": "How many iteration cycles between human ideation and AI elaboration produce the best creative results for your team?",
-      "tags": ["co-creativity", "iteration", "ideation"],
-      "embedding": [365, 135]
+      "tags": [
+        "co-creativity",
+        "iteration",
+        "ideation"
+      ],
+      "embedding": [
+        365,
+        135
+      ],
+      "citation": "Syed Mohsin Abbasi et al. (2025). HYBRID INTELLIGENCE IN ART STUDIO MANAGEMENT. ShodhKosh Journal of Visual and Performing Arts."
     },
     {
       "id": "focus-modality-design",
@@ -706,13 +1350,27 @@
       "year": 2024,
       "cluster": "creativity",
       "summary": "Maps out how AI-human teaming will evolve in design practice across different modalities, from visual to conversational to spatial, with implications for design education.",
-      "url": "",
+      "url": "/papers/focus-and-modality-defining-a-roadmap-to-future-ai-human-teaming-in-design.pdf",
       "source": "research",
-      "designLevers": ["interface", "capability_boundary"],
-      "designerIntents": ["tooling_selection", "learning_upskilling"],
+      "designLevers": [
+        "interface",
+        "capability_boundary"
+      ],
+      "designerIntents": [
+        "tooling_selection",
+        "learning_upskilling"
+      ],
       "designQuestion": "Which design modality (visual, conversational, spatial) is most ripe for AI-human teaming in your practice?",
-      "tags": ["design", "modality", "education", "roadmap"],
-      "embedding": [320, 140]
+      "tags": [
+        "design",
+        "modality",
+        "education",
+        "roadmap"
+      ],
+      "embedding": [
+        320,
+        140
+      ]
     },
     {
       "id": "genai-task-performance",
@@ -721,56 +1379,193 @@
       "year": 2024,
       "cluster": "creativity",
       "summary": "Empirical study showing that human-GenAI collaboration enhances task performance in knowledge work, with the largest gains in tasks requiring both analytical and creative thinking.",
-      "url": "",
+      "url": "https://www.semanticscholar.org/paper/294c485ebc111bfa64ecde86d5a792be8f6f68c3",
       "source": "research",
-      "designLevers": ["workflow", "capability_boundary"],
-      "designerIntents": ["workflow_redesign", "tooling_selection"],
+      "designLevers": [
+        "workflow",
+        "capability_boundary"
+      ],
+      "designerIntents": [
+        "workflow_redesign",
+        "tooling_selection"
+      ],
       "designQuestion": "Which of your team's tasks sit at the intersection of analytical and creative thinking where GenAI collaboration adds the most value?",
-      "tags": ["task-performance", "knowledge-work", "empirical"],
-      "embedding": [375, 105]
+      "tags": [
+        "task-performance",
+        "knowledge-work",
+        "empirical"
+      ],
+      "embedding": [
+        375,
+        105
+      ],
+      "citation": "Suqing Wu et al. (2025). Human-generative AI collaboration enhances task performance but undermines human’s intrinsic motivation. Scientific Reports."
     }
   ],
   "links": [
-    { "source": "shaping-trust", "target": "trust-digital-teams" },
-    { "source": "impacts-trust-model", "target": "shaping-trust" },
-    { "source": "trust-ai-team-member", "target": "shaping-trust" },
-    { "source": "trust-ai-team-member", "target": "impacts-trust-model" },
-    { "source": "tools-to-teammates", "target": "beyond-tool-teammate" },
-    { "source": "ideal-human", "target": "tools-to-teammates" },
-    { "source": "who-what-teammate", "target": "defining-hat" },
-    { "source": "when-ai-joins", "target": "who-what-teammate" },
-    { "source": "survey-hat-lpm", "target": "hat-empirical" },
-    { "source": "superteams", "target": "tools-to-teammates" },
-    { "source": "team-challenges-ai", "target": "when-ai-joins" },
-    { "source": "hello-mate", "target": "ideal-human" },
-    { "source": "antecedents-hat", "target": "hat-empirical" },
-    { "source": "genai-colleague", "target": "when-should-i-lead" },
-    { "source": "requirements-ai-teammates", "target": "human-loop-orgs" },
-    { "source": "algorithmic-management", "target": "human-loop-orgs" },
-    { "source": "state-ai-work-anthropic", "target": "genai-colleague" },
-    { "source": "structuring-ai-comm", "target": "investigating-comm" },
-    { "source": "purposeful-presentation", "target": "structuring-ai-comm" },
-    { "source": "pursuit-happiness", "target": "purposeful-presentation" },
-    { "source": "politeness-llms", "target": "structuring-ai-comm" },
-    { "source": "ai-explaining", "target": "amershi-guidelines" },
-    { "source": "how-make-agents", "target": "structuring-ai-comm" },
-    { "source": "mutual-tom", "target": "shared-mental-models" },
-    { "source": "collective-attention", "target": "collective-intelligence" },
-    { "source": "leveraging-team-cognition", "target": "shared-mental-models" },
-    { "source": "we-train-ai", "target": "skills-humans-need" },
-    { "source": "improving-collab", "target": "mutual-tom" },
-    { "source": "hcai-hat", "target": "ethics-hat" },
-    { "source": "towards-ethical-ai", "target": "ethics-hat" },
-    { "source": "synthetic-authority", "target": "algorithmic-management" },
-    { "source": "ai-culture", "target": "soul-of-work" },
-    { "source": "human-ai-cocreation", "target": "human-ai-cocreativity" },
-    { "source": "focus-modality-design", "target": "human-ai-cocreation" },
-    { "source": "genai-task-performance", "target": "human-ai-cocreativity" },
-    { "source": "trust-digital-teams", "target": "defining-hat" },
-    { "source": "shared-mental-models", "target": "collective-intelligence" },
-    { "source": "amershi-guidelines", "target": "hcai-hat" },
-    { "source": "beyond-tool-teammate", "target": "defining-hat" },
-    { "source": "when-should-i-lead", "target": "requirements-ai-teammates" },
-    { "source": "investigating-comm", "target": "amershi-guidelines" }
+    {
+      "source": "shaping-trust",
+      "target": "trust-digital-teams"
+    },
+    {
+      "source": "impacts-trust-model",
+      "target": "shaping-trust"
+    },
+    {
+      "source": "trust-ai-team-member",
+      "target": "shaping-trust"
+    },
+    {
+      "source": "trust-ai-team-member",
+      "target": "impacts-trust-model"
+    },
+    {
+      "source": "tools-to-teammates",
+      "target": "beyond-tool-teammate"
+    },
+    {
+      "source": "ideal-human",
+      "target": "tools-to-teammates"
+    },
+    {
+      "source": "who-what-teammate",
+      "target": "defining-hat"
+    },
+    {
+      "source": "when-ai-joins",
+      "target": "who-what-teammate"
+    },
+    {
+      "source": "survey-hat-lpm",
+      "target": "hat-empirical"
+    },
+    {
+      "source": "superteams",
+      "target": "tools-to-teammates"
+    },
+    {
+      "source": "team-challenges-ai",
+      "target": "when-ai-joins"
+    },
+    {
+      "source": "hello-mate",
+      "target": "ideal-human"
+    },
+    {
+      "source": "antecedents-hat",
+      "target": "hat-empirical"
+    },
+    {
+      "source": "genai-colleague",
+      "target": "when-should-i-lead"
+    },
+    {
+      "source": "requirements-ai-teammates",
+      "target": "human-loop-orgs"
+    },
+    {
+      "source": "algorithmic-management",
+      "target": "human-loop-orgs"
+    },
+    {
+      "source": "state-ai-work-anthropic",
+      "target": "genai-colleague"
+    },
+    {
+      "source": "structuring-ai-comm",
+      "target": "investigating-comm"
+    },
+    {
+      "source": "purposeful-presentation",
+      "target": "structuring-ai-comm"
+    },
+    {
+      "source": "pursuit-happiness",
+      "target": "purposeful-presentation"
+    },
+    {
+      "source": "politeness-llms",
+      "target": "structuring-ai-comm"
+    },
+    {
+      "source": "ai-explaining",
+      "target": "amershi-guidelines"
+    },
+    {
+      "source": "how-make-agents",
+      "target": "structuring-ai-comm"
+    },
+    {
+      "source": "mutual-tom",
+      "target": "shared-mental-models"
+    },
+    {
+      "source": "collective-attention",
+      "target": "collective-intelligence"
+    },
+    {
+      "source": "leveraging-team-cognition",
+      "target": "shared-mental-models"
+    },
+    {
+      "source": "we-train-ai",
+      "target": "skills-humans-need"
+    },
+    {
+      "source": "improving-collab",
+      "target": "mutual-tom"
+    },
+    {
+      "source": "hcai-hat",
+      "target": "ethics-hat"
+    },
+    {
+      "source": "towards-ethical-ai",
+      "target": "ethics-hat"
+    },
+    {
+      "source": "synthetic-authority",
+      "target": "algorithmic-management"
+    },
+    {
+      "source": "ai-culture",
+      "target": "soul-of-work"
+    },
+    {
+      "source": "human-ai-cocreation",
+      "target": "human-ai-cocreativity"
+    },
+    {
+      "source": "focus-modality-design",
+      "target": "human-ai-cocreation"
+    },
+    {
+      "source": "genai-task-performance",
+      "target": "human-ai-cocreativity"
+    },
+    {
+      "source": "trust-digital-teams",
+      "target": "defining-hat"
+    },
+    {
+      "source": "shared-mental-models",
+      "target": "collective-intelligence"
+    },
+    {
+      "source": "amershi-guidelines",
+      "target": "hcai-hat"
+    },
+    {
+      "source": "beyond-tool-teammate",
+      "target": "defining-hat"
+    },
+    {
+      "source": "when-should-i-lead",
+      "target": "requirements-ai-teammates"
+    },
+    {
+      "source": "investigating-comm",
+      "target": "amershi-guidelines"
+    }
   ]
 }

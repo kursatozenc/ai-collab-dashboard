@@ -96,6 +96,26 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .cluster-group { animation: none; }
+  .cluster-ambient-blob { animation: none; }
+}
+
+/* ── Ambient blobs: slow drift in space ── */
+.cluster-ambient-blobs {
+  transform-origin: var(--centroid-x) var(--centroid-y);
+}
+
+.cluster-ambient-blob {
+  animation: blobDrift 18s ease-in-out infinite;
+  will-change: transform;
+  transform-origin: var(--centroid-x) var(--centroid-y);
+}
+
+@keyframes blobDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  20% { transform: translate(4px, -5px) scale(1.02); }
+  40% { transform: translate(-3px, 3px) scale(0.98); }
+  60% { transform: translate(-5px, -2px) scale(1.01); }
+  80% { transform: translate(3px, 4px) scale(0.99); }
 }
 
 /* ── Cluster Pads ── */

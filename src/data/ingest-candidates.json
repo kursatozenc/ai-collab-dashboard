@@ -1,0 +1,1708 @@
+{
+  "updatedAt": "2026-02-09T01:25:11.487Z",
+  "items": [
+    {
+      "id": "openai-making-ai-work-for-everyone-everywhere-our-approach-to-localization",
+      "title": "Making AI work for everyone, everywhere: our approach to localization",
+      "url": "https://openai.com/index/our-approach-to-localization",
+      "summary": "OpenAI shares its approach to AI localization, showing how globally shared frontier models can be adapted to local languages, laws, and cultures without compromising safety.",
+      "publishedAt": "Fri, 06 Feb 2026 10:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-korea-privacy-policy",
+      "title": "Korea privacy policy",
+      "url": "https://openai.com/policies/kr-privacy-policy",
+      "summary": "Korea privacy policy",
+      "publishedAt": "Fri, 06 Feb 2026 10:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-gpt-5-lowers-the-cost-of-cell-free-protein-synthesis",
+      "title": "GPT-5 lowers the cost of cell-free protein synthesis",
+      "url": "https://openai.com/index/gpt-5-lowers-protein-synthesis-cost",
+      "summary": "An autonomous lab combining OpenAI’s GPT-5 with Ginkgo Bioworks’ cloud automation cut cell-free protein synthesis costs by 40% through closed-loop experimentation.",
+      "publishedAt": "Thu, 05 Feb 2026 11:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-introducing-trusted-access-for-cyber",
+      "title": "Introducing Trusted Access for Cyber",
+      "url": "https://openai.com/index/trusted-access-for-cyber",
+      "summary": "OpenAI introduces Trusted Access for Cyber, a trust-based framework that expands access to frontier cyber capabilities while strengthening safeguards against misuse.",
+      "publishedAt": "Thu, 05 Feb 2026 10:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-introducing-openai-frontier",
+      "title": "Introducing OpenAI Frontier",
+      "url": "https://openai.com/index/introducing-openai-frontier",
+      "summary": "OpenAI Frontier is an enterprise platform for building, deploying, and managing AI agents with shared context, onboarding, permissions, and governance.",
+      "publishedAt": "Thu, 05 Feb 2026 06:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-navigating-health-questions-with-chatgpt",
+      "title": "Navigating health questions with ChatGPT",
+      "url": "https://openai.com/index/navigating-health-questions",
+      "summary": "A family shares how ChatGPT helped them prepare for critical cancer treatment decisions for their son alongside expert guidance from his doctors.",
+      "publishedAt": "Thu, 05 Feb 2026 00:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-gpt-5-3-codex-system-card",
+      "title": "GPT-5.3-Codex System Card",
+      "url": "https://openai.com/index/gpt-5-3-codex-system-card",
+      "summary": "GPT‑5.3-Codex is the most capable agentic coding model to date, combining the frontier coding performance of GPT‑5.2-Codex with the reasoning and professional knowledge capabilities of GPT‑5.2. ",
+      "publishedAt": "Thu, 05 Feb 2026 00:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-introducing-gpt-5-3-codex",
+      "title": "Introducing GPT-5.3-Codex",
+      "url": "https://openai.com/index/introducing-gpt-5-3-codex",
+      "summary": "GPT-5.3-Codex is a Codex-native agent that pairs frontier coding performance with general reasoning to support long-horizon, real-world technical work.",
+      "publishedAt": "Thu, 05 Feb 2026 00:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-unlocking-the-codex-harness-how-we-built-the-app-server",
+      "title": "Unlocking the Codex harness: how we built the App Server",
+      "url": "https://openai.com/index/unlocking-the-codex-harness",
+      "summary": "Learn how to embed the Codex agent using the Codex App Server, a bidirectional JSON-RPC API powering streaming progress, tool use, approvals, and diffs.",
+      "publishedAt": "Wed, 04 Feb 2026 13:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-vfl-wolfsburg-turns-chatgpt-into-a-club-wide-capability",
+      "title": "VfL Wolfsburg turns ChatGPT into a club-wide capability",
+      "url": "https://openai.com/index/vfl-wolfsburg",
+      "summary": "By focusing on people, not pilots, the Bundesliga club is scaling efficiency, creativity, and knowledge—without losing its football identity.",
+      "publishedAt": "Wed, 04 Feb 2026 00:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-the-sora-feed-philosophy",
+      "title": "The Sora feed philosophy",
+      "url": "https://openai.com/index/sora-feed-philosophy",
+      "summary": "Discover the Sora feed philosophy—built to spark creativity, foster connections, and keep experiences safe with personalized recommendations, parental controls, and strong guardrails.",
+      "publishedAt": "Tue, 03 Feb 2026 00:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-snowflake-and-openai-partner-to-bring-frontier-intelligence-to-enterprise-data",
+      "title": "Snowflake and OpenAI partner to bring frontier intelligence to enterprise data",
+      "url": "https://openai.com/index/snowflake-partnership",
+      "summary": "OpenAI and Snowflake partner in a $200M agreement to bring frontier intelligence into enterprise data, enabling AI agents and insights directly in Snowflake.",
+      "publishedAt": "Mon, 02 Feb 2026 06:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-introducing-the-codex-app",
+      "title": "Introducing the Codex app",
+      "url": "https://openai.com/index/introducing-the-codex-app",
+      "summary": "Introducing the Codex app for macOS—a command center for AI coding and software development with multiple agents, parallel workflows, and long-running tasks.",
+      "publishedAt": "Mon, 02 Feb 2026 00:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-inside-openai-s-in-house-data-agent",
+      "title": "Inside OpenAI’s in-house data agent",
+      "url": "https://openai.com/index/inside-our-in-house-data-agent",
+      "summary": "How OpenAI built an in-house AI data agent that uses GPT-5, Codex, and memory to reason over massive datasets and deliver reliable insights in minutes.",
+      "publishedAt": "Thu, 29 Jan 2026 10:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-taisei-corporation-shapes-the-next-generation-of-talent-with-chatgpt",
+      "title": "Taisei Corporation shapes the next generation of talent with ChatGPT",
+      "url": "https://openai.com/index/taisei",
+      "summary": "Taisei Corporation uses ChatGPT Enterprise to support HR-led talent development and scale generative AI across its global construction business.",
+      "publishedAt": "Thu, 29 Jan 2026 00:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-retiring-gpt-4o-gpt-4-1-gpt-4-1-mini-and-openai-o4-mini-in-chatgpt",
+      "title": "Retiring GPT-4o, GPT-4.1, GPT-4.1 mini, and OpenAI o4-mini in ChatGPT",
+      "url": "https://openai.com/index/retiring-gpt-4o-and-older-models",
+      "summary": "On February 13, 2026, alongside the previously announced retirement⁠ of GPT‑5 (Instant, Thinking, and Pro), we will retire GPT‑4o, GPT‑4.1, GPT‑4.1 mini, and OpenAI o4-mini from ChatGPT. In the API, there are no changes at this time.",
+      "publishedAt": "Thu, 29 Jan 2026 00:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-the-next-chapter-for-ai-in-the-eu",
+      "title": "The next chapter for AI in the EU",
+      "url": "https://openai.com/index/the-next-chapter-for-ai-in-the-eu",
+      "summary": "OpenAI launches the EU Economic Blueprint 2.0 with new data, partnerships, and initiatives to accelerate AI adoption, skills, and growth across Europe.",
+      "publishedAt": "Wed, 28 Jan 2026 01:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-emea-youth-wellbeing-grant",
+      "title": "EMEA Youth & Wellbeing Grant",
+      "url": "https://openai.com/index/emea-youth-and-wellbeing-grant",
+      "summary": "Apply for the EMEA Youth & Wellbeing Grant, a €500,000 program funding NGOs and researchers advancing youth safety and wellbeing in the age of AI.",
+      "publishedAt": "Wed, 28 Jan 2026 01:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-keeping-your-data-safe-when-an-ai-agent-clicks-a-link",
+      "title": "Keeping your data safe when an AI agent clicks a link",
+      "url": "https://openai.com/index/ai-agent-link-safety",
+      "summary": "Learn how OpenAI protects user data when AI agents open links, preventing URL-based data exfiltration and prompt injection with built-in safeguards.",
+      "publishedAt": "Wed, 28 Jan 2026 00:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-pvh-reimagines-the-future-of-fashion-with-openai",
+      "title": "PVH reimagines the future of fashion with OpenAI",
+      "url": "https://openai.com/index/pvh-future-of-fashion",
+      "summary": "PVH Corp., parent company of Calvin Klein and Tommy Hilfiger, is adopting ChatGPT Enterprise to bring AI into fashion design, supply chain, and consumer engagement.",
+      "publishedAt": "Tue, 27 Jan 2026 06:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-introducing-prism",
+      "title": "Introducing Prism",
+      "url": "https://openai.com/index/introducing-prism",
+      "summary": "Prism is a free LaTeX-native workspace with GPT-5.2 built in, helping researchers write, collaborate, and reason in one place.",
+      "publishedAt": "Tue, 27 Jan 2026 00:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-powering-tax-donations-with-ai-powered-personalized-recommendations",
+      "title": "Powering tax donations with AI powered personalized recommendations",
+      "url": "https://openai.com/index/trustbank",
+      "summary": "TRUSTBANK partnered with Recursive to build Choice AI using OpenAI models, delivering personalized, conversational recommendations that simplify Furusato Nozei gift discovery. A multi-agent system helps donors navigate thousands of options and find gifts that match their preferences.",
+      "publishedAt": "Tue, 27 Jan 2026 00:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-how-indeed-uses-ai-to-help-evolve-the-job-search",
+      "title": "How Indeed uses AI to help evolve the job search",
+      "url": "https://openai.com/index/indeed-maggie-hulce",
+      "summary": "Indeed’s CRO Maggie Hulce shares how AI is transforming job search, recruiting, and talent acquisition for employers and job seekers.",
+      "publishedAt": "Mon, 26 Jan 2026 00:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-unrolling-the-codex-agent-loop",
+      "title": "Unrolling the Codex agent loop",
+      "url": "https://openai.com/index/unrolling-the-codex-agent-loop",
+      "summary": "A technical deep dive into the Codex agent loop, explaining how Codex CLI orchestrates models, tools, prompts, and performance using the Responses API.",
+      "publishedAt": "Fri, 23 Jan 2026 12:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-scaling-postgresql-to-power-800-million-chatgpt-users",
+      "title": "Scaling PostgreSQL to power 800 million ChatGPT users",
+      "url": "https://openai.com/index/scaling-postgresql",
+      "summary": "An inside look at how OpenAI scaled PostgreSQL to millions of queries per second using replicas, caching, rate limiting, and workload isolation.",
+      "publishedAt": "Thu, 22 Jan 2026 12:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-inside-praktika-s-conversational-approach-to-language-learning",
+      "title": "Inside Praktika's conversational approach to language learning",
+      "url": "https://openai.com/index/praktika",
+      "summary": "How Praktika uses GPT-4.1 and GPT-5.2 to build adaptive AI tutors that personalize lessons, track progress, and help learners achieve real-world language fluency",
+      "publishedAt": "Thu, 22 Jan 2026 05:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-inside-gpt-5-for-work-how-businesses-use-gpt-5",
+      "title": "Inside GPT-5 for Work: How Businesses Use GPT-5",
+      "url": "https://openai.com/business/guides-and-resources/chatgpt-usage-and-adoption-patterns-at-work",
+      "summary": "A data-driven report on how workers across industries use ChatGPT—covering adoption trends, top tasks, departmental patterns, and the future of AI at work.",
+      "publishedAt": "Thu, 22 Jan 2026 00:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-how-higgsfield-turns-simple-ideas-into-cinematic-social-videos",
+      "title": "How Higgsfield turns simple ideas into cinematic social videos",
+      "url": "https://openai.com/index/higgsfield",
+      "summary": "Discover how Higgsfield gives creators cinematic, social-first video output from simple inputs using OpenAI GPT-4.1, GPT-5, and Sora 2.",
+      "publishedAt": "Wed, 21 Jan 2026 10:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-introducing-edu-for-countries",
+      "title": "Introducing Edu for Countries",
+      "url": "https://openai.com/index/edu-for-countries",
+      "summary": "Edu for Countries is a new OpenAI initiative helping governments use AI to modernize education systems and build future-ready workforces.",
+      "publishedAt": "Wed, 21 Jan 2026 01:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-how-countries-can-end-the-capability-overhang",
+      "title": "How countries can end the capability overhang",
+      "url": "https://openai.com/index/how-countries-can-end-the-capability-overhang",
+      "summary": "Our latest report reveals stark differences in advanced AI adoption across countries and outlines new initiatives to help nations capture productivity gains from AI.",
+      "publishedAt": "Wed, 21 Jan 2026 01:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-horizon-1000-advancing-ai-for-primary-healthcare",
+      "title": "Horizon 1000: Advancing AI for primary healthcare",
+      "url": "https://openai.com/index/horizon-1000",
+      "summary": "OpenAI and the Gates Foundation launch Horizon 1000, a $50M pilot advancing AI capabilities for healthcare in Africa. The initiative aims to reach 1,000 clinics by 2028.",
+      "publishedAt": "Tue, 20 Jan 2026 21:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-stargate-community",
+      "title": "Stargate Community",
+      "url": "https://openai.com/index/stargate-community",
+      "summary": "Stargate Community plans detail a community-first approach to AI infrastructure, using locally tailored plans shaped by community input, energy needs, and workforce priorities.",
+      "publishedAt": "Tue, 20 Jan 2026 19:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-cisco-and-openai-redefine-enterprise-engineering-with-ai-agents",
+      "title": "Cisco and OpenAI redefine enterprise engineering with AI agents",
+      "url": "https://openai.com/index/cisco",
+      "summary": "Cisco and OpenAI redefine enterprise engineering with Codex, an AI software agent embedded in workflows to speed builds, automate defect fixes, and enable AI-native development.",
+      "publishedAt": "Tue, 20 Jan 2026 11:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-servicenow-powers-actionable-enterprise-ai-with-openai",
+      "title": "ServiceNow powers actionable enterprise AI with OpenAI",
+      "url": "https://openai.com/index/servicenow-powers-actionable-enterprise-ai-with-openai",
+      "summary": "ServiceNow expands access to OpenAI frontier models to power AI-driven enterprise workflows, summarization, search, and voice across the ServiceNow Platform.",
+      "publishedAt": "Tue, 20 Jan 2026 05:45:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-our-approach-to-age-prediction",
+      "title": "Our approach to age prediction",
+      "url": "https://openai.com/index/our-approach-to-age-prediction",
+      "summary": "ChatGPT is rolling out age prediction to estimate if accounts are under or over 18, applying safeguards for teens and refining accuracy over time.",
+      "publishedAt": "Tue, 20 Jan 2026 00:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-ai-for-self-empowerment",
+      "title": "AI for self empowerment",
+      "url": "https://openai.com/index/ai-for-self-empowerment",
+      "summary": "How AI can expand human agency by closing the capability overhang—helping people, businesses, and countries unlock real productivity, growth, and opportunity.",
+      "publishedAt": "Sun, 18 Jan 2026 12:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-a-business-that-scales-with-the-value-of-intelligence",
+      "title": "A business that scales with the value of intelligence",
+      "url": "https://openai.com/index/a-business-that-scales-with-the-value-of-intelligence",
+      "summary": "OpenAI’s business model scales with intelligence—spanning subscriptions, API, ads, commerce, and compute—driven by deepening ChatGPT adoption.",
+      "publishedAt": "Sun, 18 Jan 2026 10:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-the-truth-left-out-from-elon-musk-s-recent-court-filing",
+      "title": "The truth left out from Elon Musk’s recent court filing",
+      "url": "https://openai.com/index/the-truth-elon-left-out",
+      "summary": "The truth left out from Elon Musk’s recent court filing.",
+      "publishedAt": "Fri, 16 Jan 2026 12:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-introducing-chatgpt-go-now-available-worldwide",
+      "title": "Introducing ChatGPT Go, now available worldwide",
+      "url": "https://openai.com/index/introducing-chatgpt-go",
+      "summary": "ChatGPT Go is now available worldwide, offering expanded access to GPT-5.2 Instant, higher usage limits, and longer memory—making advanced AI more affordable globally.",
+      "publishedAt": "Fri, 16 Jan 2026 00:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-our-approach-to-advertising-and-expanding-access-to-chatgpt",
+      "title": "Our approach to advertising and expanding access to ChatGPT",
+      "url": "https://openai.com/index/our-approach-to-advertising-and-expanding-access",
+      "summary": "OpenAI plans to test advertising in the U.S. for ChatGPT’s free and Go tiers to expand affordable access to AI worldwide, while protecting privacy, trust, and answer quality.",
+      "publishedAt": "Fri, 16 Jan 2026 00:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-investing-in-merge-labs",
+      "title": "Investing in Merge Labs",
+      "url": "https://openai.com/index/investing-in-merge-labs",
+      "summary": "OpenAI is investing in Merge Labs to support new brain computer interfaces that bridge biological and artificial intelligence to maximize human ability, agency, and experience.",
+      "publishedAt": "Thu, 15 Jan 2026 07:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-strengthening-the-u-s-ai-supply-chain-through-domestic-manufacturing",
+      "title": "Strengthening the U.S. AI supply chain through domestic manufacturing",
+      "url": "https://openai.com/index/strengthening-the-us-ai-supply-chain",
+      "summary": "OpenAI launches a new RFP to strengthen the U.S. AI supply chain by accelerating domestic manufacturing, creating jobs, and scaling AI infrastructure.",
+      "publishedAt": "Thu, 15 Jan 2026 00:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-openai-partners-with-cerebras",
+      "title": "OpenAI partners with Cerebras  ",
+      "url": "https://openai.com/index/cerebras-partnership",
+      "summary": "OpenAI partners with Cerebras to add 750MW of high-speed AI compute, reducing inference latency and making ChatGPT faster for real-time AI workloads.",
+      "publishedAt": "Wed, 14 Jan 2026 14:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-zenken-boosts-a-lean-sales-team-with-chatgpt-enterprise",
+      "title": "Zenken boosts a lean sales team with ChatGPT Enterprise",
+      "url": "https://openai.com/index/zenken",
+      "summary": "By rolling out ChatGPT Enterprise company-wide, Zenken has boosted sales performance, cut preparation time, and increased proposal success rates. AI-supported workflows are helping a lean team deliver more personalized, effective customer engagement.",
+      "publishedAt": "Tue, 13 Jan 2026 16:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-openai-s-raising-concerns-policy",
+      "title": "OpenAI’s Raising Concerns Policy",
+      "url": "https://openai.com/index/openai-raising-concerns-policy",
+      "summary": "We’re publishing our Raising Concerns Policy, which protects employees’ rights to make protected disclosures.",
+      "publishedAt": "Mon, 12 Jan 2026 00:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-openai-and-softbank-group-partner-with-sb-energy",
+      "title": "OpenAI and SoftBank Group partner with SB Energy",
+      "url": "https://openai.com/index/stargate-sb-energy-partnership",
+      "summary": "OpenAI and SoftBank Group partner with SB Energy to develop multi-gigawatt AI data center campuses, including a 1.2 GW Texas facility supporting the Stargate initiative.",
+      "publishedAt": "Fri, 09 Jan 2026 11:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-datadog-uses-codex-for-system-level-code-review",
+      "title": "Datadog uses Codex for system-level code review",
+      "url": "https://openai.com/index/datadog",
+      "summary": "OpenAI and Datadog brand graphic with the OpenAI wordmark on the left, the Datadog logo on the right, and a central abstract brown fur-like texture panel on a white background.",
+      "publishedAt": "Fri, 09 Jan 2026 00:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-netomi-s-lessons-for-scaling-agentic-systems-into-the-enterprise",
+      "title": "Netomi’s lessons for scaling agentic systems into the enterprise",
+      "url": "https://openai.com/index/netomi",
+      "summary": "How Netomi scales enterprise AI agents using GPT-4.1 and GPT-5.2—combining concurrency, governance, and multi-step reasoning for reliable production workflows.",
+      "publishedAt": "Thu, 08 Jan 2026 13:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-openai-for-healthcare",
+      "title": "OpenAI for Healthcare",
+      "url": "https://openai.com/index/openai-for-healthcare",
+      "summary": "OpenAI for Healthcare enables secure, enterprise-grade AI that supports HIPAA compliance—reducing administrative burden and supporting clinical workflows.",
+      "publishedAt": "Thu, 08 Jan 2026 12:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "openai-how-tolan-builds-voice-first-ai-with-gpt-5-1",
+      "title": "How Tolan builds voice-first AI with GPT-5.1",
+      "url": "https://openai.com/index/tolan",
+      "summary": "Tolan built a voice-first AI companion with GPT-5.1, combining low-latency responses, real-time context reconstruction, and memory-driven personalities for natural conversations.",
+      "publishedAt": "Wed, 07 Jan 2026 10:00:00 GMT",
+      "source": "industry",
+      "tags": [
+        "openai",
+        "industry"
+      ],
+      "feed": "OpenAI Blog"
+    },
+    {
+      "id": "anthropic-responsible-scaling-policy",
+      "title": "Responsible Scaling Policy",
+      "url": "https://www.anthropic.com/news/announcing-our-updated-responsible-scaling-policy",
+      "summary": "",
+      "publishedAt": "",
+      "source": "industry",
+      "tags": [
+        "anthropic",
+        "industry"
+      ],
+      "feed": "Anthropic Blog"
+    },
+    {
+      "id": "google-ai-natively-adaptive-interfaces-a-new-framework-for-ai-accessibility",
+      "title": "Natively Adaptive Interfaces: A new framework for AI accessibility",
+      "url": "https://blog.google/company-news/outreach-and-initiatives/accessibility/natively-adaptive-interfaces-ai-accessibility/",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Natively_Adaptive_Interfaces_He.max-600x600.format-webp.webp\">Learn how Google's NAI framework uses AI to make technology more adaptive, inclusive and helpful for everyone.",
+      "publishedAt": "Thu, 05 Feb 2026 17:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "google",
+        "industry"
+      ],
+      "feed": "Google AI Blog"
+    },
+    {
+      "id": "google-ai-how-google-cloud-is-helping-team-usa-elevate-their-tricks-with-ai",
+      "title": "How Google Cloud is helping Team USA elevate their tricks with AI",
+      "url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/us-ski-snowboard-tool-winter-olympics-2026/",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/helping_Team_USA_Hero.max-600x600.format-webp.webp\">Google Cloud built an industry-first AI tool to help U.S. Ski and Snowboard athletes.",
+      "publishedAt": "Thu, 05 Feb 2026 16:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "google",
+        "industry"
+      ],
+      "feed": "Google AI Blog"
+    },
+    {
+      "id": "google-ai-watch-our-new-gemini-ad-ahead-of-football-s-biggest-weekend",
+      "title": "Watch our new Gemini ad ahead of football’s biggest weekend",
+      "url": "https://blog.google/company-news/inside-google/company-announcements/gemini-ad-new-home/",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/SB_2026_New_Home_16_9_Thumbnail.max-600x600.format-webp.webp\">Learn more about Google’s new ad that will run during football’s Big Game on February 8.",
+      "publishedAt": "Thu, 05 Feb 2026 14:30:00 +0000",
+      "source": "industry",
+      "tags": [
+        "google",
+        "industry"
+      ],
+      "feed": "Google AI Blog"
+    },
+    {
+      "id": "google-ai-the-latest-ai-news-we-announced-in-january",
+      "title": "The latest AI news we announced in January",
+      "url": "https://blog.google/innovation-and-ai/products/google-ai-updates-january-2026/",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/LatestAI_v5.max-600x600.format-webp.webp\">Google AI announcements from January",
+      "publishedAt": "Wed, 04 Feb 2026 16:55:00 +0000",
+      "source": "industry",
+      "tags": [
+        "google",
+        "industry"
+      ],
+      "feed": "Google AI Blog"
+    },
+    {
+      "id": "google-ai-how-we-re-helping-preserve-the-genetic-information-of-endangered-species-with-ai",
+      "title": "How we’re helping preserve the genetic information of endangered species with AI",
+      "url": "https://blog.google/innovation-and-ai/technology/ai/ai-to-preserve-endangered-species/",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Terria-Clay_Collage_hero.max-600x600.format-webp.webp\">Scientists are working to sequence the genome of every known species on Earth.",
+      "publishedAt": "Mon, 02 Feb 2026 18:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "google",
+        "industry"
+      ],
+      "feed": "Google AI Blog"
+    },
+    {
+      "id": "google-ai-advancing-ai-benchmarking-with-game-arena",
+      "title": "Advancing AI benchmarking with Game Arena",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/kaggle-game-arena-updates/",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/original_images/kaggle_Gsmes_Hero.png\">We’re expanding Game Arena with Poker and Werewolf, while Gemini 3 Pro and Flash top our chess leaderboard.",
+      "publishedAt": "Mon, 02 Feb 2026 17:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "google",
+        "industry"
+      ],
+      "feed": "Google AI Blog"
+    },
+    {
+      "id": "google-ai-project-genie-experimenting-with-infinite-interactive-worlds",
+      "title": "Project Genie: Experimenting with infinite, interactive worlds",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/project-genie/",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/genie-3__project-genie__hero-fi.max-600x600.format-webp_d7CisM6.webp\">Google AI Ultra subscribers in the U.S. can now try out Project Genie.",
+      "publishedAt": "Thu, 29 Jan 2026 17:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "google",
+        "industry"
+      ],
+      "feed": "Google AI Blog"
+    },
+    {
+      "id": "google-ai-hear-more-about-interactive-world-models-in-our-latest-podcast",
+      "title": "Hear more about interactive world models in our latest podcast.",
+      "url": "https://blog.google/innovation-and-ai/technology/ai/release-notes-podcast-project-genie/",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/RN25_Episode_Thumbnail.max-600x600.format-webp.webp\">The latest episode of the Google AI: Release Notes podcast focuses on Genie 3, a real-time, interactive world model. Host Logan Kilpatrick chats with Diego Rivas, Shlomi…",
+      "publishedAt": "Thu, 29 Jan 2026 15:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "google",
+        "industry"
+      ],
+      "feed": "Google AI Blog"
+    },
+    {
+      "id": "google-ai-google-ai-plus-is-now-available-everywhere-our-ai-plans-are-available-including-the-u-s",
+      "title": "Google AI Plus is now available everywhere our AI plans are available, including the U.S.",
+      "url": "https://blog.google/products-and-platforms/products/google-one/google-ai-plus-availability/",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Google_AI_Plus_Hero_Visual_2096.max-600x600.format-webp_4ffr2GI.webp\">We’re launching Google AI Plus in 35 new countries and territories including the US, making it available everywhere Google AI plans are available.",
+      "publishedAt": "Tue, 27 Jan 2026 18:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "google",
+        "industry"
+      ],
+      "feed": "Google AI Blog"
+    },
+    {
+      "id": "google-ai-just-ask-anything-a-seamless-new-search-experience",
+      "title": "Just ask anything: a seamless new Search experience",
+      "url": "https://blog.google/products-and-platforms/products/search/ai-mode-ai-overviews-updates/",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Seamless_Search_-_Blog_header.max-600x600.format-webp.webp\">Search users around the world now have easier access to frontier AI capabilities.",
+      "publishedAt": "Tue, 27 Jan 2026 17:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "google",
+        "industry"
+      ],
+      "feed": "Google AI Blog"
+    },
+    {
+      "id": "google-ai-in-our-latest-podcast-hear-how-the-smoke-jumpers-team-brings-gemini-to-billions-of-people",
+      "title": "In our latest podcast, hear how the “Smoke Jumpers” team brings Gemini to billions of people.",
+      "url": "https://blog.google/products-and-platforms/products/gemini/release-notes-podcast-smokejumpers/",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/thumbnails_EP24_002_ccRelease_N.max-600x600.format-webp.webp\">Bringing Gemini to billions of users requires a massive, coordinated infrastructure effort. In the latest episode of the Google AI: Release Notes podcast, host Logan Kil…",
+      "publishedAt": "Tue, 27 Jan 2026 10:28:00 +0000",
+      "source": "industry",
+      "tags": [
+        "google",
+        "industry"
+      ],
+      "feed": "Google AI Blog"
+    },
+    {
+      "id": "google-ai-how-animators-and-ai-researchers-made-dear-upstairs-neighbors",
+      "title": "How animators and AI researchers made ‘Dear Upstairs Neighbors’",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/dear-upstairs-neighbors/",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/DUN_poster_16x9_v02.max-600x600.format-webp.webp\">Today, our animated short film, “Dear Upstairs Neighbors,” previews at the Sundance Film Festival.",
+      "publishedAt": "Mon, 26 Jan 2026 18:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "google",
+        "industry"
+      ],
+      "feed": "Google AI Blog"
+    },
+    {
+      "id": "google-ai-personal-intelligence-in-ai-mode-in-search-help-that-s-uniquely-yours",
+      "title": "Personal Intelligence in AI Mode in Search: Help that's uniquely yours",
+      "url": "https://blog.google/products-and-platforms/products/search/personal-intelligence-ai-mode-search/",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/pcontext_sizzle_thumbnail.max-600x600.format-webp.webp\">Personal Intelligence lets you tap into your context from Gmail and Photos to deliver tailored responses in Search, just for you.",
+      "publishedAt": "Thu, 22 Jan 2026 16:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "google",
+        "industry"
+      ],
+      "feed": "Google AI Blog"
+    },
+    {
+      "id": "google-ai-building-a-community-led-future-for-ai-in-film-with-sundance-institute",
+      "title": "Building a community-led future for AI in film with Sundance Institute",
+      "url": "https://blog.google/company-news/outreach-and-initiatives/google-org/sundance-institute-ai-education/",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Building_a_community-led_future.max-600x600.format-webp.webp\">A look at how Sundance Institute will build a community-led ecosystem for AI education and empowerment, to support creatives.",
+      "publishedAt": "Tue, 20 Jan 2026 20:30:00 +0000",
+      "source": "industry",
+      "tags": [
+        "google",
+        "industry"
+      ],
+      "feed": "Google AI Blog"
+    },
+    {
+      "id": "google-ai-how-nano-banana-got-its-name",
+      "title": "How Nano Banana got its name",
+      "url": "https://blog.google/products-and-platforms/products/gemini/how-nano-banana-got-its-name/",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/NanoBananaName_Hero.max-600x600.format-webp.webp\">We’re peeling back the origin story of Nano Banana, one of Google DeepMind’s most popular models.",
+      "publishedAt": "Thu, 15 Jan 2026 16:06:00 +0000",
+      "source": "industry",
+      "tags": [
+        "google",
+        "industry"
+      ],
+      "feed": "Google AI Blog"
+    },
+    {
+      "id": "google-ai-learners-and-educators-are-ai-s-new-super-users",
+      "title": "Learners and educators are AI’s new “super users”",
+      "url": "https://blog.google/products-and-platforms/products/education/our-life-with-ai-2025/",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/aiineducatiuonJan2026_hero_v2.max-600x600.format-webp.webp\">Google’s 2025 Our Life with AI survey found people are using AI tools to learn new things.",
+      "publishedAt": "Thu, 15 Jan 2026 11:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "google",
+        "industry"
+      ],
+      "feed": "Google AI Blog"
+    },
+    {
+      "id": "google-ai-introducing-community-benchmarks-on-kaggle",
+      "title": "Introducing Community Benchmarks on Kaggle",
+      "url": "https://blog.google/innovation-and-ai/technology/developers-tools/kaggle-community-benchmarks/",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/hero-final.max-600x600.format-webp.webp\">Community Benchmarks on Kaggle lets the community build, share and run custom evaluations for AI models.",
+      "publishedAt": "Wed, 14 Jan 2026 14:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "google",
+        "industry"
+      ],
+      "feed": "Google AI Blog"
+    },
+    {
+      "id": "google-ai-announcing-the-winner-of-the-global-ai-film-award",
+      "title": "Announcing the winner of the Global AI Film Award",
+      "url": "https://blog.google/company-news/inside-google/around-the-globe/google-middle-east/winner-of-the-global-ai-film-award/",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/FAYZ0207.max-600x600.format-webp.webp\">Over the past year, we’ve witnessed how creators globally have been using our AI models and tools to share their stories with the world. That’s why we launched the AI Fi…",
+      "publishedAt": "Wed, 14 Jan 2026 10:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "google",
+        "industry"
+      ],
+      "feed": "Google AI Blog"
+    },
+    {
+      "id": "google-ai-veo-3-1-ingredients-to-video-more-consistency-creativity-and-control",
+      "title": "Veo 3.1 Ingredients to Video: More consistency, creativity and control",
+      "url": "https://blog.google/innovation-and-ai/technology/ai/veo-3-1-ingredients-to-video/",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/veo-3-1_keyword_blog_header_209.max-600x600.format-webp.webp\">Today, we’re introducing an enhanced version of Veo 3.1 “Ingredients to Video.”",
+      "publishedAt": "Tue, 13 Jan 2026 17:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "google",
+        "industry"
+      ],
+      "feed": "Google AI Blog"
+    },
+    {
+      "id": "google-ai-2025-at-google",
+      "title": "2025 at Google",
+      "url": "https://blog.google/innovation-and-ai/technology/ai/look-back-2025/",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/EOY_2025_Header.max-600x600.format-webp.webp\">Learn more about Google’s launches, milestones and more from 2025.",
+      "publishedAt": "Tue, 09 Dec 2025 16:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "google",
+        "industry"
+      ],
+      "feed": "Google AI Blog"
+    },
+    {
+      "id": "microsoft-research-rethinking-imitation-learning-with-predictive-inverse-dynamics-models",
+      "title": "Rethinking imitation learning with Predictive Inverse Dynamics Models",
+      "url": "https://www.microsoft.com/en-us/research/blog/rethinking-imitation-learning-with-predictive-inverse-dynamics-models/",
+      "summary": "<p>This research looks at why Predictive Inverse Dynamics Models often outperform standard Behavior Cloning in imitation learning. By using simple predictions of what happens next, PIDMs reduce ambiguity and learn from far fewer demonstrations.</p>\n<p>The post <a href=\"https://www.microsoft.com/en-us/research/blog/rethinking-imitation-learning-with-predictive-inverse-dynamics-models/\">Rethinking imitation learning with Predictive Inverse Dynamics Models</a> appeared first on <a href=\"https://www.microsoft.com/en-us/research\">Microsoft Research</a>.</p>\n",
+      "publishedAt": "Thu, 05 Feb 2026 17:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "microsoft",
+        "industry"
+      ],
+      "feed": "Microsoft Research Blog"
+    },
+    {
+      "id": "microsoft-research-paza-introducing-automatic-speech-recognition-benchmarks-and-models-for-low-resource-languages",
+      "title": "Paza: Introducing automatic speech recognition benchmarks and models for low resource languages",
+      "url": "https://www.microsoft.com/en-us/research/blog/paza-introducing-automatic-speech-recognition-benchmarks-and-models-for-low-resource-languages/",
+      "summary": "<p>Microsoft Research unveils Paza, a human-centered speech pipeline, and PazaBench, the first leaderboard for low-resource languages. It covers 39 African languages and 52 models and is tested with communities in real settings. </p>\n<p>The post <a href=\"https://www.microsoft.com/en-us/research/blog/paza-introducing-automatic-speech-recognition-benchmarks-and-models-for-low-resource-languages/\">Paza: Introducing automatic speech recognition benchmarks and models for low resource languages</a> appeared first on <a href=\"https://www.microsoft.com/en-us/research\">Microsoft Research</a>.</p>\n",
+      "publishedAt": "Thu, 05 Feb 2026 05:07:55 +0000",
+      "source": "industry",
+      "tags": [
+        "microsoft",
+        "industry"
+      ],
+      "feed": "Microsoft Research Blog"
+    },
+    {
+      "id": "microsoft-research-unirg-scaling-medical-imaging-report-generation-with-multimodal-reinforcement-learning",
+      "title": "UniRG: Scaling medical imaging report generation with multimodal reinforcement learning",
+      "url": "https://www.microsoft.com/en-us/research/blog/unirg-scaling-medical-imaging-report-generation-with-multimodal-reinforcement-learning/",
+      "summary": "<p>AI can help generate medical image reports, but today’s models struggle with varying reporting schemes. Learn how UniRG uses reinforcement learning to boost performance of medical vision-language models.</p>\n<p>The post <a href=\"https://www.microsoft.com/en-us/research/blog/unirg-scaling-medical-imaging-report-generation-with-multimodal-reinforcement-learning/\">UniRG: Scaling medical imaging report generation with multimodal reinforcement learning</a> appeared first on <a href=\"https://www.microsoft.com/en-us/research\">Microsoft Research</a>.</p>\n",
+      "publishedAt": "Tue, 27 Jan 2026 17:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "microsoft",
+        "industry"
+      ],
+      "feed": "Microsoft Research Blog"
+    },
+    {
+      "id": "microsoft-research-multimodal-reinforcement-learning-with-agentic-verifier-for-ai-agents",
+      "title": "Multimodal reinforcement learning with agentic verifier for AI agents",
+      "url": "https://www.microsoft.com/en-us/research/blog/multimodal-reinforcement-learning-with-agentic-verifier-for-ai-agents/",
+      "summary": "<p>Argos improves multimodal RL by evaluating whether an agent’s reasoning aligns with what it observes over time. The approach reduces visual hallucinations and produces more reliable, data-efficient agents for real-world applications.</p>\n<p>The post <a href=\"https://www.microsoft.com/en-us/research/blog/multimodal-reinforcement-learning-with-agentic-verifier-for-ai-agents/\">Multimodal reinforcement learning with agentic verifier for AI agents</a> appeared first on <a href=\"https://www.microsoft.com/en-us/research\">Microsoft Research</a>.</p>\n",
+      "publishedAt": "Tue, 20 Jan 2026 17:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "microsoft",
+        "industry"
+      ],
+      "feed": "Microsoft Research Blog"
+    },
+    {
+      "id": "microsoft-research-optimind-a-small-language-model-with-optimization-expertise",
+      "title": "OptiMind: A small language model with optimization expertise",
+      "url": "https://www.microsoft.com/en-us/research/blog/optimind-a-small-language-model-with-optimization-expertise/",
+      "summary": "<p>OptiMind is a small language model that converts business operation challenges, described naturally, into mathematical formulations that optimization software can solve. It reduces formulation time &#038; errors &#038; enables fast, privacy-preserving local use.</p>\n<p>The post <a href=\"https://www.microsoft.com/en-us/research/blog/optimind-a-small-language-model-with-optimization-expertise/\">OptiMind: A small language model with optimization expertise</a> appeared first on <a href=\"https://www.microsoft.com/en-us/research\">Microsoft Research</a>.</p>\n",
+      "publishedAt": "Thu, 15 Jan 2026 14:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "microsoft",
+        "industry"
+      ],
+      "feed": "Microsoft Research Blog"
+    },
+    {
+      "id": "microsoft-research-agent-lightning-adding-reinforcement-learning-to-ai-agents-without-code-rewrites",
+      "title": "Agent Lightning: Adding reinforcement learning to AI agents without code rewrites",
+      "url": "https://www.microsoft.com/en-us/research/blog/agent-lightning-adding-reinforcement-learning-to-ai-agents-without-code-rewrites/",
+      "summary": "<p>By decoupling how agents work from how they’re trained, Agent Lightning turns each step an agent takes into data for reinforcement learning. This makes it easy for developers to improve agent performance with almost zero code changes.</p>\n<p>The post <a href=\"https://www.microsoft.com/en-us/research/blog/agent-lightning-adding-reinforcement-learning-to-ai-agents-without-code-rewrites/\">Agent Lightning: Adding reinforcement learning to AI agents without code rewrites</a> appeared first on <a href=\"https://www.microsoft.com/en-us/research\">Microsoft Research</a>.</p>\n",
+      "publishedAt": "Thu, 11 Dec 2025 17:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "microsoft",
+        "industry"
+      ],
+      "feed": "Microsoft Research Blog"
+    },
+    {
+      "id": "microsoft-research-promptions-helps-make-ai-prompting-more-precise-with-dynamic-ui-controls",
+      "title": "Promptions helps make AI prompting more precise with dynamic UI controls",
+      "url": "https://www.microsoft.com/en-us/research/blog/promptions-helps-make-ai-prompting-more-precise-with-dynamic-ui-controls/",
+      "summary": "<p>Promptions helps developers add dynamic, context-aware controls to chat interfaces so users can guide generative AI responses. It lets users shape outputs quickly without writing long instructions.</p>\n<p>The post <a href=\"https://www.microsoft.com/en-us/research/blog/promptions-helps-make-ai-prompting-more-precise-with-dynamic-ui-controls/\">Promptions helps make AI prompting more precise with dynamic UI controls</a> appeared first on <a href=\"https://www.microsoft.com/en-us/research\">Microsoft Research</a>.</p>\n",
+      "publishedAt": "Wed, 10 Dec 2025 17:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "microsoft",
+        "industry"
+      ],
+      "feed": "Microsoft Research Blog"
+    },
+    {
+      "id": "microsoft-research-gigatime-scaling-tumor-microenvironment-modeling-using-virtual-population-generated-by-multimodal-ai",
+      "title": "GigaTIME: Scaling tumor microenvironment modeling using virtual population generated by multimodal AI",
+      "url": "https://www.microsoft.com/en-us/research/blog/gigatime-scaling-tumor-microenvironment-modeling-using-virtual-population-generated-by-multimodal-ai/",
+      "summary": "<p>Using AI-generated virtual populations, Microsoft researchers uncovered hidden cellular patterns that could reshape how we understand and treat cancer. </p>\n<p>The post <a href=\"https://www.microsoft.com/en-us/research/blog/gigatime-scaling-tumor-microenvironment-modeling-using-virtual-population-generated-by-multimodal-ai/\">GigaTIME: Scaling tumor microenvironment modeling using virtual population generated by multimodal AI</a> appeared first on <a href=\"https://www.microsoft.com/en-us/research\">Microsoft Research</a>.</p>\n",
+      "publishedAt": "Tue, 09 Dec 2025 16:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "microsoft",
+        "industry"
+      ],
+      "feed": "Microsoft Research Blog"
+    },
+    {
+      "id": "microsoft-research-ideas-community-building-machine-learning-and-the-future-of-ai",
+      "title": "Ideas: Community building, machine learning, and the future of AI",
+      "url": "https://www.microsoft.com/en-us/research/podcast/ideas-community-building-machine-learning-and-the-future-of-ai/",
+      "summary": "<p>As the Women in Machine Learning Workshop (WiML) marks its 20th annual gathering, cofounders, friends, and collaborators Jenn Wortman Vaughan and Hanna Wallach reflect on WiML’s evolution, navigating the field of ML, and their work in responsible AI.</p>\n<p>The post <a href=\"https://www.microsoft.com/en-us/research/podcast/ideas-community-building-machine-learning-and-the-future-of-ai/\">Ideas: Community building, machine learning, and the future of AI</a> appeared first on <a href=\"https://www.microsoft.com/en-us/research\">Microsoft Research</a>.</p>\n",
+      "publishedAt": "Mon, 01 Dec 2025 19:18:20 +0000",
+      "source": "industry",
+      "tags": [
+        "microsoft",
+        "industry"
+      ],
+      "feed": "Microsoft Research Blog"
+    },
+    {
+      "id": "microsoft-research-reducing-privacy-leaks-in-ai-two-approaches-to-contextual-integrity",
+      "title": "Reducing Privacy leaks in AI: Two approaches to contextual integrity",
+      "url": "https://www.microsoft.com/en-us/research/blog/reducing-privacy-leaks-in-ai-two-approaches-to-contextual-integrity/",
+      "summary": "<p>New research explores two ways to give AI agents stronger privacy safeguards grounded in contextual integrity. One adds lightweight, inference-time checks; the other builds contextual awareness directly into models through reasoning and RL.</p>\n<p>The post <a href=\"https://www.microsoft.com/en-us/research/blog/reducing-privacy-leaks-in-ai-two-approaches-to-contextual-integrity/\">Reducing Privacy leaks in AI: Two approaches to contextual integrity </a> appeared first on <a href=\"https://www.microsoft.com/en-us/research\">Microsoft Research</a>.</p>\n",
+      "publishedAt": "Tue, 25 Nov 2025 17:00:00 +0000",
+      "source": "industry",
+      "tags": [
+        "microsoft",
+        "industry"
+      ],
+      "feed": "Microsoft Research Blog"
+    },
+    {
+      "id": "meta-ai-how-generational-differences-affect-consumer-attitudes-towards-ads",
+      "title": "How generational differences affect consumer attitudes towards ads",
+      "url": "https://research.facebook.com/blog/2023/5/how-generational-differences-affect-consumer-attitudes-towards-ads/",
+      "summary": "Our research study, in collaboration with CrowdDNA, aims to understand people's relationship with social media ads across different social media platforms.",
+      "publishedAt": "Wed, 17 May 2023 10:52:00",
+      "source": "industry",
+      "tags": [
+        "meta",
+        "industry"
+      ],
+      "feed": "Meta AI Blog"
+    },
+    {
+      "id": "meta-ai-every-tree-counts",
+      "title": "Every tree counts",
+      "url": "https://research.facebook.com/blog/2023/4/every-tree-counts-large-scale-mapping-of-canopy-height-at-the-resolution-of-individual-trees/",
+      "summary": "Meta set a goal to reach net zero emissions by 2030. We are developing technology to mitigate our carbon footprint and making these openly available.",
+      "publishedAt": "Mon, 17 Apr 2023 01:00:00",
+      "source": "industry",
+      "tags": [
+        "meta",
+        "industry"
+      ],
+      "feed": "Meta AI Blog"
+    },
+    {
+      "id": "meta-ai-how-a-non-traditional-background-led-to-cutting-edge-xr-tech",
+      "title": "How a non-traditional background led to cutting-edge XR tech",
+      "url": "https://www.metacareers.com/life/how-a-non-traditional-background-led-to-cutting-edge-xr-tech",
+      "summary": "",
+      "publishedAt": "Fri, 14 Apr 2023 01:00:00",
+      "source": "industry",
+      "tags": [
+        "meta",
+        "industry"
+      ],
+      "feed": "Meta AI Blog"
+    },
+    {
+      "id": "meta-ai-a-new-unique-ai-dataset-for-animating-amateur-drawings",
+      "title": "A new, unique AI dataset for animating amateur drawings",
+      "url": "https://ai.facebook.com/blog/ai-dataset-animation-drawings/",
+      "summary": "",
+      "publishedAt": "Thu, 13 Apr 2023 07:00:00",
+      "source": "industry",
+      "tags": [
+        "meta",
+        "industry"
+      ],
+      "feed": "Meta AI Blog"
+    },
+    {
+      "id": "meta-ai-how-the-metaverse-can-transform-education",
+      "title": "How the metaverse can transform education",
+      "url": "https://about.fb.com/news/2023/04/how-the-metaverse-can-transform-education/",
+      "summary": "",
+      "publishedAt": "Wed, 12 Apr 2023 01:00:00",
+      "source": "industry",
+      "tags": [
+        "meta",
+        "industry"
+      ],
+      "feed": "Meta AI Blog"
+    },
+    {
+      "id": "meta-ai-build-faster-with-buck2-our-open-source-build-system",
+      "title": "Build faster with Buck2: Our open source build system",
+      "url": "https://engineering.fb.com/2023/04/06/open-source/buck2-open-source-large-scale-build-system/",
+      "summary": "",
+      "publishedAt": "Thu, 06 Apr 2023 01:00:00",
+      "source": "industry",
+      "tags": [
+        "meta",
+        "industry"
+      ],
+      "feed": "Meta AI Blog"
+    },
+    {
+      "id": "meta-ai-announcing-the-2023-meta-research-phd-fellowship-award-winners",
+      "title": "Announcing the 2023 Meta Research PhD Fellowship award winners",
+      "url": "https://research.facebook.com/blog/2023/4/announcing-the-2023-meta-research-phd-fellowship-award-winners/",
+      "summary": "<palette xmlns:mcr=\"palette-mc-research-toolkit\" xmlns:mcr-blog=\"palette-mc-research-blog-toolkit\" xmlns:meta-props=\"meta-props-toolkit\" xmlns:meta-config-toolkit=\"meta-config-toolkit\">...",
+      "publishedAt": "Wed, 05 Apr 2023 09:30:00",
+      "source": "industry",
+      "tags": [
+        "meta",
+        "industry"
+      ],
+      "feed": "Meta AI Blog"
+    },
+    {
+      "id": "meta-ai-introducing-segment-anything-working-toward-the-first-foundation-model-for-image-segmentation",
+      "title": "Introducing Segment Anything: Working toward the first foundation model for image segmentation",
+      "url": "https://ai.facebook.com/blog/segment-anything-foundation-model-image-segmentation/",
+      "summary": "",
+      "publishedAt": "Wed, 05 Apr 2023 01:00:00",
+      "source": "industry",
+      "tags": [
+        "meta",
+        "industry"
+      ],
+      "feed": "Meta AI Blog"
+    },
+    {
+      "id": "meta-ai-announcing-the-winners-of-the-2022-foundational-integrity-research-request-for-proposals",
+      "title": "Announcing the winners of the 2022 Foundational Integrity Research request for proposals",
+      "url": "https://research.facebook.com/blog/2023/3/announcing-the-winners-of-the-2022-foundational-integrity-research-request-for-proposals-/",
+      "summary": "In September, Meta launched the Foundational Integrity Research request for proposals. Today, we announce the winners of this award.",
+      "publishedAt": "Mon, 27 Mar 2023 04:35:00",
+      "source": "industry",
+      "tags": [
+        "meta",
+        "industry"
+      ],
+      "feed": "Meta AI Blog"
+    },
+    {
+      "id": "meta-ai-two-meta-sustainability-grant-and-scholarship-recipients-share-impact",
+      "title": "Two meta sustainability grant and scholarship recipients share impact",
+      "url": "https://sustainability.fb.com/blog/2023/03/24/two-meta-sustainability-grant-and-scholarship-recipients-share-impact/",
+      "summary": "",
+      "publishedAt": "Fri, 24 Mar 2023 07:00:00",
+      "source": "industry",
+      "tags": [
+        "meta",
+        "industry"
+      ],
+      "feed": "Meta AI Blog"
+    },
+    {
+      "id": "arxiv-hat-debiasme-de-biasing-human-ai-interactions-with-metacognitive-aied-ai-in-education-interventions",
+      "title": "DeBiasMe: De-biasing Human-AI Interactions with Metacognitive AIED (AI in Education) Interventions",
+      "url": "https://arxiv.org/abs/2504.16770v1",
+      "summary": "While generative artificial intelligence (Gen AI) increasingly transforms academic environments, a critical gap exists in understanding and mitigating human biases in AI interactions, such as anchoring and confirmation bias. This position paper advocates for metacognitive AI literacy interventions to help university students critically engage with AI and address biases across the Human-AI interaction workflows. The paper presents the importance of considering (1) metacognitive support with deliberate friction focusing on human bias; (2) bi-directional Human-AI interaction intervention addressing both input formulation and output interpretation; and (3) adaptive scaffolding that responds to diverse user engagement patterns. These frameworks are illustrated through ongoing work on \"DeBiasMe,\" AIED (AI in Education) interventions designed to enhance awareness of cognitive biases while empowering user agency in AI interactions. The paper invites multiple stakeholders to engage in discussions on design and evaluation methods for scaffolding mechanisms, bias visualization, and analysis frameworks. This position contributes to the emerging field of AI-augmented learning by emphasizing the critical role of metacognition in helping students navigate the complex interaction between human, statistical, and systemic biases in AI use while highlighting how cognitive adaptation to AI systems must be explicitly integrated into comprehensive AI literacy frameworks.",
+      "publishedAt": "2025-04-23T14:41:31Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human-AI teaming"
+    },
+    {
+      "id": "arxiv-hat-designing-ai-systems-that-augment-human-performed-vs-demonstrated-critical-thinking",
+      "title": "Designing AI Systems that Augment Human Performed vs. Demonstrated Critical Thinking",
+      "url": "https://arxiv.org/abs/2504.14689v1",
+      "summary": "The recent rapid advancement of LLM-based AI systems has accelerated our search and production of information. While the advantages brought by these systems seemingly improve the performance or efficiency of human activities, they do not necessarily enhance human capabilities. Recent research has started to examine the impact of generative AI on individuals' cognitive abilities, especially critical thinking. Based on definitions of critical thinking across psychology and education, this position paper proposes the distinction between demonstrated and performed critical thinking in the era of generative AI and discusses the implication of this distinction in research and development of AI systems that aim to augment human critical thinking.",
+      "publishedAt": "2025-04-20T17:40:28Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human-AI teaming"
+    },
+    {
+      "id": "arxiv-hat-needs-aware-artificial-intelligence-ai-that-serves-human-needs",
+      "title": "Needs-aware Artificial Intelligence: AI that 'serves [human] needs'",
+      "url": "https://arxiv.org/abs/2202.04977v3",
+      "summary": "By defining the current limits (and thereby the frontiers), many boundaries are shaping, and will continue to shape, the future of Artificial Intelligence (AI). We push on these boundaries in order to make further progress into what were yesterday's frontiers. They are both pliable and resilient - always creating new boundaries of what AI can (or should) achieve. Among these are technical boundaries (such as processing capacity), psychological boundaries (such as human trust in AI systems), ethical boundaries (such as with AI weapons), and conceptual boundaries (such as the AI people can imagine). It is within this final category while it can play a fundamental role in all other boundaries} that we find the construct of needs and the limitations that our current concept of need places on the future AI.",
+      "publishedAt": "2022-02-10T12:19:48Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human-AI teaming"
+    },
+    {
+      "id": "arxiv-hat-on-the-effect-of-information-asymmetry-in-human-ai-teams",
+      "title": "On the Effect of Information Asymmetry in Human-AI Teams",
+      "url": "https://arxiv.org/abs/2205.01467v1",
+      "summary": "Over the last years, the rising capabilities of artificial intelligence (AI) have improved human decision-making in many application areas. Teaming between AI and humans may even lead to complementary team performance (CTP), i.e., a level of performance beyond the ones that can be reached by AI or humans individually. Many researchers have proposed using explainable AI (XAI) to enable humans to rely on AI advice appropriately and thereby reach CTP. However, CTP is rarely demonstrated in previous work as often the focus is on the design of explainability, while a fundamental prerequisite -- the presence of complementarity potential between humans and AI -- is often neglected. Therefore, we focus on the existence of this potential for effective human-AI decision-making. Specifically, we identify information asymmetry as an essential source of complementarity potential, as in many real-world situations, humans have access to different contextual information. By conducting an online experiment, we demonstrate that humans can use such contextual information to adjust the AI's decision, finally resulting in CTP.",
+      "publishedAt": "2022-05-03T13:02:50Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human-AI teaming"
+    },
+    {
+      "id": "arxiv-hat-enabling-intuitive-human-robot-teaming-using-augmented-reality-and-gesture-control",
+      "title": "Enabling Intuitive Human-Robot Teaming Using Augmented Reality and Gesture Control",
+      "url": "https://arxiv.org/abs/1909.06415v1",
+      "summary": "Human-robot teaming offers great potential because of the opportunities to combine strengths of heterogeneous agents. However, one of the critical challenges in realizing an effective human-robot team is efficient information exchange - both from the human to the robot as well as from the robot to the human. In this work, we present and analyze an augmented reality-enabled, gesture-based system that supports intuitive human-robot teaming through improved information exchange. Our proposed system requires no external instrumentation aside from human-wearable devices and shows promise of real-world applicability for service-oriented missions. Additionally, we present preliminary results from a pilot study with human participants, and highlight lessons learned and open research questions that may help direct future development, fielding, and experimentation of autonomous HRI systems.",
+      "publishedAt": "2019-09-13T19:18:52Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human-AI teaming"
+    },
+    {
+      "id": "arxiv-hat-pluggable-social-artificial-intelligence-for-enabling-human-agent-teaming",
+      "title": "Pluggable Social Artificial Intelligence for Enabling Human-Agent Teaming",
+      "url": "https://arxiv.org/abs/1909.04492v2",
+      "summary": "As intelligent systems are increasingly capable of performing their tasks without the need for continuous human input, direction, or supervision, new human-machine interaction concepts are needed. A promising approach to this end is human-agent teaming, which envisions a novel interaction form where humans and machines behave as equal team partners. This paper presents an overview of the current state of the art in human-agent teaming, including the analysis of human-agent teams on five dimensions; a framework describing important teaming functionalities; a technical architecture, called SAIL, supporting social human-agent teaming through the modular implementation of the human-agent teaming functionalities; a technical implementation of the architecture; and a proof-of-concept prototype created with the framework and architecture. We conclude this paper with a reflection on where we stand and a glance into the future showing the way forward.",
+      "publishedAt": "2019-09-10T14:03:41Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human-AI teaming"
+    },
+    {
+      "id": "arxiv-hat-exploring-large-language-models-to-facilitate-variable-autonomy-for-human-robot-teaming",
+      "title": "Exploring Large Language Models to Facilitate Variable Autonomy for Human-Robot Teaming",
+      "url": "https://arxiv.org/abs/2312.07214v3",
+      "summary": "In a rapidly evolving digital landscape autonomous tools and robots are becoming commonplace. Recognizing the significance of this development, this paper explores the integration of Large Language Models (LLMs) like Generative pre-trained transformer (GPT) into human-robot teaming environments to facilitate variable autonomy through the means of verbal human-robot communication. In this paper, we introduce a novel framework for such a GPT-powered multi-robot testbed environment, based on a Unity Virtual Reality (VR) setting. This system allows users to interact with robot agents through natural language, each powered by individual GPT cores. By means of OpenAI's function calling, we bridge the gap between unstructured natural language input and structure robot actions. A user study with 12 participants explores the effectiveness of GPT-4 and, more importantly, user strategies when being given the opportunity to converse in natural language within a multi-robot environment. Our findings suggest that users may have preconceived expectations on how to converse with robots and seldom try to explore the actual language and cognitive capabilities of their robot collaborators. Still, those users who did explore where able to benefit from a much more natural flow of communication and human-like back-and-forth. We provide a set of lessons learned for future research and technical implementations of similar systems.",
+      "publishedAt": "2023-12-12T12:26:48Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human-AI teaming"
+    },
+    {
+      "id": "arxiv-hat-learning-to-lie-reinforcement-learning-attacks-damage-human-ai-teams-and-teams-of-llms",
+      "title": "Learning to Lie: Reinforcement Learning Attacks Damage Human-AI Teams and Teams of LLMs",
+      "url": "https://arxiv.org/abs/2503.21983v2",
+      "summary": "As artificial intelligence (AI) assistants become more widely adopted in safety-critical domains, it becomes important to develop safeguards against potential failures or adversarial attacks. A key prerequisite to developing these safeguards is understanding the ability of these AI assistants to mislead human teammates. We investigate this attack problem within the context of an intellective strategy game where a team of three humans and one AI assistant collaborate to answer a series of trivia questions. Unbeknownst to the humans, the AI assistant is adversarial. Leveraging techniques from Model-Based Reinforcement Learning (MBRL), the AI assistant learns a model of the humans' trust evolution and uses that model to manipulate the group decision-making process to harm the team. We evaluate two models -- one inspired by literature and the other data-driven -- and find that both can effectively harm the human team. Moreover, we find that in this setting our data-driven model is capable of accurately predicting how human agents appraise their teammates given limited information on prior interactions. Finally, we compare the performance of state-of-the-art LLM models to human agents on our influence allocation task to evaluate whether the LLMs allocate influence similarly to humans or if they are more robust to our attack. These results enhance our understanding of decision-making dynamics in small human-AI teams and lay the foundation for defense strategies.",
+      "publishedAt": "2025-03-27T21:01:02Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human-AI teaming"
+    },
+    {
+      "id": "arxiv-hat-flight-testing-an-optionally-piloted-aircraft-a-case-study-on-trust-dynamics-in-human-autonomy-teaming",
+      "title": "Flight Testing an Optionally Piloted Aircraft: a Case Study on Trust Dynamics in Human-Autonomy Teaming",
+      "url": "https://arxiv.org/abs/2503.16227v1",
+      "summary": "This paper examines how trust is formed, maintained, or diminished over time in the context of human-autonomy teaming with an optionally piloted aircraft. Whereas traditional factor-based trust models offer a static representation of human confidence in technology, here we discuss how variations in the underlying factors lead to variations in trust, trust thresholds, and human behaviours. Over 200 hours of flight test data collected over a multi-year test campaign from 2021 to 2023 were reviewed. The dispositional-situational-learned, process-performance-purpose, and IMPACTS homeostasis trust models are applied to illuminate trust trends during nominal autonomous flight operations. The results offer promising directions for future studies on trust dynamics and design-for-trust in human-autonomy teaming.",
+      "publishedAt": "2025-03-20T15:22:39Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human-AI teaming"
+    },
+    {
+      "id": "arxiv-hat-who-what-is-my-teammate-team-composition-considerations-in-human-ai-teaming",
+      "title": "Who/What is My Teammate? Team Composition Considerations in Human-AI Teaming",
+      "url": "https://arxiv.org/abs/2105.11000v1",
+      "summary": "There are many unknowns regarding the characteristics and dynamics of human-AI teams, including a lack of understanding of how certain human-human teaming concepts may or may not apply to human-AI teams and how this composition affects team performance. This paper outlines an experimental research study that investigates essential aspects of human-AI teaming such as team performance, team situation awareness, and perceived team cognition in various mixed composition teams (human-only, human-human-AI, human-AI-AI, and AI-only) through a simulated emergency response management scenario. Results indicate dichotomous outcomes regarding perceived team cognition and performance metrics, as perceived team cognition was not predictive of performance. Performance metrics like team situational awareness and team score showed that teams composed of all human participants performed at a lower level than mixed human-AI teams, with the AI-only teams attaining the highest performance. Perceived team cognition was highest in human-only teams, with mixed composition teams reporting perceived team cognition 58% below the all-human teams. These results inform future mixed teams of the potential performance gains in utilizing mixed teams' over human-only teams in certain applications, while also highlighting mixed teams' adverse effects on perceived team cognition.",
+      "publishedAt": "2021-05-23T19:06:18Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human-AI teaming"
+    },
+    {
+      "id": "arxiv-hat-towards-human-robot-teaming-through-augmented-reality-and-gaze-based-attention-control",
+      "title": "Towards Human-Robot Teaming through Augmented Reality and Gaze-Based Attention Control",
+      "url": "https://arxiv.org/abs/2408.12823v1",
+      "summary": "Robots are now increasingly integrated into various real world applications and domains. In these new domains, robots are mostly employed to improve, in some ways, the work done by humans. So, the need for effective Human-Robot Teaming (HRT) capabilities grows. These capabilities usually involve the dynamic collaboration between humans and robots at different levels of involvement, leveraging the strengths of both to efficiently navigate complex situations. Crucial to this collaboration is the ability of robotic systems to adjust their level of autonomy to match the needs of the task and the human team members.\n  This paper introduces a system designed to control attention using HRT through the use of ground robots and augmented reality (AR) technology. Traditional methods of controlling attention, such as pointing, touch, and voice commands, sometimes fall short in precision and subtlety. Our system overcomes these limitations by employing AR headsets to display virtual visual markers. These markers act as dynamic cues to attract and shift human attention seamlessly, irrespective of the robot's physical location.",
+      "publishedAt": "2024-08-23T03:57:09Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human-AI teaming"
+    },
+    {
+      "id": "arxiv-hat-learning-complementary-policies-for-human-ai-teams",
+      "title": "Learning Complementary Policies for Human-AI Teams",
+      "url": "https://arxiv.org/abs/2302.02944v2",
+      "summary": "This paper tackles the critical challenge of human-AI complementarity in decision-making. Departing from the traditional focus on algorithmic performance in favor of performance of the human-AI team, and moving past the framing of collaboration as classification to focus on decision-making tasks, we introduce a novel approach to policy learning. Specifically, we develop a robust solution for human-AI collaboration when outcomes are only observed under assigned actions. We propose a deferral collaboration approach that maximizes decision rewards by exploiting the distinct strengths of humans and AI, strategically allocating instances among them. Critically, our method is robust to misspecifications in both the human behavior and reward models. Leveraging the insight that performance gains stem from divergent human and AI behavioral patterns, we demonstrate, using synthetic and real human responses, that our proposed method significantly outperforms independent human and algorithmic decision-making. Moreover, we show that substantial performance improvements are achievable by routing only a small fraction of instances to human decision-makers, highlighting the potential for efficient and effective human-AI collaboration in complex management settings.",
+      "publishedAt": "2023-02-06T17:22:18Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human-AI teaming"
+    },
+    {
+      "id": "arxiv-hat-distributed-cognition-for-ai-supported-remote-operations-challenges-and-research-directions",
+      "title": "Distributed Cognition for AI-supported Remote Operations: Challenges and Research Directions",
+      "url": "https://arxiv.org/abs/2504.14996v1",
+      "summary": "This paper investigates the impact of artificial intelligence integration on remote operations, emphasising its influence on both distributed and team cognition. As remote operations increasingly rely on digital interfaces, sensors, and networked communication, AI-driven systems transform decision-making processes across domains such as air traffic control, industrial automation, and intelligent ports. However, the integration of AI introduces significant challenges, including the reconfiguration of human-AI team cognition, the need for adaptive AI memory that aligns with human distributed cognition, and the design of AI fallback operators to maintain continuity during communication disruptions. Drawing on theories of distributed and team cognition, we analyse how cognitive overload, loss of situational awareness, and impaired team coordination may arise in AI-supported environments. Based on real-world intelligent port scenarios, we propose research directions that aim to safeguard human reasoning and enhance collaborative decision-making in AI-augmented remote operations.",
+      "publishedAt": "2025-04-21T09:53:49Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human-AI teaming"
+    },
+    {
+      "id": "arxiv-hat-towards-feature-engineering-with-human-and-ai-s-knowledge-understanding-data-science-practitioners-perceptions-in-human-",
+      "title": "Towards Feature Engineering with Human and AI's Knowledge: Understanding Data Science Practitioners' Perceptions in Human&AI-Assisted Feature Engineering Design",
+      "url": "https://arxiv.org/abs/2405.14107v1",
+      "summary": "As AI technology continues to advance, the importance of human-AI collaboration becomes increasingly evident, with numerous studies exploring its potential in various fields. One vital field is data science, including feature engineering (FE), where both human ingenuity and AI capabilities play pivotal roles. Despite the existence of AI-generated recommendations for FE, there remains a limited understanding of how to effectively integrate and utilize humans' and AI's knowledge. To address this gap, we design a readily-usable prototype, human\\&AI-assisted FE in Jupyter notebooks. It harnesses the strengths of humans and AI to provide feature suggestions to users, seamlessly integrating these recommendations into practical workflows. Using the prototype as a research probe, we conducted an exploratory study to gain valuable insights into data science practitioners' perceptions, usage patterns, and their potential needs when presented with feature suggestions from both humans and AI. Through qualitative analysis, we discovered that the Creator of the feature (i.e., AI or human) significantly influences users' feature selection, and the semantic clarity of the suggested feature greatly impacts its adoption rate. Furthermore, our findings indicate that users perceive both differences and complementarity between features generated by humans and those generated by AI. Lastly, based on our study results, we derived a set of design recommendations for future human&AI FE design. Our findings show the collaborative potential between humans and AI in the field of FE.",
+      "publishedAt": "2024-05-23T02:26:14Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human-AI teaming"
+    },
+    {
+      "id": "arxiv-hat-ddod-dual-denial-of-decision-attacks-on-human-ai-teams",
+      "title": "DDoD: Dual Denial of Decision Attacks on Human-AI Teams",
+      "url": "https://arxiv.org/abs/2212.03980v1",
+      "summary": "Artificial Intelligence (AI) systems have been increasingly used to make decision-making processes faster, more accurate, and more efficient. However, such systems are also at constant risk of being attacked. While the majority of attacks targeting AI-based applications aim to manipulate classifiers or training data and alter the output of an AI model, recently proposed Sponge Attacks against AI models aim to impede the classifier's execution by consuming substantial resources. In this work, we propose \\textit{Dual Denial of Decision (DDoD) attacks against collaborative Human-AI teams}. We discuss how such attacks aim to deplete \\textit{both computational and human} resources, and significantly impair decision-making capabilities. We describe DDoD on human and computational resources and present potential risk scenarios in a series of exemplary domains.",
+      "publishedAt": "2022-12-07T22:30:17Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human-AI teaming"
+    },
+    {
+      "id": "arxiv-hat-can-you-explain-that-lucid-explanations-help-human-ai-collaborative-image-retrieval",
+      "title": "Can You Explain That? Lucid Explanations Help Human-AI Collaborative Image Retrieval",
+      "url": "https://arxiv.org/abs/1904.03285v4",
+      "summary": "While there have been many proposals on making AI algorithms explainable, few have attempted to evaluate the impact of AI-generated explanations on human performance in conducting human-AI collaborative tasks. To bridge the gap, we propose a Twenty-Questions style collaborative image retrieval game, Explanation-assisted Guess Which (ExAG), as a method of evaluating the efficacy of explanations (visual evidence or textual justification) in the context of Visual Question Answering (VQA). In our proposed ExAG, a human user needs to guess a secret image picked by the VQA agent by asking natural language questions to it. We show that overall, when AI explains its answers, users succeed more often in guessing the secret image correctly. Notably, a few correct explanations can readily improve human performance when VQA answers are mostly incorrect as compared to no-explanation games. Furthermore, we also show that while explanations rated as \"helpful\" significantly improve human performance, \"incorrect\" and \"unhelpful\" explanations can degrade performance as compared to no-explanation games. Our experiments, therefore, demonstrate that ExAG is an effective means to evaluate the efficacy of AI-generated explanations on a human-AI collaborative task.",
+      "publishedAt": "2019-04-05T21:26:39Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human-AI teaming"
+    },
+    {
+      "id": "arxiv-hat-supporting-data-frame-dynamics-in-ai-assisted-decision-making",
+      "title": "Supporting Data-Frame Dynamics in AI-assisted Decision Making",
+      "url": "https://arxiv.org/abs/2504.15894v1",
+      "summary": "High stakes decision-making often requires a continuous interplay between evolving evidence and shifting hypotheses, a dynamic that is not well supported by current AI decision support systems. In this paper, we introduce a mixed-initiative framework for AI assisted decision making that is grounded in the data-frame theory of sensemaking and the evaluative AI paradigm. Our approach enables both humans and AI to collaboratively construct, validate, and adapt hypotheses. We demonstrate our framework with an AI-assisted skin cancer diagnosis prototype that leverages a concept bottleneck model to facilitate interpretable interactions and dynamic updates to diagnostic hypotheses.",
+      "publishedAt": "2025-04-22T13:36:06Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human-AI teaming"
+    },
+    {
+      "id": "arxiv-hat-human-ai-collaboration-in-decision-making-beyond-learning-to-defer",
+      "title": "Human-AI Collaboration in Decision-Making: Beyond Learning to Defer",
+      "url": "https://arxiv.org/abs/2206.13202v2",
+      "summary": "Human-AI collaboration (HAIC) in decision-making aims to create synergistic teaming between human decision-makers and AI systems. Learning to defer (L2D) has been presented as a promising framework to determine who among humans and AI should make which decisions in order to optimize the performance and fairness of the combined system. Nevertheless, L2D entails several often unfeasible requirements, such as the availability of predictions from humans for every instance or ground-truth labels that are independent from said humans. Furthermore, neither L2D nor alternative approaches tackle fundamental issues of deploying HAIC systems in real-world settings, such as capacity management or dealing with dynamic environments. In this paper, we aim to identify and review these and other limitations, pointing to where opportunities for future research in HAIC may lie.",
+      "publishedAt": "2022-06-27T11:40:55Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human-AI teaming"
+    },
+    {
+      "id": "arxiv-hat-a-case-for-backward-compatibility-for-human-ai-teams",
+      "title": "A Case for Backward Compatibility for Human-AI Teams",
+      "url": "https://arxiv.org/abs/1906.01148v1",
+      "summary": "AI systems are being deployed to support human decision making in high-stakes domains. In many cases, the human and AI form a team, in which the human makes decisions after reviewing the AI's inferences. A successful partnership requires that the human develops insights into the performance of the AI system, including its failures. We study the influence of updates to an AI system in this setting. While updates can increase the AI's predictive performance, they may also lead to changes that are at odds with the user's prior experiences and confidence in the AI's inferences, hurting therefore the overall team performance. We introduce the notion of the compatibility of an AI update with prior user experience and present methods for studying the role of compatibility in human-AI teams. Empirical results on three high-stakes domains show that current machine learning algorithms do not produce compatible updates. We propose a re-training objective to improve the compatibility of an update by penalizing new errors. The objective offers full leverage of the performance/compatibility tradeoff, enabling more compatible yet accurate updates.",
+      "publishedAt": "2019-06-04T01:09:14Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human-AI teaming"
+    },
+    {
+      "id": "arxiv-hat-ace-action-and-control-via-explanations-a-proposal-for-llms-to-provide-human-centered-explainability-for-multimodal-ai-a",
+      "title": "ACE, Action and Control via Explanations: A Proposal for LLMs to Provide Human-Centered Explainability for Multimodal AI Assistants",
+      "url": "https://arxiv.org/abs/2503.16466v1",
+      "summary": "In this short paper we address issues related to building multimodal AI systems for human performance support in manufacturing domains. We make two contributions: we first identify challenges of participatory design and training of such systems, and secondly, to address such challenges, we propose the ACE paradigm: \"Action and Control via Explanations\". Specifically, we suggest that LLMs can be used to produce explanations in the form of human interpretable \"semantic frames\", which in turn enable end users to provide data the AI system needs to align its multimodal models and representations, including computer vision, automatic speech recognition, and document inputs. ACE, by using LLMs to \"explain\" using semantic frames, will help the human and the AI system to collaborate, together building a more accurate model of humans activities and behaviors, and ultimately more accurate predictive outputs for better task support, and better outcomes for human users performing manual tasks.",
+      "publishedAt": "2025-02-27T19:27:57Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human-AI teaming"
+    },
+    {
+      "id": "arxiv-human-ai-teams-debiasme-de-biasing-human-ai-interactions-with-metacognitive-aied-ai-in-education-interventions",
+      "title": "DeBiasMe: De-biasing Human-AI Interactions with Metacognitive AIED (AI in Education) Interventions",
+      "url": "https://arxiv.org/abs/2504.16770v1",
+      "summary": "While generative artificial intelligence (Gen AI) increasingly transforms academic environments, a critical gap exists in understanding and mitigating human biases in AI interactions, such as anchoring and confirmation bias. This position paper advocates for metacognitive AI literacy interventions to help university students critically engage with AI and address biases across the Human-AI interaction workflows. The paper presents the importance of considering (1) metacognitive support with deliberate friction focusing on human bias; (2) bi-directional Human-AI interaction intervention addressing both input formulation and output interpretation; and (3) adaptive scaffolding that responds to diverse user engagement patterns. These frameworks are illustrated through ongoing work on \"DeBiasMe,\" AIED (AI in Education) interventions designed to enhance awareness of cognitive biases while empowering user agency in AI interactions. The paper invites multiple stakeholders to engage in discussions on design and evaluation methods for scaffolding mechanisms, bias visualization, and analysis frameworks. This position contributes to the emerging field of AI-augmented learning by emphasizing the critical role of metacognition in helping students navigate the complex interaction between human, statistical, and systemic biases in AI use while highlighting how cognitive adaptation to AI systems must be explicitly integrated into comprehensive AI literacy frameworks.",
+      "publishedAt": "2025-04-23T14:41:31Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human AI teams"
+    },
+    {
+      "id": "arxiv-human-ai-teams-designing-ai-systems-that-augment-human-performed-vs-demonstrated-critical-thinking",
+      "title": "Designing AI Systems that Augment Human Performed vs. Demonstrated Critical Thinking",
+      "url": "https://arxiv.org/abs/2504.14689v1",
+      "summary": "The recent rapid advancement of LLM-based AI systems has accelerated our search and production of information. While the advantages brought by these systems seemingly improve the performance or efficiency of human activities, they do not necessarily enhance human capabilities. Recent research has started to examine the impact of generative AI on individuals' cognitive abilities, especially critical thinking. Based on definitions of critical thinking across psychology and education, this position paper proposes the distinction between demonstrated and performed critical thinking in the era of generative AI and discusses the implication of this distinction in research and development of AI systems that aim to augment human critical thinking.",
+      "publishedAt": "2025-04-20T17:40:28Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human AI teams"
+    },
+    {
+      "id": "arxiv-human-ai-teams-needs-aware-artificial-intelligence-ai-that-serves-human-needs",
+      "title": "Needs-aware Artificial Intelligence: AI that 'serves [human] needs'",
+      "url": "https://arxiv.org/abs/2202.04977v3",
+      "summary": "By defining the current limits (and thereby the frontiers), many boundaries are shaping, and will continue to shape, the future of Artificial Intelligence (AI). We push on these boundaries in order to make further progress into what were yesterday's frontiers. They are both pliable and resilient - always creating new boundaries of what AI can (or should) achieve. Among these are technical boundaries (such as processing capacity), psychological boundaries (such as human trust in AI systems), ethical boundaries (such as with AI weapons), and conceptual boundaries (such as the AI people can imagine). It is within this final category while it can play a fundamental role in all other boundaries} that we find the construct of needs and the limitations that our current concept of need places on the future AI.",
+      "publishedAt": "2022-02-10T12:19:48Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human AI teams"
+    },
+    {
+      "id": "arxiv-human-ai-teams-on-the-effect-of-information-asymmetry-in-human-ai-teams",
+      "title": "On the Effect of Information Asymmetry in Human-AI Teams",
+      "url": "https://arxiv.org/abs/2205.01467v1",
+      "summary": "Over the last years, the rising capabilities of artificial intelligence (AI) have improved human decision-making in many application areas. Teaming between AI and humans may even lead to complementary team performance (CTP), i.e., a level of performance beyond the ones that can be reached by AI or humans individually. Many researchers have proposed using explainable AI (XAI) to enable humans to rely on AI advice appropriately and thereby reach CTP. However, CTP is rarely demonstrated in previous work as often the focus is on the design of explainability, while a fundamental prerequisite -- the presence of complementarity potential between humans and AI -- is often neglected. Therefore, we focus on the existence of this potential for effective human-AI decision-making. Specifically, we identify information asymmetry as an essential source of complementarity potential, as in many real-world situations, humans have access to different contextual information. By conducting an online experiment, we demonstrate that humans can use such contextual information to adjust the AI's decision, finally resulting in CTP.",
+      "publishedAt": "2022-05-03T13:02:50Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human AI teams"
+    },
+    {
+      "id": "arxiv-human-ai-teams-learning-to-lie-reinforcement-learning-attacks-damage-human-ai-teams-and-teams-of-llms",
+      "title": "Learning to Lie: Reinforcement Learning Attacks Damage Human-AI Teams and Teams of LLMs",
+      "url": "https://arxiv.org/abs/2503.21983v2",
+      "summary": "As artificial intelligence (AI) assistants become more widely adopted in safety-critical domains, it becomes important to develop safeguards against potential failures or adversarial attacks. A key prerequisite to developing these safeguards is understanding the ability of these AI assistants to mislead human teammates. We investigate this attack problem within the context of an intellective strategy game where a team of three humans and one AI assistant collaborate to answer a series of trivia questions. Unbeknownst to the humans, the AI assistant is adversarial. Leveraging techniques from Model-Based Reinforcement Learning (MBRL), the AI assistant learns a model of the humans' trust evolution and uses that model to manipulate the group decision-making process to harm the team. We evaluate two models -- one inspired by literature and the other data-driven -- and find that both can effectively harm the human team. Moreover, we find that in this setting our data-driven model is capable of accurately predicting how human agents appraise their teammates given limited information on prior interactions. Finally, we compare the performance of state-of-the-art LLM models to human agents on our influence allocation task to evaluate whether the LLMs allocate influence similarly to humans or if they are more robust to our attack. These results enhance our understanding of decision-making dynamics in small human-AI teams and lay the foundation for defense strategies.",
+      "publishedAt": "2025-03-27T21:01:02Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human AI teams"
+    },
+    {
+      "id": "arxiv-human-ai-teams-enabling-intuitive-human-robot-teaming-using-augmented-reality-and-gesture-control",
+      "title": "Enabling Intuitive Human-Robot Teaming Using Augmented Reality and Gesture Control",
+      "url": "https://arxiv.org/abs/1909.06415v1",
+      "summary": "Human-robot teaming offers great potential because of the opportunities to combine strengths of heterogeneous agents. However, one of the critical challenges in realizing an effective human-robot team is efficient information exchange - both from the human to the robot as well as from the robot to the human. In this work, we present and analyze an augmented reality-enabled, gesture-based system that supports intuitive human-robot teaming through improved information exchange. Our proposed system requires no external instrumentation aside from human-wearable devices and shows promise of real-world applicability for service-oriented missions. Additionally, we present preliminary results from a pilot study with human participants, and highlight lessons learned and open research questions that may help direct future development, fielding, and experimentation of autonomous HRI systems.",
+      "publishedAt": "2019-09-13T19:18:52Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human AI teams"
+    },
+    {
+      "id": "arxiv-human-ai-teams-learning-complementary-policies-for-human-ai-teams",
+      "title": "Learning Complementary Policies for Human-AI Teams",
+      "url": "https://arxiv.org/abs/2302.02944v2",
+      "summary": "This paper tackles the critical challenge of human-AI complementarity in decision-making. Departing from the traditional focus on algorithmic performance in favor of performance of the human-AI team, and moving past the framing of collaboration as classification to focus on decision-making tasks, we introduce a novel approach to policy learning. Specifically, we develop a robust solution for human-AI collaboration when outcomes are only observed under assigned actions. We propose a deferral collaboration approach that maximizes decision rewards by exploiting the distinct strengths of humans and AI, strategically allocating instances among them. Critically, our method is robust to misspecifications in both the human behavior and reward models. Leveraging the insight that performance gains stem from divergent human and AI behavioral patterns, we demonstrate, using synthetic and real human responses, that our proposed method significantly outperforms independent human and algorithmic decision-making. Moreover, we show that substantial performance improvements are achievable by routing only a small fraction of instances to human decision-makers, highlighting the potential for efficient and effective human-AI collaboration in complex management settings.",
+      "publishedAt": "2023-02-06T17:22:18Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human AI teams"
+    },
+    {
+      "id": "arxiv-human-ai-teams-designing-for-meaningful-human-control-in-military-human-machine-teams",
+      "title": "Designing for Meaningful Human Control in Military Human-Machine Teams",
+      "url": "https://arxiv.org/abs/2305.11892v1",
+      "summary": "We propose methods for analysis, design, and evaluation of Meaningful Human Control (MHC) for defense technologies from the perspective of military human-machine teaming (HMT). Our approach is based on three principles. Firstly, MHC should be regarded as a core objective that guides all phases of analysis, design and evaluation. Secondly, MHC affects all parts of the socio-technical system, including humans, machines, AI, interactions, and context. Lastly, MHC should be viewed as a property that spans longer periods of time, encompassing both prior and realtime control by multiple actors. To describe macrolevel design options for achieving MHC, we propose various Team Design Patterns. Furthermore, we present a case study, where we applied some of these methods to envision HMT, involving robots and soldiers in a search and rescue task in a military context.",
+      "publishedAt": "2023-05-12T13:10:19Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human AI teams"
+    },
+    {
+      "id": "arxiv-human-ai-teams-ddod-dual-denial-of-decision-attacks-on-human-ai-teams",
+      "title": "DDoD: Dual Denial of Decision Attacks on Human-AI Teams",
+      "url": "https://arxiv.org/abs/2212.03980v1",
+      "summary": "Artificial Intelligence (AI) systems have been increasingly used to make decision-making processes faster, more accurate, and more efficient. However, such systems are also at constant risk of being attacked. While the majority of attacks targeting AI-based applications aim to manipulate classifiers or training data and alter the output of an AI model, recently proposed Sponge Attacks against AI models aim to impede the classifier's execution by consuming substantial resources. In this work, we propose \\textit{Dual Denial of Decision (DDoD) attacks against collaborative Human-AI teams}. We discuss how such attacks aim to deplete \\textit{both computational and human} resources, and significantly impair decision-making capabilities. We describe DDoD on human and computational resources and present potential risk scenarios in a series of exemplary domains.",
+      "publishedAt": "2022-12-07T22:30:17Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human AI teams"
+    },
+    {
+      "id": "arxiv-human-ai-teams-who-what-is-my-teammate-team-composition-considerations-in-human-ai-teaming",
+      "title": "Who/What is My Teammate? Team Composition Considerations in Human-AI Teaming",
+      "url": "https://arxiv.org/abs/2105.11000v1",
+      "summary": "There are many unknowns regarding the characteristics and dynamics of human-AI teams, including a lack of understanding of how certain human-human teaming concepts may or may not apply to human-AI teams and how this composition affects team performance. This paper outlines an experimental research study that investigates essential aspects of human-AI teaming such as team performance, team situation awareness, and perceived team cognition in various mixed composition teams (human-only, human-human-AI, human-AI-AI, and AI-only) through a simulated emergency response management scenario. Results indicate dichotomous outcomes regarding perceived team cognition and performance metrics, as perceived team cognition was not predictive of performance. Performance metrics like team situational awareness and team score showed that teams composed of all human participants performed at a lower level than mixed human-AI teams, with the AI-only teams attaining the highest performance. Perceived team cognition was highest in human-only teams, with mixed composition teams reporting perceived team cognition 58% below the all-human teams. These results inform future mixed teams of the potential performance gains in utilizing mixed teams' over human-only teams in certain applications, while also highlighting mixed teams' adverse effects on perceived team cognition.",
+      "publishedAt": "2021-05-23T19:06:18Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human AI teams"
+    },
+    {
+      "id": "arxiv-human-ai-teams-distributed-cognition-for-ai-supported-remote-operations-challenges-and-research-directions",
+      "title": "Distributed Cognition for AI-supported Remote Operations: Challenges and Research Directions",
+      "url": "https://arxiv.org/abs/2504.14996v1",
+      "summary": "This paper investigates the impact of artificial intelligence integration on remote operations, emphasising its influence on both distributed and team cognition. As remote operations increasingly rely on digital interfaces, sensors, and networked communication, AI-driven systems transform decision-making processes across domains such as air traffic control, industrial automation, and intelligent ports. However, the integration of AI introduces significant challenges, including the reconfiguration of human-AI team cognition, the need for adaptive AI memory that aligns with human distributed cognition, and the design of AI fallback operators to maintain continuity during communication disruptions. Drawing on theories of distributed and team cognition, we analyse how cognitive overload, loss of situational awareness, and impaired team coordination may arise in AI-supported environments. Based on real-world intelligent port scenarios, we propose research directions that aim to safeguard human reasoning and enhance collaborative decision-making in AI-augmented remote operations.",
+      "publishedAt": "2025-04-21T09:53:49Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human AI teams"
+    },
+    {
+      "id": "arxiv-human-ai-teams-towards-feature-engineering-with-human-and-ai-s-knowledge-understanding-data-science-practitioners-perceptions-in-human-",
+      "title": "Towards Feature Engineering with Human and AI's Knowledge: Understanding Data Science Practitioners' Perceptions in Human&AI-Assisted Feature Engineering Design",
+      "url": "https://arxiv.org/abs/2405.14107v1",
+      "summary": "As AI technology continues to advance, the importance of human-AI collaboration becomes increasingly evident, with numerous studies exploring its potential in various fields. One vital field is data science, including feature engineering (FE), where both human ingenuity and AI capabilities play pivotal roles. Despite the existence of AI-generated recommendations for FE, there remains a limited understanding of how to effectively integrate and utilize humans' and AI's knowledge. To address this gap, we design a readily-usable prototype, human\\&AI-assisted FE in Jupyter notebooks. It harnesses the strengths of humans and AI to provide feature suggestions to users, seamlessly integrating these recommendations into practical workflows. Using the prototype as a research probe, we conducted an exploratory study to gain valuable insights into data science practitioners' perceptions, usage patterns, and their potential needs when presented with feature suggestions from both humans and AI. Through qualitative analysis, we discovered that the Creator of the feature (i.e., AI or human) significantly influences users' feature selection, and the semantic clarity of the suggested feature greatly impacts its adoption rate. Furthermore, our findings indicate that users perceive both differences and complementarity between features generated by humans and those generated by AI. Lastly, based on our study results, we derived a set of design recommendations for future human&AI FE design. Our findings show the collaborative potential between humans and AI in the field of FE.",
+      "publishedAt": "2024-05-23T02:26:14Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human AI teams"
+    },
+    {
+      "id": "arxiv-human-ai-teams-a-case-for-backward-compatibility-for-human-ai-teams",
+      "title": "A Case for Backward Compatibility for Human-AI Teams",
+      "url": "https://arxiv.org/abs/1906.01148v1",
+      "summary": "AI systems are being deployed to support human decision making in high-stakes domains. In many cases, the human and AI form a team, in which the human makes decisions after reviewing the AI's inferences. A successful partnership requires that the human develops insights into the performance of the AI system, including its failures. We study the influence of updates to an AI system in this setting. While updates can increase the AI's predictive performance, they may also lead to changes that are at odds with the user's prior experiences and confidence in the AI's inferences, hurting therefore the overall team performance. We introduce the notion of the compatibility of an AI update with prior user experience and present methods for studying the role of compatibility in human-AI teams. Empirical results on three high-stakes domains show that current machine learning algorithms do not produce compatible updates. We propose a re-training objective to improve the compatibility of an update by penalizing new errors. The objective offers full leverage of the performance/compatibility tradeoff, enabling more compatible yet accurate updates.",
+      "publishedAt": "2019-06-04T01:09:14Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human AI teams"
+    },
+    {
+      "id": "arxiv-human-ai-teams-can-you-explain-that-lucid-explanations-help-human-ai-collaborative-image-retrieval",
+      "title": "Can You Explain That? Lucid Explanations Help Human-AI Collaborative Image Retrieval",
+      "url": "https://arxiv.org/abs/1904.03285v4",
+      "summary": "While there have been many proposals on making AI algorithms explainable, few have attempted to evaluate the impact of AI-generated explanations on human performance in conducting human-AI collaborative tasks. To bridge the gap, we propose a Twenty-Questions style collaborative image retrieval game, Explanation-assisted Guess Which (ExAG), as a method of evaluating the efficacy of explanations (visual evidence or textual justification) in the context of Visual Question Answering (VQA). In our proposed ExAG, a human user needs to guess a secret image picked by the VQA agent by asking natural language questions to it. We show that overall, when AI explains its answers, users succeed more often in guessing the secret image correctly. Notably, a few correct explanations can readily improve human performance when VQA answers are mostly incorrect as compared to no-explanation games. Furthermore, we also show that while explanations rated as \"helpful\" significantly improve human performance, \"incorrect\" and \"unhelpful\" explanations can degrade performance as compared to no-explanation games. Our experiments, therefore, demonstrate that ExAG is an effective means to evaluate the efficacy of AI-generated explanations on a human-AI collaborative task.",
+      "publishedAt": "2019-04-05T21:26:39Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human AI teams"
+    },
+    {
+      "id": "arxiv-human-ai-teams-should-i-follow-ai-based-advice-measuring-appropriate-reliance-in-human-ai-decision-making",
+      "title": "Should I Follow AI-based Advice? Measuring Appropriate Reliance in Human-AI Decision-Making",
+      "url": "https://arxiv.org/abs/2204.06916v1",
+      "summary": "Many important decisions in daily life are made with the help of advisors, e.g., decisions about medical treatments or financial investments. Whereas in the past, advice has often been received from human experts, friends, or family, advisors based on artificial intelligence (AI) have become more and more present nowadays. Typically, the advice generated by AI is judged by a human and either deemed reliable or rejected. However, recent work has shown that AI advice is not always beneficial, as humans have shown to be unable to ignore incorrect AI advice, essentially representing an over-reliance on AI. Therefore, the aspired goal should be to enable humans not to rely on AI advice blindly but rather to distinguish its quality and act upon it to make better decisions. Specifically, that means that humans should rely on the AI in the presence of correct advice and self-rely when confronted with incorrect advice, i.e., establish appropriate reliance (AR) on AI advice on a case-by-case basis. Current research lacks a metric for AR. This prevents a rigorous evaluation of factors impacting AR and hinders further development of human-AI decision-making. Therefore, based on the literature, we derive a measurement concept of AR. We propose to view AR as a two-dimensional construct that measures the ability to discriminate advice quality and behave accordingly. In this article, we derive the measurement concept, illustrate its application and outline potential future research.",
+      "publishedAt": "2022-04-14T12:18:51Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human AI teams"
+    },
+    {
+      "id": "arxiv-human-ai-teams-supporting-data-frame-dynamics-in-ai-assisted-decision-making",
+      "title": "Supporting Data-Frame Dynamics in AI-assisted Decision Making",
+      "url": "https://arxiv.org/abs/2504.15894v1",
+      "summary": "High stakes decision-making often requires a continuous interplay between evolving evidence and shifting hypotheses, a dynamic that is not well supported by current AI decision support systems. In this paper, we introduce a mixed-initiative framework for AI assisted decision making that is grounded in the data-frame theory of sensemaking and the evaluative AI paradigm. Our approach enables both humans and AI to collaboratively construct, validate, and adapt hypotheses. We demonstrate our framework with an AI-assisted skin cancer diagnosis prototype that leverages a concept bottleneck model to facilitate interpretable interactions and dynamic updates to diagnostic hypotheses.",
+      "publishedAt": "2025-04-22T13:36:06Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human AI teams"
+    },
+    {
+      "id": "arxiv-human-ai-teams-ace-action-and-control-via-explanations-a-proposal-for-llms-to-provide-human-centered-explainability-for-multimodal-ai-a",
+      "title": "ACE, Action and Control via Explanations: A Proposal for LLMs to Provide Human-Centered Explainability for Multimodal AI Assistants",
+      "url": "https://arxiv.org/abs/2503.16466v1",
+      "summary": "In this short paper we address issues related to building multimodal AI systems for human performance support in manufacturing domains. We make two contributions: we first identify challenges of participatory design and training of such systems, and secondly, to address such challenges, we propose the ACE paradigm: \"Action and Control via Explanations\". Specifically, we suggest that LLMs can be used to produce explanations in the form of human interpretable \"semantic frames\", which in turn enable end users to provide data the AI system needs to align its multimodal models and representations, including computer vision, automatic speech recognition, and document inputs. ACE, by using LLMs to \"explain\" using semantic frames, will help the human and the AI system to collaborate, together building a more accurate model of humans activities and behaviors, and ultimately more accurate predictive outputs for better task support, and better outcomes for human users performing manual tasks.",
+      "publishedAt": "2025-02-27T19:27:57Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human AI teams"
+    },
+    {
+      "id": "arxiv-human-ai-teams-promoting-real-time-reflection-in-synchronous-communication-with-generative-ai",
+      "title": "Promoting Real-Time Reflection in Synchronous Communication with Generative AI",
+      "url": "https://arxiv.org/abs/2504.15647v2",
+      "summary": "Real-time reflection plays a vital role in synchronous communication. It enables users to adjust their communication strategies dynamically, thereby improving the effectiveness of their communication. Generative AI holds significant potential to enhance real-time reflection due to its ability to comprehensively understand the current context and generate personalized and nuanced content. However, it is challenging to design the way of interaction and information presentation to support the real-time workflow rather than disrupt it. In this position paper, we present a review of existing research on systems designed for reflection in different synchronous communication scenarios. Based on that, we discuss design implications on how to design human-AI interaction to support reflection in real time.",
+      "publishedAt": "2025-04-22T07:12:56Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human AI teams"
+    },
+    {
+      "id": "arxiv-human-ai-teams-meaningful-human-control-actionable-properties-for-ai-system-development",
+      "title": "Meaningful human control: actionable properties for AI system development",
+      "url": "https://arxiv.org/abs/2112.01298v2",
+      "summary": "How can humans remain in control of artificial intelligence (AI)-based systems designed to perform tasks autonomously? Such systems are increasingly ubiquitous, creating benefits - but also undesirable situations where moral responsibility for their actions cannot be properly attributed to any particular person or group. The concept of meaningful human control has been proposed to address responsibility gaps and mitigate them by establishing conditions that enable a proper attribution of responsibility for humans; however, clear requirements for researchers, designers, and engineers are yet inexistent, making the development of AI-based systems that remain under meaningful human control challenging. In this paper, we address the gap between philosophical theory and engineering practice by identifying, through an iterative process of abductive thinking, four actionable properties for AI-based systems under meaningful human control, which we discuss making use of two applications scenarios: automated vehicles and AI-based hiring. First, a system in which humans and AI algorithms interact should have an explicitly defined domain of morally loaded situations within which the system ought to operate. Second, humans and AI agents within the system should have appropriate and mutually compatible representations. Third, responsibility attributed to a human should be commensurate with that human's ability and authority to control the system. Fourth, there should be explicit links between the actions of the AI agents and actions of humans who are aware of their moral responsibility. We argue that these four properties will support practically-minded professionals to take concrete steps toward designing and engineering for AI systems that facilitate meaningful human control.",
+      "publishedAt": "2021-11-25T11:05:37Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human AI teams"
+    },
+    {
+      "id": "arxiv-human-ai-teams-foundations-of-genir",
+      "title": "Foundations of GenIR",
+      "url": "https://arxiv.org/abs/2501.02842v1",
+      "summary": "The chapter discusses the foundational impact of modern generative AI models on information access (IA) systems. In contrast to traditional AI, the large-scale training and superior data modeling of generative AI models enable them to produce high-quality, human-like responses, which brings brand new opportunities for the development of IA paradigms. In this chapter, we identify and introduce two of them in details, i.e., information generation and information synthesis. Information generation allows AI to create tailored content addressing user needs directly, enhancing user experience with immediate, relevant outputs. Information synthesis leverages the ability of generative AI to integrate and reorganize existing information, providing grounded responses and mitigating issues like model hallucination, which is particularly valuable in scenarios requiring precision and external knowledge. This chapter delves into the foundational aspects of generative models, including architecture, scaling, and training, and discusses their applications in multi-modal scenarios. Additionally, it examines the retrieval-augmented generation paradigm and other methods for corpus modeling and understanding, demonstrating how generative AI can enhance information access systems. It also summarizes potential challenges and fruitful directions for future studies.",
+      "publishedAt": "2025-01-06T08:38:29Z",
+      "source": "research",
+      "tags": [
+        "arxiv",
+        "research"
+      ],
+      "feed": "arXiv: human AI teams"
+    }
+  ]
+}

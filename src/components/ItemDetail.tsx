@@ -11,6 +11,12 @@ export default function ItemDetail({ item, onClose }: ItemDetailProps) {
   const sourceColor =
     item.source === "research" ? "var(--research-color)" : "var(--industry-color)";
   const sourceLabel = item.source === "research" ? "Research" : "Industry";
+  const primaryUrl = item.url?.trim();
+  const fallbackCitation = `${item.authors} (${item.year}). ${item.title}.`;
+  const citation = item.citation?.trim() || fallbackCitation;
+  const searchUrl = `https://scholar.google.com/scholar?q=${encodeURIComponent(
+    `${item.title} ${item.authors}`
+  )}`;
 
   return (
     <div className="detail-panel h-full overflow-y-auto" style={{ backgroundColor: "var(--surface)" }}>
@@ -68,6 +74,55 @@ export default function ItemDetail({ item, onClose }: ItemDetailProps) {
           <p className="text-sm leading-relaxed" style={{ color: "var(--foreground)" }}>
             {item.summary}
           </p>
+        </div>
+
+        {/* References */}
+        <div className="mb-5">
+          <h3
+            className="text-[10px] font-semibold uppercase tracking-widest mb-2"
+            style={{ color: "var(--text-secondary)" }}
+          >
+            References
+          </h3>
+          <p className="text-sm leading-relaxed mb-3" style={{ color: "var(--foreground)" }}>
+            {citation}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {primaryUrl ? (
+              <a
+                href={primaryUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors"
+                style={{
+                  backgroundColor: "var(--accent)",
+                  color: "white",
+                }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
+                </svg>
+                {item.source === "research" ? "Read Paper" : "View Report"}
+              </a>
+            ) : (
+              <span className="text-xs" style={{ color: "var(--text-secondary)" }}>
+                Link not available yet
+              </span>
+            )}
+            <a
+              href={searchUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors"
+              style={{
+                backgroundColor: "var(--background)",
+                color: "var(--text-secondary)",
+                border: "1px solid var(--border)",
+              }}
+            >
+              Search citation
+            </a>
+          </div>
         </div>
 
         {/* Design Question */}
@@ -178,24 +233,6 @@ export default function ItemDetail({ item, onClose }: ItemDetailProps) {
           </div>
         )}
 
-        {/* Link */}
-        {item.url && (
-          <a
-            href={item.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-            style={{
-              backgroundColor: "var(--accent)",
-              color: "white",
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
-            </svg>
-            Read Paper
-          </a>
-        )}
       </div>
     </div>
   );

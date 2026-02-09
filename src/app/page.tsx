@@ -121,7 +121,7 @@ export default function Home() {
             color: "var(--foreground)",
           }}
         >
-          AI Collaboration Radar
+          Human-AI Collaboration Radar
         </h1>
         <p className="text-xs mt-0.5" style={{ color: "var(--text-secondary)" }}>
           A sensemaking instrument for designing AI-supported teams
@@ -171,7 +171,7 @@ export default function Home() {
         </aside>
 
         {/* Center: Topic landscape */}
-        <main className="flex-1 relative overflow-hidden" style={{ backgroundColor: "#0a0a14" }}>
+        <main className="flex-1 relative overflow-hidden" style={{ backgroundColor: "#12121f" }}>
           <TopicLandscape
             items={items}
             clusters={clusters}

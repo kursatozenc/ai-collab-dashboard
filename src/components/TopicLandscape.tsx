@@ -204,6 +204,40 @@ function yearOpacity(year: number): number {
   return 0.60;
 }
 
+// ── Zoom helpers ────────────────────────────────────────────────
+
+const DEFAULT_VIEWBOX = { x: -50, y: -30, w: 1100, h: 760 };
+const SVG_ASPECT = DEFAULT_VIEWBOX.w / DEFAULT_VIEWBOX.h;
+
+function computeClusterViewBox(
+  hullPoints: [number, number][],
+  padding = 60
+): { x: number; y: number; w: number; h: number } {
+  let minX = Infinity,
+    minY = Infinity,
+    maxX = -Infinity,
+    maxY = -Infinity;
+  for (const [px, py] of hullPoints) {
+    if (px < minX) minX = px;
+    if (py < minY) minY = py;
+    if (px > maxX) maxX = px;
+    if (py > maxY) maxY = py;
+  }
+  const rawW = maxX - minX + padding * 2;
+  const rawH = maxY - minY + padding * 2;
+  // Maintain aspect ratio
+  let w = rawW;
+  let h = rawH;
+  if (w / h > SVG_ASPECT) {
+    h = w / SVG_ASPECT;
+  } else {
+    w = h * SVG_ASPECT;
+  }
+  const cx = (minX + maxX) / 2;
+  const cy = (minY + maxY) / 2;
+  return { x: cx - w / 2, y: cy - h / 2, w, h };
+}
+
 // ── Component ───────────────────────────────────────────────────
 
 interface TopicLandscapeProps {
@@ -226,9 +260,14 @@ export default function TopicLandscape({
   const [hoveredItem, setHoveredItem] = useState<RadarItem | null>(null);
   const [hoveredCluster, setHoveredCluster] = useState<string | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [viewBox, setViewBox] = useState({ x: -50, y: -30, w: 1100, h: 760 });
+  const [viewBox, setViewBox] = useState(DEFAULT_VIEWBOX);
+  const [zoomedCluster, setZoomedCluster] = useState<string | null>(null);
   const isPanning = useRef(false);
   const panStart = useRef({ x: 0, y: 0 });
+  const animFrameRef = useRef<number | null>(null);
+  const viewBoxRef = useRef(viewBox);
+  viewBoxRef.current = viewBox;
+  const mouseDownPos = useRef<{ x: number; y: number } | null>(null);
 
   // ── Relaxed positions (once) ──
   const relaxedPositions = useMemo(() => relaxPositions(items), [items]);
@@ -252,6 +291,8 @@ export default function TopicLandscape({
       centroid: [number, number];
       count: number;
       label: string;
+      /** Organic ambient blob paths (larger, softer) for slow drift effect */
+      ambientBlobPaths: string[];
     }[] = [];
 
     for (const [clusterId, { points, ids }] of grouped) {
@@ -274,6 +315,11 @@ export default function TopicLandscape({
               })();
         // Synthesize hit-test polygon for small clusters
         const hitPoly = circlePoints(cx, cy, r, 12);
+        // Ambient blobs: two larger circles for soft glow
+        const blobR1 = r * 2.2;
+        const blobR2 = r * 2.9;
+        const blob1 = `M ${cx - blobR1} ${cy} A ${blobR1} ${blobR1} 0 1 1 ${cx + blobR1} ${cy} A ${blobR1} ${blobR1} 0 1 1 ${cx - blobR1} ${cy} Z`;
+        const blob2 = `M ${cx - blobR2} ${cy} A ${blobR2} ${blobR2} 0 1 1 ${cx + blobR2} ${cy} A ${blobR2} ${blobR2} 0 1 1 ${cx - blobR2} ${cy} Z`;
         pads.push({
           clusterId,
           padPath: fallbackPath,
@@ -282,6 +328,7 @@ export default function TopicLandscape({
           centroid: [cx, cy],
           count: ids.length,
           label,
+          ambientBlobPaths: [blob1, blob2],
         });
         continue;
       }
@@ -294,6 +341,18 @@ export default function TopicLandscape({
       const wobbled = addRadialWobble(interpolated, cx, cy, 0.12, seed);
       const pathD = catmullRomPath(wobbled, 0.55);
 
+      // Ambient blobs: larger, softer organic shapes that drift slowly
+      const expandedBlob1 = expandHull(hull, 72);
+      const expandedBlob2 = expandHull(hull, 100);
+      const interp1 = interpolateHull(expandedBlob1, 2);
+      const interp2 = interpolateHull(expandedBlob2, 2);
+      const wobbled1 = addRadialWobble(interp1, cx, cy, 0.18, seed + 1);
+      const wobbled2 = addRadialWobble(interp2, cx, cy, 0.22, seed + 2.3);
+      const ambientBlobPaths = [
+        catmullRomPath(wobbled1, 0.55),
+        catmullRomPath(wobbled2, 0.55),
+      ];
+
       pads.push({
         clusterId,
         padPath: pathD,
@@ -302,6 +361,7 @@ export default function TopicLandscape({
         centroid: [cx, cy],
         count: ids.length,
         label,
+        ambientBlobPaths,
       });
     }
 
@@ -338,9 +398,68 @@ export default function TopicLandscape({
 
   // ── Zoom & pan ──
 
+  // ── Animated viewBox transitions ──
+  const animateViewBox = useCallback(
+    (
+      from: { x: number; y: number; w: number; h: number },
+      to: { x: number; y: number; w: number; h: number },
+      durationMs = 500
+    ) => {
+      if (animFrameRef.current !== null) {
+        cancelAnimationFrame(animFrameRef.current);
+      }
+      const startTime = performance.now();
+      const ease = (t: number) =>
+        t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+      const tick = (now: number) => {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / durationMs, 1);
+        const t = ease(progress);
+        setViewBox({
+          x: from.x + (to.x - from.x) * t,
+          y: from.y + (to.y - from.y) * t,
+          w: from.w + (to.w - from.w) * t,
+          h: from.h + (to.h - from.h) * t,
+        });
+        if (progress < 1) {
+          animFrameRef.current = requestAnimationFrame(tick);
+        } else {
+          animFrameRef.current = null;
+        }
+      };
+      animFrameRef.current = requestAnimationFrame(tick);
+    },
+    []
+  );
+
+  const handleClusterClick = useCallback(
+    (clusterId: string) => {
+      if (zoomedCluster === clusterId) {
+        // Toggle: zoom out
+        setZoomedCluster(null);
+        animateViewBox(viewBoxRef.current, DEFAULT_VIEWBOX, 400);
+        return;
+      }
+      const pad = clusterPads.find((p) => p.clusterId === clusterId);
+      if (!pad) return;
+      const targetVB = computeClusterViewBox(pad.hullPoints, 60);
+      setZoomedCluster(clusterId);
+      animateViewBox(viewBoxRef.current, targetVB, 500);
+    },
+    [zoomedCluster, clusterPads, animateViewBox]
+  );
+
   const handleWheel = useCallback(
     (e: React.WheelEvent) => {
       e.preventDefault();
+      // Cancel any in-flight animation
+      if (animFrameRef.current !== null) {
+        cancelAnimationFrame(animFrameRef.current);
+        animFrameRef.current = null;
+      }
+      if (zoomedCluster !== null) setZoomedCluster(null);
+
       const factor = e.deltaY > 0 ? 1.08 : 0.92;
       const svg = svgRef.current;
       if (!svg) return;
@@ -354,13 +473,14 @@ export default function TopicLandscape({
         h: viewBox.h * factor,
       });
     },
-    [viewBox]
+    [viewBox, zoomedCluster]
   );
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     if (e.button !== 0) return;
     isPanning.current = true;
     panStart.current = { x: e.clientX, y: e.clientY };
+    mouseDownPos.current = { x: e.clientX, y: e.clientY };
   }, []);
 
   const handleMouseMove = useCallback(
@@ -399,10 +519,77 @@ export default function TopicLandscape({
     isPanning.current = false;
   }, []);
 
+  // ── SVG click handler (reset zoom on empty space) ──
+  const handleSvgClick = useCallback(
+    (e: React.MouseEvent) => {
+      // If mouse moved significantly since mousedown, it was a pan
+      if (mouseDownPos.current) {
+        const dx = e.clientX - mouseDownPos.current.x;
+        const dy = e.clientY - mouseDownPos.current.y;
+        if (Math.sqrt(dx * dx + dy * dy) > 5) return;
+      }
+      const svgPt = svgPointFromClient(e.clientX, e.clientY);
+      if (!svgPt) return;
+      // If click is inside any cluster hull, do nothing on single click
+      for (const pad of clusterPads) {
+        if (pointInPolygon(svgPt, pad.hullPoints)) {
+          return;
+        }
+      }
+      // Click on empty background: reset zoom
+      if (zoomedCluster !== null) {
+        setZoomedCluster(null);
+        animateViewBox(viewBoxRef.current, DEFAULT_VIEWBOX, 400);
+      }
+    },
+    [svgPointFromClient, clusterPads, zoomedCluster, animateViewBox]
+  );
+
+  // ── SVG double-click handler (cluster zoom) ──
+  const handleSvgDoubleClick = useCallback(
+    (e: React.MouseEvent) => {
+      // If mouse moved significantly since mousedown, it was a pan
+      if (mouseDownPos.current) {
+        const dx = e.clientX - mouseDownPos.current.x;
+        const dy = e.clientY - mouseDownPos.current.y;
+        if (Math.sqrt(dx * dx + dy * dy) > 5) return;
+      }
+      const svgPt = svgPointFromClient(e.clientX, e.clientY);
+      if (!svgPt) return;
+      // Check if double-click is inside any cluster hull
+      for (const pad of clusterPads) {
+        if (pointInPolygon(svgPt, pad.hullPoints)) {
+          handleClusterClick(pad.clusterId);
+          return;
+        }
+      }
+    },
+    [svgPointFromClient, clusterPads, handleClusterClick]
+  );
+
   useEffect(() => {
     const up = () => { isPanning.current = false; };
     window.addEventListener("mouseup", up);
     return () => window.removeEventListener("mouseup", up);
+  }, []);
+
+  // ── Escape key to reset zoom ──
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && zoomedCluster !== null) {
+        setZoomedCluster(null);
+        animateViewBox(viewBoxRef.current, DEFAULT_VIEWBOX, 400);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [zoomedCluster, animateViewBox]);
+
+  // ── Cleanup animation frame on unmount ──
+  useEffect(() => {
+    return () => {
+      if (animFrameRef.current !== null) cancelAnimationFrame(animFrameRef.current);
+    };
   }, []);
 
   return (
@@ -411,11 +598,19 @@ export default function TopicLandscape({
         ref={svgRef}
         viewBox={`${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`}
         className="w-full h-full"
-        style={{ cursor: isPanning.current ? "grabbing" : "grab" }}
+        style={{
+          cursor: isPanning.current
+            ? "grabbing"
+            : hoveredCluster !== null
+              ? "zoom-in"
+              : "grab",
+        }}
         onWheel={handleWheel}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
+        onClick={handleSvgClick}
+        onDoubleClick={handleSvgDoubleClick}
       >
         {/* ══════════ DEFS ══════════ */}
         <defs>
@@ -514,13 +709,41 @@ export default function TopicLandscape({
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
+
+          {/* Soft glow for ambient blobs (translucent, slow-moving) */}
+          <filter id="ambient-blob-blur" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="28" result="blob-blur" />
+            <feColorMatrix in="blob-blur" type="matrix" result="blob-soft"
+              values="1.2 0 0 0 0
+                      0 1.2 0 0 0
+                      0 0 1.2 0 0
+                      0 0 0 0.85 0" />
+            <feMerge>
+              <feMergeNode in="blob-soft" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+
+          {/* Per-cluster radial gradient for blob fill */}
+          {clusterPads.map((h) => (
+            <radialGradient
+              key={`blob-grad-${h.clusterId}`}
+              id={`blob-grad-${h.clusterId}`}
+              cx="50%" cy="50%" r="70%" fx="45%" fy="45%"
+            >
+              <stop offset="0%" stopColor={h.color} stopOpacity={0.35} />
+              <stop offset="40%" stopColor={h.color} stopOpacity={0.18} />
+              <stop offset="75%" stopColor={h.color} stopOpacity={0.08} />
+              <stop offset="100%" stopColor={h.color} stopOpacity={0} />
+            </radialGradient>
+          ))}
         </defs>
 
         {/* ══════════ LAYER 0: Dark background + texture ══════════ */}
         <rect
           x={viewBox.x - viewBox.w} y={viewBox.y - viewBox.h}
           width={viewBox.w * 3} height={viewBox.h * 3}
-          fill="#0a0a14"
+          fill="#12121f"
           className="pointer-events-none"
         />
         <rect
@@ -556,6 +779,25 @@ export default function TopicLandscape({
                 transformOrigin: `${h.centroid[0]}px ${h.centroid[1]}px`,
               } as React.CSSProperties}
             >
+              {/* Layer 0: Organic ambient blobs (soft, translucent, slow drift) */}
+              <g className="cluster-ambient-blobs" pointerEvents="none">
+                {h.ambientBlobPaths.map((blobD, blobIdx) => (
+                  <path
+                    key={`blob-${h.clusterId}-${blobIdx}`}
+                    className="cluster-ambient-blob"
+                    d={blobD}
+                    fill={`url(#blob-grad-${h.clusterId})`}
+                    stroke="none"
+                    filter="url(#ambient-blob-blur)"
+                    opacity={dimmed ? 0.12 : isFadedBySelection ? 0.15 : isFadedByHover ? 0.25 : 0.7}
+                    style={{
+                      animationDelay: `${blobIdx * 2.5}s`,
+                      transformOrigin: `${h.centroid[0]}px ${h.centroid[1]}px`,
+                    }}
+                  />
+                ))}
+              </g>
+
               {/* Layer A: Ambient halo (blurred glow behind shape) */}
               <path
                 className="cluster-pad-halo"
@@ -642,7 +884,7 @@ export default function TopicLandscape({
                       textAnchor="middle"
                       dominantBaseline="central"
                       fill="none"
-                      stroke="#0a0a14"
+                      stroke="#12121f"
                       strokeWidth={4}
                       strokeOpacity={isFadedBySelection ? 0.3 : isFadedByHover ? 0.4 : 0.7}
                       strokeLinejoin="round"
@@ -938,6 +1180,25 @@ export default function TopicLandscape({
           ? `Showing ${visibleItemIds.size} of ${items.length} items`
           : `${items.length} items`}
       </div>
+
+      {/* Reset Zoom button */}
+      {zoomedCluster !== null && (
+        <button
+          onClick={() => {
+            setZoomedCluster(null);
+            animateViewBox(viewBoxRef.current, DEFAULT_VIEWBOX, 400);
+          }}
+          className="absolute bottom-3 right-3 px-3 py-1.5 text-xs rounded-lg border transition-colors hover:border-white/30"
+          style={{
+            backgroundColor: "rgba(12, 12, 22, 0.8)",
+            borderColor: "rgba(255, 255, 255, 0.15)",
+            color: "rgba(255, 255, 255, 0.7)",
+            backdropFilter: "blur(8px)",
+          }}
+        >
+          Reset Zoom
+        </button>
+      )}
     </div>
   );
 }

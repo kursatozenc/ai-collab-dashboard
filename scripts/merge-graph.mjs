@@ -23,15 +23,57 @@ const maxVocab = 600;
 const viewBox = { xMin: 80, yMin: 60, xMax: 920, yMax: 640 };
 
 // ── Tokenize ─────────────────────────────────────────────────────────────
-const STOP = new Set(
-  "a an the and or but in on at to for of with by from as is was are were be been being have has had do does did will would could should may might must shall can need dare ought used".split(
-    " "
-  )
-);
+const STOP = new Set([
+  // English stopwords
+  "a", "an", "the", "and", "or", "but", "in", "on", "at", "to", "for", "of",
+  "with", "by", "from", "as", "is", "was", "are", "were", "be", "been", "being",
+  "have", "has", "had", "do", "does", "did", "will", "would", "could", "should",
+  "may", "might", "must", "shall", "can", "need", "dare", "ought", "used",
+  // Pronouns, determiners, common short words
+  "this", "that", "these", "those", "it", "its", "we", "our", "they", "their",
+  "not", "no", "also", "however", "such", "more", "most", "than", "very",
+  "about", "into", "over", "after", "before", "between", "through", "during",
+  "both", "each", "other", "some", "all", "any", "new", "first", "last", "only",
+  "one", "two", "how", "what", "when", "which", "who",
+  // Academic filler (appears uniformly across papers)
+  "using", "based", "approach", "proposed", "results", "method", "methods",
+  "paper", "study", "research", "show", "shows", "shown", "et", "al",
+  // HTML / web / file artifacts
+  "img", "src", "alt", "div", "href", "http", "https", "www", "html", "css",
+  "webp", "png", "jpg", "jpeg", "svg", "gif", "pdf", "url", "max", "format",
+  "com", "org", "io", "net",
+  // CDN / storage artifacts
+  "storage", "googleapis", "gweb", "uniblog", "publish", "prod", "images",
+  // Tech company / product names (noise for cluster differentiation)
+  "gpt", "codex", "openai", "google", "microsoft", "meta", "github", "arxiv",
+  "doi", "chatgpt", "gemini", "claude", "llama", "anthropic", "deepmind",
+  // Blog post / press release filler
+  "introducing", "announcing", "launched", "released", "update", "updates",
+  "blog", "post", "article", "report", "press",
+  // Generic tech terms that don't differentiate topics
+  "system", "systems", "model", "models", "data", "analysis", "information",
+  "available", "access", "use", "enable", "features", "feature", "tools", "tool",
+  "users", "applications", "application", "platform", "service", "services",
+  "image", "images", "video", "text", "content", "generate", "generation",
+  "language", "large", "frontier", "enterprise", "transform", "transformer",
+  // Common abbreviations / short noise tokens that leak from papers
+  "ie", "eg", "cf", "vs", "etc", "fig", "al", "re", "pre", "non",
+  // Vague / generic terms that don't differentiate research topics
+  "community", "communities", "countries", "review", "reviews",
+  "world", "people", "latest", "today", "year", "years",
+  "work", "working", "works", "making", "made", "make",
+  "way", "ways", "things", "thing", "part", "time",
+  "different", "important", "possible", "potential", "possible",
+  "help", "helps", "helping", "need", "needs",
+  "across", "many", "well", "like", "just", "even", "still",
+  "high", "low", "best", "better", "able",
+]);
 
 function tokenize(text) {
   if (!text || typeof text !== "string") return [];
   return text
+    .replace(/<[^>]+>/g, " ")         // strip HTML tags
+    .replace(/https?:\/\/\S+/g, " ")  // strip URLs
     .toLowerCase()
     .replace(/\s+/g, " ")
     .replace(/[^a-z0-9\s]/g, " ")
@@ -69,19 +111,40 @@ function tfIdfMatrix(docs, vocab) {
 }
 
 // ── Preferred terms for human–AI collaboration cluster labels (boosted so labels stay on-theme) ──
-const LABEL_THEME_TERMS = new Set(
-  [
-    "human", "ai", "collaboration", "team", "teaming", "trust", "delegation",
-    "communication", "learning", "assistive", "interaction", "agents", "agent",
-    "work", "decision", "support", "user", "design", "transparency", "ethics",
-    "explainability", "control", "automation", "coordination", "mixed", "initiative",
-    "human-ai", "human-centered", "cooperative", "partnership", "feedback", "calibration",
-  ].map((t) => t.toLowerCase())
-);
+const LABEL_THEME_TERMS = new Set([
+  // Domain-relevant terms that differentiate clusters (boosted 1.6×)
+  // Note: "human" and "ai" omitted — they appear in nearly every doc and are
+  // handled by the ubiquity penalty instead.
+  // Note: no hyphenated terms — the tokenizer strips hyphens before matching.
+  "collaboration", "team", "teaming", "trust", "delegation",
+  "communication", "learning", "assistive", "interaction", "agents", "agent",
+  "decision", "support", "design", "transparency", "ethics",
+  "explainability", "control", "automation", "coordination", "mixed", "initiative",
+  "cooperative", "partnership", "feedback", "calibration",
+  "robot", "robotics", "autonomy", "oversight", "safety",
+  "workflow", "accountability", "fairness",
+]);
 
 // ── Cluster labels and rationale (top terms; theme terms boosted) ──
 function topTermsPerCluster(docs, vocab, matrix, clusterAssignments) {
   const k = Math.max(...clusterAssignments) + 1;
+
+  // Cluster-level frequency: in how many clusters does each term appear prominently?
+  // Terms that appear everywhere (like "ai", "human") get penalized.
+  const clusterTermPresence = vocab.map((_, termIdx) => {
+    let clustersPresent = 0;
+    for (let c = 0; c < k; c++) {
+      const indices = clusterAssignments
+        .map((assign, i) => (assign === c ? i : -1))
+        .filter((i) => i >= 0);
+      const avgScore =
+        indices.reduce((sum, i) => sum + matrix[i][termIdx], 0) /
+        (indices.length || 1);
+      if (avgScore > 0.01) clustersPresent++;
+    }
+    return clustersPresent;
+  });
+
   const result = [];
   for (let c = 0; c < k; c++) {
     const indices = clusterAssignments
@@ -92,15 +155,35 @@ function topTermsPerCluster(docs, vocab, matrix, clusterAssignments) {
       for (const i of indices) sum += matrix[i][termIdx];
       const score = sum / (indices.length || 1);
       const term = vocab[termIdx].toLowerCase();
+
+      // Theme boost: domain-relevant terms get 1.6×
       const boost = LABEL_THEME_TERMS.has(term) ? 1.6 : 1;
-      return [termIdx, score * boost];
+
+      // Ubiquity penalty: terms in >50% of clusters are poor differentiators
+      const presence = clusterTermPresence[termIdx];
+      const ubiquityPenalty =
+        presence > k * 0.5 ? 0.3 : presence > k * 0.35 ? 0.6 : 1.0;
+
+      return [termIdx, score * boost * ubiquityPenalty];
     });
     termScores.sort((a, b) => b[1] - a[1]);
     const top = termScores
-      .slice(0, 6)
+      .slice(0, 10)
       .filter(([, s]) => s > 0)
       .map(([idx]) => vocab[idx]);
-    const topThree = top.slice(0, 3);
+    // Deduplicate morphological variants (team/teams/teaming, explain/explanations)
+    const isStemDuplicate = (term, selected) =>
+      selected.some(
+        (s) =>
+          term.startsWith(s) || s.startsWith(term) ||
+          term.replace(/s$/, "") === s.replace(/s$/, "")
+      );
+    const topDeduped = [];
+    for (const t of top) {
+      if (topDeduped.length >= 3) break;
+      if (!isStemDuplicate(t, topDeduped)) topDeduped.push(t);
+    }
+    const topThree = topDeduped;
     const label =
       topThree.length >= 2
         ? topThree
@@ -392,14 +475,15 @@ async function main() {
   const allDocs = [...graphDocs, ...ingestDocs];
   console.log(`Total documents: ${allDocs.length} (${graphDocs.length} graph + ${ingestDocs.length} ingest)`);
 
-  const tokenized = allDocs.map((d) => tokenize(`${d.title} ${d.summary}`));
+  // Title repeated for ~2× weight — titles are more signal-rich than summaries
+  const tokenized = allDocs.map((d) => tokenize(`${d.title} ${d.title} ${d.summary}`));
   const vocab = buildVocabulary(tokenized, maxVocab);
   console.log(`Vocabulary size: ${vocab.length}`);
 
   const matrix = tfIdfMatrix(tokenized, vocab);
   const k = Math.min(K, allDocs.length, 20);
   console.log(`Running k-means with k=${k}...`);
-  const result = kmeans(matrix, k, { maxIterations: 100 });
+  const result = kmeans(matrix, k, { maxIterations: 100, seed: 42 });
   let clusterAssignments = result.clusters;
 
   console.log("Running PCA to 2D...");
@@ -489,7 +573,9 @@ async function main() {
     }
     const sampleDesignQuestions = designQuestionsByCluster.get(cid) || [];
     let label = r.label;
-    if (designFocus && !r.label.toLowerCase().includes(designFocus.toLowerCase())) {
+    // Prepend design focus only if label has fewer than 3 segments (avoid overly long labels)
+    const segmentCount = r.label.split(" & ").length;
+    if (designFocus && segmentCount < 3 && !r.label.toLowerCase().includes(designFocus.toLowerCase())) {
       label = `${designFocus.charAt(0).toUpperCase() + designFocus.slice(1)} & ${r.label}`;
     }
     return {

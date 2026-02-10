@@ -1190,7 +1190,7 @@ function TopicLandscape({
           return (
             <g key={`cluster-labels-top-${h.clusterId}`} pointerEvents="none">
               {parts.map((line, i) => {
-                const labelText = parts.length > 1 && i === 0 ? line + " &" : line;
+                const labelText = line;
                 const ly = labelBlockTop + i * lineHeight;
                 return (
                   <g key={`top-label-${i}`}>

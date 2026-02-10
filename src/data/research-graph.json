@@ -2,31 +2,75 @@
   "clusters": [
     {
       "id": "cluster-0",
-      "label": "Ai & Human & Trust"
+      "label": "Learning & Agents & Education",
+      "topTerms": [
+        "learning",
+        "agents",
+        "education",
+        "ai",
+        "build"
+      ],
+      "sampleDesignQuestions": [
+        "What does each level of the AI integration spectrum look like in practice for your team's daily workflows?",
+        "Which of your team's strengths could AI amplify, and which capabilities should remain exclusively human?"
+      ],
+      "designFocus": "role"
     },
     {
       "id": "cluster-1",
-      "label": "Webp & Img & Src"
+      "label": "Robot & Teaming & Control",
+      "topTerms": [
+        "robot",
+        "teaming",
+        "control",
+        "design",
+        "human"
+      ],
+      "sampleDesignQuestions": [
+        "Does your team's AI use qualify as 'teaming' or just 'interaction'? What would need to change to reach true interdependence?",
+        "How should task division patterns change now that LLMs can handle increasingly complex knowledge work?"
+      ],
+      "designFocus": "capability boundary"
     },
     {
       "id": "cluster-2",
-      "label": "Ai & Human & Decision"
+      "label": "Policy & Privacy & Scaling",
+      "topTerms": [
+        "policy",
+        "privacy",
+        "scaling"
+      ],
+      "sampleDesignQuestions": []
     },
     {
       "id": "cluster-3",
-      "label": "Human & Robot & Build"
+      "label": "Team & Communication & Ai",
+      "topTerms": [
+        "team",
+        "communication",
+        "ai",
+        "teammates",
+        "teams"
+      ],
+      "sampleDesignQuestions": [
+        "How might we design transparency mechanisms that help teams calibrate trust appropriately rather than defaulting to over- or under-trust?",
+        "What rituals could help teams repair trust after an AI teammate makes a significant error?"
+      ],
+      "designFocus": "interface"
     },
     {
       "id": "cluster-4",
-      "label": "Team & Human & Ai"
-    },
-    {
-      "id": "cluster-5",
-      "label": "Policy & Privacy & Scaling"
-    },
-    {
-      "id": "cluster-6",
-      "label": "Gpt & Transform & Codex"
+      "label": "Assisted & Algorithmic & Management",
+      "topTerms": [
+        "assisted",
+        "algorithmic",
+        "management",
+        "supporting",
+        "dynamic"
+      ],
+      "sampleDesignQuestions": [
+        "How do you ensure algorithmic management amplifies worker agency rather than constraining it?"
+      ]
     }
   ],
   "nodes": [
@@ -35,7 +79,7 @@
       "title": "Trust in Digital Human-AI Team Collaboration: A Systematic Review",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Systematic review synthesizing trust dynamics in digital human-AI teams, identifying key factors like transparency, predictability, and shared mental models that influence trust calibration.",
       "url": "/papers/Trust%20in%20Digital%20Human-AI%20Team%20Collaboration_%20A%20Systematic%20Review_Publishers_Version.pdf",
       "source": "research",
@@ -54,8 +98,8 @@
         "transparency"
       ],
       "embedding": [
-        503.2679452917344,
-        38.99805450265184
+        501.64484420711636,
+        607.2365270097379
       ]
     },
     {
@@ -63,7 +107,7 @@
       "title": "Shaping a Multidisciplinary Understanding of Team Trust in Human-AI Teams",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-4",
+      "cluster": "cluster-3",
       "summary": "Proposes a theoretical framework bridging organizational psychology and AI research to understand how trust develops, erodes, and is repaired in human-AI team contexts.",
       "url": "/papers/Shaping%20a%20multidisciplinary%20understanding%20of%20team%20trust%20in%20human-AI%20teams%20%20a%20theoretical%20framework%20(1).pdf",
       "source": "research",
@@ -82,8 +126,8 @@
         "emerging"
       ],
       "embedding": [
-        722.4765905205536,
-        559.1913137053083
+        501.89125710581817,
+        607.642693858251
       ]
     },
     {
@@ -91,7 +135,7 @@
       "title": "IMPACTS: A Trust Model for Human-Autonomy Teaming",
       "authors": "Hou et al.",
       "year": 2021,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Introduces the IMPACTS trust model for human-autonomy teaming, decomposing trust into measurable factors including intent, measurability, performance, adaptability, communication, transparency, and security.",
       "url": "/papers/Hou_2021_IMPACTS_A_Trust_Model_Human-Autonomy_Teaming.pdf",
       "source": "research",
@@ -110,8 +154,8 @@
         "measurement"
       ],
       "embedding": [
-        502.83768348258604,
-        37.97971302201833
+        501.22087400048935,
+        606.9277014319691
       ]
     },
     {
@@ -119,7 +163,7 @@
       "title": "Would You Trust an AI Team Member? Team Trust in Human-AI Teams",
       "authors": "Georganta et al.",
       "year": 2024,
-      "cluster": "cluster-0",
+      "cluster": "cluster-3",
       "summary": "Empirical study on trust formation with AI team members, finding that trust in AI teammates follows different trajectories than interpersonal trust and requires distinct calibration.",
       "url": "/papers/J%20Occupat%20%20%20Organ%20Psyc%20-%202024%20-%20Georganta%20-%20Would%20you%20trust%20an%20AI%20team%20member%20%20Team%20trust%20in%20human%20AI%20teams.pdf",
       "source": "research",
@@ -139,8 +183,8 @@
         "emerging"
       ],
       "embedding": [
-        503.3089213761078,
-        168.30044850302448
+        503.7162759245181,
+        604.5868416677714
       ]
     },
     {
@@ -148,7 +192,7 @@
       "title": "An Ideal Human: Expectations of AI Teammates in Human-AI Teaming",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Investigates what humans expect from AI teammates, finding that people project human-like qualities onto AI partners and that unmet expectations significantly impact team performance.",
       "url": "/papers/22AnIdealHuman22ExpectationsofAITeammatesinHuman-AITeaming.pdf",
       "source": "research",
@@ -167,8 +211,8 @@
         "performance"
       ],
       "embedding": [
-        504.21140656252624,
-        38.093288957744754
+        504.0310641261813,
+        606.7614127604113
       ]
     },
     {
@@ -176,7 +220,7 @@
       "title": "From Tools to Teammates: Reconceptualizing AI in Organizations",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Explores the paradigm shift from viewing AI as a tool to treating it as a teammate, examining implications for organizational design, team composition, and management practices.",
       "url": "",
       "source": "research",
@@ -195,8 +239,8 @@
         "emerging"
       ],
       "embedding": [
-        502.20739801174966,
-        69.7519120757184
+        499.5484309578091,
+        611.4918075367922
       ]
     },
     {
@@ -204,7 +248,7 @@
       "title": "Beyond the Tool vs. Teammate Debate: Exploring the Spectrum",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "summary": "Argues against the binary tool/teammate framing, proposing a spectrum of AI integration levels in teams with distinct interaction patterns and design requirements at each level.",
       "url": "",
       "source": "research",
@@ -223,8 +267,8 @@
         "framework"
       ],
       "embedding": [
-        501.11635124891177,
-        80.05370559123843
+        503.2790288491806,
+        215.27910028668379
       ]
     },
     {
@@ -232,7 +276,7 @@
       "title": "Who/What Is My Teammate? Team Composition Considerations in Human-AI Teaming",
       "authors": "Various",
       "year": 2023,
-      "cluster": "cluster-4",
+      "cluster": "cluster-3",
       "summary": "Examines how introducing AI agents changes team composition dynamics, including role allocation, expertise distribution, and the emergence of new coordination challenges.",
       "url": "/papers/Who-What%2BIs%2BMy%2BTeammate-Team%2BComposition%2BConsiderations%2Bin%2BHuman-AI%2BTeaming.pdf",
       "source": "research",
@@ -251,8 +295,8 @@
         "role-allocation"
       ],
       "embedding": [
-        722.2695863644426,
-        574.1908032075295
+        501.8215802466832,
+        607.6544100440857
       ]
     },
     {
@@ -260,7 +304,7 @@
       "title": "When AI Joins the Team: A Literature Review on Intragroup Processes",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Reviews literature on how AI integration affects intragroup processes including communication patterns, conflict resolution, decision-making, and group identity formation.",
       "url": "https://www.semanticscholar.org/paper/b1f0abc44ed30f180232b93f77fde15e7775d1b2",
       "source": "research",
@@ -279,8 +323,8 @@
         "literature-review"
       ],
       "embedding": [
-        502.00245450691864,
-        71.19628856050882
+        498.6934934223069,
+        612.1994569874397
       ],
       "citation": "Désirée Zercher et al. (2023). When AI joins the Team: A Literature Review on Intragroup Processes and their Effect on Team Performance in Team-AI Collaboration. European Conference on Information Systems."
     },
@@ -289,7 +333,7 @@
       "title": "Defining Human-AI Teaming",
       "authors": "Berretta et al.",
       "year": 2023,
-      "cluster": "cluster-0",
+      "cluster": "cluster-1",
       "summary": "Provides a comprehensive definition of human-AI teaming that distinguishes it from human-AI interaction, emphasizing interdependence, shared goals, and adaptive coordination.",
       "url": "/papers/Defining-HumanAI-Teaming.pdf",
       "source": "research",
@@ -308,8 +352,8 @@
         "coordination"
       ],
       "embedding": [
-        503.6076339214154,
-        174.07247144723638
+        506.04244406906406,
+        82.46763752060123
       ]
     },
     {
@@ -317,7 +361,7 @@
       "title": "A Survey on Human-AI Teaming with Large Pre-Trained Models",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-1",
       "summary": "Surveys how large language models are transforming human-AI teaming, from code generation to creative collaboration, identifying new patterns of human-AI task division.",
       "url": "/papers/A%20Survey%20on%20Human-AI%20Teaming%20with%20Large%20Pre-Trained%20Models.pdf",
       "source": "research",
@@ -337,8 +381,8 @@
         "emerging"
       ],
       "embedding": [
-        503.68975897945444,
-        52.10916820471102
+        505.69543649411014,
+        81.77311527207053
       ]
     },
     {
@@ -346,7 +390,7 @@
       "title": "Human-Autonomy Teaming: A Review and Analysis of the Empirical Literature",
       "authors": "O'Neill et al.",
       "year": 2020,
-      "cluster": "cluster-2",
+      "cluster": "cluster-1",
       "summary": "Comprehensive meta-analysis of empirical studies on human-autonomy teaming, identifying key moderators of team effectiveness including task complexity and automation level.",
       "url": "/papers/o-neill-et-al-2020-human-autonomy-teaming-a-review-and-analysis-of-the-empirical-literature.pdf",
       "source": "research",
@@ -365,8 +409,8 @@
         "effectiveness"
       ],
       "embedding": [
-        502.8820125812027,
-        38.81493416607403
+        502.8662242722124,
+        83.04030185113112
       ]
     },
     {
@@ -374,7 +418,7 @@
       "title": "Artificial Intelligence Superteams & Augmentation Strategies",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "summary": "Examines how organizations can build AI superteams through strategic augmentation, identifying patterns where AI amplifies human strengths rather than replacing human capabilities.",
       "url": "/papers/Artificial%20Intelligence%20Superteams%20%26%20Augmentation%20Strategies_%20Inc.pdf",
       "source": "industry",
@@ -393,8 +437,8 @@
         "strategy"
       ],
       "embedding": [
-        502.5064504877171,
-        77.66274795040749
+        505.0804160322696,
+        222.3856322030381
       ]
     },
     {
@@ -402,7 +446,7 @@
       "title": "Team Challenges: Is Artificial Intelligence the Solution?",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-4",
+      "cluster": "cluster-3",
       "summary": "Evaluates whether AI can address common team challenges including coordination failures, social loafing, and groupthink, finding mixed results depending on implementation.",
       "url": "/papers/Team%20challenges_%20Is%20artificial%20intelligence%20the%20solution_.pdf",
       "source": "research",
@@ -421,8 +465,8 @@
         "groupthink"
       ],
       "embedding": [
-        720.6258339437991,
-        584.110428099905
+        497.73377519095646,
+        613.1209775527941
       ]
     },
     {
@@ -430,7 +474,7 @@
       "title": "Hello Mate! Insights from the Field on Leveraging Machine Teammates",
       "authors": "Various",
       "year": 2022,
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "summary": "Field study of organizations using AI teammates, revealing practical insights about onboarding AI into existing teams, managing expectations, and sustaining engagement.",
       "url": "/papers/PACIS2022_HelloMateInsightsfromtheFieldonLeveragingMachineTeammates_cameraready.pdf",
       "source": "research",
@@ -449,8 +493,8 @@
         "engagement"
       ],
       "embedding": [
-        501.5586327796035,
-        79.8297819231245
+        504.2267710698364,
+        214.34916115081722
       ]
     },
     {
@@ -458,7 +502,7 @@
       "title": "Examining the Antecedents of Human-AI Team Effectiveness",
       "authors": "Siemon et al.",
       "year": 2024,
-      "cluster": "cluster-4",
+      "cluster": "cluster-3",
       "summary": "Identifies key antecedents of effective human-AI teaming including task design, team composition, communication protocols, and organizational support structures.",
       "url": "",
       "source": "research",
@@ -477,8 +521,8 @@
         "organizational-support"
       ],
       "embedding": [
-        722.7184495046821,
-        550.1298395076797
+        501.67079833601036,
+        608.8140110659612
       ]
     },
     {
@@ -486,7 +530,7 @@
       "title": "GenAI as a New Colleague",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "summary": "Examines how generative AI is being integrated as a virtual colleague in knowledge work, analyzing delegation patterns and the evolution of human-AI work distribution.",
       "url": "/papers/GenAI-NewColleague.pdf",
       "source": "industry",
@@ -506,8 +550,8 @@
         "emerging"
       ],
       "embedding": [
-        502.1831634362201,
-        82.62408890491736
+        503.6869123418246,
+        215.4216484850915
       ]
     },
     {
@@ -515,7 +559,7 @@
       "title": "When Should I Lead? Exploring Human-AI Leadership Dynamics",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Investigates dynamic leadership allocation between humans and AI in team settings, finding that optimal performance requires flexible leadership transitions based on task context.",
       "url": "https://www.semanticscholar.org/paper/8e19f8e79b61502556674204a186e121966e3213",
       "source": "research",
@@ -534,8 +578,8 @@
         "transitions"
       ],
       "embedding": [
-        502.4047196985711,
-        63.90819698624949
+        499.64938302524007,
+        611.2769865888162
       ],
       "citation": "Inês Lobo et al. (2024). When Should I Lead or Follow: Understanding Initiative Levels in Human-AI Collaborative Gameplay. Conference on Designing Interactive Systems."
     },
@@ -544,7 +588,7 @@
       "title": "Requirements for AI Teammates",
       "authors": "Various",
       "year": 2023,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Identifies core requirements for AI systems to function as effective teammates, including situational awareness, explainability, adaptability, and appropriate autonomy levels.",
       "url": "/papers/Requirements-for-AI-teammates.pdf",
       "source": "research",
@@ -563,8 +607,8 @@
         "capabilities"
       ],
       "embedding": [
-        502.310851357749,
-        61.51233183995514
+        499.57006253088286,
+        611.2059481720644
       ]
     },
     {
@@ -572,7 +616,7 @@
       "title": "Human-in-the-Loop in Organizations",
       "authors": "Various",
       "year": 2023,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Analyzes different models of human-in-the-loop AI deployment in organizations, from human oversight to human-AI co-decision making, with implications for accountability.",
       "url": "https://www.semanticscholar.org/paper/f8956dff3ee8a15ef8a7060b5efc08a522552671",
       "source": "research",
@@ -591,8 +635,8 @@
         "accountability"
       ],
       "embedding": [
-        504.02885897827036,
-        37.97859658580602
+        502.8188161534394,
+        608.0383243992397
       ],
       "citation": "Y. Hua (2000). Double-loop learning control (DLC) model for reengineering: a \"yin\" and \"yang\" balanced approach for effective organizational change. Proceedings of the 2000 IEEE International Conference on Management of Innovation and Technology. ICMIT 2000. 'Management in the 21st Century' (Cat. No.00EX457)."
     },
@@ -601,7 +645,7 @@
       "title": "Working With Machines: Algorithmic Management",
       "authors": "Various",
       "year": 2023,
-      "cluster": "cluster-2",
+      "cluster": "cluster-4",
       "summary": "Examines how algorithmic management reshapes workplace dynamics, exploring both efficiency gains and concerns about worker autonomy, surveillance, and dehumanization.",
       "url": "/papers/WorkingWithMachines-algorithmic_management.pdf",
       "source": "research",
@@ -620,8 +664,8 @@
         "surveillance"
       ],
       "embedding": [
-        500.1060880516104,
-        96.60629739164014
+        119.95348951455676,
+        350.7579797828294
       ]
     },
     {
@@ -629,7 +673,7 @@
       "title": "State of AI at Work",
       "authors": "Anthropic",
       "year": 2025,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Anthropic's industry report on current AI adoption patterns in workplaces, covering usage trends, productivity impacts, and emerging challenges in human-AI collaboration.",
       "url": "/papers/FY25_Q2_State%20of%20AI%20at%20Work-Anthropic_Final.pdf",
       "source": "industry",
@@ -649,8 +693,8 @@
         "emerging"
       ],
       "embedding": [
-        502.513663406823,
-        69.24649396613705
+        500.23057243108633,
+        611.7908998068496
       ]
     },
     {
@@ -658,7 +702,7 @@
       "title": "Structuring AI Teammate Communication: An Exploration of AI's Communication Strategies",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Explores how AI teammates should structure their communication, finding that proactive updates, explanation depth, and communication timing significantly affect team coordination.",
       "url": "https://www.semanticscholar.org/paper/e24abbf7ed3ec09eabe326a999df0afd3de4278a",
       "source": "research",
@@ -677,8 +721,8 @@
         "coordination"
       ],
       "embedding": [
-        503.2330553204419,
-        54.614769349796916
+        500.65258707979336,
+        610.1644555625782
       ],
       "citation": "Hyosun An and Minjung Park (2026). AI tools and fashion design education: instructor perspectives on student challenges and design process tool support. Fashion and Textiles."
     },
@@ -687,7 +731,7 @@
       "title": "Investigating Human-AI Team Communication Strategies",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Studies communication strategies in human-AI teams, revealing that effective AI teammates adapt communication style based on task urgency, team member expertise, and cognitive load.",
       "url": "https://www.semanticscholar.org/paper/80b22833df9438fafd209f8338ac062eeaf971eb",
       "source": "research",
@@ -706,8 +750,8 @@
         "cognitive-load"
       ],
       "embedding": [
-        504.1236200510829,
-        32.906184041550745
+        502.50543534871446,
+        607.639644986782
       ],
       "citation": "Rui Zhang et al. (2023). Investigating AI Teammate Communication Strategies and Their Impact in Human-AI Teams for Effective Teamwork. Proc. ACM Hum. Comput. Interact.."
     },
@@ -716,7 +760,7 @@
       "title": "The Purposeful Presentation of AI Teammates Impacts Human Acceptance and Perception",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Demonstrates that how AI teammates are introduced and framed significantly influences human acceptance, with anthropomorphic presentations increasing trust but also raising expectations.",
       "url": "/papers/ThePurposefulPresentationofAITeammatesImpactsonHumanAcceptanceandPerception.pdf",
       "source": "research",
@@ -735,8 +779,8 @@
         "anthropomorphism"
       ],
       "embedding": [
-        502.37483965010966,
-        59.75832636929766
+        499.3025147471389,
+        611.2320868263628
       ]
     },
     {
@@ -744,7 +788,7 @@
       "title": "The Pursuit of Happiness: The Power and Influence of AI Teammate Emotion in Human-AI Teamwork",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Investigates how emotional expressions by AI teammates influence team dynamics, finding that AI emotional displays can boost morale but may also feel manipulative if perceived as inauthentic.",
       "url": "/papers/ThepursuitofhappinessthepowerandinfluenceofAIteammateemotioninhuman-AIteamwork.pdf",
       "source": "research",
@@ -764,8 +808,8 @@
         "emerging"
       ],
       "embedding": [
-        502.4725400396743,
-        66.1000766522696
+        499.18186795594806,
+        611.7351839595256
       ]
     },
     {
@@ -773,7 +817,7 @@
       "title": "Politeness in Large Language Models",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "summary": "Analyzes politeness norms in LLM interactions, finding that social conventions like politeness significantly influence AI output quality and user satisfaction in collaborative settings.",
       "url": "https://www.semanticscholar.org/paper/752adcfa738ae00407efe43fa17aaace16a0c5aa",
       "source": "research",
@@ -792,8 +836,8 @@
         "LLMs"
       ],
       "embedding": [
-        500.7729386672766,
-        87.89955911200254
+        501.81510395697956,
+        217.45868206478676
       ],
       "citation": "Taoufiq Zarra and R. Chiheb (2025). The Influence of Prompt Politeness on Response Quality in Large Language Models. IEEE International Conference on Circuits and Systems for Communications."
     },
@@ -802,7 +846,7 @@
       "title": "AI Explaining Its Decisions",
       "authors": "Various",
       "year": 2023,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Reviews approaches to AI explainability in team contexts, finding that explanation format, timing, and detail level must be calibrated to the user's expertise and decision criticality.",
       "url": "/papers/AI-explaining-decisions.pdf",
       "source": "research",
@@ -821,8 +865,8 @@
         "calibration"
       ],
       "embedding": [
-        501.62472668611684,
-        90.40112020704771
+        497.597235867387,
+        613.4874791986282
       ]
     },
     {
@@ -830,7 +874,7 @@
       "title": "Guidelines for Human-AI Interaction",
       "authors": "Amershi et al. (Microsoft)",
       "year": 2019,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Foundational set of 18 design guidelines for human-AI interaction, covering initial interaction, during interaction, when wrong, and over time, widely adopted across the industry.",
       "url": "https://www.semanticscholar.org/paper/ad3cf68bae32d21f25ac142287d4a556155619d2",
       "source": "industry",
@@ -849,8 +893,8 @@
         "foundational"
       ],
       "embedding": [
-        502.3262996573369,
-        66.8577886024124
+        500.50921948814783,
+        611.9910045777759
       ],
       "citation": "Saleema Amershi et al. (2019). Guidelines for Human-AI Interaction. International Conference on Human Factors in Computing Systems."
     },
@@ -859,7 +903,7 @@
       "title": "How to Make Agents and Influence Teammates: Understanding the Social Dynamics",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Studies social influence dynamics in human-AI teams, finding that AI agents can shape team behavior through suggestion framing, timing, and social proof mechanisms.",
       "url": "",
       "source": "research",
@@ -879,8 +923,8 @@
         "emerging"
       ],
       "embedding": [
-        502.75421732137215,
-        59.58489251200798
+        499.3409598436297,
+        611.0376125385148
       ]
     },
     {
@@ -888,7 +932,7 @@
       "title": "Mutual Theory of Mind in AI",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Proposes that effective human-AI teaming requires mutual theory of mind where both humans and AI maintain models of each other's knowledge, intentions, and capabilities.",
       "url": "/papers/MutualTheoryOfMind-AI.pdf",
       "source": "research",
@@ -907,8 +951,8 @@
         "emerging"
       ],
       "embedding": [
-        502.6363784761261,
-        65.50342476227942
+        499.7404357779257,
+        612.175480201729
       ]
     },
     {
@@ -916,7 +960,7 @@
       "title": "Let's Think Together: Shared Mental Models in Human-AI Teams",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Examines how shared mental models develop between humans and AI, finding that explicit model sharing and calibration exercises improve team decision-making accuracy.",
       "url": "https://www.semanticscholar.org/paper/f5c507643d84d73aea70aac546009dc72a4a72f2",
       "source": "research",
@@ -935,8 +979,8 @@
         "decision-making"
       ],
       "embedding": [
-        502.5850232155404,
-        67.18299424346492
+        499.566241240919,
+        611.1945685840316
       ],
       "citation": "Beau G. Schelble et al. (2022). Let's Think Together! Assessing Shared Mental Models, Performance, and Trust in Human-Agent Teams. Proc. ACM Hum. Comput. Interact.."
     },
@@ -945,7 +989,7 @@
       "title": "Collective Attention in Human-AI Teams",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-4",
+      "cluster": "cluster-3",
       "summary": "Studies how attention is distributed across human-AI teams, revealing patterns of collective attention allocation that predict team performance and error rates.",
       "url": "/papers/CollectiveAttention-HumanAI-Teams.pdf",
       "source": "research",
@@ -964,8 +1008,8 @@
         "error-rates"
       ],
       "embedding": [
-        722.1287137658652,
-        565.2615668514222
+        501.087282625928,
+        609.2452365462728
       ]
     },
     {
@@ -973,7 +1017,7 @@
       "title": "Human-AI Collective Intelligence",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-0",
+      "cluster": "cluster-3",
       "summary": "Explores how human-AI teams can achieve collective intelligence that exceeds either human or AI capabilities alone through complementary expertise and adaptive coordination.",
       "url": "/papers/human-AI-CollectiveIntelligence.pdf",
       "source": "research",
@@ -993,8 +1037,8 @@
         "emerging"
       ],
       "embedding": [
-        503.064296294207,
-        190.85450519706905
+        502.2600223242599,
+        609.2696307622342
       ]
     },
     {
@@ -1002,7 +1046,7 @@
       "title": "Leveraging AI for Team Cognition in Human-AI Teams",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-4",
+      "cluster": "cluster-3",
       "summary": "Investigates how AI can support team cognitive processes including shared situational awareness, transactive memory, and collective sensemaking in complex environments.",
       "url": "https://www.semanticscholar.org/paper/ad13022b5d0e966ff5fa555895a4a6939d4ba70c",
       "source": "research",
@@ -1021,8 +1065,8 @@
         "sensemaking"
       ],
       "embedding": [
-        722.7117839102814,
-        561.4016454848261
+        502.66931292538374,
+        607.7900785243994
       ],
       "citation": "Jessica Williams et al. (2023). The Role of Artificial Theory of Mind in Supporting Human-Agent Teaming Interactions. Human Factors and Simulation."
     },
@@ -1031,7 +1075,7 @@
       "title": "We Train AI, Why Not Humans Too? Exploring Human-AI Team Training",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Argues for bidirectional training in human-AI teams where humans learn to work effectively with AI while AI systems are calibrated to team-specific interaction patterns.",
       "url": "https://www.semanticscholar.org/paper/60e3fe29c300b4e44958188158b8773c7cb7dfb4",
       "source": "research",
@@ -1050,8 +1094,8 @@
         "upskilling"
       ],
       "embedding": [
-        503.615782171842,
-        55.12969113410225
+        501.8637380843807,
+        609.472199733685
       ],
       "citation": "Shuai Chen and Yang Zhao (2025). Why am I willing to collaborate with AI? Exploring the desire for collaboration in human-AI hybrid group brainstorming. Kybernetes."
     },
@@ -1060,7 +1104,7 @@
       "title": "Improving Human-AI Collaboration with AI Behaviors",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Demonstrates that specific AI behavioral patterns including proactive information sharing, uncertainty communication, and adaptive pacing significantly improve collaboration outcomes.",
       "url": "https://www.semanticscholar.org/paper/f0f6d133b4ea26fc656733042774e878bef34fd0",
       "source": "research",
@@ -1079,8 +1123,8 @@
         "uncertainty"
       ],
       "embedding": [
-        502.5598495363481,
-        63.974283911085756
+        500.30658002750346,
+        611.1266055109692
       ],
       "citation": "Ángel Alexander Cabrera et al. (2023). Improving Human-AI Collaboration With Descriptions of AI Behavior. Proc. ACM Hum. Comput. Interact.."
     },
@@ -1089,7 +1133,7 @@
       "title": "Human-Machine Teams: What Skills Do the Humans Need?",
       "authors": "Dubrow & Orvis",
       "year": 2020,
-      "cluster": "cluster-2",
+      "cluster": "cluster-1",
       "summary": "Identifies essential human skills for effective human-machine teaming including AI literacy, adaptive coordination, calibrated trust, and collaborative problem-solving.",
       "url": "/papers/DubrowOrvis2020Human-MachineTeams-Whatskillsdothehumansneed.pdf",
       "source": "research",
@@ -1108,8 +1152,8 @@
         "human-development"
       ],
       "embedding": [
-        503.39461365880004,
-        37.72197084809548
+        502.97814890521335,
+        83.8345059294324
       ]
     },
     {
@@ -1136,8 +1180,8 @@
         "oversight"
       ],
       "embedding": [
-        863.0684497957811,
-        204.5862197490975
+        503.7649648544854,
+        607.1953837591777
       ],
       "citation": "Wei Xu and Zaifeng Gao (2023). Applying HCAI in Developing Effective Human-AI Teaming: A Perspective from Human-AI Joint Cognitive Systems. Interactions."
     },
@@ -1146,7 +1190,7 @@
       "title": "Ethics in Human-AI Teaming",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-0",
+      "cluster": "cluster-3",
       "summary": "Maps the ethical landscape of human-AI teaming including questions of accountability, bias amplification, power dynamics, and the moral status of AI teammates.",
       "url": "/papers/Ethics-in-HumanAI_Teaming.pdf",
       "source": "research",
@@ -1166,8 +1210,8 @@
         "power-dynamics"
       ],
       "embedding": [
-        502.87766452314764,
-        181.96323285493312
+        502.42649060698113,
+        608.5491652364644
       ]
     },
     {
@@ -1175,7 +1219,7 @@
       "title": "Towards Ethical AI in Teams",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-0",
+      "cluster": "cluster-3",
       "summary": "Proposes an ethical framework for AI integration in teams that addresses fairness in task allocation, transparency in AI reasoning, and preservation of human dignity.",
       "url": "https://www.semanticscholar.org/paper/8ceaa12aaf37fa2bdbb67f9271adc85f5555b895",
       "source": "research",
@@ -1195,8 +1239,8 @@
         "framework"
       ],
       "embedding": [
-        502.44591966479896,
-        193.05950545031934
+        500.8359687464727,
+        609.8689095573975
       ],
       "citation": "Beau G. Schelble et al. (2022). Towards Ethical AI: Empirically Investigating Dimensions of AI Ethics, Trust Repair, and Performance in Human-AI Teaming. Hum. Factors."
     },
@@ -1225,8 +1269,8 @@
         "emerging"
       ],
       "embedding": [
-        500.5146250776939,
-        227.00426551088526
+        503.1723903596608,
+        215.108384505186
       ]
     },
     {
@@ -1234,7 +1278,7 @@
       "title": "AI and Culture",
       "authors": "Goldberg & Srivastava",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Explores the bidirectional relationship between AI and organizational culture, examining how cultural values shape AI adoption and how AI in turn transforms workplace culture.",
       "url": "/papers/ai_and_culture_-_goldberg_and_srivastava.pdf",
       "source": "research",
@@ -1253,8 +1297,8 @@
         "organizational-change"
       ],
       "embedding": [
-        502.19646567908717,
-        85.58722285477432
+        498.47703893087055,
+        614.0352047844651
       ]
     },
     {
@@ -1262,7 +1306,7 @@
       "title": "The Soul of Work in the Age of AI",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Philosophical exploration of how AI integration challenges fundamental concepts of meaningful work, professional identity, and human purpose in the workplace.",
       "url": "/papers/Soul-of-Work-AI.pdf",
       "source": "research",
@@ -1282,8 +1326,8 @@
         "emerging"
       ],
       "embedding": [
-        502.0666121661799,
-        77.90131158213381
+        498.14998318994714,
+        613.7757122507711
       ]
     },
     {
@@ -1291,7 +1335,7 @@
       "title": "Human-AI Co-Creation",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Studies co-creative processes between humans and AI, identifying patterns where human creativity and AI capabilities combine to produce outcomes neither could achieve alone.",
       "url": "/papers/Human-AI-Cocreation.pdf",
       "source": "research",
@@ -1310,8 +1354,8 @@
         "synergy"
       ],
       "embedding": [
-        503.0998518862729,
-        53.53025552895844
+        500.56502043204824,
+        610.9628585455416
       ]
     },
     {
@@ -1319,7 +1363,7 @@
       "title": "Human-AI Co-Creativity: Exploring Shared Creative Processes",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "summary": "Examines shared creative processes in human-AI teams, finding that iterative cycles of human ideation and AI elaboration produce the most novel creative outcomes.",
       "url": "https://www.semanticscholar.org/paper/7be23d2f5af3c043322cc161714a4755a038347d",
       "source": "research",
@@ -1338,8 +1382,8 @@
         "ideation"
       ],
       "embedding": [
-        503.84681282856025,
-        36.885704845025266
+        501.6330632299257,
+        608.819432244538
       ],
       "citation": "Syed Mohsin Abbasi et al. (2025). HYBRID INTELLIGENCE IN ART STUDIO MANAGEMENT. ShodhKosh Journal of Visual and Performing Arts."
     },
@@ -1348,7 +1392,7 @@
       "title": "Focus and Modality: Defining a Roadmap to Future AI-Human Teaming in Design",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-1",
       "summary": "Maps out how AI-human teaming will evolve in design practice across different modalities, from visual to conversational to spatial, with implications for design education.",
       "url": "/papers/focus-and-modality-defining-a-roadmap-to-future-ai-human-teaming-in-design.pdf",
       "source": "research",
@@ -1368,8 +1412,8 @@
         "roadmap"
       ],
       "embedding": [
-        502.8608189999905,
-        68.01998123396572
+        502.1406277029021,
+        104.89958838267599
       ]
     },
     {
@@ -1377,7 +1421,7 @@
       "title": "Human-GenAI Collaboration to Enhance Task Performance",
       "authors": "Various",
       "year": 2024,
-      "cluster": "cluster-2",
+      "cluster": "cluster-1",
       "summary": "Empirical study showing that human-GenAI collaboration enhances task performance in knowledge work, with the largest gains in tasks requiring both analytical and creative thinking.",
       "url": "https://www.semanticscholar.org/paper/294c485ebc111bfa64ecde86d5a792be8f6f68c3",
       "source": "research",
@@ -1396,8 +1440,8 @@
         "empirical"
       ],
       "embedding": [
-        501.85092951712625,
-        61.674905886386725
+        499.9892605050963,
+        87.06567508125448
       ],
       "citation": "Suqing Wu et al. (2025). Human-generative AI collaboration enhances task performance but undermines human’s intrinsic motivation. Scientific Reports."
     },
@@ -1416,10 +1460,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        500.614288511759,
-        104.60403660471788
+        502.7314691454943,
+        216.6140528680433
       ]
     },
     {
@@ -1437,10 +1481,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-5",
+      "cluster": "cluster-2",
       "embedding": [
-        -53.087352280259836,
-        518.1594777842744
+        781.771671033436,
+        348.5465329604598
       ]
     },
     {
@@ -1458,10 +1502,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        499.2072624539618,
-        121.1163126180867
+        499.1774489347545,
+        219.59951422904945
       ]
     },
     {
@@ -1479,10 +1523,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        500.13412149715515,
-        109.30836242312344
+        500.81420345633666,
+        217.5502875945057
       ]
     },
     {
@@ -1500,10 +1544,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        501.060235724048,
-        126.04782850267827
+        503.2160740459287,
+        217.2942871967322
       ]
     },
     {
@@ -1521,10 +1565,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        499.090779514674,
-        111.61928369009757
+        499.6604383108996,
+        219.51573565024123
       ]
     },
     {
@@ -1542,10 +1586,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-6",
+      "cluster": "cluster-0",
       "embedding": [
-        140.63290954709333,
-        276.0606733975476
+        499.72741056697663,
+        218.38216971903066
       ]
     },
     {
@@ -1563,10 +1607,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-6",
+      "cluster": "cluster-0",
       "embedding": [
-        140.93979571913695,
-        267.2056005169588
+        500.79078192116765,
+        218.6703851345924
       ]
     },
     {
@@ -1584,10 +1628,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        500.7019630230015,
-        135.81934622097924
+        499.8259441100365,
+        219.97432239354748
       ]
     },
     {
@@ -1605,10 +1649,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        484.92554771150037,
-        112.41213049336451
+        486.1947124627497,
+        219.5300050987573
       ]
     },
     {
@@ -1626,10 +1670,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        498.84555523417754,
-        113.05042742483519
+        499.5473376935563,
+        219.79394290924216
       ]
     },
     {
@@ -1649,8 +1693,8 @@
       ],
       "cluster": "cluster-0",
       "embedding": [
-        499.5611869694672,
-        257.3379024445951
+        501.5904908282566,
+        217.8860379430287
       ]
     },
     {
@@ -1668,10 +1712,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        501.13123094707555,
-        129.6044983876703
+        500.85715703697593,
+        218.31589500584525
       ]
     },
     {
@@ -1689,10 +1733,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        501.2904456689774,
-        125.19714436947464
+        501.641503574314,
+        219.41778078663623
       ]
     },
     {
@@ -1710,10 +1754,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        499.63909628846113,
-        109.09268210046855
+        500.49524061701476,
+        219.08931057685908
       ]
     },
     {
@@ -1731,10 +1775,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-6",
+      "cluster": "cluster-0",
       "embedding": [
-        138.68408217978862,
-        259.7898968481891
+        499.41778775937223,
+        219.82133412912572
       ]
     },
     {
@@ -1752,10 +1796,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        500.48505230316493,
-        104.29705917483123
+        502.6409271364211,
+        216.95698550340887
       ]
     },
     {
@@ -1773,10 +1817,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        499.24983472498366,
-        106.4299872779402
+        500.1359603323728,
+        218.95255209972967
       ]
     },
     {
@@ -1794,10 +1838,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        500.89733569638827,
-        111.53598443537328
+        502.54875951551566,
+        221.0598852993399
       ]
     },
     {
@@ -1815,10 +1859,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        499.41315032779625,
-        109.09735564288398
+        500.66946052299943,
+        220.33130461711093
       ]
     },
     {
@@ -1836,10 +1880,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        499.9117004563574,
-        136.82693550968708
+        499.49019544433025,
+        219.79682296549532
       ]
     },
     {
@@ -1857,10 +1901,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        500.1256164130831,
-        112.43717336604692
+        501.5112950153629,
+        224.20967750987916
       ]
     },
     {
@@ -1878,10 +1922,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        500.5669751737787,
-        114.2085559342887
+        502.30984181431245,
+        217.76762769424462
       ]
     },
     {
@@ -1899,10 +1943,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        501.1955494611042,
-        134.24416804195738
+        500.8087126661921,
+        219.11845689049574
       ]
     },
     {
@@ -1920,10 +1964,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        485.65700425536573,
-        117.58982467234098
+        472.77342617408647,
+        219.52541014156628
       ]
     },
     {
@@ -1941,10 +1985,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        501.09403563960336,
-        128.53147446957547
+        500.98660755113497,
+        229.45765219661385
       ]
     },
     {
@@ -1962,10 +2006,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        501.5186619373598,
-        115.12197537782276
+        501.76621119555324,
+        219.8342745820509
       ]
     },
     {
@@ -1983,10 +2027,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        500.0639764300906,
-        123.8340648420009
+        499.91590227262543,
+        219.1265933481486
       ]
     },
     {
@@ -2004,10 +2048,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        501.4205600597818,
-        143.34270592711812
+        503.13591184119673,
+        283.6289036399166
       ]
     },
     {
@@ -2025,10 +2069,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        500.93003594797926,
-        115.15702600191952
+        502.1169710282708,
+        217.3733883719887
       ]
     },
     {
@@ -2046,10 +2090,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        499.89933811545455,
-        104.13730504737696
+        501.73864285397406,
+        218.65383746161018
       ]
     },
     {
@@ -2069,8 +2113,8 @@
       ],
       "cluster": "cluster-0",
       "embedding": [
-        499.49353555603835,
-        307.7482137798569
+        500.68582588092323,
+        218.6091866853777
       ]
     },
     {
@@ -2088,10 +2132,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        501.0253354440203,
-        110.57349040571992
+        503.4919046983396,
+        216.19009094600582
       ]
     },
     {
@@ -2109,10 +2153,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        500.805770391553,
-        116.13837065524064
+        503.36464898706413,
+        216.2158173052298
       ]
     },
     {
@@ -2130,10 +2174,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        499.0179680667833,
-        115.20639368026292
+        499.28652594557275,
+        219.86052254844935
       ]
     },
     {
@@ -2151,10 +2195,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        501.5132219445653,
-        95.55470449978567
+        504.26334931937265,
+        215.315812387452
       ]
     },
     {
@@ -2172,10 +2216,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-3",
+      "cluster": "cluster-0",
       "embedding": [
-        857.991351904794,
-        283.3308629278102
+        500.4846211424078,
+        219.1231760990828
       ]
     },
     {
@@ -2193,10 +2237,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        499.04731285575616,
-        114.57048134415751
+        499.60769881713344,
+        220.55699344880708
       ]
     },
     {
@@ -2214,10 +2258,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        499.919378689643,
-        125.43756228760365
+        501.0120951188189,
+        218.47712671985053
       ]
     },
     {
@@ -2235,10 +2279,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        480.4328279703769,
-        105.26424023715427
+        478.5861233537332,
+        217.2402995255598
       ]
     },
     {
@@ -2258,8 +2302,8 @@
       ],
       "cluster": "cluster-0",
       "embedding": [
-        499.34591907456405,
-        242.22536903190462
+        501.3352558594087,
+        218.04267775593476
       ]
     },
     {
@@ -2279,8 +2323,8 @@
       ],
       "cluster": "cluster-0",
       "embedding": [
-        485.7508915126315,
-        242.72997095154525
+        490.49239162544103,
+        216.89072023901159
       ]
     },
     {
@@ -2298,10 +2342,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        500.3582577159828,
-        107.43915717498533
+        502.7304492505641,
+        223.41190485305177
       ]
     },
     {
@@ -2319,10 +2363,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        500.2129743811092,
-        104.39037147774202
+        501.723517905807,
+        216.8801019995593
       ]
     },
     {
@@ -2342,8 +2386,8 @@
       ],
       "cluster": "cluster-2",
       "embedding": [
-        416.6772877755337,
-        116.58035375435463
+        1027.0543371551373,
+        351.37274071180843
       ]
     },
     {
@@ -2361,10 +2405,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        499.5171547546433,
-        106.42491016183915
+        500.48453188112154,
+        219.45455367887124
       ]
     },
     {
@@ -2382,10 +2426,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        499.23404953610304,
-        117.94211724257754
+        499.4904489774784,
+        219.62051400886628
       ]
     },
     {
@@ -2403,10 +2447,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        487.91471705915825,
-        124.85127745623211
+        469.2985022478005,
+        218.608510852335
       ]
     },
     {
@@ -2424,10 +2468,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        499.7619922080023,
-        108.46208165520753
+        500.79168940296324,
+        218.46006863806943
       ]
     },
     {
@@ -2445,10 +2489,10 @@
         "openai",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        501.2241863087958,
-        122.92463271493689
+        502.9420750782418,
+        216.92337308833999
       ]
     },
     {
@@ -2466,10 +2510,10 @@
         "anthropic",
         "industry"
       ],
-      "cluster": "cluster-5",
+      "cluster": "cluster-2",
       "embedding": [
-        -2.530928017071176,
-        542.6259102779445
+        825.1739918114266,
+        350.0807263277317
       ]
     },
     {
@@ -2487,10 +2531,10 @@
         "google",
         "industry"
       ],
-      "cluster": "cluster-1",
+      "cluster": "cluster-3",
       "embedding": [
-        500.5564361174362,
-        472.14649054273565
+        497.58893356355014,
+        615.2604565719956
       ]
     },
     {
@@ -2508,10 +2552,10 @@
         "google",
         "industry"
       ],
-      "cluster": "cluster-1",
+      "cluster": "cluster-3",
       "embedding": [
-        500.8922146230524,
-        475.21377133977694
+        497.80469111738097,
+        613.9206503731871
       ]
     },
     {
@@ -2529,10 +2573,10 @@
         "google",
         "industry"
       ],
-      "cluster": "cluster-1",
+      "cluster": "cluster-0",
       "embedding": [
-        499.5208791252757,
-        470.40932419021533
+        499.3409626078852,
+        219.7165105188052
       ]
     },
     {
@@ -2550,10 +2594,10 @@
         "google",
         "industry"
       ],
-      "cluster": "cluster-1",
+      "cluster": "cluster-3",
       "embedding": [
-        500.9392997335619,
-        522.8837300204484
+        498.5662442892942,
+        614.1389847851314
       ]
     },
     {
@@ -2571,10 +2615,10 @@
         "google",
         "industry"
       ],
-      "cluster": "cluster-1",
+      "cluster": "cluster-0",
       "embedding": [
-        499.63608135561304,
-        476.71716687324687
+        501.8271133959581,
+        217.65054634678543
       ]
     },
     {
@@ -2592,10 +2636,10 @@
         "google",
         "industry"
       ],
-      "cluster": "cluster-1",
+      "cluster": "cluster-0",
       "embedding": [
-        498.67439046848,
-        432.7096976876295
+        501.62366425834654,
+        217.90223509622004
       ]
     },
     {
@@ -2613,10 +2657,10 @@
         "google",
         "industry"
       ],
-      "cluster": "cluster-1",
+      "cluster": "cluster-0",
       "embedding": [
-        499.7659777687446,
-        486.39611159730146
+        500.5508974401804,
+        218.95943534512318
       ]
     },
     {
@@ -2634,10 +2678,10 @@
         "google",
         "industry"
       ],
-      "cluster": "cluster-1",
+      "cluster": "cluster-0",
       "embedding": [
-        499.53869574510554,
-        456.6389645540346
+        500.31438433608025,
+        218.90409024984942
       ]
     },
     {
@@ -2655,10 +2699,10 @@
         "google",
         "industry"
       ],
-      "cluster": "cluster-1",
+      "cluster": "cluster-3",
       "embedding": [
-        500.4356647896453,
-        452.34137262967175
+        499.23753836300807,
+        613.335500106437
       ]
     },
     {
@@ -2676,10 +2720,10 @@
         "google",
         "industry"
       ],
-      "cluster": "cluster-1",
+      "cluster": "cluster-0",
       "embedding": [
-        500.2490795373244,
-        489.77511084366097
+        502.40533031098477,
+        218.06020381529018
       ]
     },
     {
@@ -2697,10 +2741,10 @@
         "google",
         "industry"
       ],
-      "cluster": "cluster-1",
+      "cluster": "cluster-0",
       "embedding": [
-        499.4103814076915,
-        446.0192828205767
+        501.0738497004451,
+        217.48174972992248
       ]
     },
     {
@@ -2718,10 +2762,10 @@
         "google",
         "industry"
       ],
-      "cluster": "cluster-1",
+      "cluster": "cluster-0",
       "embedding": [
-        499.4835698273698,
-        465.9025629657986
+        501.25482869735606,
+        218.0743422192365
       ]
     },
     {
@@ -2739,10 +2783,10 @@
         "google",
         "industry"
       ],
-      "cluster": "cluster-1",
+      "cluster": "cluster-0",
       "embedding": [
-        499.7744746353675,
-        455.50613543827205
+        502.42822455427023,
+        217.56277205303624
       ]
     },
     {
@@ -2760,10 +2804,10 @@
         "google",
         "industry"
       ],
-      "cluster": "cluster-1",
+      "cluster": "cluster-0",
       "embedding": [
-        500.8043479445512,
-        490.988639003331
+        503.3823841169148,
+        249.67186083129351
       ]
     },
     {
@@ -2781,10 +2825,10 @@
         "google",
         "industry"
       ],
-      "cluster": "cluster-1",
+      "cluster": "cluster-0",
       "embedding": [
-        499.37979219852394,
-        485.6268097709299
+        499.123483026456,
+        219.77396187368805
       ]
     },
     {
@@ -2802,10 +2846,10 @@
         "google",
         "industry"
       ],
-      "cluster": "cluster-1",
+      "cluster": "cluster-3",
       "embedding": [
-        500.5745847001939,
-        481.4065392610332
+        498.5757798049426,
+        614.2264076395011
       ]
     },
     {
@@ -2823,10 +2867,10 @@
         "google",
         "industry"
       ],
-      "cluster": "cluster-1",
+      "cluster": "cluster-0",
       "embedding": [
-        500.7205537762362,
-        524.908526357967
+        501.4965657502243,
+        235.07309396538182
       ]
     },
     {
@@ -2844,10 +2888,10 @@
         "google",
         "industry"
       ],
-      "cluster": "cluster-1",
+      "cluster": "cluster-0",
       "embedding": [
-        500.1472298136176,
-        442.4842671382885
+        503.3889559171488,
+        216.26266954045195
       ]
     },
     {
@@ -2867,8 +2911,8 @@
       ],
       "cluster": "cluster-1",
       "embedding": [
-        499.2228162943332,
-        483.9167229296408
+        495.1993143044385,
+        93.18974851133197
       ]
     },
     {
@@ -2886,10 +2930,10 @@
         "google",
         "industry"
       ],
-      "cluster": "cluster-1",
+      "cluster": "cluster-0",
       "embedding": [
-        500.2735301378781,
-        540.0087740354423
+        499.4833385716571,
+        219.71840623845418
       ]
     },
     {
@@ -2907,10 +2951,10 @@
         "microsoft",
         "industry"
       ],
-      "cluster": "cluster-5",
+      "cluster": "cluster-0",
       "embedding": [
-        344.4622007750953,
-        566.8634448571388
+        499.98442490166514,
+        218.65638269971942
       ]
     },
     {
@@ -2928,10 +2972,10 @@
         "microsoft",
         "industry"
       ],
-      "cluster": "cluster-5",
+      "cluster": "cluster-0",
       "embedding": [
-        344.4286677524022,
-        569.2263344262541
+        499.8610077325712,
+        218.85207993545313
       ]
     },
     {
@@ -2949,10 +2993,10 @@
         "microsoft",
         "industry"
       ],
-      "cluster": "cluster-5",
+      "cluster": "cluster-0",
       "embedding": [
-        331.36616481713315,
-        572.9384255411783
+        473.98313903103036,
+        218.5488410948158
       ]
     },
     {
@@ -2970,10 +3014,10 @@
         "microsoft",
         "industry"
       ],
-      "cluster": "cluster-5",
+      "cluster": "cluster-0",
       "embedding": [
-        344.8736291800857,
-        568.6884900152791
+        499.9503748879,
+        217.44914967992653
       ]
     },
     {
@@ -2991,10 +3035,10 @@
         "microsoft",
         "industry"
       ],
-      "cluster": "cluster-5",
+      "cluster": "cluster-0",
       "embedding": [
-        337.8648349650695,
-        563.6745671516021
+        486.6246598311289,
+        218.8399719842591
       ]
     },
     {
@@ -3012,10 +3056,10 @@
         "microsoft",
         "industry"
       ],
-      "cluster": "cluster-5",
+      "cluster": "cluster-0",
       "embedding": [
-        345.1278354388753,
-        564.5101480687788
+        501.1716153942154,
+        217.72370704659085
       ]
     },
     {
@@ -3033,10 +3077,10 @@
         "microsoft",
         "industry"
       ],
-      "cluster": "cluster-5",
+      "cluster": "cluster-0",
       "embedding": [
-        344.5528652426709,
-        564.8320086447197
+        501.68524327607287,
+        217.68163403311206
       ]
     },
     {
@@ -3054,10 +3098,10 @@
         "microsoft",
         "industry"
       ],
-      "cluster": "cluster-5",
+      "cluster": "cluster-0",
       "embedding": [
-        331.6514146454527,
-        565.8418281744842
+        478.71988580770375,
+        217.43652406708824
       ]
     },
     {
@@ -3075,10 +3119,10 @@
         "microsoft",
         "industry"
       ],
-      "cluster": "cluster-5",
+      "cluster": "cluster-0",
       "embedding": [
-        345.33142925552215,
-        577.1130692591383
+        502.23377893137507,
+        219.4264062102053
       ]
     },
     {
@@ -3096,10 +3140,10 @@
         "microsoft",
         "industry"
       ],
-      "cluster": "cluster-5",
+      "cluster": "cluster-0",
       "embedding": [
-        319.76533382636757,
-        559.3675221815434
+        456.69793609687537,
+        216.61985261869592
       ]
     },
     {
@@ -3117,10 +3161,10 @@
         "meta",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        499.8849073581986,
-        102.87836848014602
+        500.31604297773526,
+        218.49620263261593
       ]
     },
     {
@@ -3138,10 +3182,10 @@
         "meta",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        499.2175071878621,
-        110.83517022602689
+        499.71225120030675,
+        219.46445908587754
       ]
     },
     {
@@ -3159,10 +3203,10 @@
         "meta",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        499.3762870462357,
-        110.92219980774162
+        499.2890567993471,
+        219.64012931936097
       ]
     },
     {
@@ -3182,8 +3226,8 @@
       ],
       "cluster": "cluster-0",
       "embedding": [
-        500.04388601404577,
-        246.21448629595295
+        502.81966734333577,
+        216.75872139094923
       ]
     },
     {
@@ -3201,10 +3245,10 @@
         "meta",
         "industry"
       ],
-      "cluster": "cluster-6",
+      "cluster": "cluster-0",
       "embedding": [
-        141.74575991570867,
-        274.33008710985956
+        504.3383494495366,
+        483.68778887548274
       ]
     },
     {
@@ -3222,10 +3266,10 @@
         "meta",
         "industry"
       ],
-      "cluster": "cluster-3",
+      "cluster": "cluster-0",
       "embedding": [
-        859.7796885466864,
-        390.58224907843464
+        504.04694072242023,
+        340.64242125239355
       ]
     },
     {
@@ -3243,10 +3287,10 @@
         "meta",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        499.01799107747553,
-        114.50002238398443
+        499.123483026456,
+        219.77396187368805
       ]
     },
     {
@@ -3264,10 +3308,10 @@
         "meta",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        499.91724855776397,
-        128.32675876021392
+        499.4123759815314,
+        219.97599925620668
       ]
     },
     {
@@ -3285,10 +3329,10 @@
         "meta",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        499.00014561830756,
-        113.50427307088454
+        499.27000588990967,
+        219.8725964760353
       ]
     },
     {
@@ -3306,10 +3350,10 @@
         "meta",
         "industry"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        499.0477264217825,
-        108.23530458354611
+        499.6124135559253,
+        219.5152641386144
       ]
     },
     {
@@ -3327,10 +3371,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        501.5406425249846,
-        82.30460461677315
+        504.2830679093466,
+        228.0722939698726
       ]
     },
     {
@@ -3348,10 +3392,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        501.2917659831889,
-        85.21358711642236
+        504.1950257401435,
+        223.94585079931377
       ]
     },
     {
@@ -3371,8 +3415,8 @@
       ],
       "cluster": "cluster-0",
       "embedding": [
-        499.9927600079412,
-        229.84481426633891
+        503.9480352080866,
+        216.08756357512206
       ]
     },
     {
@@ -3390,10 +3434,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "embedding": [
-        501.6452842978596,
-        78.22876118993241
+        498.6989336663799,
+        613.8733052377835
       ]
     },
     {
@@ -3411,10 +3455,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-3",
+      "cluster": "cluster-1",
       "embedding": [
-        859.598303370083,
-        253.33502285485702
+        500.0065748411793,
+        89.49000346888253
       ]
     },
     {
@@ -3432,10 +3476,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-1",
       "embedding": [
-        501.4510869577099,
-        76.40960059703333
+        500.0082429103328,
+        88.58102612927956
       ]
     },
     {
@@ -3453,10 +3497,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-3",
+      "cluster": "cluster-1",
       "embedding": [
-        858.8786341643507,
-        270.3610026167834
+        497.50114070834456,
+        90.64384778716233
       ]
     },
     {
@@ -3474,10 +3518,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "embedding": [
-        501.2699279621381,
-        83.57723103462104
+        497.4413117761554,
+        613.5000898143148
       ]
     },
     {
@@ -3495,10 +3539,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-1",
       "embedding": [
-        501.26628843478335,
-        69.81023353962019
+        499.0663772274282,
+        87.62355921013668
       ]
     },
     {
@@ -3516,10 +3560,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-4",
+      "cluster": "cluster-3",
       "embedding": [
-        722.2243239139814,
-        554.3121896154856
+        502.0927181873853,
+        607.2391395883228
       ]
     },
     {
@@ -3537,10 +3581,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-3",
+      "cluster": "cluster-1",
       "embedding": [
-        858.7515113494767,
-        265.12539037059435
+        497.661353932307,
+        90.49540750367301
       ]
     },
     {
@@ -3558,10 +3602,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        496.40326452463347,
-        71.45104386825066
+        498.5865264269453,
+        213.05164308473337
       ]
     },
     {
@@ -3579,10 +3623,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "embedding": [
-        501.90698971224816,
-        74.31558670673905
+        498.4694241676633,
+        612.6306658739529
       ]
     },
     {
@@ -3600,10 +3644,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        501.1070709292508,
-        86.28921026858004
+        504.3586519792721,
+        215.0247921422985
       ]
     },
     {
@@ -3621,10 +3665,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        501.28136518898214,
-        83.78322815673101
+        504.44844423536296,
+        215.64693883045763
       ]
     },
     {
@@ -3642,10 +3686,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        500.9352492497986,
-        86.92990269048903
+        503.53028193077665,
+        215.41684377113566
       ]
     },
     {
@@ -3663,10 +3707,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-4",
       "embedding": [
-        501.17661544850586,
-        88.79782725246248
+        122.51162762136082,
+        349.8105050542927
       ]
     },
     {
@@ -3684,10 +3728,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        500.63141098155864,
-        86.65850159498704
+        503.2276996032862,
+        215.63551468041211
       ]
     },
     {
@@ -3705,10 +3749,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "embedding": [
-        501.58468870920336,
-        77.89336124779187
+        498.68501767129044,
+        612.657316423056
       ]
     },
     {
@@ -3726,10 +3770,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        500.5396782667297,
-        94.95060838178183
+        502.7373355832279,
+        216.17602205814316
       ]
     },
     {
@@ -3747,10 +3791,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        501.5406425249846,
-        82.30460461677315
+        504.2830679093466,
+        228.0722939698726
       ]
     },
     {
@@ -3768,10 +3812,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        501.2917659831889,
-        85.21358711642236
+        504.1950257401435,
+        223.94585079931377
       ]
     },
     {
@@ -3791,8 +3835,8 @@
       ],
       "cluster": "cluster-0",
       "embedding": [
-        499.9927600079412,
-        229.84481426633891
+        503.9480352080866,
+        216.08756357512206
       ]
     },
     {
@@ -3810,10 +3854,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "embedding": [
-        501.6452842978596,
-        78.22876118993241
+        498.6989336663799,
+        613.8733052377835
       ]
     },
     {
@@ -3831,10 +3875,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "embedding": [
-        501.2699279621381,
-        83.57723103462104
+        497.4413117761554,
+        613.5000898143148
       ]
     },
     {
@@ -3852,10 +3896,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-3",
+      "cluster": "cluster-1",
       "embedding": [
-        859.598303370083,
-        253.33502285485702
+        500.0065748411793,
+        89.49000346888253
       ]
     },
     {
@@ -3873,10 +3917,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        496.40326452463347,
-        71.45104386825066
+        498.5865264269453,
+        213.05164308473337
       ]
     },
     {
@@ -3894,10 +3938,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-1",
       "embedding": [
-        500.5654717145007,
-        88.22473995014538
+        498.2940074127103,
+        90.04086615773453
       ]
     },
     {
@@ -3915,10 +3959,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        501.28136518898214,
-        83.78322815673101
+        504.44844423536296,
+        215.64693883045763
       ]
     },
     {
@@ -3936,10 +3980,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-4",
+      "cluster": "cluster-3",
       "embedding": [
-        722.2243239139814,
-        554.3121896154856
+        502.0927181873853,
+        607.2391395883228
       ]
     },
     {
@@ -3957,10 +4001,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "embedding": [
-        501.90698971224816,
-        74.31558670673905
+        498.4694241676633,
+        612.6306658739529
       ]
     },
     {
@@ -3978,10 +4022,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        501.1070709292508,
-        86.28921026858004
+        504.3586519792721,
+        215.0247921422985
       ]
     },
     {
@@ -3999,10 +4043,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-3",
       "embedding": [
-        501.58468870920336,
-        77.89336124779187
+        498.68501767129044,
+        612.657316423056
       ]
     },
     {
@@ -4020,10 +4064,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        500.9352492497986,
-        86.92990269048903
+        503.53028193077665,
+        215.41684377113566
       ]
     },
     {
@@ -4041,10 +4085,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        500.5618058822092,
-        91.79126855202482
+        503.0975302873011,
+        216.20057677222306
       ]
     },
     {
@@ -4062,10 +4106,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-4",
       "embedding": [
-        501.17661544850586,
-        88.79782725246248
+        122.51162762136082,
+        349.8105050542927
       ]
     },
     {
@@ -4083,10 +4127,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        500.5396782667297,
-        94.95060838178183
+        502.7373355832279,
+        216.17602205814316
       ]
     },
     {
@@ -4104,10 +4148,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        500.9890010744892,
-        88.51136917314315
+        503.57114688986246,
+        216.37810890182976
       ]
     },
     {
@@ -4125,10 +4169,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        500.66516823993084,
-        89.99123621209453
+        502.9920012819361,
+        216.18711933979773
       ]
     },
     {
@@ -4146,10 +4190,10 @@
         "arxiv",
         "research"
       ],
-      "cluster": "cluster-2",
+      "cluster": "cluster-0",
       "embedding": [
-        497.92100270163417,
-        98.35996292554967
+        498.510822716303,
+        217.90909536520033
       ]
     }
   ]

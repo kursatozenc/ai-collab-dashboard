@@ -199,6 +199,73 @@ body {
   background: #b8b0a6;
 }
 
+/* ── Discovery Overlay ── */
+.discovery-overlay {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.discovery-overlay--visible {
+  opacity: 1;
+}
+
+.discovery-overlay--exiting {
+  opacity: 0;
+  transition: opacity 0.28s ease;
+}
+
+.discovery-card-stagger {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: discoveryCardIn 0.4s ease-out forwards;
+  animation-delay: calc(var(--stagger-index, 0) * 60ms + 200ms);
+}
+
+.discovery-overlay--exiting .discovery-card-stagger {
+  animation: none;
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+@keyframes discoveryCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.discovery-card:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+  transform: translateY(-2px);
+}
+
+.discovery-cluster-chip:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+.discovery-explore-btn:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .discovery-overlay {
+    transition: none;
+  }
+  .discovery-card-stagger {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* Tooltip */
 .landscape-tooltip {
   animation: tooltipIn 0.15s ease-out;

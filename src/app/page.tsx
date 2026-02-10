@@ -7,6 +7,7 @@ import ItemDetail from "../components/ItemDetail";
 import FilterPanel from "../components/FilterPanel";
 import SearchBar from "../components/SearchBar";
 import ThemeCandidates from "../components/ThemeCandidates";
+import DiscoveryOverlay from "../components/DiscoveryOverlay";
 import { useDebouncedValue } from "../hooks/useDebouncedValue";
 import graphData from "../data/research-graph.json";
 
@@ -32,6 +33,7 @@ export default function Home() {
   const [sourceFilter, setSourceFilter] = useState<"all" | "research" | "industry">("all");
   const [activeLeverFilters, setActiveLeverFilters] = useState<Set<DesignLever>>(new Set());
   const [activeIntentFilters, setActiveIntentFilters] = useState<Set<DesignerIntent>>(new Set());
+  const [showDiscoveryOverlay, setShowDiscoveryOverlay] = useState(true);
 
   const items = graphData.nodes as RadarItem[];
   const clusters = graphData.clusters;
@@ -125,6 +127,23 @@ export default function Home() {
     setActiveIntentFilters(new Set());
   }, []);
 
+  // Discovery overlay handlers
+  const handleDiscoveryLever = useCallback((lever: DesignLever) => {
+    setActiveLeverFilters(new Set([lever]));
+    setShowDiscoveryOverlay(false);
+  }, []);
+
+  const handleDiscoveryCluster = useCallback((clusterId: string) => {
+    // Find an item in this cluster and select it to trigger a visual focus
+    const clusterItem = items.find((i) => i.cluster === clusterId);
+    if (clusterItem) setSelectedItem(clusterItem);
+    setShowDiscoveryOverlay(false);
+  }, [items]);
+
+  const handleDiscoveryExplore = useCallback(() => {
+    setShowDiscoveryOverlay(false);
+  }, []);
+
   return (
     <div className="h-screen flex flex-col" style={{ backgroundColor: "var(--background)" }}>
       {/* Header */}
@@ -132,15 +151,36 @@ export default function Home() {
         className="flex-shrink-0 px-6 py-4 border-b"
         style={{ borderColor: "var(--border)" }}
       >
-        <h1
-          className="text-xl"
-          style={{
-            fontFamily: "var(--font-dm-serif), Georgia, serif",
-            color: "var(--foreground)",
-          }}
-        >
-          Human-AI Collaboration Radar
-        </h1>
+        <div className="flex items-center gap-3">
+          <h1
+            className="text-xl"
+            style={{
+              fontFamily: "var(--font-dm-serif), Georgia, serif",
+              color: "var(--foreground)",
+            }}
+          >
+            Human-AI Collaboration Radar
+          </h1>
+          {!showDiscoveryOverlay && (
+            <button
+              onClick={() => setShowDiscoveryOverlay(true)}
+              title="What are you designing?"
+              className="discovery-reopen-btn"
+              style={{
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+                borderRadius: "999px",
+                padding: "0.25rem 0.75rem",
+                fontSize: "0.7rem",
+                color: "var(--text-secondary)",
+                cursor: "pointer",
+                transition: "all 0.15s ease",
+              }}
+            >
+              &#9678; Discover
+            </button>
+          )}
+        </div>
         <p className="text-xs mt-0.5" style={{ color: "var(--text-secondary)" }}>
           A sensemaking instrument for designing AI-supported teams
         </p>
@@ -200,6 +240,17 @@ export default function Home() {
             onItemClick={handleItemClick}
             clusterAnchors={CLUSTER_ANCHORS}
           />
+
+          {/* Discovery overlay */}
+          {showDiscoveryOverlay && (
+            <DiscoveryOverlay
+              items={items}
+              clusters={clusters}
+              onSelectLever={handleDiscoveryLever}
+              onSelectCluster={handleDiscoveryCluster}
+              onExploreAll={handleDiscoveryExplore}
+            />
+          )}
         </main>
 
         {/* Right: Detail panel */}

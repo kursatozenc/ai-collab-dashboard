@@ -471,6 +471,78 @@ function TopicLandscape({
 
   const hasFilters = visibleItemIds.size > 0;
 
+  // ── Filter-responsive cluster pads: contract blobs to wrap only visible items ──
+  const activeClusterPads = useMemo(() => {
+    if (!hasFilters) return null; // use base clusterPads when no filters
+
+    const grouped = new Map<string, { points: [number, number][]; ids: string[] }>();
+    items.forEach((item) => {
+      if (!visibleItemIds.has(item.id)) return; // only visible items
+      const pos = relaxedPositions.get(item.id) || item.embedding;
+      const g = grouped.get(item.cluster) || { points: [], ids: [] };
+      g.points.push(pos);
+      g.ids.push(item.id);
+      grouped.set(item.cluster, g);
+    });
+
+    const pads: {
+      clusterId: string;
+      padPath: string;
+      color: string;
+      centroid: [number, number];
+      count: number;
+      ambientBlobPaths: string[];
+    }[] = [];
+
+    for (const [clusterId, { points, ids }] of grouped) {
+      if (points.length === 0) continue;
+      const color = clusterColors.get(clusterId) ?? "#888";
+      const cx = points.reduce((s, p) => s + p[0], 0) / points.length;
+      const cy = points.reduce((s, p) => s + p[1], 0) / points.length;
+      const seed = clusterId.charCodeAt(0) + clusterId.charCodeAt(clusterId.length - 1);
+
+      if (points.length < 3) {
+        // Single or pair of visible items: small organic blob
+        const r = 35 + points.length * 8;
+        const baseRing = circlePoints(cx, cy, r, 16);
+        const interp = interpolateHull(baseRing, 3);
+        const wobbled = addRadialWobble(interp, cx, cy, 0.25, seed);
+        const padPath = catmullRomPath(wobbled, 0.42);
+        const ring1 = circlePoints(cx, cy, r * 1.8, 16);
+        const w1 = addRadialWobble(interpolateHull(ring1, 3), cx, cy, 0.28, seed + 1);
+        pads.push({
+          clusterId,
+          padPath,
+          color,
+          centroid: [cx, cy],
+          count: ids.length,
+          ambientBlobPaths: [catmullRomPath(w1, 0.42)],
+        });
+        continue;
+      }
+
+      const hull = convexHull(points);
+      const expanded = expandHull(hull, 28); // tighter than base (28 vs 40)
+      const interpolated = interpolateHull(expanded, 4);
+      const wobbled = addRadialWobble(interpolated, cx, cy, 0.28, seed);
+      const padPath = catmullRomPath(wobbled, 0.42);
+      // Single ambient blob (smaller than base)
+      const expandedBlob = expandHull(hull, 55);
+      const interpBlob = interpolateHull(expandedBlob, 4);
+      const wobbledBlob = addRadialWobble(interpBlob, cx, cy, 0.25, seed + 1);
+      pads.push({
+        clusterId,
+        padPath,
+        color,
+        centroid: [cx, cy],
+        count: ids.length,
+        ambientBlobPaths: [catmullRomPath(wobbledBlob, 0.42)],
+      });
+    }
+
+    return pads;
+  }, [hasFilters, items, visibleItemIds, relaxedPositions, clusterColors]);
+
   // ── SVG coordinate conversion ──
   const svgPointFromClient = useCallback(
     (clientX: number, clientY: number): [number, number] | null => {
@@ -886,7 +958,9 @@ function TopicLandscape({
           const isFadedBySelection = selectedItem !== null && !isActivePad;
           const cv = clusterVisibility.get(h.clusterId);
           const dimmed = hasFilters && cv && cv.visible === 0;
-          const showFiltered = hasFilters && cv;
+          // When filters active, check if this cluster has an active (contracted) pad
+          const activePad = activeClusterPads?.find((p) => p.clusterId === h.clusterId);
+          const hasActiveVersion = hasFilters && activePad;
           const floatVariant = ["a", "b", "c"][index % 3];
 
           return (
@@ -900,80 +974,114 @@ function TopicLandscape({
                 transformOrigin: `${h.centroid[0]} ${h.centroid[1]}`,
               } as React.CSSProperties}
             >
-              {/* Layer 0: Organic ambient blobs (soft, translucent, slow drift) */}
+              {/* Layer 0: Organic ambient blobs */}
               <g className="cluster-ambient-blobs" pointerEvents="none">
-                {h.ambientBlobPaths.map((blobD, blobIdx) => (
-                  <path
-                    key={`blob-${h.clusterId}-${blobIdx}`}
-                    className="cluster-ambient-blob"
-                    d={blobD}
-                    fill={`url(#blob-grad-${h.clusterId})`}
-                    stroke="none"
-                    filter="url(#ambient-blob-blur)"
-                    opacity={dimmed ? 0.10 : isFadedBySelection ? 0.12 : isFadedByHover ? 0.20 : 0.36}
-                    style={{
-                      animationDelay: `${blobIdx * 2.5}s`,
-                      transformOrigin: `${h.centroid[0]} ${h.centroid[1]}`,
-                    }}
-                  />
-                ))}
+                {/* When filtered: show active (contracted) ambient blobs with full vibrancy */}
+                {hasActiveVersion ? (
+                  activePad.ambientBlobPaths.map((blobD, blobIdx) => (
+                    <path
+                      key={`active-blob-${h.clusterId}-${blobIdx}`}
+                      className="cluster-ambient-blob cluster-pad-morph"
+                      d={blobD}
+                      fill={`url(#blob-grad-${h.clusterId})`}
+                      stroke="none"
+                      filter="url(#ambient-blob-blur)"
+                      opacity={isFadedBySelection ? 0.12 : isFadedByHover ? 0.20 : 0.40}
+                      style={{
+                        animationDelay: `${blobIdx * 2.5}s`,
+                        transformOrigin: `${activePad.centroid[0]} ${activePad.centroid[1]}`,
+                      }}
+                    />
+                  ))
+                ) : (
+                  h.ambientBlobPaths.map((blobD, blobIdx) => (
+                    <path
+                      key={`blob-${h.clusterId}-${blobIdx}`}
+                      className="cluster-ambient-blob"
+                      d={blobD}
+                      fill={`url(#blob-grad-${h.clusterId})`}
+                      stroke="none"
+                      filter="url(#ambient-blob-blur)"
+                      opacity={dimmed ? 0.03 : isFadedBySelection ? 0.12 : isFadedByHover ? 0.20 : 0.36}
+                      style={{
+                        animationDelay: `${blobIdx * 2.5}s`,
+                        transformOrigin: `${h.centroid[0]} ${h.centroid[1]}`,
+                      }}
+                    />
+                  ))
+                )}
               </g>
 
-              {/* Layer A: Ambient halo (subtle so shape reads clearly, not diffusing) */}
+              {/* Base pad ghost outline (visible when filtered, very faint) */}
+              {hasFilters && (
+                <path
+                  className="cluster-pad cluster-pad-morph"
+                  d={h.padPath}
+                  fill="none"
+                  stroke={h.color}
+                  strokeWidth={0.5}
+                  strokeOpacity={dimmed ? 0.04 : 0.08}
+                  strokeDasharray="4 6"
+                  strokeLinejoin="round"
+                  pointerEvents="none"
+                />
+              )}
+
+              {/* Layer A: Ambient halo */}
               <path
-                className="cluster-pad-halo"
-                d={h.padPath}
+                className="cluster-pad-halo cluster-pad-morph"
+                d={hasActiveVersion ? activePad.padPath : h.padPath}
                 fill={`url(#pad-halo-${h.clusterId})`}
                 stroke="none"
                 filter="url(#pad-ambient-halo)"
-                opacity={dimmed ? 0.06 : isFadedBySelection ? 0.08 : isFadedByHover ? 0.12 : 0.32}
+                opacity={dimmed ? 0.02 : isFadedBySelection ? 0.08 : isFadedByHover ? 0.12 : 0.32}
                 style={{
                   transform: isHoveredPad
                     ? "scale(1.08)"
                     : isActivePad
                       ? "scale(1.06)"
                       : "scale(1.02)",
-                  transformOrigin: `${h.centroid[0]} ${h.centroid[1]}`,
+                  transformOrigin: `${(hasActiveVersion ? activePad : h).centroid[0]} ${(hasActiveVersion ? activePad : h).centroid[1]}`,
                 }}
                 pointerEvents="none"
               />
 
               {/* Layer B: Main glass body */}
               <path
-                className="cluster-pad"
-                d={h.padPath}
+                className="cluster-pad cluster-pad-morph"
+                d={hasActiveVersion ? activePad.padPath : h.padPath}
                 fill={`url(#pad-grad-${h.clusterId})`}
                 stroke={h.color}
                 strokeWidth={1.5}
                 strokeOpacity={isHoveredPad ? 0.55 : 0.30}
                 strokeLinejoin="round"
                 filter={isHoveredPad ? "url(#pad-glow)" : undefined}
-                opacity={dimmed ? 0.15 : isFadedBySelection ? 0.20 : isFadedByHover ? 0.30 : 1}
+                opacity={dimmed ? 0.04 : isFadedBySelection ? 0.20 : isFadedByHover ? 0.30 : 1}
                 style={{
                   transform: isHoveredPad
                     ? "scale(1.04)"
                     : isActivePad
                       ? "scale(1.03)"
                       : "scale(1)",
-                  transformOrigin: `${h.centroid[0]} ${h.centroid[1]}`,
+                  transformOrigin: `${(hasActiveVersion ? activePad : h).centroid[0]} ${(hasActiveVersion ? activePad : h).centroid[1]}`,
                 }}
                 pointerEvents="none"
               />
 
               {/* Layer C: Specular highlight (3D curvature) */}
               <path
-                className="cluster-pad-specular"
-                d={h.padPath}
+                className="cluster-pad-specular cluster-pad-morph"
+                d={hasActiveVersion ? activePad.padPath : h.padPath}
                 fill={`url(#pad-specular-${h.clusterId})`}
                 stroke="none"
-                opacity={dimmed ? 0.05 : isFadedBySelection ? 0.08 : isFadedByHover ? 0.12 : 0.6}
+                opacity={dimmed ? 0.02 : isFadedBySelection ? 0.08 : isFadedByHover ? 0.12 : 0.6}
                 style={{
                   transform: isHoveredPad
                     ? "scale(1.04)"
                     : isActivePad
                       ? "scale(1.03)"
                       : "scale(1)",
-                  transformOrigin: `${h.centroid[0]} ${h.centroid[1]}`,
+                  transformOrigin: `${(hasActiveVersion ? activePad : h).centroid[0]} ${(hasActiveVersion ? activePad : h).centroid[1]}`,
                 }}
                 pointerEvents="none"
               />
@@ -982,7 +1090,7 @@ function TopicLandscape({
               {isActivePad && (
                 <path
                   className="cluster-pad-inner-glow"
-                  d={h.padPath}
+                  d={hasActiveVersion ? activePad.padPath : h.padPath}
                   fill={h.color}
                   fillOpacity={0.12}
                   stroke={h.color}
@@ -1170,6 +1278,9 @@ function TopicLandscape({
           const cv = clusterVisibility.get(h.clusterId);
           const dimmed = hasFilters && cv && cv.visible === 0;
           const showFiltered = hasFilters && cv;
+          // Use active (contracted) pad centroid when available
+          const activePad = activeClusterPads?.find((p) => p.clusterId === h.clusterId);
+          const labelCentroid = (hasFilters && activePad) ? activePad.centroid : h.centroid;
           const twoLines = (() => {
             if (h.label.includes(" & ")) {
               const segs = h.label.split(" & ");
@@ -1185,24 +1296,25 @@ function TopicLandscape({
           })();
           const parts = twoLines[1] ? twoLines : [twoLines[0], ""];
           // Position label block underneath the cluster blob (offset below centroid)
-          const labelBlockTop = h.centroid[1] + 48;
+          const labelBlockTop = labelCentroid[1] + 48;
           const lineHeight = 18;
           return (
-            <g key={`cluster-labels-top-${h.clusterId}`} pointerEvents="none">
+            <g key={`cluster-labels-top-${h.clusterId}`} pointerEvents="none"
+               className="cluster-pad-morph">
               {parts.map((line, i) => {
                 const labelText = line;
                 const ly = labelBlockTop + i * lineHeight;
                 return (
                   <g key={`top-label-${i}`}>
                     <text
-                      x={h.centroid[0]}
+                      x={labelCentroid[0]}
                       y={ly}
                       textAnchor="middle"
                       dominantBaseline="central"
                       fill="none"
                       stroke="#12121f"
                       strokeWidth={4}
-                      strokeOpacity={isFadedBySelection ? 0.3 : isFadedByHover ? 0.4 : 0.7}
+                      strokeOpacity={dimmed ? 0.15 : isFadedBySelection ? 0.3 : isFadedByHover ? 0.4 : 0.7}
                       strokeLinejoin="round"
                       fontSize={16}
                       fontWeight={700}
@@ -1212,12 +1324,12 @@ function TopicLandscape({
                       {labelText}
                     </text>
                     <text
-                      x={h.centroid[0]}
+                      x={labelCentroid[0]}
                       y={ly}
                       textAnchor="middle"
                       dominantBaseline="central"
                       fill="#ffffff"
-                      opacity={isFadedBySelection ? 0.25 : isFadedByHover ? 0.30 : 0.95}
+                      opacity={dimmed ? 0.15 : isFadedBySelection ? 0.25 : isFadedByHover ? 0.30 : 0.95}
                       fontSize={16}
                       fontWeight={700}
                       fontFamily="var(--font-dm-serif), Georgia, serif"
@@ -1230,12 +1342,12 @@ function TopicLandscape({
                 );
               })}
               <text
-                x={h.centroid[0]}
+                x={labelCentroid[0]}
                 y={labelBlockTop + parts.length * lineHeight + 4}
                 textAnchor="middle"
                 dominantBaseline="central"
                 fill="#ffffff"
-                opacity={isFadedBySelection ? 0.12 : isFadedByHover ? 0.18 : 0.40}
+                opacity={dimmed ? 0.10 : isFadedBySelection ? 0.12 : isFadedByHover ? 0.18 : 0.40}
                 fontSize={9}
                 fontFamily="var(--font-inter), sans-serif"
                 className="cluster-pad-label"

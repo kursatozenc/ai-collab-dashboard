@@ -7,7 +7,10 @@ import ItemDetail from "../components/ItemDetail";
 import FilterPanel from "../components/FilterPanel";
 import SearchBar from "../components/SearchBar";
 import ThemeCandidates from "../components/ThemeCandidates";
+import { useDebouncedValue } from "../hooks/useDebouncedValue";
 import graphData from "../data/research-graph.json";
+
+const FILTER_DEBOUNCE_MS = 180;
 
 const CLUSTER_ANCHORS: Record<string, [number, number]> = {
   trust: [200, 150],
@@ -19,9 +22,13 @@ const CLUSTER_ANCHORS: Record<string, [number, number]> = {
   creativity: [350, 120],
 };
 
+/** Stable empty set: when no filters are active we pass this so TopicLandscape doesn't re-run effects every parent render. */
+const EMPTY_VISIBLE_IDS = new Set<string>();
+
 export default function Home() {
   const [selectedItem, setSelectedItem] = useState<RadarItem | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [designQuestionFilter, setDesignQuestionFilter] = useState("");
   const [sourceFilter, setSourceFilter] = useState<"all" | "research" | "industry">("all");
   const [activeLeverFilters, setActiveLeverFilters] = useState<Set<DesignLever>>(new Set());
   const [activeIntentFilters, setActiveIntentFilters] = useState<Set<DesignerIntent>>(new Set());
@@ -29,16 +36,20 @@ export default function Home() {
   const items = graphData.nodes as RadarItem[];
   const clusters = graphData.clusters;
 
+  // Debounce text filters so landscape/filter logic doesn't run on every keystroke
+  const debouncedSearchQuery = useDebouncedValue(searchQuery, FILTER_DEBOUNCE_MS);
+  const debouncedDesignQuestionFilter = useDebouncedValue(designQuestionFilter, FILTER_DEBOUNCE_MS);
+
   // Source counts
   const researchCount = useMemo(() => items.filter((i) => i.source === "research").length, [items]);
   const industryCount = useMemo(() => items.filter((i) => i.source === "industry").length, [items]);
 
-  // Combined filtering
+  // Combined filtering (uses debounced text so typing doesn't thrash the landscape)
   const visibleItemIds = useMemo(() => {
     const filtered = items.filter((item) => {
       // Search
-      if (searchQuery.trim()) {
-        const q = searchQuery.toLowerCase();
+      if (debouncedSearchQuery.trim()) {
+        const q = debouncedSearchQuery.toLowerCase();
         if (
           !item.title.toLowerCase().includes(q) &&
           !item.authors.toLowerCase().includes(q) &&
@@ -48,6 +59,11 @@ export default function Home() {
         ) {
           return false;
         }
+      }
+      // Design question contains
+      if (debouncedDesignQuestionFilter.trim()) {
+        const q = debouncedDesignQuestionFilter.toLowerCase().trim();
+        if (!item.designQuestion?.toLowerCase().includes(q)) return false;
       }
       // Source
       if (sourceFilter !== "all" && item.source !== sourceFilter) return false;
@@ -66,10 +82,11 @@ export default function Home() {
       return true;
     });
     return new Set(filtered.map((i) => i.id));
-  }, [items, searchQuery, sourceFilter, activeLeverFilters, activeIntentFilters]);
+  }, [items, debouncedSearchQuery, debouncedDesignQuestionFilter, sourceFilter, activeLeverFilters, activeIntentFilters]);
 
   const hasActiveFilters =
     searchQuery.trim() !== "" ||
+    designQuestionFilter.trim() !== "" ||
     sourceFilter !== "all" ||
     activeLeverFilters.size > 0 ||
     activeIntentFilters.size > 0;
@@ -102,6 +119,7 @@ export default function Home() {
 
   const handleClearAll = useCallback(() => {
     setSearchQuery("");
+    setDesignQuestionFilter("");
     setSourceFilter("all");
     setActiveLeverFilters(new Set());
     setActiveIntentFilters(new Set());
@@ -148,6 +166,8 @@ export default function Home() {
           <FilterPanel
             sourceFilter={sourceFilter}
             onSourceFilterChange={setSourceFilter}
+            designQuestionFilter={designQuestionFilter}
+            onDesignQuestionFilterChange={setDesignQuestionFilter}
             activeLeverFilters={activeLeverFilters}
             onLeverToggle={handleLeverToggle}
             activeIntentFilters={activeIntentFilters}
@@ -175,7 +195,7 @@ export default function Home() {
           <TopicLandscape
             items={items}
             clusters={clusters}
-            visibleItemIds={hasActiveFilters ? visibleItemIds : new Set()}
+            visibleItemIds={hasActiveFilters ? visibleItemIds : EMPTY_VISIBLE_IDS}
             selectedItem={selectedItem}
             onItemClick={handleItemClick}
             clusterAnchors={CLUSTER_ANCHORS}
@@ -190,6 +210,7 @@ export default function Home() {
           >
             <ItemDetail
               item={selectedItem}
+              cluster={clusters.find((c) => c.id === selectedItem.cluster)}
               onClose={() => setSelectedItem(null)}
             />
           </aside>

@@ -3,8 +3,8 @@
 import React, { useState, useRef, useCallback, useEffect, useMemo } from "react";
 import { RadarItem, Cluster } from "../types";
 
-// ── Cluster colors ──────────────────────────────────────────────
-const CLUSTER_COLORS: Record<string, string> = {
+// ── Cluster colors (fallback for data-driven cluster ids like cluster-0, cluster-1) ──────────────────────────────────────────────
+const CLUSTER_COLORS_LEGACY: Record<string, string> = {
   trust: "#6366f1",
   teamwork: "#2563eb",
   delegation: "#0891b2",
@@ -13,6 +13,25 @@ const CLUSTER_COLORS: Record<string, string> = {
   ethics: "#dc2626",
   creativity: "#7c3aed",
 };
+
+const CLUSTER_PALETTE = [
+  "#6366f1",
+  "#2563eb",
+  "#0891b2",
+  "#059669",
+  "#d97706",
+  "#dc2626",
+  "#7c3aed",
+  "#db2777",
+  "#65a30d",
+  "#0d9488",
+  "#4f46e5",
+  "#ea580c",
+];
+
+function getClusterColor(clusterId: string, clusterIndex: number): string {
+  return CLUSTER_COLORS_LEGACY[clusterId] ?? CLUSTER_PALETTE[clusterIndex % CLUSTER_PALETTE.length] ?? "#888";
+}
 
 // ── Geometry helpers ────────────────────────────────────────────
 
@@ -128,7 +147,7 @@ function interpolateHull(
   return result;
 }
 
-/** Apply sine-harmonic radial perturbations for organic blob shapes */
+/** Apply sine-harmonic radial perturbations for organic blob shapes (amoeba-like, not pill) */
 function addRadialWobble(
   points: [number, number][],
   cx: number,
@@ -140,19 +159,75 @@ function addRadialWobble(
     const dx = p[0] - cx;
     const dy = p[1] - cy;
     const angle = Math.atan2(dy, dx);
-    // Deterministic wobble using 3 sine harmonics at decreasing amplitudes
+    const r = Math.sqrt(dx * dx + dy * dy) || 1;
+    // Multiple harmonics for lumpy, organic outline (not smooth pill)
     const wobble =
       1 +
       amplitude *
-        (Math.sin(angle * 3 + seed) * 0.6 +
-          Math.sin(angle * 5 + seed * 1.7) * 0.3 +
-          Math.sin(angle * 7 + seed * 2.3) * 0.1);
-    return [cx + dx * wobble, cy + dy * wobble] as [number, number];
+        (Math.sin(angle * 2 + seed) * 0.5 +
+          Math.sin(angle * 4 + seed * 1.3) * 0.4 +
+          Math.sin(angle * 6 + seed * 2.1) * 0.35 +
+          Math.sin(angle * 8 + seed * 0.7) * 0.25 +
+          Math.sin(angle * 11 + seed * 1.9) * 0.15);
+    return [cx + (dx / r) * (r * wobble), cy + (dy / r) * (r * wobble)] as [number, number];
   });
 }
 
-// ── Overlap relaxation ──────────────────────────────────────────
+// ── Cluster centroid from embeddings (for circular layout) ──
+function clusterCentroidsFromEmbeddings(items: RadarItem[]): Map<string, [number, number]> {
+  const byCluster = new Map<string, [number, number][]>();
+  items.forEach((item) => {
+    const g = byCluster.get(item.cluster) || [];
+    g.push(item.embedding);
+    byCluster.set(item.cluster, g);
+  });
+  const centroids = new Map<string, [number, number]>();
+  byCluster.forEach((points, clusterId) => {
+    const cx = points.reduce((s, p) => s + p[0], 0) / points.length;
+    const cy = points.reduce((s, p) => s + p[1], 0) / points.length;
+    centroids.set(clusterId, [cx, cy]);
+  });
+  return centroids;
+}
 
+/** Simple deterministic hash for jitter from string */
+function hash(s: string): number {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
+  return h / 2 ** 32;
+}
+
+// ── 3D sphere layout: nodes on the surface of a hemisphere, projected to 2D (sphere of spheres) ──
+const SPHERE_RADIUS = 48;
+
+function circularLayoutPositions(items: RadarItem[]): Map<string, [number, number]> {
+  const centroids = clusterCentroidsFromEmbeddings(items);
+  const byCluster = new Map<string, RadarItem[]>();
+  items.forEach((item) => {
+    const g = byCluster.get(item.cluster) || [];
+    g.push(item);
+    byCluster.set(item.cluster, g);
+  });
+  const out = new Map<string, [number, number]>();
+  byCluster.forEach((clusterItems, clusterId) => {
+    const [cx, cy] = centroids.get(clusterId)!;
+    const n = clusterItems.length;
+    clusterItems.forEach((item, i) => {
+      // Front hemisphere: φ from 0 (pole) to π/2 (equator); θ around the axis
+      const phi = Math.acos(1 - (i + 0.5) / n);
+      const theta = 2 * Math.PI * (i / n) + hash(item.id) * 0.5;
+      const x = Math.sin(phi) * Math.cos(theta);
+      const y = Math.sin(phi) * Math.sin(theta);
+      out.set(item.id, [
+        cx + SPHERE_RADIUS * x,
+        cy + SPHERE_RADIUS * y,
+      ]);
+    });
+  });
+  return out;
+}
+
+// ── Overlap relaxation (used only when not using circular layout; kept for reference) ──
 function relaxPositions(
   items: RadarItem[],
   minDist = 16,
@@ -195,7 +270,7 @@ function relaxPositions(
 // ── Visual encoding helpers ─────────────────────────────────────
 
 function nodeRadius(item: RadarItem): number {
-  return item.tags?.includes("emerging") ? 6 : 4.5;
+  return item.tags?.includes("emerging") ? 7 : 5.5;
 }
 
 function yearOpacity(year: number): number {
@@ -249,7 +324,7 @@ interface TopicLandscapeProps {
   clusterAnchors: Record<string, [number, number]>;
 }
 
-export default function TopicLandscape({
+function TopicLandscape({
   items,
   clusters,
   visibleItemIds,
@@ -268,9 +343,21 @@ export default function TopicLandscape({
   const viewBoxRef = useRef(viewBox);
   viewBoxRef.current = viewBox;
   const mouseDownPos = useRef<{ x: number; y: number } | null>(null);
+  // Throttle tooltip position: only update state when tooltip is visible, at most once per frame
+  const hoveredItemRef = useRef<RadarItem | null>(null);
+  hoveredItemRef.current = hoveredItem;
+  const tooltipRafScheduled = useRef(false);
+  const pendingTooltipPos = useRef<{ x: number; y: number } | null>(null);
 
-  // ── Relaxed positions (once) ──
-  const relaxedPositions = useMemo(() => relaxPositions(items), [items]);
+  // ── Circular layout: nodes in a disk per cluster (sphere of spheres, no elongated spikes) ──
+  const relaxedPositions = useMemo(() => circularLayoutPositions(items), [items]);
+
+  // ── Cluster colors (by order for data-driven cluster ids) ──
+  const clusterColors = useMemo(() => {
+    const m = new Map<string, string>();
+    clusters.forEach((c, i) => m.set(c.id, getClusterColor(c.id, i)));
+    return m;
+  }, [clusters]);
 
   // ── Pad hull computation ──
   const clusterPads = useMemo(() => {
@@ -296,7 +383,7 @@ export default function TopicLandscape({
     }[] = [];
 
     for (const [clusterId, { points, ids }] of grouped) {
-      const color = CLUSTER_COLORS[clusterId] || "#888";
+      const color = clusterColors.get(clusterId) ?? "#888";
       const clusterInfo = clusters.find((c) => c.id === clusterId);
       const label = clusterInfo?.label || clusterId;
 
@@ -305,21 +392,22 @@ export default function TopicLandscape({
 
       if (points.length < 3) {
         const r = 55;
-        const fallbackPath =
-          points.length === 1
-            ? `M ${points[0][0] - r} ${points[0][1]} A ${r} ${r} 0 1 1 ${points[0][0] + r} ${points[0][1]} A ${r} ${r} 0 1 1 ${points[0][0] - r} ${points[0][1]} Z`
-            : (() => {
-                const mx = (points[0][0] + points[1][0]) / 2;
-                const my = (points[0][1] + points[1][1]) / 2;
-                return `M ${mx - r} ${my - r} L ${mx + r} ${my - r} A ${r} ${r} 0 0 1 ${mx + r} ${my + r} L ${mx - r} ${my + r} A ${r} ${r} 0 0 1 ${mx - r} ${my - r} Z`;
-              })();
-        // Synthesize hit-test polygon for small clusters
+        const seed = clusterId.charCodeAt(0) + clusterId.charCodeAt(clusterId.length - 1);
+        // Organic blob from circle: circle points → interpolate → wobble → smooth (no spheres/pills)
+        const baseRing = circlePoints(cx, cy, r, 16);
+        const interp = interpolateHull(baseRing, 3);
+        const wobbled = addRadialWobble(interp, cx, cy, 0.28, seed);
+        const fallbackPath = catmullRomPath(wobbled, 0.42);
         const hitPoly = circlePoints(cx, cy, r, 12);
-        // Ambient blobs: two larger circles for soft glow
-        const blobR1 = r * 2.2;
-        const blobR2 = r * 2.9;
-        const blob1 = `M ${cx - blobR1} ${cy} A ${blobR1} ${blobR1} 0 1 1 ${cx + blobR1} ${cy} A ${blobR1} ${blobR1} 0 1 1 ${cx - blobR1} ${cy} Z`;
-        const blob2 = `M ${cx - blobR2} ${cy} A ${blobR2} ${blobR2} 0 1 1 ${cx + blobR2} ${cy} A ${blobR2} ${blobR2} 0 1 1 ${cx - blobR2} ${cy} Z`;
+        // Ambient blobs: larger wobbled rings (organic, not circles)
+        const ring1 = circlePoints(cx, cy, r * 2.2, 16);
+        const ring2 = circlePoints(cx, cy, r * 2.9, 16);
+        const w1 = addRadialWobble(interpolateHull(ring1, 3), cx, cy, 0.32, seed + 1);
+        const w2 = addRadialWobble(interpolateHull(ring2, 3), cx, cy, 0.36, seed + 2.3);
+        const ambientBlobPaths = [
+          catmullRomPath(w1, 0.42),
+          catmullRomPath(w2, 0.42),
+        ];
         pads.push({
           clusterId,
           padPath: fallbackPath,
@@ -328,29 +416,29 @@ export default function TopicLandscape({
           centroid: [cx, cy],
           count: ids.length,
           label,
-          ambientBlobPaths: [blob1, blob2],
+          ambientBlobPaths,
         });
         continue;
       }
 
       const hull = convexHull(points);
       const expanded = expandHull(hull, 40);
-      // Organic blob pipeline: interpolate → wobble → smooth
-      const interpolated = interpolateHull(expanded, 2);
+      // Organic blob pipeline: strong wobble so elongated hulls become blob-like, not pills
+      const interpolated = interpolateHull(expanded, 4);
       const seed = clusterId.charCodeAt(0) + clusterId.charCodeAt(clusterId.length - 1);
-      const wobbled = addRadialWobble(interpolated, cx, cy, 0.12, seed);
-      const pathD = catmullRomPath(wobbled, 0.55);
+      const wobbled = addRadialWobble(interpolated, cx, cy, 0.32, seed);
+      const pathD = catmullRomPath(wobbled, 0.42);
 
-      // Ambient blobs: larger, softer organic shapes that drift slowly
+      // Ambient blobs: larger, soft organic shapes (same lumpy profile)
       const expandedBlob1 = expandHull(hull, 72);
       const expandedBlob2 = expandHull(hull, 100);
-      const interp1 = interpolateHull(expandedBlob1, 2);
-      const interp2 = interpolateHull(expandedBlob2, 2);
-      const wobbled1 = addRadialWobble(interp1, cx, cy, 0.18, seed + 1);
-      const wobbled2 = addRadialWobble(interp2, cx, cy, 0.22, seed + 2.3);
+      const interp1 = interpolateHull(expandedBlob1, 4);
+      const interp2 = interpolateHull(expandedBlob2, 4);
+      const wobbled1 = addRadialWobble(interp1, cx, cy, 0.28, seed + 1);
+      const wobbled2 = addRadialWobble(interp2, cx, cy, 0.32, seed + 2.3);
       const ambientBlobPaths = [
-        catmullRomPath(wobbled1, 0.55),
-        catmullRomPath(wobbled2, 0.55),
+        catmullRomPath(wobbled1, 0.42),
+        catmullRomPath(wobbled2, 0.42),
       ];
 
       pads.push({
@@ -366,7 +454,7 @@ export default function TopicLandscape({
     }
 
     return pads;
-  }, [items, clusters, relaxedPositions]);
+  }, [items, clusters, relaxedPositions, clusterColors]);
 
   // ── Cluster visibility for filter-responsive labels ──
   const clusterVisibility = useMemo(() => {
@@ -485,7 +573,18 @@ export default function TopicLandscape({
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
+      // Tooltip position: only trigger re-renders when tooltip is visible, throttled to rAF
+      if (hoveredItemRef.current) {
+        pendingTooltipPos.current = { x: e.clientX, y: e.clientY };
+        if (!tooltipRafScheduled.current) {
+          tooltipRafScheduled.current = true;
+          requestAnimationFrame(() => {
+            if (pendingTooltipPos.current) setMousePos(pendingTooltipPos.current);
+            pendingTooltipPos.current = null;
+            tooltipRafScheduled.current = false;
+          });
+        }
+      }
 
       // Pad hover detection (only when not panning)
       if (!isPanning.current) {
@@ -591,6 +690,33 @@ export default function TopicLandscape({
       if (animFrameRef.current !== null) cancelAnimationFrame(animFrameRef.current);
     };
   }, []);
+
+  // ── Fit view to visible items when filters are active ──
+  useEffect(() => {
+    if (!hasFilters || visibleItemIds.size === 0 || visibleItemIds.size >= items.length) return;
+    const positions: [number, number][] = [];
+    items.forEach((item) => {
+      if (visibleItemIds.has(item.id)) {
+        const pos = relaxedPositions.get(item.id) || item.embedding;
+        positions.push(pos);
+      }
+    });
+    if (positions.length < 2) return;
+    const xs = positions.map((p) => p[0]);
+    const ys = positions.map((p) => p[1]);
+    const minX = Math.min(...xs);
+    const maxX = Math.max(...xs);
+    const minY = Math.min(...ys);
+    const maxY = Math.max(...ys);
+    const padding = 80;
+    const targetVB = {
+      x: minX - padding,
+      y: minY - padding,
+      w: maxX - minX + 2 * padding,
+      h: maxY - minY + 2 * padding,
+    };
+    animateViewBox(viewBoxRef.current, targetVB, 500);
+  }, [hasFilters, visibleItemIds.size, items.length, relaxedPositions, animateViewBox]);
 
   return (
     <div className="relative w-full h-full">
@@ -710,9 +836,9 @@ export default function TopicLandscape({
             </feMerge>
           </filter>
 
-          {/* Soft glow for ambient blobs (translucent, slow-moving) */}
+          {/* Soft glow for ambient blobs (subtle so main shape stays clear, not diffusing) */}
           <filter id="ambient-blob-blur" x="-60%" y="-60%" width="220%" height="220%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="28" result="blob-blur" />
+            <feGaussianBlur in="SourceGraphic" stdDeviation="16" result="blob-blur" />
             <feColorMatrix in="blob-blur" type="matrix" result="blob-soft"
               values="1.2 0 0 0 0
                       0 1.2 0 0 0
@@ -763,20 +889,15 @@ export default function TopicLandscape({
           const showFiltered = hasFilters && cv;
           const floatVariant = ["a", "b", "c"][index % 3];
 
-          // Two-line split for labels containing "&"
-          const parts = h.label.includes(" & ")
-            ? h.label.split(" & ")
-            : [h.label];
-
           return (
             <g
               key={`cluster-group-${h.clusterId}`}
               className={`cluster-group cluster-group--float-${floatVariant}${isHoveredPad ? " cluster-group--hovered" : ""}`}
               style={{
                 "--float-delay": `${index * -1.7}s`,
-                "--centroid-x": `${h.centroid[0]}px`,
-                "--centroid-y": `${h.centroid[1]}px`,
-                transformOrigin: `${h.centroid[0]}px ${h.centroid[1]}px`,
+                "--centroid-x": String(h.centroid[0]),
+                "--centroid-y": String(h.centroid[1]),
+                transformOrigin: `${h.centroid[0]} ${h.centroid[1]}`,
               } as React.CSSProperties}
             >
               {/* Layer 0: Organic ambient blobs (soft, translucent, slow drift) */}
@@ -789,30 +910,30 @@ export default function TopicLandscape({
                     fill={`url(#blob-grad-${h.clusterId})`}
                     stroke="none"
                     filter="url(#ambient-blob-blur)"
-                    opacity={dimmed ? 0.12 : isFadedBySelection ? 0.15 : isFadedByHover ? 0.25 : 0.7}
+                    opacity={dimmed ? 0.10 : isFadedBySelection ? 0.12 : isFadedByHover ? 0.20 : 0.36}
                     style={{
                       animationDelay: `${blobIdx * 2.5}s`,
-                      transformOrigin: `${h.centroid[0]}px ${h.centroid[1]}px`,
+                      transformOrigin: `${h.centroid[0]} ${h.centroid[1]}`,
                     }}
                   />
                 ))}
               </g>
 
-              {/* Layer A: Ambient halo (blurred glow behind shape) */}
+              {/* Layer A: Ambient halo (subtle so shape reads clearly, not diffusing) */}
               <path
                 className="cluster-pad-halo"
                 d={h.padPath}
                 fill={`url(#pad-halo-${h.clusterId})`}
                 stroke="none"
                 filter="url(#pad-ambient-halo)"
-                opacity={dimmed ? 0.08 : isFadedBySelection ? 0.10 : isFadedByHover ? 0.15 : 0.7}
+                opacity={dimmed ? 0.06 : isFadedBySelection ? 0.08 : isFadedByHover ? 0.12 : 0.32}
                 style={{
                   transform: isHoveredPad
                     ? "scale(1.08)"
                     : isActivePad
                       ? "scale(1.06)"
                       : "scale(1.02)",
-                  transformOrigin: `${h.centroid[0]}px ${h.centroid[1]}px`,
+                  transformOrigin: `${h.centroid[0]} ${h.centroid[1]}`,
                 }}
                 pointerEvents="none"
               />
@@ -834,7 +955,7 @@ export default function TopicLandscape({
                     : isActivePad
                       ? "scale(1.03)"
                       : "scale(1)",
-                  transformOrigin: `${h.centroid[0]}px ${h.centroid[1]}px`,
+                  transformOrigin: `${h.centroid[0]} ${h.centroid[1]}`,
                 }}
                 pointerEvents="none"
               />
@@ -852,7 +973,7 @@ export default function TopicLandscape({
                     : isActivePad
                       ? "scale(1.03)"
                       : "scale(1)",
-                  transformOrigin: `${h.centroid[0]}px ${h.centroid[1]}px`,
+                  transformOrigin: `${h.centroid[0]} ${h.centroid[1]}`,
                 }}
                 pointerEvents="none"
               />
@@ -871,69 +992,7 @@ export default function TopicLandscape({
                 />
               )}
 
-              {/* Label text (dark halo + white fill for dark bg) */}
-              {parts.map((line, i) => {
-                const labelText = parts.length > 1 && i === 0 ? line + " &" : line;
-                const ly = h.centroid[1] + (i - (parts.length - 1) / 2) * 20;
-                return (
-                  <g key={`label-line-${i}`}>
-                    {/* Dark halo for readability on dark bg */}
-                    <text
-                      x={h.centroid[0]}
-                      y={ly}
-                      textAnchor="middle"
-                      dominantBaseline="central"
-                      fill="none"
-                      stroke="#12121f"
-                      strokeWidth={4}
-                      strokeOpacity={isFadedBySelection ? 0.3 : isFadedByHover ? 0.4 : 0.7}
-                      strokeLinejoin="round"
-                      fontSize={16}
-                      fontWeight={700}
-                      fontFamily="var(--font-dm-serif), Georgia, serif"
-                      letterSpacing={0.5}
-                      pointerEvents="none"
-                    >
-                      {labelText}
-                    </text>
-                    {/* White label */}
-                    <text
-                      x={h.centroid[0]}
-                      y={ly}
-                      textAnchor="middle"
-                      dominantBaseline="central"
-                      fill="#ffffff"
-                      opacity={isFadedBySelection ? 0.25 : isFadedByHover ? 0.30 : 0.95}
-                      fontSize={16}
-                      fontWeight={700}
-                      fontFamily="var(--font-dm-serif), Georgia, serif"
-                      letterSpacing={0.5}
-                      className="cluster-pad-label"
-                      pointerEvents="none"
-                    >
-                      {labelText}
-                    </text>
-                  </g>
-                );
-              })}
-
-              {/* Count badge */}
-              <text
-                x={h.centroid[0]}
-                y={h.centroid[1] + ((parts.length - 1) / 2) * 20 + 20}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fill="#ffffff"
-                opacity={isFadedBySelection ? 0.12 : isFadedByHover ? 0.18 : 0.40}
-                fontSize={9}
-                fontFamily="var(--font-inter), sans-serif"
-                className="cluster-pad-label"
-                pointerEvents="none"
-              >
-                {showFiltered
-                  ? `${cv!.visible} of ${cv!.total}`
-                  : `${h.count} ${h.count === 1 ? "item" : "items"}`}
-              </text>
+              {/* Labels drawn in Layer 4 on top of nodes for readability */}
             </g>
           );
         })}
@@ -954,7 +1013,7 @@ export default function TopicLandscape({
                   y1={selPos[1]}
                   x2={sibPos[0]}
                   y2={sibPos[1]}
-                  stroke={CLUSTER_COLORS[selectedItem.cluster] || "#888"}
+                  stroke={clusterColors.get(selectedItem.cluster) ?? "#888"}
                   strokeOpacity={0.35}
                   strokeWidth={1}
                   strokeDasharray="3 5"
@@ -965,12 +1024,12 @@ export default function TopicLandscape({
             })}
 
         {/* ══════════ LAYER 3: Nodes ══════════ */}
-        {items.map((item) => {
+        {items.map((item, nodeIndex) => {
           const pos = relaxedPositions.get(item.id) || item.embedding;
           const isVisible = visibleItemIds.size === 0 || visibleItemIds.has(item.id);
           const isSelected = selectedItem?.id === item.id;
           const isHovered = hoveredItem?.id === item.id;
-          const clusterColor = CLUSTER_COLORS[item.cluster] || "#888";
+          const clusterColor = clusterColors.get(item.cluster) ?? "#888";
           const r = nodeRadius(item);
           const baseOpacity = yearOpacity(item.year);
           const isEmerging = item.tags?.includes("emerging");
@@ -991,14 +1050,17 @@ export default function TopicLandscape({
 
           return (
             <g
-              key={item.id}
+              key={`node-${item.id}-${nodeIndex}`}
               className={`landscape-node${!isVisible ? " landscape-node--dimmed" : ""}`}
               style={{ transformOrigin: `${pos[0]}px ${pos[1]}px` }}
               onClick={(e) => {
                 e.stopPropagation();
                 onItemClick(item);
               }}
-              onMouseEnter={() => setHoveredItem(item)}
+              onMouseEnter={(e) => {
+                setHoveredItem(item);
+                setMousePos({ x: e.clientX, y: e.clientY });
+              }}
               onMouseLeave={() => setHoveredItem(null)}
             >
               {/* Emerging / novelty pulse ring (always-on for emerging items) */}
@@ -1099,6 +1161,141 @@ export default function TopicLandscape({
             </g>
           );
         })}
+
+        {/* ══════════ LAYER 4: Cluster labels underneath each cluster ══════════ */}
+        {clusterPads.map((h) => {
+          const isActivePad = selectedItem?.cluster === h.clusterId;
+          const isFadedBySelection = selectedItem !== null && !isActivePad;
+          const isFadedByHover = hoveredCluster !== null && hoveredCluster !== h.clusterId && !selectedItem;
+          const cv = clusterVisibility.get(h.clusterId);
+          const dimmed = hasFilters && cv && cv.visible === 0;
+          const showFiltered = hasFilters && cv;
+          const twoLines = (() => {
+            if (h.label.includes(" & ")) {
+              const segs = h.label.split(" & ");
+              if (segs.length >= 2) return [segs[0].trim() + " &", segs.slice(1).join(" & ").trim()];
+            }
+            const s = h.label.trim();
+            if (!s) return ["Cluster", ""];
+            const mid = Math.floor(s.length / 2);
+            const spaceNearMid = s.slice(0, mid).lastIndexOf(" ") || s.indexOf(" ", mid);
+            if (spaceNearMid > 0 && spaceNearMid < s.length - 1)
+              return [s.slice(0, spaceNearMid).trim(), s.slice(spaceNearMid + 1).trim()];
+            return [s, ""];
+          })();
+          const parts = twoLines[1] ? twoLines : [twoLines[0], ""];
+          // Position label block underneath the cluster blob (offset below centroid)
+          const labelBlockTop = h.centroid[1] + 48;
+          const lineHeight = 18;
+          return (
+            <g key={`cluster-labels-top-${h.clusterId}`} pointerEvents="none">
+              {parts.map((line, i) => {
+                const labelText = parts.length > 1 && i === 0 ? line + " &" : line;
+                const ly = labelBlockTop + i * lineHeight;
+                return (
+                  <g key={`top-label-${i}`}>
+                    <text
+                      x={h.centroid[0]}
+                      y={ly}
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      fill="none"
+                      stroke="#12121f"
+                      strokeWidth={4}
+                      strokeOpacity={isFadedBySelection ? 0.3 : isFadedByHover ? 0.4 : 0.7}
+                      strokeLinejoin="round"
+                      fontSize={16}
+                      fontWeight={700}
+                      fontFamily="var(--font-dm-serif), Georgia, serif"
+                      letterSpacing={0.5}
+                    >
+                      {labelText}
+                    </text>
+                    <text
+                      x={h.centroid[0]}
+                      y={ly}
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      fill="#ffffff"
+                      opacity={isFadedBySelection ? 0.25 : isFadedByHover ? 0.30 : 0.95}
+                      fontSize={16}
+                      fontWeight={700}
+                      fontFamily="var(--font-dm-serif), Georgia, serif"
+                      letterSpacing={0.5}
+                      className="cluster-pad-label"
+                    >
+                      {labelText}
+                    </text>
+                  </g>
+                );
+              })}
+              <text
+                x={h.centroid[0]}
+                y={labelBlockTop + parts.length * lineHeight + 4}
+                textAnchor="middle"
+                dominantBaseline="central"
+                fill="#ffffff"
+                opacity={isFadedBySelection ? 0.12 : isFadedByHover ? 0.18 : 0.40}
+                fontSize={9}
+                fontFamily="var(--font-inter), sans-serif"
+                className="cluster-pad-label"
+              >
+                {showFiltered
+                  ? `${cv!.visible} of ${cv!.total}`
+                  : `${h.count} ${h.count === 1 ? "item" : "items"}`}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* Cluster rationale tooltip (why this cluster) */}
+        {hoveredCluster && (() => {
+          const pad = clusterPads.find((p) => p.clusterId === hoveredCluster);
+          const clusterInfo = clusters.find((c) => c.id === hoveredCluster);
+          if (!pad || !clusterInfo?.topTerms?.length) return null;
+          const cx = pad.centroid[0];
+          const cy = pad.centroid[1] - 85;
+          const tw = 200;
+          const terms = clusterInfo.topTerms.slice(0, 5).join(", ");
+          const sampleQ = clusterInfo.sampleDesignQuestions?.[0];
+          return (
+            <g pointerEvents="none">
+              <rect
+                x={cx - tw / 2}
+                y={cy - 8}
+                width={tw}
+                height={sampleQ ? 56 : 28}
+                rx={8}
+                fill="rgba(12, 12, 22, 0.94)"
+                stroke="rgba(255,255,255,0.12)"
+                strokeWidth={1}
+              />
+              <text
+                x={cx}
+                y={cy + 4}
+                textAnchor="middle"
+                fontSize={10}
+                fill="rgba(255,255,255,0.5)"
+                fontFamily="var(--font-inter), sans-serif"
+              >
+                Why this cluster: {terms}
+              </text>
+              {sampleQ && (
+                <text
+                  x={cx}
+                  y={cy + 22}
+                  textAnchor="middle"
+                  fontSize={9}
+                  fill="rgba(255,255,255,0.4)"
+                  fontFamily="var(--font-inter), sans-serif"
+                  fontStyle="italic"
+                >
+                  {sampleQ.slice(0, 50)}…
+                </text>
+              )}
+            </g>
+          );
+        })()}
       </svg>
 
       {/* Hover card (dark glassmorphic) */}
@@ -1119,7 +1316,7 @@ export default function TopicLandscape({
             <span
               className="flex-shrink-0 rounded-full"
               style={{
-                backgroundColor: CLUSTER_COLORS[hoveredItem.cluster] || "var(--research-color)",
+                backgroundColor: clusterColors.get(hoveredItem.cluster) ?? "var(--research-color)",
                 width: 8,
                 height: 8,
               }}
@@ -1160,7 +1357,7 @@ export default function TopicLandscape({
             <p
               className="text-xs italic leading-relaxed pt-1.5"
               style={{
-                color: CLUSTER_COLORS[hoveredItem.cluster] || "rgba(255, 255, 255, 0.6)",
+                color: clusterColors.get(hoveredItem.cluster) ?? "rgba(255, 255, 255, 0.6)",
                 borderTop: "1px solid rgba(255, 255, 255, 0.08)",
                 fontFamily: "var(--font-dm-serif), Georgia, serif",
               }}
@@ -1202,3 +1399,5 @@ export default function TopicLandscape({
     </div>
   );
 }
+
+export default React.memo(TopicLandscape);

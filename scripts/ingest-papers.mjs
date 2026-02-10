@@ -16,6 +16,45 @@ const feedLimit = feedLimitArg ? Number.parseInt(feedLimitArg.split("=")[1], 10)
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+// Keep only items relevant to human–AI collaboration (same logic as merge-graph)
+const HUMAN_AI_PHRASES = [
+  "human-ai",
+  "human ai",
+  "human–ai",
+  "human-machine",
+  "human machine",
+  "human-agent",
+  "human agent",
+  "human in the loop",
+  "human-in-the-loop",
+  "human-AI collaboration",
+  "human AI collaboration",
+  "human-AI team",
+  "human AI team",
+  "human-AI teaming",
+  "human AI teaming",
+  "AI collaboration",
+  "AI-assisted",
+  "AI assisted",
+  "human-AI interaction",
+  "human AI interaction",
+  "human-centered AI",
+  "human centred AI",
+  "collaborative AI",
+  "teaming",
+  "human computer",
+  "HCI",
+  "assistive AI",
+  "cooperative AI",
+  "mixed-initiative",
+  "mixed initiative",
+];
+
+function isHumanAICollabRelevant(item) {
+  const text = `${item.title || ""} ${item.summary || ""}`.toLowerCase();
+  return HUMAN_AI_PHRASES.some((phrase) => text.includes(phrase.toLowerCase()));
+}
+
 const slugify = (value) =>
   value
     .toLowerCase()
@@ -432,8 +471,13 @@ const run = async () => {
     for (const source of sources) {
       try {
         const items = await fetchFeed(source);
-        candidates.push(...items);
-        console.log(`Feed ${source.label}: ${items.length} items`);
+        const relevant = items.filter(isHumanAICollabRelevant);
+        candidates.push(...relevant);
+        if (items.length > 0 && relevant.length < items.length) {
+          console.log(`Feed ${source.label}: ${relevant.length}/${items.length} (human–AI relevant)`);
+        } else {
+          console.log(`Feed ${source.label}: ${items.length} items`);
+        }
         if (!isDryRun) {
           await sleep(700);
         }

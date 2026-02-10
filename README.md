@@ -39,6 +39,26 @@ Notes:
 - Limit feed items per source with `--feed-limit=50`.
 - Anthropic falls back to parsing the Newsroom page if no RSS works.
 
+## Merge graph (data-driven clusters)
+
+To merge ingest candidates into the radar and recompute **real clusters from the data** (no fixed dummy cluster names):
+
+```bash
+npm install
+npm run merge:graph -- --dry-run   # preview only
+npm run merge:graph                # overwrites src/data/research-graph.json
+```
+
+What it does:
+- Loads `research-graph.json` and `ingest-candidates.json`.
+- Builds TF-IDF from title + summary for all items, runs **k-means** clustering, then **PCA** to 2D for the layout.
+- **Cluster labels** are derived from the top terms in each cluster (e.g. "Trust & Teams & Transparency").
+- Writes a new `research-graph.json` with updated `clusters` and `nodes` (existing + ingest). All nodes get new `cluster` ids (`cluster-0`, `cluster-1`, …) and new 2D `embedding` coordinates.
+
+Options:
+- `--k=10` — number of clusters (default 10).
+- `--dry-run` — print cluster labels and a sample node; do not write the file.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

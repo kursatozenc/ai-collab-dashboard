@@ -1,13 +1,14 @@
 "use client";
 
-import { RadarItem } from "../types";
+import { RadarItem, Cluster } from "../types";
 
 interface ItemDetailProps {
   item: RadarItem;
+  cluster?: Cluster | null;
   onClose: () => void;
 }
 
-export default function ItemDetail({ item, onClose }: ItemDetailProps) {
+export default function ItemDetail({ item, cluster, onClose }: ItemDetailProps) {
   const sourceColor =
     item.source === "research" ? "var(--research-color)" : "var(--industry-color)";
   const sourceLabel = item.source === "research" ? "Research" : "Industry";
@@ -124,6 +125,47 @@ export default function ItemDetail({ item, onClose }: ItemDetailProps) {
             </a>
           </div>
         </div>
+
+        {/* In this cluster (rationale) */}
+        {cluster && (cluster.topTerms?.length || cluster.sampleDesignQuestions?.length) && (
+          <div
+            className="mb-5 p-4 rounded-lg border"
+            style={{
+              backgroundColor: "var(--background)",
+              borderColor: "var(--border)",
+            }}
+          >
+            <h3
+              className="text-[10px] font-semibold uppercase tracking-widest mb-2"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              In this cluster
+            </h3>
+            <p className="text-sm leading-relaxed mb-2" style={{ color: "var(--foreground)" }}>
+              This cluster groups work around:{" "}
+              <span style={{ color: "var(--text-secondary)" }}>
+                {cluster.topTerms?.slice(0, 5).join(", ")}
+              </span>
+            </p>
+            {(() => {
+              const itemText = `${item.title} ${item.summary}`.toLowerCase();
+              const found = cluster.topTerms?.filter((t) => itemText.includes(t.toLowerCase()));
+              if (found && found.length > 0)
+                return (
+                  <p className="text-xs" style={{ color: "var(--text-secondary)" }}>
+                    Your item relates to: <strong>{found.join(", ")}</strong>
+                  </p>
+                );
+              return null;
+            })()}
+            {cluster.sampleDesignQuestions && cluster.sampleDesignQuestions.length > 0 && (
+              <p className="text-xs mt-2 italic" style={{ color: "var(--text-secondary)" }}>
+                Sample design question: &ldquo;{cluster.sampleDesignQuestions[0].slice(0, 120)}
+                {cluster.sampleDesignQuestions[0].length > 120 ? "…" : ""}&rdquo;
+              </p>
+            )}
+          </div>
+        )}
 
         {/* Design Question */}
         {item.designQuestion && (

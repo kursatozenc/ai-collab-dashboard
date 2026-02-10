@@ -24,6 +24,8 @@ const DESIGNER_INTENTS: { id: DesignerIntent; label: string }[] = [
 interface FilterPanelProps {
   sourceFilter: "all" | "research" | "industry";
   onSourceFilterChange: (source: "all" | "research" | "industry") => void;
+  designQuestionFilter: string;
+  onDesignQuestionFilterChange: (value: string) => void;
   activeLeverFilters: Set<DesignLever>;
   onLeverToggle: (lever: DesignLever) => void;
   activeIntentFilters: Set<DesignerIntent>;
@@ -37,6 +39,8 @@ interface FilterPanelProps {
 export default function FilterPanel({
   sourceFilter,
   onSourceFilterChange,
+  designQuestionFilter,
+  onDesignQuestionFilterChange,
   activeLeverFilters,
   onLeverToggle,
   activeIntentFilters,
@@ -48,6 +52,27 @@ export default function FilterPanel({
 }: FilterPanelProps) {
   return (
     <div className="space-y-6">
+      {/* Design question contains */}
+      <div>
+        <h4
+          className="text-[10px] font-semibold uppercase tracking-widest mb-2.5"
+          style={{ color: "var(--text-secondary)" }}
+        >
+          Design question contains
+        </h4>
+        <input
+          type="text"
+          value={designQuestionFilter}
+          onChange={(e) => onDesignQuestionFilterChange(e.target.value)}
+          placeholder="e.g. trust, delegation"
+          className="w-full px-3 py-1.5 text-xs rounded-lg border bg-transparent"
+          style={{
+            borderColor: "var(--border)",
+            color: "var(--foreground)",
+          }}
+        />
+      </div>
+
       {/* Source toggle (Gap Lens) */}
       <div>
         <h4

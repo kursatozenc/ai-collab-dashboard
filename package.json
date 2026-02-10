@@ -7,11 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "ingest:papers": "node scripts/ingest-papers.mjs"
+    "ingest:papers": "node scripts/ingest-papers.mjs",
+    "merge:graph": "node scripts/merge-graph.mjs"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "fast-xml-parser": "^5.3.5",
+    "ml-kmeans": "^7.0.0",
+    "ml-pca": "^4.1.1",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3"

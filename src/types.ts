@@ -35,6 +35,12 @@ export interface RadarItem {
 export interface Cluster {
   id: string;
   label: string;
+  /** Top TF-IDF terms explaining why this cluster groups these items */
+  topTerms?: string[];
+  /** Up to 2 sample design questions from items in this cluster */
+  sampleDesignQuestions?: string[];
+  /** Most common design lever in this cluster (if any) */
+  designFocus?: string;
 }
 
 export interface RadarLink {

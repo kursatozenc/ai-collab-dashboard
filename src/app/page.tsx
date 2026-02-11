@@ -2,32 +2,25 @@
 
 import { useState, useMemo, useCallback } from "react";
 import { RadarItem, DesignLever, DesignerIntent } from "../types";
-import TopicLandscape from "../components/TopicLandscape";
+import ThemeBubbleMap from "../components/ThemeBubbleMap";
+import ThemeCardList from "../components/ThemeCardList";
 import ItemDetail from "../components/ItemDetail";
 import FilterPanel from "../components/FilterPanel";
 import SearchBar from "../components/SearchBar";
 import ThemeCandidates from "../components/ThemeCandidates";
 import DiscoveryOverlay from "../components/DiscoveryOverlay";
+import { DESIGN_THEMES } from "../data/theme-map";
 import { useDebouncedValue } from "../hooks/useDebouncedValue";
 import graphData from "../data/research-graph.json";
 
 const FILTER_DEBOUNCE_MS = 180;
 
-const CLUSTER_ANCHORS: Record<string, [number, number]> = {
-  trust: [200, 150],
-  teamwork: [500, 300],
-  delegation: [800, 150],
-  communication: [200, 500],
-  learning: [500, 550],
-  ethics: [800, 500],
-  creativity: [350, 120],
-};
-
-/** Stable empty set: when no filters are active we pass this so TopicLandscape doesn't re-run effects every parent render. */
+/** Stable empty set: when no filters are active we pass this so ThemeBubbleMap doesn't re-run effects every parent render. */
 const EMPTY_VISIBLE_IDS = new Set<string>();
 
 export default function Home() {
   const [selectedItem, setSelectedItem] = useState<RadarItem | null>(null);
+  const [expandedThemeId, setExpandedThemeId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [designQuestionFilter, setDesignQuestionFilter] = useState("");
   const [sourceFilter, setSourceFilter] = useState<"all" | "research" | "industry">("all");
@@ -95,6 +88,12 @@ export default function Home() {
 
   const handleItemClick = useCallback((item: RadarItem) => {
     setSelectedItem(item);
+    setExpandedThemeId(null); // Close theme panel when viewing item detail
+  }, []);
+
+  const handleExpandTheme = useCallback((themeId: string | null) => {
+    setExpandedThemeId(themeId);
+    setSelectedItem(null); // Close item detail when viewing theme
   }, []);
 
   const handleSearch = useCallback((query: string) => {
@@ -133,12 +132,10 @@ export default function Home() {
     setShowDiscoveryOverlay(false);
   }, []);
 
-  const handleDiscoveryCluster = useCallback((clusterId: string) => {
-    // Find an item in this cluster and select it to trigger a visual focus
-    const clusterItem = items.find((i) => i.cluster === clusterId);
-    if (clusterItem) setSelectedItem(clusterItem);
+  const handleDiscoveryTheme = useCallback((themeId: string) => {
+    setExpandedThemeId(themeId);
     setShowDiscoveryOverlay(false);
-  }, [items]);
+  }, []);
 
   const handleDiscoveryExplore = useCallback(() => {
     setShowDiscoveryOverlay(false);
@@ -230,15 +227,15 @@ export default function Home() {
           </div>
         </aside>
 
-        {/* Center: Topic landscape */}
-        <main className="flex-1 relative overflow-hidden" style={{ backgroundColor: "#12121f" }}>
-          <TopicLandscape
+        {/* Center: Theme bubble map */}
+        <main className="flex-1 relative overflow-hidden map-main" style={{ backgroundColor: "var(--canvas-bg)", minWidth: 0 }}>
+          <ThemeBubbleMap
             items={items}
-            clusters={clusters}
             visibleItemIds={hasActiveFilters ? visibleItemIds : EMPTY_VISIBLE_IDS}
             selectedItem={selectedItem}
             onItemClick={handleItemClick}
-            clusterAnchors={CLUSTER_ANCHORS}
+            onExpandTheme={handleExpandTheme}
+            expandedThemeId={expandedThemeId}
           />
 
           {/* Discovery overlay */}
@@ -247,23 +244,34 @@ export default function Home() {
               items={items}
               clusters={clusters}
               onSelectLever={handleDiscoveryLever}
-              onSelectCluster={handleDiscoveryCluster}
+              onSelectTheme={handleDiscoveryTheme}
               onExploreAll={handleDiscoveryExplore}
             />
           )}
         </main>
 
-        {/* Right: Detail panel */}
-        {selectedItem && (
+        {/* Right: Theme card list or Item detail */}
+        {(expandedThemeId || selectedItem) && (
           <aside
-            className="flex-shrink-0 w-[360px] border-l overflow-hidden"
+            className="flex-shrink-0 w-[360px] border-l overflow-hidden detail-panel"
             style={{ borderColor: "var(--border)" }}
           >
-            <ItemDetail
-              item={selectedItem}
-              cluster={clusters.find((c) => c.id === selectedItem.cluster)}
-              onClose={() => setSelectedItem(null)}
-            />
+            {expandedThemeId && !selectedItem ? (
+              <ThemeCardList
+                theme={DESIGN_THEMES.find((t) => t.id === expandedThemeId)!}
+                items={items}
+                onItemClick={handleItemClick}
+                onClose={() => setExpandedThemeId(null)}
+              />
+            ) : selectedItem ? (
+              <ItemDetail
+                item={selectedItem}
+                cluster={clusters.find((c) => c.id === selectedItem.cluster)}
+                onClose={() => {
+                  setSelectedItem(null);
+                }}
+              />
+            ) : null}
           </aside>
         )}
       </div>

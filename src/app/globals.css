@@ -11,6 +11,9 @@
   --industry-color: #d97706;
   --accent: #2563eb;
   --accent-light: #3b82f6;
+  --canvas-bg: #f8f6f2;
+  --ink-black: #1f2937;
+  --pencil-grey: #9ca3af;
 }
 
 @theme inline {
@@ -23,6 +26,7 @@
   --color-accent-light: var(--accent-light);
   --font-sans: var(--font-inter);
   --font-serif: var(--font-dm-serif);
+  --font-hand: var(--font-caveat);
 }
 
 body {
@@ -34,6 +38,11 @@ body {
 /* Detail panel animation */
 .detail-panel {
   animation: slideIn 0.25s ease-out;
+}
+
+/* Smooth map resize when drawer opens/closes */
+.map-main {
+  transition: flex-basis 0.3s ease, width 0.3s ease;
 }
 
 @keyframes slideIn {
@@ -246,20 +255,29 @@ body {
 }
 
 .discovery-card:hover {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border-color: rgba(255, 255, 255, 0.16) !important;
-  transform: translateY(-2px);
+  background: #fefce8 !important;
+  border-color: var(--ink-black) !important;
+  transform: translateY(-2px) rotate(0.5deg);
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.08) !important;
 }
 
 .discovery-cluster-chip:hover {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border-color: rgba(255, 255, 255, 0.16) !important;
+  background: #f0fdf4 !important;
+  border-color: var(--ink-black) !important;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.06) !important;
 }
 
 .discovery-explore-btn:hover {
-  background: rgba(255, 255, 255, 0.06) !important;
-  border-color: rgba(255, 255, 255, 0.25) !important;
-  color: rgba(255, 255, 255, 0.85) !important;
+  background: var(--surface) !important;
+  border-color: var(--ink-black) !important;
+  color: var(--ink-black) !important;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.08) !important;
+}
+
+/* ── Personified filter pill eyes — blink animation ── */
+@keyframes pillBlink {
+  0%, 45%, 55%, 100% { opacity: 0.8; transform: translateX(-50%) scaleY(1); }
+  50% { opacity: 0.4; transform: translateX(-50%) scaleY(0.1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -273,6 +291,122 @@ body {
   }
 }
 
+/* ── Theme Blobs (soft organic) ── */
+.theme-blob {
+  transition: opacity 0.5s ease, transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+  cursor: pointer;
+}
+
+.theme-blob--float-a {
+  animation: blobFloat-a 26s ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+}
+.theme-blob--float-b {
+  animation: blobFloat-b 30s ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+}
+.theme-blob--float-c {
+  animation: blobFloat-c 24s ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+}
+
+/* Slow, aquarium-like float — wide meander + breathing + rotation sway */
+@keyframes blobFloat-a {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  15% { transform: translate(5px, -6px) scale(1.02) rotate(0.8deg); }
+  30% { transform: translate(2px, 2px) scale(0.99) rotate(-0.3deg); }
+  50% { transform: translate(-4px, 4px) scale(1.015) rotate(-0.7deg); }
+  70% { transform: translate(-2px, -3px) scale(0.985) rotate(0.5deg); }
+  85% { transform: translate(4px, 1px) scale(1.01) rotate(0.9deg); }
+}
+
+@keyframes blobFloat-b {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  18% { transform: translate(-6px, -4px) scale(0.985) rotate(-0.7deg); }
+  35% { transform: translate(-2px, 5px) scale(1.018) rotate(0.5deg); }
+  52% { transform: translate(4px, 2px) scale(0.992) rotate(0.9deg); }
+  68% { transform: translate(3px, -5px) scale(1.012) rotate(-0.4deg); }
+  82% { transform: translate(-3px, -1px) scale(1.005) rotate(-0.8deg); }
+}
+
+@keyframes blobFloat-c {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  12% { transform: translate(3px, 6px) scale(1.02) rotate(0.6deg); }
+  28% { transform: translate(6px, -2px) scale(0.988) rotate(1deg); }
+  48% { transform: translate(-5px, -4px) scale(1.015) rotate(-0.9deg); }
+  65% { transform: translate(-3px, 5px) scale(0.99) rotate(-0.5deg); }
+  80% { transform: translate(4px, -1px) scale(1.008) rotate(0.7deg); }
+}
+
+.theme-blob--hovered {
+  animation-play-state: paused;
+}
+
+.theme-blob--dimmed {
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+/* Gentle breathing pulse on the blob fill */
+.theme-blob-body {
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: blobBreathe 6s ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+}
+
+@keyframes blobBreathe {
+  0%, 100% { fill-opacity: 0.82; }
+  50% { fill-opacity: 0.72; }
+}
+
+/* Satellite orbit drift — slow lazy circles */
+.sat-orbit {
+  animation: satOrbit var(--orbit-dur, 20s) linear infinite;
+  transform-origin: var(--orbit-cx) var(--orbit-cy);
+}
+
+@keyframes satOrbit {
+  from { transform: rotate(0deg) translateX(var(--orbit-r, 0px)) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(var(--orbit-r, 0px)) rotate(-360deg); }
+}
+
+/* Connector dash crawl — dashes flow along the line */
+.connector-crawl {
+  animation: dashCrawl 4s linear infinite;
+}
+
+@keyframes dashCrawl {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -14; }
+}
+
+/* Industry row gentle bob */
+.industry-bob {
+  animation: industryBob 5s ease-in-out infinite;
+  animation-delay: var(--bob-delay, 0s);
+}
+
+@keyframes industryBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* ── Theme Card List ── */
+.theme-card-list {
+  animation: slideIn 0.25s ease-out;
+}
+
+.theme-card {
+  transition: all 0.15s ease;
+}
+
+.theme-card:hover {
+  background: var(--surface-hover) !important;
+  border-color: var(--accent) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
 /* Tooltip */
 .landscape-tooltip {
   animation: tooltipIn 0.15s ease-out;
@@ -282,10 +416,26 @@ body {
 @keyframes tooltipIn {
   from {
     opacity: 0;
-    transform: translateY(4px);
+    transform: translateY(4px) rotate(-1deg);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) rotate(-0.5deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-blob,
+  .theme-blob-body,
+  .sat-orbit,
+  .connector-crawl,
+  .industry-bob {
+    animation: none;
+  }
+  .theme-blob {
+    transition: none;
+  }
+  .theme-card-list {
+    animation: none;
   }
 }

@@ -47,3 +47,12 @@ export interface RadarLink {
   source: string;
   target: string;
 }
+
+export interface DesignTheme {
+  id: string;
+  label: string;
+  leverCategory: DesignLever;
+  description: string;
+  itemIds: string[];
+  sampleQuestion: string;
+}

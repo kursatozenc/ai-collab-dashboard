@@ -124,13 +124,33 @@ export default function FilterPanel({
               <button
                 key={id}
                 onClick={() => onLeverToggle(id)}
-                className="filter-pill px-2.5 py-1 text-[11px] rounded-full border"
+                className="filter-pill px-2.5 py-1 text-[11px] rounded-full border relative"
                 style={{
                   backgroundColor: isActive ? "#dbeafe" : "transparent",
                   borderColor: isActive ? "#93c5fd" : "var(--border)",
                   color: isActive ? "#1d4ed8" : "var(--text-secondary)",
                 }}
               >
+                {/* Personified eyes when active */}
+                {isActive && (
+                  <span
+                    className="pill-eyes"
+                    style={{
+                      position: "absolute",
+                      top: "-6px",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      fontSize: "6px",
+                      lineHeight: 1,
+                      letterSpacing: "2px",
+                      color: "#1d4ed8",
+                      opacity: 0.8,
+                      animation: "pillBlink 3s ease-in-out infinite",
+                    }}
+                  >
+                    &#x25CF;&#x25CF;
+                  </span>
+                )}
                 {label}
               </button>
             );
@@ -153,13 +173,33 @@ export default function FilterPanel({
               <button
                 key={id}
                 onClick={() => onIntentToggle(id)}
-                className="filter-pill px-2.5 py-1 text-[11px] rounded-full border"
+                className="filter-pill px-2.5 py-1 text-[11px] rounded-full border relative"
                 style={{
                   backgroundColor: isActive ? "#fef3c7" : "transparent",
                   borderColor: isActive ? "#fcd34d" : "var(--border)",
                   color: isActive ? "#92400e" : "var(--text-secondary)",
                 }}
               >
+                {/* Personified eyes when active */}
+                {isActive && (
+                  <span
+                    className="pill-eyes"
+                    style={{
+                      position: "absolute",
+                      top: "-6px",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      fontSize: "6px",
+                      lineHeight: 1,
+                      letterSpacing: "2px",
+                      color: "#92400e",
+                      opacity: 0.8,
+                      animation: "pillBlink 3s ease-in-out infinite",
+                    }}
+                  >
+                    &#x25CF;&#x25CF;
+                  </span>
+                )}
                 {label}
               </button>
             );

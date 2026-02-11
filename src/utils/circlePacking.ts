@@ -122,8 +122,21 @@ function generateOrganicBlobPath(
 
 /* ─── Zone-based layout ─────────────────────────────────────────────── */
 
-const BASE_R_DEFAULT = 38;
-const RANGE_R_DEFAULT = 20;
+/**
+ * Importance-based sizing.
+ *
+ * Blobs are sized by the number of items (papers) they contain.
+ * We use a clamped log scale so:
+ *   - Small themes (1-2 items) don't shrink to nothing  → MIN_R
+ *   - Large themes don't balloon excessively             → MAX_R
+ *   - The baseline is generous (≈70% of max) to keep all
+ *     blobs legible while still conveying relative weight.
+ *
+ * Formula: radius = MIN_R + t * (MAX_R - MIN_R)
+ *   where  t = log(count) / log(maxCount), clamped to [0, 1]
+ */
+const MIN_R_DEFAULT = 34;
+const MAX_R_DEFAULT = 62;
 
 /** Lever ordering for the 3×2 grid */
 const LEVER_ORDER: DesignLever[] = [
@@ -231,10 +244,11 @@ export function computeThemeBlobLayout(
   // Scale blob radii down when width is narrow (e.g. when detail drawer is open)
   const REF_WIDTH = 960;
   const scale = Math.min(1, width / REF_WIDTH);
-  const BASE_R = BASE_R_DEFAULT * scale;
-  const RANGE_R = RANGE_R_DEFAULT * scale;
+  const MIN_R = MIN_R_DEFAULT * scale;
+  const MAX_R = MAX_R_DEFAULT * scale;
 
   const maxItems = Math.max(...themes.map((t) => t.itemIds.length), 1);
+  const logMax = Math.log(maxItems + 1); // +1 avoids log(1)=0 edge case
 
   const grouped = new Map<DesignLever, DesignTheme[]>();
   for (const lever of LEVER_ORDER) {
@@ -266,8 +280,9 @@ export function computeThemeBlobLayout(
     if (leverThemes.length === 0) return;
 
     const radii = leverThemes.map((theme) => {
-      const ratio = Math.sqrt(theme.itemIds.length) / Math.sqrt(maxItems);
-      return BASE_R + ratio * RANGE_R;
+      const t = Math.log(theme.itemIds.length + 1) / logMax;
+      const clamped = Math.max(0, Math.min(1, t));
+      return MIN_R + clamped * (MAX_R - MIN_R);
     });
     const avgR = radii.reduce((a, b) => a + b, 0) / radii.length;
     const offsets = positionThemesInZone(leverThemes.length, avgR);

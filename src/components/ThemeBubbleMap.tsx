@@ -594,7 +594,7 @@ function SketchBlob({
         textAnchor="middle"
         dominantBaseline="middle"
         fontFamily="var(--font-dm-serif), Georgia, serif"
-        fontSize={blob.radius > 55 ? 12.5 : 11}
+        fontSize={Math.max(9.5, Math.min(13, blob.radius * 0.2))}
         fill="var(--ink-black)"
         opacity={isDimmed ? 0.06 : 0.92}
         style={{ pointerEvents: "none" }}

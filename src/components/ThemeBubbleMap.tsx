@@ -63,6 +63,7 @@ export default function ThemeBubbleMap({
   const physicsRef = useRef(new Map<string, { x: number; y: number; vx: number; vy: number }>());
   const rafRef = useRef(0);
   const mouseRef = useRef<{ x: number; y: number } | null>(null);
+  const hoveredThemeRef = useRef<string | null>(null);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -135,8 +136,8 @@ export default function ThemeBubbleMap({
     const FRICTION    = 0.86;   // velocity damping each frame
     const REPULSION   = 2200;   // blob-blob push force
     const REPULSION_D = 140;    // distance at which repulsion kicks in
-    const MOUSE_R     = 190;    // mouse repulsion radius
-    const MOUSE_F     = 7;      // mouse repulsion strength
+    const MOUSE_R     = 90;     // mouse repulsion radius (keep tight so blobs don't flee before cursor arrives)
+    const MOUSE_F     = 2.5;    // mouse repulsion strength (gentle nudge)
     const WALK        = 0.10;   // random organic drift
 
     function tick() {
@@ -170,8 +171,8 @@ export default function ThemeBubbleMap({
           }
         }
 
-        // Mouse repulsion
-        if (mouse) {
+        // Mouse repulsion — skip for the blob currently being hovered so it stays clickable
+        if (mouse && id !== hoveredThemeRef.current) {
           const dx = p.x - mouse.x;
           const dy = p.y - mouse.y;
           const dist = Math.sqrt(dx * dx + dy * dy) || 1;
@@ -268,6 +269,7 @@ export default function ThemeBubbleMap({
       const rect = containerRef.current?.getBoundingClientRect();
       if (rect) {
         setHoveredTheme(themeId);
+        hoveredThemeRef.current = themeId;
         setTooltipPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
       }
     },
@@ -276,6 +278,7 @@ export default function ThemeBubbleMap({
 
   const handleMouseLeave = useCallback(() => {
     setHoveredTheme(null);
+    hoveredThemeRef.current = null;
     setTooltipPos(null);
   }, []);
 

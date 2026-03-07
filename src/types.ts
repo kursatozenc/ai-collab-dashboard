@@ -15,6 +15,17 @@ export type DesignerIntent =
   | "governance_policy"
   | "learning_upskilling";
 
+export interface FieldGuide {
+  /** Evocative landmark name for the building in the isometric city, e.g. "The Calibration Spire" */
+  landmarkName: string;
+  /** 2-sentence design action in wayfinder voice */
+  fieldNote: string;
+  /** One 5-minute team activity bringing the findings to life */
+  ritualRecipe: string;
+  /** Pre-formatted markdown for a sticky note / Figma annotation */
+  figmaSnippet: string;
+}
+
 export interface RadarItem {
   id: string;
   title: string;
@@ -30,6 +41,7 @@ export interface RadarItem {
   designQuestion: string;
   tags: string[];
   embedding: [number, number];
+  fieldGuide?: FieldGuide;
 }
 
 export interface Cluster {

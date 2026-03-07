@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback } from "react";
 import { RadarItem, DesignLever, DesignerIntent } from "../types";
-import ThemeBubbleMap from "../components/ThemeBubbleMap";
+import IsometricCityMap from "../components/IsometricCityMap";
 import ThemeCardList from "../components/ThemeCardList";
 import ItemDetail from "../components/ItemDetail";
 import FilterPanel from "../components/FilterPanel";
@@ -229,7 +229,7 @@ export default function Home() {
 
         {/* Center: Theme bubble map */}
         <main className="flex-1 relative overflow-hidden map-main" style={{ backgroundColor: "var(--canvas-bg)", minWidth: 0 }}>
-          <ThemeBubbleMap
+          <IsometricCityMap
             items={items}
             visibleItemIds={hasActiveFilters ? visibleItemIds : EMPTY_VISIBLE_IDS}
             selectedItem={selectedItem}

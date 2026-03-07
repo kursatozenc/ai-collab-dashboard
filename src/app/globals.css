@@ -439,3 +439,21 @@ body {
     animation: none;
   }
 }
+
+/* ── Isometric City Map ── */
+:root {
+  --iso-outline: #2D2926;
+  --iso-outline-light: rgba(45, 41, 38, 0.25);
+  --iso-window: rgba(255, 243, 185, 0.85);
+}
+
+.iso-building {
+  cursor: pointer;
+}
+
+.iso-district-label {
+  pointer-events: none;
+  user-select: none;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  letter-spacing: 0.1em;
+}

@@ -19,7 +19,6 @@ interface ThemeBubbleMapProps {
 /* ─── Constants ─────────────────────────────────────────────────────── */
 
 const INDUSTRY_BUBBLE_R = 16;
-const FLOAT_VARIANTS = ["a", "b", "c"] as const;
 
 /* ─── Hand-drawn wobbly line helper ─────────────────────────────────── */
 
@@ -58,6 +57,13 @@ export default function ThemeBubbleMap({
   const [hoveredTheme, setHoveredTheme] = useState<string | null>(null);
   const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number } | null>(null);
 
+  /* ── Physics refs (mutated every frame, never trigger re-renders) ─── */
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const blobGroupRefs = useRef(new Map<string, SVGGElement>());
+  const physicsRef = useRef(new Map<string, { x: number; y: number; vx: number; vy: number }>());
+  const rafRef = useRef(0);
+  const mouseRef = useRef<{ x: number; y: number } | null>(null);
+
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
@@ -67,6 +73,17 @@ export default function ThemeBubbleMap({
     });
     ro.observe(el);
     return () => ro.disconnect();
+  }, []);
+
+  /* ── Mouse tracking for repulsion ──────────────────────────────────── */
+  const handleContainerMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = containerRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+  }, []);
+
+  const handleContainerMouseLeave = useCallback(() => {
+    mouseRef.current = null;
   }, []);
 
   const annotatedIds = useMemo(() => getAnnotatedItemIds(), []);
@@ -103,6 +120,126 @@ export default function ThemeBubbleMap({
     () => computeThemeBlobLayout(DESIGN_THEMES, dimensions.width, dimensions.height),
     [dimensions.width, dimensions.height]
   );
+
+  /* ── Physics init + RAF animation loop ─────────────────────────────── */
+  useEffect(() => {
+    // Seed physics from current home positions (preserve velocity if already running)
+    const physics = new Map<string, { x: number; y: number; vx: number; vy: number }>();
+    for (const blob of blobs) {
+      const existing = physicsRef.current.get(blob.themeId);
+      physics.set(blob.themeId, existing ?? { x: blob.cx, y: blob.cy, vx: 0, vy: 0 });
+    }
+    physicsRef.current = physics;
+
+    const SPRING_K    = 0.014;  // pull toward home position
+    const FRICTION    = 0.86;   // velocity damping each frame
+    const REPULSION   = 2200;   // blob-blob push force
+    const REPULSION_D = 140;    // distance at which repulsion kicks in
+    const MOUSE_R     = 190;    // mouse repulsion radius
+    const MOUSE_F     = 7;      // mouse repulsion strength
+    const WALK        = 0.10;   // random organic drift
+
+    function tick() {
+      const phys = physicsRef.current;
+      const entries = Array.from(phys.entries());
+      const mouse = mouseRef.current;
+
+      /* ── update velocities & positions ── */
+      for (const [id, p] of entries) {
+        const blob = blobs.find((b) => b.themeId === id);
+        if (!blob) continue;
+
+        // Spring toward home
+        p.vx += (blob.cx - p.x) * SPRING_K;
+        p.vy += (blob.cy - p.y) * SPRING_K;
+
+        // Organic random walk
+        p.vx += (Math.random() - 0.5) * WALK;
+        p.vy += (Math.random() - 0.5) * WALK;
+
+        // Blob-blob repulsion
+        for (const [id2, p2] of entries) {
+          if (id === id2) continue;
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+          if (dist < REPULSION_D) {
+            const f = REPULSION / (dist * dist + 1);
+            p.vx += (dx / dist) * f;
+            p.vy += (dy / dist) * f;
+          }
+        }
+
+        // Mouse repulsion
+        if (mouse) {
+          const dx = p.x - mouse.x;
+          const dy = p.y - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+          if (dist < MOUSE_R) {
+            const strength = (1 - dist / MOUSE_R) * MOUSE_F;
+            p.vx += (dx / dist) * strength;
+            p.vy += (dy / dist) * strength;
+          }
+        }
+
+        p.vx *= FRICTION;
+        p.vy *= FRICTION;
+        p.x += p.vx;
+        p.y += p.vy;
+      }
+
+      /* ── apply transforms directly to SVG groups (no React re-render) ── */
+      for (const [id, p] of entries) {
+        const blob = blobs.find((b) => b.themeId === id);
+        if (!blob) continue;
+        const el = blobGroupRefs.current.get(id);
+        if (el) {
+          el.style.transform = `translate(${(p.x - blob.cx).toFixed(2)}px, ${(p.y - blob.cy).toFixed(2)}px)`;
+        }
+      }
+
+      /* ── draw connection lines on canvas ── */
+      const canvas = canvasRef.current;
+      if (canvas) {
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          for (let i = 0; i < entries.length; i++) {
+            for (let j = i + 1; j < entries.length; j++) {
+              const [id1, p1] = entries[i];
+              const [id2, p2] = entries[j];
+              const b1 = blobs.find((b) => b.themeId === id1);
+              const b2 = blobs.find((b) => b.themeId === id2);
+              if (!b1 || !b2) continue;
+
+              const dx = p1.x - p2.x;
+              const dy = p1.y - p2.y;
+              const dist = Math.sqrt(dx * dx + dy * dy);
+
+              const sameLever = b1.leverCategory === b2.leverCategory;
+              const maxDist = sameLever ? 310 : 165;
+
+              if (dist < maxDist) {
+                const t = 1 - dist / maxDist;
+                const alpha = t * (sameLever ? 0.30 : 0.12);
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.strokeStyle = `rgba(40, 30, 20, ${alpha.toFixed(3)})`;
+                ctx.lineWidth = sameLever ? 1.2 : 0.8;
+                ctx.stroke();
+              }
+            }
+          }
+        }
+      }
+
+      rafRef.current = requestAnimationFrame(tick);
+    }
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [blobs]);
 
   const mainHeight = dimensions.height - 70;
   const industryLayout = useMemo(() => {
@@ -155,7 +292,16 @@ export default function ThemeBubbleMap({
         position: "relative",
         overflow: "clip",
       }}
+      onMouseMove={handleContainerMouseMove}
+      onMouseLeave={handleContainerMouseLeave}
     >
+      {/* Canvas layer — draws connection lines at 60fps behind the SVG */}
+      <canvas
+        ref={canvasRef}
+        width={dimensions.width}
+        height={dimensions.height}
+        style={{ position: "absolute", top: 0, left: 0, pointerEvents: "none" }}
+      />
       <svg
         width={dimensions.width}
         height={dimensions.height}
@@ -271,8 +417,6 @@ export default function ThemeBubbleMap({
             isFiltering && matchCount !== undefined && matchCount === 0;
           const isExpanded = expandedThemeId === blob.themeId;
           const isHovered = hoveredTheme === blob.themeId;
-          const floatVariant = FLOAT_VARIANTS[idx % 3];
-
           return (
             <SketchBlob
               key={blob.themeId}
@@ -282,8 +426,10 @@ export default function ThemeBubbleMap({
               isExpanded={isExpanded}
               isHovered={isHovered}
               matchCount={isFiltering ? matchCount ?? 0 : undefined}
-              floatVariant={floatVariant}
-              floatDelay={idx * -1.7}
+              groupRef={(el) => {
+                if (el) blobGroupRefs.current.set(blob.themeId, el);
+                else blobGroupRefs.current.delete(blob.themeId);
+              }}
               onClick={handleBlobClick}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
@@ -441,8 +587,7 @@ interface SketchBlobProps {
   isExpanded: boolean;
   isHovered: boolean;
   matchCount: number | undefined;
-  floatVariant: "a" | "b" | "c";
-  floatDelay: number;
+  groupRef: (el: SVGGElement | null) => void;
   onClick: (themeId: string) => void;
   onMouseEnter: (themeId: string, e: React.MouseEvent) => void;
   onMouseLeave: () => void;
@@ -455,8 +600,7 @@ function SketchBlob({
   isExpanded,
   isHovered,
   matchCount,
-  floatVariant,
-  floatDelay,
+  groupRef,
   onClick,
   onMouseEnter,
   onMouseLeave,
@@ -468,7 +612,6 @@ function SketchBlob({
 
   const classNames = [
     "theme-blob",
-    `theme-blob--float-${floatVariant}`,
     isDimmed ? "theme-blob--dimmed" : "",
     isHovered ? "theme-blob--hovered" : "",
     isExpanded ? "theme-blob--expanded" : "",
@@ -478,13 +621,8 @@ function SketchBlob({
 
   return (
     <g
+      ref={(el) => groupRef(el as SVGGElement | null)}
       className={classNames}
-      style={
-        {
-          "--float-delay": `${floatDelay}s`,
-          transformOrigin: `${blob.cx}px ${blob.cy}px`,
-        } as React.CSSProperties
-      }
       onClick={() => onClick(blob.themeId)}
       onMouseEnter={(e) => onMouseEnter(blob.themeId, e)}
       onMouseLeave={onMouseLeave}

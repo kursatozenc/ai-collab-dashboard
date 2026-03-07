@@ -106,7 +106,7 @@ function generateOrganicBlobPath(
     const p3 = points[(i + 2) % n];
 
     // Catmull-Rom tension (lower = rounder/softer)
-    const tension = 0.3;
+    const tension = 0.22;
 
     const cp1x = p1.x + ((p2.x - p0.x) * tension) / 3;
     const cp1y = p1.y + ((p2.y - p0.y) * tension) / 3;
@@ -303,8 +303,8 @@ export function computeThemeBlobLayout(
         colorLight: meta.colorLight,
         leverLabel: meta.label,
         seed,
-        blobPath: generateOrganicBlobPath(cx, cy, r, seed, 0.22, 8),
-        haloPath: generateOrganicBlobPath(cx, cy, r * 1.35, seed + 7, 0.16, 8),
+        blobPath: generateOrganicBlobPath(cx, cy, r, seed, 0.42, 10),
+        haloPath: generateOrganicBlobPath(cx, cy, r * 1.25, seed + 7, 0.30, 10),
         satellites: generateSatellites(r, seed, theme.itemIds.length),
       });
     });
@@ -343,10 +343,10 @@ export function computeThemeBlobLayout(
   // Regenerate paths after position changes
   for (const blob of blobs) {
     blob.blobPath = generateOrganicBlobPath(
-      blob.cx, blob.cy, blob.radius, blob.seed, 0.22, 8
+      blob.cx, blob.cy, blob.radius, blob.seed, 0.42, 10
     );
     blob.haloPath = generateOrganicBlobPath(
-      blob.cx, blob.cy, blob.radius * 1.25, blob.seed + 7, 0.16, 8
+      blob.cx, blob.cy, blob.radius * 1.25, blob.seed + 7, 0.30, 10
     );
   }
 

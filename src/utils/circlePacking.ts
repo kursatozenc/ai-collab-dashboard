@@ -303,8 +303,8 @@ export function computeThemeBlobLayout(
         colorLight: meta.colorLight,
         leverLabel: meta.label,
         seed,
-        blobPath: generateOrganicBlobPath(cx, cy, r, seed, 0.42, 10),
-        haloPath: generateOrganicBlobPath(cx, cy, r * 1.25, seed + 7, 0.30, 10),
+        blobPath: generateOrganicBlobPath(cx, cy, r, seed, 0.58, 10),
+        haloPath: generateOrganicBlobPath(cx, cy, r * 1.25, seed + 7, 0.40, 10),
         satellites: generateSatellites(r, seed, theme.itemIds.length),
       });
     });
@@ -343,10 +343,10 @@ export function computeThemeBlobLayout(
   // Regenerate paths after position changes
   for (const blob of blobs) {
     blob.blobPath = generateOrganicBlobPath(
-      blob.cx, blob.cy, blob.radius, blob.seed, 0.42, 10
+      blob.cx, blob.cy, blob.radius, blob.seed, 0.58, 10
     );
     blob.haloPath = generateOrganicBlobPath(
-      blob.cx, blob.cy, blob.radius * 1.25, blob.seed + 7, 0.30, 10
+      blob.cx, blob.cy, blob.radius * 1.25, blob.seed + 7, 0.40, 10
     );
   }
 

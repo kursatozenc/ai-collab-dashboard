@@ -302,7 +302,7 @@
     {
       "id": "when-ai-joins",
       "title": "When AI Joins the Team: A Literature Review on Intragroup Processes",
-      "authors": "Various",
+      "authors": "Zercher et al.",
       "year": 2024,
       "cluster": "cluster-3",
       "summary": "Reviews literature on how AI integration affects intragroup processes including communication patterns, conflict resolution, decision-making, and group identity formation.",
@@ -557,7 +557,7 @@
     {
       "id": "when-should-i-lead",
       "title": "When Should I Lead? Exploring Human-AI Leadership Dynamics",
-      "authors": "Various",
+      "authors": "Lobo et al.",
       "year": 2024,
       "cluster": "cluster-3",
       "summary": "Investigates dynamic leadership allocation between humans and AI in team settings, finding that optimal performance requires flexible leadership transitions based on task context.",
@@ -729,7 +729,7 @@
     {
       "id": "investigating-comm",
       "title": "Investigating Human-AI Team Communication Strategies",
-      "authors": "Various",
+      "authors": "Zhang et al.",
       "year": 2024,
       "cluster": "cluster-3",
       "summary": "Studies communication strategies in human-AI teams, revealing that effective AI teammates adapt communication style based on task urgency, team member expertise, and cognitive load.",
@@ -815,7 +815,7 @@
     {
       "id": "politeness-llms",
       "title": "Politeness in Large Language Models",
-      "authors": "Various",
+      "authors": "Zarra & Chiheb",
       "year": 2024,
       "cluster": "cluster-0",
       "summary": "Analyzes politeness norms in LLM interactions, finding that social conventions like politeness significantly influence AI output quality and user satisfaction in collaborative settings.",
@@ -958,7 +958,7 @@
     {
       "id": "shared-mental-models",
       "title": "Let's Think Together: Shared Mental Models in Human-AI Teams",
-      "authors": "Various",
+      "authors": "Schelble et al.",
       "year": 2024,
       "cluster": "cluster-3",
       "summary": "Examines how shared mental models develop between humans and AI, finding that explicit model sharing and calibration exercises improve team decision-making accuracy.",
@@ -1044,7 +1044,7 @@
     {
       "id": "leveraging-team-cognition",
       "title": "Leveraging AI for Team Cognition in Human-AI Teams",
-      "authors": "Various",
+      "authors": "Williams et al.",
       "year": 2024,
       "cluster": "cluster-3",
       "summary": "Investigates how AI can support team cognitive processes including shared situational awareness, transactive memory, and collective sensemaking in complex environments.",
@@ -1102,7 +1102,7 @@
     {
       "id": "improving-collab",
       "title": "Improving Human-AI Collaboration with AI Behaviors",
-      "authors": "Various",
+      "authors": "Cabrera et al.",
       "year": 2024,
       "cluster": "cluster-3",
       "summary": "Demonstrates that specific AI behavioral patterns including proactive information sharing, uncertainty communication, and adaptive pacing significantly improve collaboration outcomes.",
@@ -1159,7 +1159,7 @@
     {
       "id": "hcai-hat",
       "title": "Applying Human-Centered AI in Developing Effective Human-AI Teaming",
-      "authors": "Various",
+      "authors": "Xu & Gao",
       "year": 2023,
       "cluster": "cluster-3",
       "summary": "Demonstrates how human-centered AI principles can guide the development of effective human-AI teams, balancing automation benefits with human agency and oversight.",
@@ -1217,7 +1217,7 @@
     {
       "id": "towards-ethical-ai",
       "title": "Towards Ethical AI in Teams",
-      "authors": "Various",
+      "authors": "Schelble et al.",
       "year": 2024,
       "cluster": "cluster-3",
       "summary": "Proposes an ethical framework for AI integration in teams that addresses fairness in task allocation, transparency in AI reasoning, and preservation of human dignity.",
@@ -1419,7 +1419,7 @@
     {
       "id": "genai-task-performance",
       "title": "Human-GenAI Collaboration to Enhance Task Performance",
-      "authors": "Various",
+      "authors": "Wu et al.",
       "year": 2024,
       "cluster": "cluster-1",
       "summary": "Empirical study showing that human-GenAI collaboration enhances task performance in knowledge work, with the largest gains in tasks requiring both analytical and creative thinking.",

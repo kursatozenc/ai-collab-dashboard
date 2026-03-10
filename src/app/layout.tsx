@@ -20,9 +20,9 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
-  title: "Human-AI Collaboration Radar",
+  title: "Atlas of Human-AI Collaboration",
   description:
-    "A sensemaking instrument for designing AI-supported teams. Explore the frontier of human-AI collaboration research across trust, delegation, communication, and team dynamics.",
+    "A navigable scholarly landscape of human-AI collaboration research. Six territories. Emergent neighborhoods. Real sources. For designers and knowledge workers.",
 };
 
 export default function RootLayout({

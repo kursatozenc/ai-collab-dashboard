@@ -1,279 +1,618 @@
 "use client";
 
-import { useState, useMemo, useCallback } from "react";
-import { RadarItem, DesignLever, DesignerIntent } from "../types";
-import IsometricCityMap from "../components/IsometricCityMap";
-import ThemeCardList from "../components/ThemeCardList";
-import ItemDetail from "../components/ItemDetail";
-import FilterPanel from "../components/FilterPanel";
-import SearchBar from "../components/SearchBar";
-import ThemeCandidates from "../components/ThemeCandidates";
-import DiscoveryOverlay from "../components/DiscoveryOverlay";
-import { DESIGN_THEMES } from "../data/theme-map";
-import { useDebouncedValue } from "../hooks/useDebouncedValue";
+import { useState, useCallback, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import type { RadarItem, AtlasState, CompareMode } from "../types";
+import AtlasMap from "../components/AtlasMap";
+import AtlasPanel from "../components/AtlasPanel";
+import {
+  TERRITORY_MAP,
+  NEIGHBORHOOD_MAP,
+  ROUTES,
+} from "../data/atlas-data";
 import graphData from "../data/research-graph.json";
 
-const FILTER_DEBOUNCE_MS = 180;
+// ─── Panel variant builder ────────────────────────────────────────────────────
 
-/** Stable empty set: when no filters are active we pass this so ThemeBubbleMap doesn't re-run effects every parent render. */
-const EMPTY_VISIBLE_IDS = new Set<string>();
+function buildPanelVariant(
+  state: AtlasState,
+  selectedTerritoryId: string | null,
+  selectedNeighborhoodId: string | null,
+  selectedSourceItem: RadarItem | null,
+  routeId: string | null,
+  routeStopIndex: number
+) {
+  switch (state) {
+    case "territory": {
+      const territory = selectedTerritoryId
+        ? TERRITORY_MAP.get(selectedTerritoryId)
+        : null;
+      if (territory) return { type: "territory" as const, territory };
+      break;
+    }
+    case "neighborhood": {
+      const neighborhood = selectedNeighborhoodId
+        ? NEIGHBORHOOD_MAP.get(selectedNeighborhoodId)
+        : null;
+      if (neighborhood) return { type: "neighborhood" as const, neighborhood };
+      break;
+    }
+    case "source": {
+      if (selectedSourceItem)
+        return { type: "source" as const, item: selectedSourceItem };
+      break;
+    }
+    case "route": {
+      const route = routeId ? ROUTES.find((r) => r.id === routeId) : null;
+      if (route)
+        return { type: "route" as const, route, stopIndex: routeStopIndex };
+      break;
+    }
+    case "atlas":
+    default:
+      return { type: "welcome" as const };
+  }
+  return { type: "welcome" as const };
+}
 
-export default function Home() {
-  const [selectedItem, setSelectedItem] = useState<RadarItem | null>(null);
-  const [expandedThemeId, setExpandedThemeId] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [designQuestionFilter, setDesignQuestionFilter] = useState("");
-  const [sourceFilter, setSourceFilter] = useState<"all" | "research" | "industry">("all");
-  const [activeLeverFilters, setActiveLeverFilters] = useState<Set<DesignLever>>(new Set());
-  const [activeIntentFilters, setActiveIntentFilters] = useState<Set<DesignerIntent>>(new Set());
-  const [showDiscoveryOverlay, setShowDiscoveryOverlay] = useState(true);
+// ─── Entry Overlay ────────────────────────────────────────────────────────────
 
-  const items = graphData.nodes as RadarItem[];
-  const clusters = graphData.clusters;
-
-  // Debounce text filters so landscape/filter logic doesn't run on every keystroke
-  const debouncedSearchQuery = useDebouncedValue(searchQuery, FILTER_DEBOUNCE_MS);
-  const debouncedDesignQuestionFilter = useDebouncedValue(designQuestionFilter, FILTER_DEBOUNCE_MS);
-
-  // Source counts
-  const researchCount = useMemo(() => items.filter((i) => i.source === "research").length, [items]);
-  const industryCount = useMemo(() => items.filter((i) => i.source === "industry").length, [items]);
-
-  // Combined filtering (uses debounced text so typing doesn't thrash the landscape)
-  const visibleItemIds = useMemo(() => {
-    const filtered = items.filter((item) => {
-      // Search
-      if (debouncedSearchQuery.trim()) {
-        const q = debouncedSearchQuery.toLowerCase();
-        if (
-          !item.title.toLowerCase().includes(q) &&
-          !item.authors.toLowerCase().includes(q) &&
-          !item.summary.toLowerCase().includes(q) &&
-          !item.designQuestion?.toLowerCase().includes(q) &&
-          !item.tags?.some((t) => t.toLowerCase().includes(q))
-        ) {
-          return false;
-        }
-      }
-      // Design question contains
-      if (debouncedDesignQuestionFilter.trim()) {
-        const q = debouncedDesignQuestionFilter.toLowerCase().trim();
-        if (!item.designQuestion?.toLowerCase().includes(q)) return false;
-      }
-      // Source
-      if (sourceFilter !== "all" && item.source !== sourceFilter) return false;
-      // Design levers (OR)
-      if (
-        activeLeverFilters.size > 0 &&
-        !item.designLevers?.some((l) => activeLeverFilters.has(l))
-      )
-        return false;
-      // Designer intents (OR)
-      if (
-        activeIntentFilters.size > 0 &&
-        !item.designerIntents?.some((i) => activeIntentFilters.has(i))
-      )
-        return false;
-      return true;
-    });
-    return new Set(filtered.map((i) => i.id));
-  }, [items, debouncedSearchQuery, debouncedDesignQuestionFilter, sourceFilter, activeLeverFilters, activeIntentFilters]);
-
-  const hasActiveFilters =
-    searchQuery.trim() !== "" ||
-    designQuestionFilter.trim() !== "" ||
-    sourceFilter !== "all" ||
-    activeLeverFilters.size > 0 ||
-    activeIntentFilters.size > 0;
-
-  const handleItemClick = useCallback((item: RadarItem) => {
-    setSelectedItem(item);
-    setExpandedThemeId(null); // Close theme panel when viewing item detail
-  }, []);
-
-  const handleExpandTheme = useCallback((themeId: string | null) => {
-    setExpandedThemeId(themeId);
-    setSelectedItem(null); // Close item detail when viewing theme
-  }, []);
-
-  const handleSearch = useCallback((query: string) => {
-    setSearchQuery(query);
-  }, []);
-
-  const handleLeverToggle = useCallback((lever: DesignLever) => {
-    setActiveLeverFilters((prev) => {
-      const next = new Set(prev);
-      if (next.has(lever)) next.delete(lever);
-      else next.add(lever);
-      return next;
-    });
-  }, []);
-
-  const handleIntentToggle = useCallback((intent: DesignerIntent) => {
-    setActiveIntentFilters((prev) => {
-      const next = new Set(prev);
-      if (next.has(intent)) next.delete(intent);
-      else next.add(intent);
-      return next;
-    });
-  }, []);
-
-  const handleClearAll = useCallback(() => {
-    setSearchQuery("");
-    setDesignQuestionFilter("");
-    setSourceFilter("all");
-    setActiveLeverFilters(new Set());
-    setActiveIntentFilters(new Set());
-  }, []);
-
-  // Discovery overlay handlers
-  const handleDiscoveryLever = useCallback((lever: DesignLever) => {
-    setActiveLeverFilters(new Set([lever]));
-    setShowDiscoveryOverlay(false);
-  }, []);
-
-  const handleDiscoveryTheme = useCallback((themeId: string) => {
-    setExpandedThemeId(themeId);
-    setShowDiscoveryOverlay(false);
-  }, []);
-
-  const handleDiscoveryExplore = useCallback(() => {
-    setShowDiscoveryOverlay(false);
-  }, []);
-
+function EntryOverlay({
+  onExplore,
+  onRoute,
+}: {
+  onExplore: () => void;
+  onRoute: () => void;
+}) {
   return (
-    <div className="h-screen flex flex-col" style={{ backgroundColor: "var(--background)" }}>
-      {/* Header */}
-      <header
-        className="flex-shrink-0 px-6 py-4 border-b"
-        style={{ borderColor: "var(--border)" }}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.4 }}
+      style={{
+        position: "absolute",
+        inset: 0,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "rgba(247, 243, 237, 0.88)",
+        backdropFilter: "blur(2px)",
+        zIndex: 20,
+      }}
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.15, duration: 0.4 }}
+        style={{
+          maxWidth: 480,
+          textAlign: "center",
+          padding: "0 32px",
+        }}
       >
-        <div className="flex items-center gap-3">
-          <h1
-            className="text-xl"
+        {/* Ornamental rule */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
+            marginBottom: 24,
+            justifyContent: "center",
+          }}
+        >
+          <div style={{ height: 1, width: 40, background: "#b8a898" }} />
+          <span
             style={{
-              fontFamily: "var(--font-dm-serif), Georgia, serif",
-              color: "var(--foreground)",
+              fontSize: 9,
+              letterSpacing: "0.2em",
+              color: "#9e8a7a",
+              fontFamily: "var(--font-inter), system-ui",
+              textTransform: "uppercase",
             }}
           >
-            Human-AI Collaboration Radar
-          </h1>
-          {!showDiscoveryOverlay && (
-            <button
-              onClick={() => setShowDiscoveryOverlay(true)}
-              title="What are you designing?"
-              className="discovery-reopen-btn"
+            A Scholarly Atlas
+          </span>
+          <div style={{ height: 1, width: 40, background: "#b8a898" }} />
+        </div>
+
+        <h1
+          style={{
+            fontFamily: "var(--font-dm-serif), Georgia, serif",
+            fontSize: 34,
+            color: "#2d2926",
+            lineHeight: 1.2,
+            marginBottom: 16,
+            fontWeight: 400,
+          }}
+        >
+          Atlas of Human-AI
+          <br />
+          Collaboration
+        </h1>
+
+        <p
+          style={{
+            fontSize: 14,
+            color: "#6b6560",
+            lineHeight: 1.7,
+            marginBottom: 32,
+            fontFamily: "var(--font-inter), system-ui",
+          }}
+        >
+          A navigable landscape of research and industry knowledge.
+          <br />
+          Six territories. Emergent neighborhoods. Real sources.
+        </p>
+
+        <div
+          style={{ display: "flex", gap: 10, justifyContent: "center" }}
+        >
+          <button
+            onClick={onExplore}
+            style={{
+              padding: "11px 24px",
+              borderRadius: 7,
+              border: "1px solid #2d2926",
+              background: "#2d2926",
+              color: "#f7f3ed",
+              fontSize: 13,
+              cursor: "pointer",
+              fontFamily: "var(--font-inter), system-ui",
+              fontWeight: 500,
+              letterSpacing: "0.03em",
+              transition: "all 0.15s",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.background = "#3d3530";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.background = "#2d2926";
+            }}
+          >
+            Explore the Atlas
+          </button>
+          <button
+            onClick={onRoute}
+            style={{
+              padding: "11px 24px",
+              borderRadius: 7,
+              border: "1px solid #8b6d6d",
+              background: "transparent",
+              color: "#8b6d6d",
+              fontSize: 13,
+              cursor: "pointer",
+              fontFamily: "var(--font-inter), system-ui",
+              letterSpacing: "0.03em",
+              transition: "all 0.15s",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.background = "#f9f1f1";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.background = "transparent";
+            }}
+          >
+            Take a Guided Route
+          </button>
+        </div>
+
+        {/* Source count legend */}
+        <div
+          style={{
+            marginTop: 32,
+            display: "flex",
+            gap: 16,
+            justifyContent: "center",
+            opacity: 0.55,
+          }}
+        >
+          {[
+            { label: "territories", value: "6" },
+            { label: "research papers", value: "48" },
+            { label: "neighborhoods", value: "20" },
+          ].map((s) => (
+            <div key={s.label} style={{ textAlign: "center" }}>
+              <div
+                style={{
+                  fontSize: 18,
+                  fontFamily: "var(--font-dm-serif), Georgia, serif",
+                  color: "#2d2926",
+                }}
+              >
+                {s.value}
+              </div>
+              <div
+                style={{
+                  fontSize: 9.5,
+                  color: "#9e8a7a",
+                  fontFamily: "var(--font-inter), system-ui",
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                }}
+              >
+                {s.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// ─── Main page ─────────────────────────────────────────────────────────────────
+
+export default function Home() {
+  const items = graphData.nodes as RadarItem[];
+
+  // ── Atlas state ────────────────────────────────────────────────────────────
+  const [atlasState, setAtlasState] = useState<AtlasState>("entry");
+  const [selectedTerritoryId, setSelectedTerritoryId] = useState<string | null>(null);
+  const [selectedNeighborhoodId, setSelectedNeighborhoodId] = useState<string | null>(null);
+  const [selectedSourceItem, setSelectedSourceItem] = useState<RadarItem | null>(null);
+  const [activeRouteId, setActiveRouteId] = useState<string | null>(null);
+  const [routeStopIndex, setRouteStopIndex] = useState(0);
+  const [compareMode, setCompareMode] = useState<CompareMode>("both");
+
+  // ── Derived: which territory the map camera focuses on ────────────────────
+  const activeRouteFocusId = useMemo(() => {
+    if (atlasState !== "route" || !activeRouteId) return null;
+    const route = ROUTES.find((r) => r.id === activeRouteId);
+    if (!route) return null;
+    return route.stops[routeStopIndex]?.focus_id ?? null;
+  }, [atlasState, activeRouteId, routeStopIndex]);
+
+  // ── Panel variant ─────────────────────────────────────────────────────────
+  const panelVariant = useMemo(
+    () =>
+      buildPanelVariant(
+        atlasState,
+        selectedTerritoryId,
+        selectedNeighborhoodId,
+        selectedSourceItem,
+        activeRouteId,
+        routeStopIndex
+      ),
+    [
+      atlasState,
+      selectedTerritoryId,
+      selectedNeighborhoodId,
+      selectedSourceItem,
+      activeRouteId,
+      routeStopIndex,
+    ]
+  );
+
+  // ── Handlers ──────────────────────────────────────────────────────────────
+
+  const handleEnterAtlas = useCallback(() => {
+    setAtlasState("atlas");
+  }, []);
+
+  const handleStartRoute = useCallback((routeId: string) => {
+    setActiveRouteId(routeId);
+    setRouteStopIndex(0);
+    setSelectedTerritoryId(null);
+    setSelectedNeighborhoodId(null);
+    setSelectedSourceItem(null);
+    setAtlasState("route");
+  }, []);
+
+  const handleEntryRoute = useCallback(() => {
+    handleStartRoute(ROUTES[0].id);
+    setAtlasState("route");
+  }, [handleStartRoute]);
+
+  const handleTerritoryClick = useCallback((id: string) => {
+    setSelectedTerritoryId(id);
+    setSelectedNeighborhoodId(null);
+    setSelectedSourceItem(null);
+    setAtlasState("territory");
+  }, []);
+
+  const handleNeighborhoodClick = useCallback((id: string) => {
+    setSelectedNeighborhoodId(id);
+    setSelectedSourceItem(null);
+    setAtlasState("neighborhood");
+  }, []);
+
+  const handleSourceClick = useCallback((item: RadarItem) => {
+    setSelectedSourceItem(item);
+    setAtlasState("source");
+  }, []);
+
+  const handleMapBackgroundClick = useCallback(() => {
+    if (atlasState === "entry") return;
+    if (atlasState === "route") return; // don't dismiss route on bg click
+    if (selectedSourceItem) {
+      setSelectedSourceItem(null);
+      setAtlasState(selectedNeighborhoodId ? "neighborhood" : selectedTerritoryId ? "territory" : "atlas");
+      return;
+    }
+    if (selectedNeighborhoodId) {
+      setSelectedNeighborhoodId(null);
+      setAtlasState(selectedTerritoryId ? "territory" : "atlas");
+      return;
+    }
+    if (selectedTerritoryId) {
+      setSelectedTerritoryId(null);
+      setAtlasState("atlas");
+      return;
+    }
+  }, [atlasState, selectedTerritoryId, selectedNeighborhoodId, selectedSourceItem]);
+
+  const handlePanelClose = useCallback(() => {
+    if (atlasState === "source") {
+      setSelectedSourceItem(null);
+      setAtlasState(selectedNeighborhoodId ? "neighborhood" : selectedTerritoryId ? "territory" : "atlas");
+    } else if (atlasState === "neighborhood") {
+      setSelectedNeighborhoodId(null);
+      setAtlasState(selectedTerritoryId ? "territory" : "atlas");
+    } else if (atlasState === "territory") {
+      setSelectedTerritoryId(null);
+      setAtlasState("atlas");
+    } else if (atlasState === "route") {
+      setAtlasState("atlas");
+      setActiveRouteId(null);
+    } else {
+      setAtlasState("atlas");
+    }
+  }, [atlasState, selectedTerritoryId, selectedNeighborhoodId]);
+
+  const handleRouteNext = useCallback(() => {
+    const route = ROUTES.find((r) => r.id === activeRouteId);
+    if (!route) return;
+    if (routeStopIndex < route.stops.length - 1) {
+      setRouteStopIndex((i) => i + 1);
+    }
+  }, [activeRouteId, routeStopIndex]);
+
+  const handleRoutePrev = useCallback(() => {
+    if (routeStopIndex > 0) {
+      setRouteStopIndex((i) => i - 1);
+    }
+  }, [routeStopIndex]);
+
+  const showPanel =
+    atlasState !== "entry" &&
+    panelVariant !== null;
+
+  const showEntryOverlay = atlasState === "entry";
+
+  return (
+    <div
+      style={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        background: "var(--background)",
+        overflow: "hidden",
+      }}
+    >
+      {/* ── Header ──────────────────────────────────────────────────────── */}
+      <header
+        style={{
+          flexShrink: 0,
+          padding: "12px 24px",
+          borderBottom: "1px solid var(--border)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          background: "var(--surface)",
+        }}
+      >
+        <div>
+          <button
+            onClick={handleEnterAtlas}
+            style={{
+              background: "none",
+              border: "none",
+              padding: 0,
+              cursor: atlasState !== "entry" ? "pointer" : "default",
+              textAlign: "left",
+            }}
+          >
+            <h1
               style={{
-                background: "var(--surface)",
-                border: "1px solid var(--border)",
-                borderRadius: "999px",
-                padding: "0.25rem 0.75rem",
-                fontSize: "0.7rem",
-                color: "var(--text-secondary)",
-                cursor: "pointer",
-                transition: "all 0.15s ease",
+                fontFamily: "var(--font-dm-serif), Georgia, serif",
+                fontSize: 17,
+                color: "var(--foreground)",
+                fontWeight: 400,
+                letterSpacing: "0.01em",
+                margin: 0,
               }}
             >
-              &#9678; Discover
-            </button>
-          )}
+              Atlas of Human-AI Collaboration
+            </h1>
+          </button>
+          <p
+            style={{
+              fontSize: 10.5,
+              color: "var(--text-secondary)",
+              marginTop: 2,
+              fontFamily: "var(--font-inter), system-ui",
+            }}
+          >
+            A navigable scholarly landscape · 6 territories · 48 research sources
+          </p>
         </div>
-        <p className="text-xs mt-0.5" style={{ color: "var(--text-secondary)" }}>
-          A sensemaking instrument for designing AI-supported teams
-        </p>
+
+        {/* Breadcrumb */}
+        {atlasState !== "entry" && atlasState !== "atlas" && (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 5,
+              fontSize: 11,
+              color: "var(--text-secondary)",
+              fontFamily: "var(--font-inter), system-ui",
+            }}
+          >
+            <button
+              onClick={handleEnterAtlas}
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                color: "var(--text-secondary)",
+                fontSize: 11,
+                padding: 0,
+                fontFamily: "var(--font-inter), system-ui",
+              }}
+            >
+              Atlas
+            </button>
+            {atlasState === "route" ? (
+              <>
+                <span>›</span>
+                <span style={{ color: "#8b6d6d" }}>
+                  {ROUTES.find((r) => r.id === activeRouteId)?.name}
+                </span>
+              </>
+            ) : (
+              <>
+                {selectedTerritoryId && (
+                  <>
+                    <span>›</span>
+                    <button
+                      onClick={() => {
+                        setAtlasState("territory");
+                        setSelectedNeighborhoodId(null);
+                        setSelectedSourceItem(null);
+                      }}
+                      style={{
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                        color:
+                          atlasState === "territory"
+                            ? "var(--foreground)"
+                            : "var(--text-secondary)",
+                        fontSize: 11,
+                        padding: 0,
+                        fontFamily: "var(--font-inter), system-ui",
+                      }}
+                    >
+                      {TERRITORY_MAP.get(selectedTerritoryId)?.name}
+                    </button>
+                  </>
+                )}
+                {selectedNeighborhoodId && (
+                  <>
+                    <span>›</span>
+                    <span style={{ color: "var(--foreground)" }}>
+                      {NEIGHBORHOOD_MAP.get(selectedNeighborhoodId)?.name}
+                    </span>
+                  </>
+                )}
+              </>
+            )}
+          </div>
+        )}
+
+        {/* Route entry point (from atlas default state) */}
+        {atlasState === "atlas" && (
+          <button
+            onClick={() => handleStartRoute(ROUTES[0].id)}
+            style={{
+              padding: "6px 14px",
+              borderRadius: 6,
+              border: "1px solid #8b6d6d",
+              background: "transparent",
+              color: "#8b6d6d",
+              fontSize: 11,
+              cursor: "pointer",
+              fontFamily: "var(--font-inter), system-ui",
+              letterSpacing: "0.03em",
+              transition: "all 0.12s",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.background = "#f9f1f1";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.background = "transparent";
+            }}
+          >
+            Take a Guided Route ›
+          </button>
+        )}
       </header>
 
-      {/* Main content */}
-      <div className="flex flex-1 overflow-hidden">
-        {/* Left sidebar: filters */}
-        <aside
-          className="flex-shrink-0 w-56 p-5 border-r overflow-y-auto"
-          style={{ borderColor: "var(--border)" }}
+      {/* ── Body ────────────────────────────────────────────────────────── */}
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
+        {/* Map */}
+        <main
+          style={{
+            flex: 1,
+            position: "relative",
+            overflow: "hidden",
+            background: "#f7f3ed",
+            transition: "flex 0.3s ease",
+          }}
         >
-          {/* Search */}
-          <div className="mb-6">
-            <SearchBar
-              onSearch={handleSearch}
-              resultCount={visibleItemIds.size}
-              totalCount={items.length}
-            />
-          </div>
-
-          {/* Filters */}
-          <FilterPanel
-            sourceFilter={sourceFilter}
-            onSourceFilterChange={setSourceFilter}
-            designQuestionFilter={designQuestionFilter}
-            onDesignQuestionFilterChange={setDesignQuestionFilter}
-            activeLeverFilters={activeLeverFilters}
-            onLeverToggle={handleLeverToggle}
-            activeIntentFilters={activeIntentFilters}
-            onIntentToggle={handleIntentToggle}
-            researchCount={researchCount}
-            industryCount={industryCount}
-            onClearAll={handleClearAll}
-            hasActiveFilters={hasActiveFilters}
-          />
-
-          {/* Divider */}
-          <div className="h-px my-6" style={{ backgroundColor: "var(--border)" }} />
-
-          {/* Emerging Themes */}
-          <ThemeCandidates items={items} onItemClick={handleItemClick} />
-
-          {/* Footer credit */}
-          <div className="mt-8 text-[10px]" style={{ color: "var(--text-secondary)" }}>
-            Curated by Kursat Ozenc
-          </div>
-        </aside>
-
-        {/* Center: Theme bubble map */}
-        <main className="flex-1 relative overflow-hidden map-main" style={{ backgroundColor: "var(--canvas-bg)", minWidth: 0 }}>
-          <IsometricCityMap
+          <AtlasMap
             items={items}
-            visibleItemIds={hasActiveFilters ? visibleItemIds : EMPTY_VISIBLE_IDS}
-            selectedItem={selectedItem}
-            onItemClick={handleItemClick}
-            onExpandTheme={handleExpandTheme}
-            expandedThemeId={expandedThemeId}
+            selectedTerritoryId={selectedTerritoryId}
+            selectedNeighborhoodId={selectedNeighborhoodId}
+            selectedSourceId={selectedSourceItem?.id ?? null}
+            activeRouteStopFocusId={activeRouteFocusId}
+            compareMode={compareMode}
+            onTerritoryClick={handleTerritoryClick}
+            onNeighborhoodClick={handleNeighborhoodClick}
+            onSourceClick={handleSourceClick}
+            onMapBackgroundClick={handleMapBackgroundClick}
           />
 
-          {/* Discovery overlay */}
-          {showDiscoveryOverlay && (
-            <DiscoveryOverlay
-              items={items}
-              clusters={clusters}
-              onSelectLever={handleDiscoveryLever}
-              onSelectTheme={handleDiscoveryTheme}
-              onExploreAll={handleDiscoveryExplore}
-            />
-          )}
+          {/* Entry overlay */}
+          <AnimatePresence>
+            {showEntryOverlay && (
+              <EntryOverlay
+                onExplore={handleEnterAtlas}
+                onRoute={handleEntryRoute}
+              />
+            )}
+          </AnimatePresence>
         </main>
 
-        {/* Right: Theme card list or Item detail */}
-        {(expandedThemeId || selectedItem) && (
-          <aside
-            className="flex-shrink-0 w-[360px] border-l overflow-hidden detail-panel"
-            style={{ borderColor: "var(--border)" }}
-          >
-            {expandedThemeId && !selectedItem ? (
-              <ThemeCardList
-                theme={DESIGN_THEMES.find((t) => t.id === expandedThemeId)!}
-                items={items}
-                onItemClick={handleItemClick}
-                onClose={() => setExpandedThemeId(null)}
+        {/* Panel */}
+        <AnimatePresence>
+          {showPanel && (
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 30 }}
+              transition={{ duration: 0.22, ease: [0.25, 0.1, 0.25, 1] }}
+              style={{
+                display: "flex",
+                height: "100%",
+                overflow: "hidden",
+              }}
+            >
+              <AtlasPanel
+                variant={panelVariant}
+                onClose={handlePanelClose}
+                onTerritoryClick={handleTerritoryClick}
+                onNeighborhoodClick={handleNeighborhoodClick}
+                onSourceClick={handleSourceClick}
+                onRouteStepNext={handleRouteNext}
+                onRouteStepPrev={handleRoutePrev}
+                onStartRoute={handleStartRoute}
+                allItems={items}
+                compareMode={compareMode}
+                onCompareModeChange={setCompareMode}
               />
-            ) : selectedItem ? (
-              <ItemDetail
-                item={selectedItem}
-                cluster={clusters.find((c) => c.id === selectedItem.cluster)}
-                onClose={() => {
-                  setSelectedItem(null);
-                }}
-              />
-            ) : null}
-          </aside>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

@@ -137,7 +137,7 @@
 
 <div class="topbar">
   <a class="logo" href="https://kursatozenc.com"><span class="logo-dot"></span>Kursat Ozenc</a>
-  <a class="topbar-link" href="https://www.designmeetsai.com" target="_blank">Design Meets AI ↗</a>
+  <a class="topbar-link" href="https://designmeetsai.substack.com/" target="_blank">Design Meets AI ↗</a>
 </div>
 
 <main>
@@ -376,7 +376,7 @@
     const email = document.getElementById('nl-email').value.trim();
     if (!email || !email.includes('@')) return;
     // Redirect to Substack / Beehiiv subscribe with email prefilled
-    window.open(`https://www.designmeetsai.com?subscribe=${encodeURIComponent(email)}`, '_blank');
+    window.open(`https://designmeetsai.substack.com/?subscribeemail=${encodeURIComponent(email)}`, '_blank');
     document.getElementById('nl-thanks').style.display = 'block';
     document.querySelector('.newsletter-form').style.display = 'none';
   }

@@ -4,8 +4,8 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: '/ai-model-finder',
-        destination: '/ai-model-finder/index.html',
+        source: '/model-scout',
+        destination: '/model-scout/index.html',
       },
     ];
   },

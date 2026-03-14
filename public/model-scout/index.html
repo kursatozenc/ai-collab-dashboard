@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Model Finder — Design Meets AI</title>
+<title>Model Scout — Design Meets AI</title>
 <meta name="description" content="Describe your task, get a benchmark-backed AI model recommendation in seconds. Built by Kursat Ozenc for Design Meets AI.">
 
 <!-- Open Graph for newsletter link previews -->
-<meta property="og:title" content="AI Model Finder — Design Meets AI">
-<meta property="og:description" content="Describe your task, get a benchmark-backed AI model recommendation in seconds.">
+<meta property="og:title" content="Model Scout — Design Meets AI">
+<meta property="og:description" content="Stop guessing which AI to use. Describe your task → get a benchmark-backed recommendation in seconds.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://ai-collab-dashboard.vercel.app/ai-model-finder/">
+<meta property="og:url" content="https://ai-collab-dashboard.vercel.app/model-scout">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AI Model Finder — Design Meets AI">
-<meta name="twitter:description" content="Stop guessing which AI to use. Describe your task → get a benchmark-backed recommendation.">
+<meta name="twitter:title" content="Model Scout — Design Meets AI">
+<meta name="twitter:description" content="Stop guessing which AI to use. Describe your task → get a benchmark-backed recommendation in seconds.">
 
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -144,8 +144,8 @@
 
   <!-- SCREEN: Ask -->
   <div class="screen active" id="screen-ask">
-    <div class="ask-label">Find your<br><em>AI model.</em></div>
-    <div class="ask-sub">Describe what you're working on — get a benchmark-backed recommendation in seconds.</div>
+    <div class="ask-label">Scout the<br><em>right model.</em></div>
+    <div class="ask-sub">Describe what you're working on — get a benchmark-backed AI model recommendation in seconds.</div>
 
     <textarea id="task-input" placeholder="e.g. I'm writing a strategy memo for my team on AI adoption… or I need to process 200 PDFs and extract key findings…" rows="4"></textarea>
 
@@ -188,7 +188,7 @@
       </div>
     </div>
 
-    <button class="btn-primary" id="find-btn" onclick="findModels()" disabled>Find my models →</button>
+    <button class="btn-primary" id="find-btn" onclick="findModels()" disabled>Scout my models →</button>
     <div id="error-area"></div>
   </div>
 
@@ -200,20 +200,20 @@
         <div class="geo-block" style="background:#e03020;"></div>
         <div class="geo-block" style="background:#f0c000;"></div>
       </div>
-      <div class="loading-text">Matching benchmarks to your task…</div>
+      <div class="loading-text">Scouting benchmarks for your task…</div>
     </div>
   </div>
 
   <!-- SCREEN: Results -->
   <div class="screen" id="screen-results">
-    <div class="results-title">Recommended for you</div>
+    <div class="results-title">Scouted for you</div>
     <div class="results-task" id="results-task-label"></div>
     <div class="constraint-echo" id="constraint-echo"></div>
     <div class="result-cards" id="result-cards"></div>
     <div class="results-footer" id="results-footer"></div>
 
     <div class="results-actions">
-      <button class="btn-ghost" onclick="goBack()">← Start over</button>
+      <button class="btn-ghost" onclick="goBack()">← Scout again</button>
       <button class="btn-share" id="share-btn" onclick="shareResults()">Copy results ↗</button>
     </div>
 
@@ -275,7 +275,7 @@
     showScreen('screen-loading');
 
     try {
-      const res = await fetch('/api/ai-model-finder', {
+      const res = await fetch('/api/model-scout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ task, budget, privacy, speed }),
@@ -335,7 +335,6 @@
     document.getElementById('results-footer').innerHTML =
       `<strong>Caveat:</strong> ${json.caveat || ''}<br>Sources: ${json.sources_line || 'Epoch AI · LM Arena · EQ-Bench'}`;
 
-    // Reset share button
     const shareBtn = document.getElementById('share-btn');
     shareBtn.textContent = 'Copy results ↗';
     shareBtn.classList.remove('copied');
@@ -348,14 +347,14 @@
     const { json } = lastResults;
     const recs = (json.recommendations || []).slice(0, 3);
     const lines = [
-      `AI Model Finder — ${json.task_summary}`,
+      `Model Scout — ${json.task_summary}`,
       `Task: ${lastTask}`,
       '',
       ...recs.map((r, i) => `${RANK_LABELS[i]}: ${r.model}\n  → ${r.reason}`),
       '',
       `Caveat: ${json.caveat || ''}`,
       '',
-      `Find your model → https://ai-collab-dashboard.vercel.app/ai-model-finder/`,
+      `Scout your model → https://ai-collab-dashboard.vercel.app/model-scout`,
       `Via Design Meets AI by Kursat Ozenc`,
     ];
 
@@ -375,7 +374,6 @@
   function subscribeNewsletter() {
     const email = document.getElementById('nl-email').value.trim();
     if (!email || !email.includes('@')) return;
-    // Redirect to Substack / Beehiiv subscribe with email prefilled
     window.open(`https://designmeetsai.substack.com/?subscribeemail=${encodeURIComponent(email)}`, '_blank');
     document.getElementById('nl-thanks').style.display = 'block';
     document.querySelector('.newsletter-form').style.display = 'none';

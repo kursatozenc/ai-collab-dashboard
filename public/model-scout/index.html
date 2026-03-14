@@ -15,7 +15,7 @@
 <meta name="twitter:title" content="Model Scout — Design Meets AI">
 <meta name="twitter:description" content="Stop guessing which AI to use. Describe your task → get a benchmark-backed recommendation in seconds.">
 
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,800;1,9..144,700;1,9..144,800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg:#f2efe8; --ink:#0e0d0b; --muted:#7a7570; --line:#d8d3c8;
@@ -27,7 +27,7 @@
 
   /* ── Topbar ── */
   .topbar{display:flex;justify-content:space-between;align-items:center;padding:16px 32px;border-bottom:2px solid var(--ink);background:var(--bg);position:sticky;top:0;z-index:100;}
-  .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:14px;letter-spacing:-0.01em;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:8px;}
+  .logo{font-family:'Fraunces',serif;font-weight:800;font-size:14px;letter-spacing:-0.01em;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:8px;}
   .logo-dot{width:10px;height:10px;border-radius:50%;background:var(--red);display:inline-block;}
   .topbar-link{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;}
   .topbar-link:hover{color:var(--ink);}
@@ -47,8 +47,8 @@
   .screen.active{display:flex;flex-direction:column;}
 
   /* ── Hero headline ── */
-  .ask-label{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(36px,5vw,56px);line-height:1.02;letter-spacing:-0.03em;margin-bottom:10px;}
-  .ask-label em{font-style:normal;color:var(--red);}
+  .ask-label{font-family:'Fraunces',serif;font-weight:800;font-size:clamp(36px,5vw,56px);line-height:1.02;letter-spacing:-0.03em;margin-bottom:10px;}
+  .ask-label em{font-style:italic;color:var(--red);}
   .ask-sub{font-size:15px;font-weight:400;color:var(--muted);margin-bottom:32px;line-height:1.6;max-width:480px;}
 
   /* ── Textarea ── */
@@ -77,7 +77,7 @@
   .constraint-group select:focus{border-color:var(--blue);outline:none;}
 
   /* ── Buttons ── */
-  .btn-primary{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;letter-spacing:-0.01em;padding:16px 32px;background:var(--ink);color:var(--bg);border:none;cursor:pointer;transition:background 0.12s,transform 0.1s;align-self:flex-start;}
+  .btn-primary{font-family:'DM Sans',sans-serif;font-weight:700;font-size:15px;letter-spacing:-0.01em;padding:16px 32px;background:var(--ink);color:var(--bg);border:none;cursor:pointer;transition:background 0.12s,transform 0.1s;align-self:flex-start;}
   .btn-primary:hover:not(:disabled){background:var(--blue);transform:translateY(-1px);}
   .btn-primary:disabled{opacity:0.3;cursor:not-allowed;}
 
@@ -100,7 +100,7 @@
 
   /* ── Result cards ── */
   .results-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
-  .results-task{font-family:'Syne',sans-serif;font-weight:700;font-size:22px;letter-spacing:-0.02em;line-height:1.2;margin-bottom:14px;}
+  .results-task{font-family:'Fraunces',serif;font-weight:700;font-size:22px;letter-spacing:-0.02em;line-height:1.2;margin-bottom:14px;}
   .constraint-echo{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
   .constraint-echo span{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);background:rgba(14,13,11,0.06);padding:4px 8px;border-radius:4px;}
   .result-cards{display:flex;flex-direction:column;gap:10px;margin-bottom:4px;}
@@ -111,7 +111,7 @@
   .card-accent{height:10px;border-radius:18px 18px 0 0;}
   .card-inner{padding:18px 22px 16px;}
   .card-rank{font-family:'DM Mono',monospace;font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
-  .card-model{font-family:'Syne',sans-serif;font-weight:800;font-size:28px;letter-spacing:-0.03em;line-height:1;margin-bottom:10px;}
+  .card-model{font-family:'Fraunces',serif;font-weight:800;font-size:28px;letter-spacing:-0.03em;line-height:1;margin-bottom:10px;}
   .card-reason{font-size:13px;font-weight:400;color:#3a3835;line-height:1.55;margin-bottom:12px;}
   .card-meta{display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
   .meta-badge{font-family:'DM Mono',monospace;font-size:8.5px;letter-spacing:0.05em;padding:4px 9px;background:rgba(0,0,0,0.04);border-radius:20px;color:var(--muted);}
@@ -124,7 +124,7 @@
   /* ── Newsletter CTA ── */
   .newsletter-cta{margin-top:28px;padding:24px;border-radius:20px;background:var(--white);display:flex;flex-direction:column;gap:10px;box-shadow:0 4px 24px rgba(0,0,0,0.07);}
   .newsletter-cta-label{font-family:'DM Mono',monospace;font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);}
-  .newsletter-cta-title{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.02em;line-height:1.2;}
+  .newsletter-cta-title{font-family:'Fraunces',serif;font-weight:700;font-size:18px;letter-spacing:-0.02em;line-height:1.2;}
   .newsletter-cta-sub{font-size:13px;color:var(--muted);line-height:1.55;}
   .newsletter-form{display:flex;gap:0;margin-top:4px;}
   .newsletter-input{flex:1;font-family:'DM Sans',sans-serif;font-size:13px;padding:11px 14px;border:2px solid rgba(14,13,11,0.18);border-right:none;border-radius:10px 0 0 10px;outline:none;background:var(--bg);transition:border-color 0.15s;}

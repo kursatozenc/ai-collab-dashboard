@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback, useMemo } from "react";
+import React, { useState, useRef, useCallback, useMemo, useEffect, useReducer } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { RadarItem, CompareMode } from "../types";
 import {
@@ -180,6 +180,38 @@ export default function AtlasMap({
   const [hoveredPin, setHoveredPin] = useState<string | null>(null);
   const [hoveredTerritory, setHoveredTerritory] = useState<string | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
+  const [svgMouse, setSvgMouse] = useState({ x: -2000, y: -2000 });
+
+  // Ghost cursor — lags behind real cursor with inertia for physical weight feel
+  const svgMouseRef = useRef({ x: -2000, y: -2000 });
+  const smoothedMouse = useRef({ x: -2000, y: -2000 });
+  const [, forceRender] = useReducer((x: number) => x + 1, 0);
+
+  useEffect(() => {
+    const LERP = 0.10;
+    let rafId: number;
+    function lerp() {
+      const s = smoothedMouse.current;
+      s.x += (svgMouseRef.current.x - s.x) * LERP;
+      s.y += (svgMouseRef.current.y - s.y) * LERP;
+      forceRender();
+      rafId = requestAnimationFrame(lerp);
+    }
+    rafId = requestAnimationFrame(lerp);
+    return () => cancelAnimationFrame(rafId);
+  }, []);
+
+  const CURSOR_R = 200;
+  const MAX_PUSH = 18;
+
+  function getCursorOffset(cx: number, cy: number) {
+    const dx = cx - smoothedMouse.current.x;
+    const dy = cy - smoothedMouse.current.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist >= CURSOR_R || dist === 0) return { x: 0, y: 0 };
+    const f = (1 - dist / CURSOR_R) * MAX_PUSH;
+    return { x: (dx / dist) * f, y: (dy / dist) * f };
+  }
 
   // Build source pins from items + source assignments
   const sourcePins = useMemo<SourcePin[]>(() => {
@@ -268,27 +300,22 @@ export default function AtlasMap({
       height="100%"
       style={{ display: "block", cursor: "default" }}
       onClick={onMapBackgroundClick}
+      onMouseMove={(e) => {
+        const rect = svgRef.current?.getBoundingClientRect();
+        if (!rect) return;
+        const pos = {
+          x: (e.clientX - rect.left) * (SVG_W / rect.width),
+          y: (e.clientY - rect.top) * (SVG_H / rect.height),
+        };
+        setSvgMouse(pos);
+        svgMouseRef.current = pos;
+      }}
+      onMouseLeave={() => {
+        setSvgMouse({ x: -2000, y: -2000 });
+        svgMouseRef.current = { x: -2000, y: -2000 };
+      }}
     >
       <defs>
-        {/* Parchment texture filter */}
-        <filter id="parchment" x="-5%" y="-5%" width="110%" height="110%">
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.65"
-            numOctaves="3"
-            stitchTiles="stitch"
-            result="noise"
-          />
-          <feColorMatrix
-            type="saturate"
-            values="0"
-            in="noise"
-            result="grayNoise"
-          />
-          <feBlend in="SourceGraphic" in2="grayNoise" mode="multiply" result="blended" />
-          <feComposite in="blended" in2="SourceGraphic" operator="in" />
-        </filter>
-
         {/* Soft drop shadow for territories */}
         <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
           <feDropShadow
@@ -300,9 +327,9 @@ export default function AtlasMap({
           />
         </filter>
 
-        {/* Glow for selected territory */}
-        <filter id="glow" x="-15%" y="-15%" width="130%" height="130%">
-          <feGaussianBlur stdDeviation="4" result="blur" />
+        {/* Pin glow for hover/select */}
+        <filter id="pinGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2.5" result="blur" />
           <feComposite in="SourceGraphic" in2="blur" operator="over" />
         </filter>
 
@@ -317,61 +344,97 @@ export default function AtlasMap({
           <stop offset="0%" stopColor="#d4a85a" stopOpacity="1" />
           <stop offset="100%" stopColor="#a4783a" stopOpacity="1" />
         </radialGradient>
+
+        {/* Territory radial gradient fills — lighter center, deeper edge */}
+        <radialGradient id="grad-interactions-modality" cx="50%" cy="40%" r="60%">
+          <stop offset="0%" stopColor="#9bbf9e" />
+          <stop offset="100%" stopColor="#7a9e7e" />
+        </radialGradient>
+        <radialGradient id="grad-workflow" cx="50%" cy="40%" r="60%">
+          <stop offset="0%" stopColor="#d4b48a" />
+          <stop offset="100%" stopColor="#b8956a" />
+        </radialGradient>
+        <radialGradient id="grad-roles-boundaries" cx="50%" cy="40%" r="60%">
+          <stop offset="0%" stopColor="#8db0cc" />
+          <stop offset="100%" stopColor="#6d8fad" />
+        </radialGradient>
+        <radialGradient id="grad-governance" cx="50%" cy="40%" r="60%">
+          <stop offset="0%" stopColor="#ac8e8e" />
+          <stop offset="100%" stopColor="#8b6d6d" />
+        </radialGradient>
+        <radialGradient id="grad-trust-accountability" cx="50%" cy="40%" r="60%">
+          <stop offset="0%" stopColor="#bfab7e" />
+          <stop offset="100%" stopColor="#9e8a5c" />
+        </radialGradient>
+        <radialGradient id="grad-rituals-norms" cx="50%" cy="40%" r="60%">
+          <stop offset="0%" stopColor="#af9fc8" />
+          <stop offset="100%" stopColor="#8e7ea8" />
+        </radialGradient>
+
+        {/* Terrain displacement — makes smooth ellipses look like organic landmasses */}
+        <filter id="terrainDisplace" x="-15%" y="-15%" width="130%" height="130%">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.012 0.008"
+            numOctaves="3"
+            seed="42"
+            result="noise"
+          />
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="noise"
+            scale="12"
+            xChannelSelector="R"
+            yChannelSelector="G"
+          />
+        </filter>
+        <filter id="terrainDisplaceSelected" x="-20%" y="-20%" width="140%" height="140%">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.012 0.008"
+            numOctaves="3"
+            seed="42"
+            result="noise"
+          />
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="noise"
+            scale="12"
+            xChannelSelector="R"
+            yChannelSelector="G"
+            result="displaced"
+          />
+          <feDropShadow
+            dx="0"
+            dy="2"
+            stdDeviation="6"
+            floodColor="#2d2926"
+            floodOpacity="0.12"
+            in="displaced"
+          />
+        </filter>
       </defs>
 
       {/* Background */}
       <rect
         width={SVG_W}
         height={SVG_H}
-        fill="#f7f3ed"
+        fill="transparent"
         onClick={onMapBackgroundClick}
       />
 
-      {/* Very subtle background grid lines for map feel */}
-      {Array.from({ length: 12 }).map((_, i) => (
-        <line
-          key={`hg-${i}`}
-          x1={0}
-          y1={(SVG_H / 12) * i}
-          x2={SVG_W}
-          y2={(SVG_H / 12) * i}
-          stroke="#e8e2d8"
-          strokeWidth={0.5}
-          strokeOpacity={0.5}
-        />
-      ))}
-      {Array.from({ length: 16 }).map((_, i) => (
-        <line
-          key={`vg-${i}`}
-          x1={(SVG_W / 16) * i}
-          y1={0}
-          x2={(SVG_W / 16) * i}
-          y2={SVG_H}
-          stroke="#e8e2d8"
-          strokeWidth={0.5}
-          strokeOpacity={0.5}
-        />
-      ))}
 
-      {/* Subtle compass rose / orientation mark */}
-      <g transform="translate(856, 636)" opacity={0.3}>
-        <circle cx={0} cy={0} r={16} fill="none" stroke="#9e8a7a" strokeWidth={0.75} />
-        <text x={0} y={-20} textAnchor="middle" fontSize={7} fill="#9e8a7a" fontFamily="var(--font-inter), system-ui">N</text>
-        <line x1={0} y1={-14} x2={0} y2={14} stroke="#9e8a7a" strokeWidth={0.75} />
-        <line x1={-14} y1={0} x2={14} y2={0} stroke="#9e8a7a" strokeWidth={0.75} />
-        <polygon points="0,-12 3,-4 0,-8 -3,-4" fill="#9e8a7a" />
+      {/* Compass rose — clean 4-point cross */}
+      <g transform="translate(852, 630)" opacity={0.55} style={{ pointerEvents: "none" }}>
+        <line x1={0} y1={-18} x2={0} y2={18} stroke="#9e8a7a" strokeWidth={0.75} />
+        <line x1={-18} y1={0} x2={18} y2={0} stroke="#9e8a7a" strokeWidth={0.75} />
+        <polygon points="0,-16 3,-8 -3,-8" fill="#9e8a7a" />
+        <circle cx={0} cy={0} r={2.5} fill="#f5f0eb" stroke="#9e8a7a" strokeWidth={0.75} />
+        <text x={0} y={-22} textAnchor="middle" fontSize={7} fill="#9e8a7a"
+          fontFamily="var(--font-inter), system-ui" letterSpacing="0.1em">N</text>
       </g>
 
-      {/* Layer gradient legend (subtle) */}
-      <g transform="translate(20, 600)" opacity={0.35}>
-        <text fontSize={7} fill="#9e8a7a" fontFamily="var(--font-inter), system-ui" letterSpacing="0.08em" textAnchor="start">
-          TASK
-        </text>
-        <line x1={0} y1={4} x2={0} y2={-52} stroke="#9e8a7a" strokeWidth={0.75} strokeDasharray="2,3"/>
-        <text fontSize={7} fill="#9e8a7a" fontFamily="var(--font-inter), system-ui" letterSpacing="0.08em" textAnchor="start" y={-58}>
-          ORG
-        </text>
-      </g>
+
 
       {/* Main zoomable content group */}
       <motion.g
@@ -380,14 +443,46 @@ export default function AtlasMap({
           x: zoomTransform.tx,
           y: zoomTransform.ty,
         }}
-        transition={{ type: "spring", stiffness: 120, damping: 22 }}
+        transition={{ type: "spring", stiffness: 65, damping: 26, mass: 1.2 }}
         style={{ transformOrigin: "center center" }}
       >
+        {/* ── Territory connection lines (particle-style network) ────────── */}
+        {(() => {
+          const CONN_DIST = 360;
+          const lines: React.ReactElement[] = [];
+          for (let i = 0; i < TERRITORIES.length; i++) {
+            for (let j = i + 1; j < TERRITORIES.length; j++) {
+              const a = TERRITORIES[i];
+              const b = TERRITORIES[j];
+              const dx = a.center.x - b.center.x;
+              const dy = a.center.y - b.center.y;
+              const d = Math.sqrt(dx * dx + dy * dy);
+              if (d < CONN_DIST) {
+                const opacity = (1 - d / CONN_DIST) * 0.2;
+                lines.push(
+                  <line
+                    key={`conn-${a.id}-${b.id}`}
+                    x1={a.center.x}
+                    y1={a.center.y}
+                    x2={b.center.x}
+                    y2={b.center.y}
+                    stroke="#b4a090"
+                    strokeWidth={0.75}
+                    strokeOpacity={opacity}
+                    style={{ pointerEvents: "none" }}
+                  />
+                );
+              }
+            }
+          }
+          return lines;
+        })()}
+
         {/* ── Territory layers (back to front) ─────────────────────────── */}
         {/* Render T&A last so it visually overlaps others as a ridge */}
         {[...TERRITORIES]
           .sort((a, b) => (a.id === "trust-accountability" ? 1 : b.id === "trust-accountability" ? -1 : 0))
-          .map((territory) => {
+          .map((territory, index) => {
             const isSelected = selectedTerritoryId === territory.id;
             const isHovered = hoveredTerritory === territory.id;
             const isDimmed =
@@ -395,65 +490,117 @@ export default function AtlasMap({
               !emphasizedTerritories.has(territory.id);
             const isTrustRidge = territory.id === "trust-accountability";
 
+            const cursorOffset = getCursorOffset(territory.center.x, territory.center.y);
             return (
-              <g
+              <motion.g
                 key={territory.id}
+                animate={cursorOffset}
+                transition={{ type: "spring", stiffness: 75, damping: 22 }}
+              >
+              <motion.g
+                animate={{
+                  x: [0, 3, 1, -3, 1, 0],
+                  y: [0, -2, 3, 1, -1, 0],
+                }}
+                transition={{
+                  duration: 14 + index * 1.8,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: index * 2.3,
+                }}
                 style={{ cursor: "pointer" }}
                 onClick={(e) => handleTerritoryClick(e, territory.id)}
                 onMouseEnter={() => setHoveredTerritory(territory.id)}
                 onMouseLeave={() => setHoveredTerritory(null)}
               >
-                {/* Contour ring 2 (outermost) */}
+                {/* Contour ring 4 (outermost) */}
                 <path
                   d={territory.svgPath}
                   fill="none"
                   stroke={territory.strokeColor}
-                  strokeWidth={isTrustRidge ? 1.5 : 1}
-                  strokeOpacity={isDimmed ? 0.05 : isTrustRidge ? 0.12 : 0.08}
+                  strokeWidth={1}
+                  strokeOpacity={isDimmed ? 0 : isTrustRidge ? 0.07 : 0.04}
+                  filter="url(#terrainDisplace)"
                   style={{
-                    transform: `scale(1.06)`,
+                    transform: `scale(1.19)`,
                     transformOrigin: `${territory.center.x}px ${territory.center.y}px`,
                   }}
                 />
-                {/* Contour ring 1 */}
+                {/* Contour ring 3 */}
                 <path
                   d={territory.svgPath}
                   fill="none"
                   stroke={territory.strokeColor}
-                  strokeWidth={isTrustRidge ? 1.5 : 1}
-                  strokeOpacity={isDimmed ? 0.05 : isTrustRidge ? 0.18 : 0.12}
+                  strokeWidth={1}
+                  strokeOpacity={isDimmed ? 0 : isTrustRidge ? 0.13 : 0.08}
+                  filter="url(#terrainDisplace)"
                   style={{
-                    transform: `scale(1.03)`,
+                    transform: `scale(1.13)`,
                     transformOrigin: `${territory.center.x}px ${territory.center.y}px`,
                   }}
+                />
+                {/* Contour ring 2 */}
+                <path
+                  d={territory.svgPath}
+                  fill="none"
+                  stroke={territory.strokeColor}
+                  strokeWidth={1}
+                  strokeOpacity={isDimmed ? 0 : isTrustRidge ? 0.20 : 0.14}
+                  filter="url(#terrainDisplace)"
+                  style={{
+                    transform: `scale(1.08)`,
+                    transformOrigin: `${territory.center.x}px ${territory.center.y}px`,
+                  }}
+                />
+                {/* Contour ring 1 (innermost) */}
+                <path
+                  d={territory.svgPath}
+                  fill="none"
+                  stroke={territory.strokeColor}
+                  strokeWidth={1}
+                  strokeOpacity={isDimmed ? 0 : isTrustRidge ? 0.30 : 0.22}
+                  filter="url(#terrainDisplace)"
+                  style={{
+                    transform: `scale(1.04)`,
+                    transformOrigin: `${territory.center.x}px ${territory.center.y}px`,
+                  }}
+                />
+                {/* White halo behind border (for legibility over any bg) */}
+                <path
+                  d={territory.svgPath}
+                  fill="none"
+                  stroke="#f5f0eb"
+                  strokeWidth={isDimmed ? 0 : 4}
+                  strokeOpacity={isDimmed ? 0 : 0.7}
+                  style={{ pointerEvents: "none" }}
                 />
                 {/* Territory fill */}
                 <motion.path
                   d={territory.svgPath}
-                  fill={territory.color}
+                  fill={`url(#grad-${territory.id})`}
                   fillOpacity={
                     isDimmed
-                      ? 0.04
+                      ? 0.12
                       : isTrustRidge
                       ? isSelected || isHovered
-                        ? 0.22
-                        : 0.1
+                        ? 0.70
+                        : 0.55
                       : isSelected || isHovered
-                      ? 0.32
-                      : 0.18
+                      ? 0.88
+                      : 0.72
                   }
                   stroke={territory.strokeColor}
-                  strokeWidth={isSelected ? 1.5 : 0.75}
-                  strokeOpacity={isDimmed ? 0.06 : isSelected ? 0.6 : 0.3}
+                  strokeWidth={isSelected ? 2.25 : 1.5}
+                  strokeOpacity={isDimmed ? 0.12 : isSelected ? 0.85 : 0.55}
                   animate={{
                     fillOpacity: isDimmed
-                      ? 0.04
+                      ? 0.12
                       : isTrustRidge
-                      ? isSelected || isHovered ? 0.22 : 0.1
-                      : isSelected || isHovered ? 0.32 : 0.18,
+                      ? isSelected || isHovered ? 0.70 : 0.55
+                      : isSelected || isHovered ? 0.88 : 0.72,
                   }}
-                  transition={{ duration: 0.25 }}
-                  filter={isSelected ? "url(#softShadow)" : undefined}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  filter={isSelected ? "url(#terrainDisplaceSelected)" : "url(#terrainDisplace)"}
                 />
                 {/* Selected ring highlight */}
                 {isSelected && (
@@ -461,12 +608,25 @@ export default function AtlasMap({
                     d={territory.svgPath}
                     fill="none"
                     stroke={territory.strokeColor}
-                    strokeWidth={2}
-                    strokeOpacity={0.5}
-                    strokeDasharray="4,3"
+                    strokeWidth={2.5}
+                    strokeOpacity={0.6}
+                    strokeDasharray="5,3"
                   />
                 )}
-              </g>
+                {/* Center node dot */}
+                <circle
+                  cx={territory.center.x}
+                  cy={territory.center.y}
+                  r={isDimmed ? 2 : isSelected || isHovered ? 5 : 3.5}
+                  fill={territory.color}
+                  fillOpacity={isDimmed ? 0.3 : 0.95}
+                  stroke="#f5f0eb"
+                  strokeWidth={1.5}
+                  strokeOpacity={isDimmed ? 0 : 0.8}
+                  style={{ pointerEvents: "none" }}
+                />
+              </motion.g>
+              </motion.g>
             );
           })}
 
@@ -478,10 +638,10 @@ export default function AtlasMap({
             return (
               <motion.g
                 key={`nh-${neighborhood.id}`}
-                initial={{ opacity: 0, y: 4 }}
+                initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 4 }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.35, ease: "easeOut" }}
                 style={{ cursor: "pointer" }}
                 onClick={(e) =>
                   handleNeighborhoodLabelClick(e, neighborhood.id)
@@ -558,6 +718,7 @@ export default function AtlasMap({
                   stroke={isResearch ? "#6d8fad" : "#d4a85a"}
                   strokeWidth={1.5}
                   strokeOpacity={0.7}
+                  filter="url(#pinGlow)"
                 />
               )}
               {/* Research pin: filled circle */}
@@ -649,6 +810,19 @@ export default function AtlasMap({
             </g>
           );
         })}
+
+        {/* ── Guided route path (always visible) ───────────────────── */}
+        {/* Workflow → Roles+Boundaries → Interactions → Trust → Governance */}
+        <polyline
+          points="400,555 420,278 155,462 690,370 778,118"
+          fill="none"
+          stroke="#a4783a"
+          strokeWidth={1.25}
+          strokeDasharray="5,4"
+          strokeOpacity={0.45}
+          strokeLinejoin="round"
+          style={{ pointerEvents: "none" }}
+        />
 
         {/* Tooltip for hovered pin */}
         <AnimatePresence>

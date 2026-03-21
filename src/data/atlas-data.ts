@@ -29,9 +29,9 @@ export const TERRITORIES: Territory[] = [
     color: "#7a9e7e",
     strokeColor: "#5a7a5e",
     svgPath:
-      "M 55 350 C 90 315 175 308 262 348 C 328 378 318 455 300 520 C 282 582 215 622 138 614 C 62 606 24 555 22 486 C 20 420 28 375 55 350 Z",
-    center: { x: 175, y: 483 },
-    labelPos: { x: 150, y: 450 },
+      "M 155 332 C 222 332 277 390 277 462 C 277 534 222 592 155 592 C 88 592 33 534 33 462 C 33 390 88 332 155 332 Z",
+    center: { x: 155, y: 462 },
+    labelPos: { x: 155, y: 426 },
   },
   {
     id: "workflow",
@@ -61,9 +61,9 @@ export const TERRITORIES: Territory[] = [
     color: "#b8956a",
     strokeColor: "#8a6e48",
     svgPath:
-      "M 198 428 C 240 392 332 376 440 384 C 532 390 588 436 585 508 C 581 582 510 645 388 648 C 268 650 186 598 174 534 C 164 474 168 452 198 428 Z",
-    center: { x: 390, y: 520 },
-    labelPos: { x: 380, y: 490 },
+      "M 400 447 C 482 447 548 495 548 555 C 548 615 482 663 400 663 C 318 663 252 615 252 555 C 252 495 318 447 400 447 Z",
+    center: { x: 400, y: 555 },
+    labelPos: { x: 400, y: 525 },
   },
   {
     id: "roles-boundaries",
@@ -94,9 +94,9 @@ export const TERRITORIES: Territory[] = [
     color: "#6d8fad",
     strokeColor: "#4d6f8d",
     svgPath:
-      "M 262 198 C 306 162 386 148 468 166 C 542 182 580 238 576 316 C 572 392 526 448 448 458 C 372 468 292 440 252 388 C 214 338 212 278 230 250 C 242 228 254 210 262 198 Z",
-    center: { x: 418, y: 312 },
-    labelPos: { x: 390, y: 280 },
+      "M 420 156 C 502 156 568 211 568 278 C 568 345 502 400 420 400 C 338 400 272 345 272 278 C 272 211 338 156 420 156 Z",
+    center: { x: 420, y: 278 },
+    labelPos: { x: 420, y: 244 },
   },
   {
     id: "governance",
@@ -121,9 +121,9 @@ export const TERRITORIES: Territory[] = [
     color: "#8b6d6d",
     strokeColor: "#6b4d4d",
     svgPath:
-      "M 578 58 C 618 28 700 18 782 34 C 852 48 892 95 888 172 C 884 246 836 286 754 292 C 672 298 610 258 586 196 C 564 138 562 82 578 58 Z",
-    center: { x: 735, y: 163 },
-    labelPos: { x: 720, y: 135 },
+      "M 778 30 C 833 30 878 69 878 118 C 878 167 833 206 778 206 C 723 206 678 167 678 118 C 678 69 723 30 778 30 Z",
+    center: { x: 778, y: 118 },
+    labelPos: { x: 778, y: 93 },
   },
   {
     id: "trust-accountability",
@@ -153,11 +153,11 @@ export const TERRITORIES: Territory[] = [
     landmark_name: "The Accountability Ridge",
     color: "#9e8a5c",
     strokeColor: "#7e6a3c",
-    // Elongated diagonal belt — cross-cutting from upper-center-east to lower-center-east
+    // Elongated vertical ridge — cross-cutting through center-east
     svgPath:
-      "M 528 152 C 562 122 634 120 692 152 C 748 182 778 252 778 342 C 778 432 748 510 698 548 C 650 584 592 580 550 550 C 508 520 484 472 478 412 C 472 346 472 272 492 222 C 504 190 520 168 528 152 Z",
-    center: { x: 630, y: 355 },
-    labelPos: { x: 650, y: 310 },
+      "M 690 185 C 743 185 786 268 786 370 C 786 472 743 555 690 555 C 637 555 594 472 594 370 C 594 268 637 185 690 185 Z",
+    center: { x: 690, y: 370 },
+    labelPos: { x: 690, y: 318 },
   },
   {
     id: "rituals-norms",
@@ -182,9 +182,9 @@ export const TERRITORIES: Territory[] = [
     color: "#8e7ea8",
     strokeColor: "#6e5e88",
     svgPath:
-      "M 52 88 C 90 48 172 36 258 52 C 334 66 372 118 358 192 C 344 262 288 300 198 304 C 110 308 48 264 34 196 C 22 136 28 110 52 88 Z",
-    center: { x: 202, y: 176 },
-    labelPos: { x: 180, y: 148 },
+      "M 188 52 C 253 52 306 97 306 152 C 306 207 253 252 188 252 C 123 252 70 207 70 152 C 70 97 123 52 188 52 Z",
+    center: { x: 188, y: 152 },
+    labelPos: { x: 188, y: 124 },
   },
 ];
 
@@ -212,7 +212,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     territory_ids: ["interactions-modality", "trust-accountability"],
     related_neighborhood_ids: ["shared-understanding", "trust-dynamics"],
-    labelPos: { x: 118, y: 410 },
+    labelPos: { x: 96, y: 392 },
     prominence: 0.9,
   },
   {
@@ -235,7 +235,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     territory_ids: ["interactions-modality"],
     related_neighborhood_ids: ["shared-understanding", "ai-behavioral-patterns"],
-    labelPos: { x: 210, y: 460 },
+    labelPos: { x: 194, y: 442 },
     prominence: 0.75,
   },
   {
@@ -261,7 +261,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     territory_ids: ["interactions-modality"],
     related_neighborhood_ids: ["ai-behavioral-patterns", "trust-calibration"],
-    labelPos: { x: 145, y: 540 },
+    labelPos: { x: 118, y: 522 },
     prominence: 0.65,
   },
   {
@@ -287,7 +287,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     territory_ids: ["interactions-modality"],
     related_neighborhood_ids: ["communication-design", "shared-understanding"],
-    labelPos: { x: 248, y: 508 },
+    labelPos: { x: 218, y: 490 },
     prominence: 0.7,
   },
   {
@@ -313,7 +313,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     territory_ids: ["interactions-modality", "workflow"],
     related_neighborhood_ids: ["trust-calibration", "communication-design"],
-    labelPos: { x: 185, y: 572 },
+    labelPos: { x: 172, y: 556 },
     prominence: 0.7,
   },
 
@@ -344,7 +344,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       "human-in-the-loop",
       "co-creative-workflows",
     ],
-    labelPos: { x: 278, y: 468 },
+    labelPos: { x: 290, y: 508 },
     prominence: 0.85,
   },
   {
@@ -370,7 +370,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     territory_ids: ["workflow"],
     related_neighborhood_ids: ["task-delegation", "team-effectiveness"],
-    labelPos: { x: 420, y: 452 },
+    labelPos: { x: 432, y: 492 },
     prominence: 0.8,
   },
   {
@@ -392,7 +392,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     representative_source_ids: ["human-loop-orgs", "algorithmic-management"],
     territory_ids: ["workflow", "governance"],
     related_neighborhood_ids: ["task-delegation", "accountability-harm"],
-    labelPos: { x: 494, y: 502 },
+    labelPos: { x: 506, y: 542 },
     prominence: 0.8,
   },
   {
@@ -421,7 +421,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       "co-creative-workflows",
       "onboarding-rituals",
     ],
-    labelPos: { x: 360, y: 574 },
+    labelPos: { x: 370, y: 614 },
     prominence: 0.75,
   },
 
@@ -449,7 +449,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     territory_ids: ["roles-boundaries"],
     related_neighborhood_ids: ["team-composition", "teaming-vs-interaction"],
-    labelPos: { x: 308, y: 238 },
+    labelPos: { x: 312, y: 204 },
     prominence: 0.9,
   },
   {
@@ -475,7 +475,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     territory_ids: ["roles-boundaries"],
     related_neighborhood_ids: ["tool-vs-teammate", "team-effectiveness"],
-    labelPos: { x: 474, y: 228 },
+    labelPos: { x: 478, y: 194 },
     prominence: 0.8,
   },
   {
@@ -501,7 +501,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     territory_ids: ["roles-boundaries", "rituals-norms"],
     related_neighborhood_ids: ["tool-vs-teammate", "ai-culture-norms"],
-    labelPos: { x: 340, y: 374 },
+    labelPos: { x: 344, y: 340 },
     prominence: 0.75,
   },
   {
@@ -526,7 +526,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     territory_ids: ["roles-boundaries", "interactions-modality"],
     related_neighborhood_ids: ["tool-vs-teammate", "ai-behavioral-patterns"],
-    labelPos: { x: 490, y: 360 },
+    labelPos: { x: 494, y: 326 },
     prominence: 0.65,
   },
 
@@ -554,7 +554,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     territory_ids: ["governance", "trust-accountability"],
     related_neighborhood_ids: ["power-fairness", "human-in-the-loop"],
-    labelPos: { x: 668, y: 140 },
+    labelPos: { x: 740, y: 98 },
     prominence: 0.9,
   },
   {
@@ -576,7 +576,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     representative_source_ids: ["synthetic-authority", "when-should-i-lead"],
     territory_ids: ["governance"],
     related_neighborhood_ids: ["accountability-harm", "identity-meaning"],
-    labelPos: { x: 788, y: 185 },
+    labelPos: { x: 822, y: 152 },
     prominence: 0.75,
   },
 
@@ -608,7 +608,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       "onboarding-rituals",
       "trust-repair",
     ],
-    labelPos: { x: 572, y: 278 },
+    labelPos: { x: 634, y: 296 },
     prominence: 0.85,
   },
   {
@@ -634,7 +634,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     territory_ids: ["trust-accountability", "governance"],
     related_neighborhood_ids: ["accountability-harm", "human-in-the-loop"],
-    labelPos: { x: 652, y: 445 },
+    labelPos: { x: 714, y: 462 },
     prominence: 0.75,
   },
 
@@ -665,7 +665,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       "trust-dynamics",
       "team-effectiveness",
     ],
-    labelPos: { x: 158, y: 128 },
+    labelPos: { x: 148, y: 100 },
     prominence: 0.85,
   },
   {
@@ -687,7 +687,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     representative_source_ids: ["shaping-trust", "ai-culture"],
     territory_ids: ["rituals-norms", "trust-accountability"],
     related_neighborhood_ids: ["trust-dynamics", "onboarding-rituals"],
-    labelPos: { x: 254, y: 158 },
+    labelPos: { x: 244, y: 130 },
     prominence: 0.75,
   },
   {
@@ -713,7 +713,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     territory_ids: ["rituals-norms"],
     related_neighborhood_ids: ["team-effectiveness", "ai-culture-norms"],
-    labelPos: { x: 188, y: 232 },
+    labelPos: { x: 176, y: 204 },
     prominence: 0.75,
   },
   {
@@ -738,7 +738,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       "training-upskilling",
       "identity-meaning",
     ],
-    labelPos: { x: 295, y: 218 },
+    labelPos: { x: 258, y: 190 },
     prominence: 0.65,
   },
 ];

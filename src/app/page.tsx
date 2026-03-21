@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import type { RadarItem, AtlasState, CompareMode } from "../types";
 import AtlasMap from "../components/AtlasMap";
 import AtlasPanel from "../components/AtlasPanel";
+import StarCanvas from "../components/StarCanvas";
 import {
   TERRITORY_MAP,
   NEIGHBORHOOD_MAP,
@@ -559,6 +560,7 @@ export default function Home() {
             transition: "flex 0.3s ease",
           }}
         >
+          <StarCanvas />
           <AtlasMap
             items={items}
             selectedTerritoryId={selectedTerritoryId}

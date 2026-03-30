@@ -326,7 +326,7 @@
         498.6934934223069,
         612.1994569874397
       ],
-      "citation": "Désirée Zercher et al. (2023). When AI joins the Team: A Literature Review on Intragroup Processes and their Effect on Team Performance in Team-AI Collaboration. European Conference on Information Systems."
+      "citation": "D\u00e9sir\u00e9e Zercher et al. (2023). When AI joins the Team: A Literature Review on Intragroup Processes and their Effect on Team Performance in Team-AI Collaboration. European Conference on Information Systems."
     },
     {
       "id": "defining-hat",
@@ -581,7 +581,7 @@
         499.64938302524007,
         611.2769865888162
       ],
-      "citation": "Inês Lobo et al. (2024). When Should I Lead or Follow: Understanding Initiative Levels in Human-AI Collaborative Gameplay. Conference on Designing Interactive Systems."
+      "citation": "In\u00eas Lobo et al. (2024). When Should I Lead or Follow: Understanding Initiative Levels in Human-AI Collaborative Gameplay. Conference on Designing Interactive Systems."
     },
     {
       "id": "requirements-ai-teammates",
@@ -1126,7 +1126,7 @@
         500.30658002750346,
         611.1266055109692
       ],
-      "citation": "Ángel Alexander Cabrera et al. (2023). Improving Human-AI Collaboration With Descriptions of AI Behavior. Proc. ACM Hum. Comput. Interact.."
+      "citation": "\u00c1ngel Alexander Cabrera et al. (2023). Improving Human-AI Collaboration With Descriptions of AI Behavior. Proc. ACM Hum. Comput. Interact.."
     },
     {
       "id": "skills-humans-need",
@@ -1443,7 +1443,7 @@
         499.9892605050963,
         87.06567508125448
       ],
-      "citation": "Suqing Wu et al. (2025). Human-generative AI collaboration enhances task performance but undermines human’s intrinsic motivation. Scientific Reports."
+      "citation": "Suqing Wu et al. (2025). Human-generative AI collaboration enhances task performance but undermines human\u2019s intrinsic motivation. Scientific Reports."
     },
     {
       "id": "openai-making-ai-work-for-everyone-everywhere-our-approach-to-localization",
@@ -1493,7 +1493,7 @@
       "authors": "Various",
       "year": 2026,
       "url": "https://openai.com/index/gpt-5-lowers-protein-synthesis-cost",
-      "summary": "An autonomous lab combining OpenAI’s GPT-5 with Ginkgo Bioworks’ cloud automation cut cell-free protein synthesis costs by 40% through closed-loop experimentation.",
+      "summary": "An autonomous lab combining OpenAI\u2019s GPT-5 with Ginkgo Bioworks\u2019 cloud automation cut cell-free protein synthesis costs by 40% through closed-loop experimentation.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -1577,7 +1577,7 @@
       "authors": "Various",
       "year": 2026,
       "url": "https://openai.com/index/gpt-5-3-codex-system-card",
-      "summary": "GPT‑5.3-Codex is the most capable agentic coding model to date, combining the frontier coding performance of GPT‑5.2-Codex with the reasoning and professional knowledge capabilities of GPT‑5.2. ",
+      "summary": "GPT\u20115.3-Codex is the most capable agentic coding model to date, combining the frontier coding performance of GPT\u20115.2-Codex with the reasoning and professional knowledge capabilities of GPT\u20115.2. ",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -1640,7 +1640,7 @@
       "authors": "Various",
       "year": 2026,
       "url": "https://openai.com/index/vfl-wolfsburg",
-      "summary": "By focusing on people, not pilots, the Bundesliga club is scaling efficiency, creativity, and knowledge—without losing its football identity.",
+      "summary": "By focusing on people, not pilots, the Bundesliga club is scaling efficiency, creativity, and knowledge\u2014without losing its football identity.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -1661,7 +1661,7 @@
       "authors": "Various",
       "year": 2026,
       "url": "https://openai.com/index/sora-feed-philosophy",
-      "summary": "Discover the Sora feed philosophy—built to spark creativity, foster connections, and keep experiences safe with personalized recommendations, parental controls, and strong guardrails.",
+      "summary": "Discover the Sora feed philosophy\u2014built to spark creativity, foster connections, and keep experiences safe with personalized recommendations, parental controls, and strong guardrails.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -1703,7 +1703,7 @@
       "authors": "Various",
       "year": 2026,
       "url": "https://openai.com/index/introducing-the-codex-app",
-      "summary": "Introducing the Codex app for macOS—a command center for AI coding and software development with multiple agents, parallel workflows, and long-running tasks.",
+      "summary": "Introducing the Codex app for macOS\u2014a command center for AI coding and software development with multiple agents, parallel workflows, and long-running tasks.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -1720,7 +1720,7 @@
     },
     {
       "id": "openai-inside-openai-s-in-house-data-agent",
-      "title": "Inside OpenAI’s in-house data agent",
+      "title": "Inside OpenAI\u2019s in-house data agent",
       "authors": "Various",
       "year": 2026,
       "url": "https://openai.com/index/inside-our-in-house-data-agent",
@@ -1766,7 +1766,7 @@
       "authors": "Various",
       "year": 2026,
       "url": "https://openai.com/index/retiring-gpt-4o-and-older-models",
-      "summary": "On February 13, 2026, alongside the previously announced retirement⁠ of GPT‑5 (Instant, Thinking, and Pro), we will retire GPT‑4o, GPT‑4.1, GPT‑4.1 mini, and OpenAI o4-mini from ChatGPT. In the API, there are no changes at this time.",
+      "summary": "On February 13, 2026, alongside the previously announced retirement\u2060 of GPT\u20115 (Instant, Thinking, and Pro), we will retire GPT\u20114o, GPT\u20114.1, GPT\u20114.1 mini, and OpenAI o4-mini from ChatGPT. In the API, there are no changes at this time.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -1808,7 +1808,7 @@
       "authors": "Various",
       "year": 2026,
       "url": "https://openai.com/index/emea-youth-and-wellbeing-grant",
-      "summary": "Apply for the EMEA Youth & Wellbeing Grant, a €500,000 program funding NGOs and researchers advancing youth safety and wellbeing in the age of AI.",
+      "summary": "Apply for the EMEA Youth & Wellbeing Grant, a \u20ac500,000 program funding NGOs and researchers advancing youth safety and wellbeing in the age of AI.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -1913,7 +1913,7 @@
       "authors": "Various",
       "year": 2026,
       "url": "https://openai.com/index/indeed-maggie-hulce",
-      "summary": "Indeed’s CRO Maggie Hulce shares how AI is transforming job search, recruiting, and talent acquisition for employers and job seekers.",
+      "summary": "Indeed\u2019s CRO Maggie Hulce shares how AI is transforming job search, recruiting, and talent acquisition for employers and job seekers.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -1997,7 +1997,7 @@
       "authors": "Various",
       "year": 2026,
       "url": "https://openai.com/business/guides-and-resources/chatgpt-usage-and-adoption-patterns-at-work",
-      "summary": "A data-driven report on how workers across industries use ChatGPT—covering adoption trends, top tasks, departmental patterns, and the future of AI at work.",
+      "summary": "A data-driven report on how workers across industries use ChatGPT\u2014covering adoption trends, top tasks, departmental patterns, and the future of AI at work.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -2186,7 +2186,7 @@
       "authors": "Various",
       "year": 2026,
       "url": "https://openai.com/index/ai-for-self-empowerment",
-      "summary": "How AI can expand human agency by closing the capability overhang—helping people, businesses, and countries unlock real productivity, growth, and opportunity.",
+      "summary": "How AI can expand human agency by closing the capability overhang\u2014helping people, businesses, and countries unlock real productivity, growth, and opportunity.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -2207,7 +2207,7 @@
       "authors": "Various",
       "year": 2026,
       "url": "https://openai.com/index/a-business-that-scales-with-the-value-of-intelligence",
-      "summary": "OpenAI’s business model scales with intelligence—spanning subscriptions, API, ads, commerce, and compute—driven by deepening ChatGPT adoption.",
+      "summary": "OpenAI\u2019s business model scales with intelligence\u2014spanning subscriptions, API, ads, commerce, and compute\u2014driven by deepening ChatGPT adoption.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -2224,11 +2224,11 @@
     },
     {
       "id": "openai-the-truth-left-out-from-elon-musk-s-recent-court-filing",
-      "title": "The truth left out from Elon Musk’s recent court filing",
+      "title": "The truth left out from Elon Musk\u2019s recent court filing",
       "authors": "Various",
       "year": 2026,
       "url": "https://openai.com/index/the-truth-elon-left-out",
-      "summary": "The truth left out from Elon Musk’s recent court filing.",
+      "summary": "The truth left out from Elon Musk\u2019s recent court filing.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -2249,7 +2249,7 @@
       "authors": "Various",
       "year": 2026,
       "url": "https://openai.com/index/introducing-chatgpt-go",
-      "summary": "ChatGPT Go is now available worldwide, offering expanded access to GPT-5.2 Instant, higher usage limits, and longer memory—making advanced AI more affordable globally.",
+      "summary": "ChatGPT Go is now available worldwide, offering expanded access to GPT-5.2 Instant, higher usage limits, and longer memory\u2014making advanced AI more affordable globally.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -2270,7 +2270,7 @@
       "authors": "Various",
       "year": 2026,
       "url": "https://openai.com/index/our-approach-to-advertising-and-expanding-access",
-      "summary": "OpenAI plans to test advertising in the U.S. for ChatGPT’s free and Go tiers to expand affordable access to AI worldwide, while protecting privacy, trust, and answer quality.",
+      "summary": "OpenAI plans to test advertising in the U.S. for ChatGPT\u2019s free and Go tiers to expand affordable access to AI worldwide, while protecting privacy, trust, and answer quality.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -2329,7 +2329,7 @@
     },
     {
       "id": "openai-openai-partners-with-cerebras",
-      "title": "OpenAI partners with Cerebras  ",
+      "title": "OpenAI partners with Cerebras\u202f ",
       "authors": "Various",
       "year": 2026,
       "url": "https://openai.com/index/cerebras-partnership",
@@ -2371,11 +2371,11 @@
     },
     {
       "id": "openai-openai-s-raising-concerns-policy",
-      "title": "OpenAI’s Raising Concerns Policy",
+      "title": "OpenAI\u2019s Raising Concerns Policy",
       "authors": "Various",
       "year": 2026,
       "url": "https://openai.com/index/openai-raising-concerns-policy",
-      "summary": "We’re publishing our Raising Concerns Policy, which protects employees’ rights to make protected disclosures.",
+      "summary": "We\u2019re publishing our Raising Concerns Policy, which protects employees\u2019 rights to make protected disclosures.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -2434,11 +2434,11 @@
     },
     {
       "id": "openai-netomi-s-lessons-for-scaling-agentic-systems-into-the-enterprise",
-      "title": "Netomi’s lessons for scaling agentic systems into the enterprise",
+      "title": "Netomi\u2019s lessons for scaling agentic systems into the enterprise",
       "authors": "Various",
       "year": 2026,
       "url": "https://openai.com/index/netomi",
-      "summary": "How Netomi scales enterprise AI agents using GPT-4.1 and GPT-5.2—combining concurrency, governance, and multi-step reasoning for reliable production workflows.",
+      "summary": "How Netomi scales enterprise AI agents using GPT-4.1 and GPT-5.2\u2014combining concurrency, governance, and multi-step reasoning for reliable production workflows.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -2459,7 +2459,7 @@
       "authors": "Various",
       "year": 2026,
       "url": "https://openai.com/index/openai-for-healthcare",
-      "summary": "OpenAI for Healthcare enables secure, enterprise-grade AI that supports HIPAA compliance—reducing administrative burden and supporting clinical workflows.",
+      "summary": "OpenAI for Healthcare enables secure, enterprise-grade AI that supports HIPAA compliance\u2014reducing administrative burden and supporting clinical workflows.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -2560,11 +2560,11 @@
     },
     {
       "id": "google-ai-watch-our-new-gemini-ad-ahead-of-football-s-biggest-weekend",
-      "title": "Watch our new Gemini ad ahead of football’s biggest weekend",
+      "title": "Watch our new Gemini ad ahead of football\u2019s biggest weekend",
       "authors": "Various",
       "year": 2026,
       "url": "https://blog.google/company-news/inside-google/company-announcements/gemini-ad-new-home/",
-      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/SB_2026_New_Home_16_9_Thumbnail.max-600x600.format-webp.webp\">Learn more about Google’s new ad that will run during football’s Big Game on February 8.",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/SB_2026_New_Home_16_9_Thumbnail.max-600x600.format-webp.webp\">Learn more about Google\u2019s new ad that will run during football\u2019s Big Game on February 8.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -2602,7 +2602,7 @@
     },
     {
       "id": "google-ai-how-we-re-helping-preserve-the-genetic-information-of-endangered-species-with-ai",
-      "title": "How we’re helping preserve the genetic information of endangered species with AI",
+      "title": "How we\u2019re helping preserve the genetic information of endangered species with AI",
       "authors": "Various",
       "year": 2026,
       "url": "https://blog.google/innovation-and-ai/technology/ai/ai-to-preserve-endangered-species/",
@@ -2627,7 +2627,7 @@
       "authors": "Various",
       "year": 2026,
       "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/kaggle-game-arena-updates/",
-      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/original_images/kaggle_Gsmes_Hero.png\">We’re expanding Game Arena with Poker and Werewolf, while Gemini 3 Pro and Flash top our chess leaderboard.",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/original_images/kaggle_Gsmes_Hero.png\">We\u2019re expanding Game Arena with Poker and Werewolf, while Gemini 3 Pro and Flash top our chess leaderboard.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -2669,7 +2669,7 @@
       "authors": "Various",
       "year": 2026,
       "url": "https://blog.google/innovation-and-ai/technology/ai/release-notes-podcast-project-genie/",
-      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/RN25_Episode_Thumbnail.max-600x600.format-webp.webp\">The latest episode of the Google AI: Release Notes podcast focuses on Genie 3, a real-time, interactive world model. Host Logan Kilpatrick chats with Diego Rivas, Shlomi…",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/RN25_Episode_Thumbnail.max-600x600.format-webp.webp\">The latest episode of the Google AI: Release Notes podcast focuses on Genie 3, a real-time, interactive world model. Host Logan Kilpatrick chats with Diego Rivas, Shlomi\u2026",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -2690,7 +2690,7 @@
       "authors": "Various",
       "year": 2026,
       "url": "https://blog.google/products-and-platforms/products/google-one/google-ai-plus-availability/",
-      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Google_AI_Plus_Hero_Visual_2096.max-600x600.format-webp_4ffr2GI.webp\">We’re launching Google AI Plus in 35 new countries and territories including the US, making it available everywhere Google AI plans are available.",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Google_AI_Plus_Hero_Visual_2096.max-600x600.format-webp_4ffr2GI.webp\">We\u2019re launching Google AI Plus in 35 new countries and territories including the US, making it available everywhere Google AI plans are available.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -2728,11 +2728,11 @@
     },
     {
       "id": "google-ai-in-our-latest-podcast-hear-how-the-smoke-jumpers-team-brings-gemini-to-billions-of-people",
-      "title": "In our latest podcast, hear how the “Smoke Jumpers” team brings Gemini to billions of people.",
+      "title": "In our latest podcast, hear how the \u201cSmoke Jumpers\u201d team brings Gemini to billions of people.",
       "authors": "Various",
       "year": 2026,
       "url": "https://blog.google/products-and-platforms/products/gemini/release-notes-podcast-smokejumpers/",
-      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/thumbnails_EP24_002_ccRelease_N.max-600x600.format-webp.webp\">Bringing Gemini to billions of users requires a massive, coordinated infrastructure effort. In the latest episode of the Google AI: Release Notes podcast, host Logan Kil…",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/thumbnails_EP24_002_ccRelease_N.max-600x600.format-webp.webp\">Bringing Gemini to billions of users requires a massive, coordinated infrastructure effort. In the latest episode of the Google AI: Release Notes podcast, host Logan Kil\u2026",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -2749,11 +2749,11 @@
     },
     {
       "id": "google-ai-how-animators-and-ai-researchers-made-dear-upstairs-neighbors",
-      "title": "How animators and AI researchers made ‘Dear Upstairs Neighbors’",
+      "title": "How animators and AI researchers made \u2018Dear Upstairs Neighbors\u2019",
       "authors": "Various",
       "year": 2026,
       "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/dear-upstairs-neighbors/",
-      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/DUN_poster_16x9_v02.max-600x600.format-webp.webp\">Today, our animated short film, “Dear Upstairs Neighbors,” previews at the Sundance Film Festival.",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/DUN_poster_16x9_v02.max-600x600.format-webp.webp\">Today, our animated short film, \u201cDear Upstairs Neighbors,\u201d previews at the Sundance Film Festival.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -2816,7 +2816,7 @@
       "authors": "Various",
       "year": 2026,
       "url": "https://blog.google/products-and-platforms/products/gemini/how-nano-banana-got-its-name/",
-      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/NanoBananaName_Hero.max-600x600.format-webp.webp\">We’re peeling back the origin story of Nano Banana, one of Google DeepMind’s most popular models.",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/NanoBananaName_Hero.max-600x600.format-webp.webp\">We\u2019re peeling back the origin story of Nano Banana, one of Google DeepMind\u2019s most popular models.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -2833,11 +2833,11 @@
     },
     {
       "id": "google-ai-learners-and-educators-are-ai-s-new-super-users",
-      "title": "Learners and educators are AI’s new “super users”",
+      "title": "Learners and educators are AI\u2019s new \u201csuper users\u201d",
       "authors": "Various",
       "year": 2026,
       "url": "https://blog.google/products-and-platforms/products/education/our-life-with-ai-2025/",
-      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/aiineducatiuonJan2026_hero_v2.max-600x600.format-webp.webp\">Google’s 2025 Our Life with AI survey found people are using AI tools to learn new things.",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/aiineducatiuonJan2026_hero_v2.max-600x600.format-webp.webp\">Google\u2019s 2025 Our Life with AI survey found people are using AI tools to learn new things.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -2879,7 +2879,7 @@
       "authors": "Various",
       "year": 2026,
       "url": "https://blog.google/company-news/inside-google/around-the-globe/google-middle-east/winner-of-the-global-ai-film-award/",
-      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/FAYZ0207.max-600x600.format-webp.webp\">Over the past year, we’ve witnessed how creators globally have been using our AI models and tools to share their stories with the world. That’s why we launched the AI Fi…",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/FAYZ0207.max-600x600.format-webp.webp\">Over the past year, we\u2019ve witnessed how creators globally have been using our AI models and tools to share their stories with the world. That\u2019s why we launched the AI Fi\u2026",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -2900,7 +2900,7 @@
       "authors": "Various",
       "year": 2026,
       "url": "https://blog.google/innovation-and-ai/technology/ai/veo-3-1-ingredients-to-video/",
-      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/veo-3-1_keyword_blog_header_209.max-600x600.format-webp.webp\">Today, we’re introducing an enhanced version of Veo 3.1 “Ingredients to Video.”",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/veo-3-1_keyword_blog_header_209.max-600x600.format-webp.webp\">Today, we\u2019re introducing an enhanced version of Veo 3.1 \u201cIngredients to Video.\u201d",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -2921,7 +2921,7 @@
       "authors": "Various",
       "year": 2025,
       "url": "https://blog.google/innovation-and-ai/technology/ai/look-back-2025/",
-      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/EOY_2025_Header.max-600x600.format-webp.webp\">Learn more about Google’s launches, milestones and more from 2025.",
+      "summary": "<img src=\"https://storage.googleapis.com/gweb-uniblog-publish-prod/images/EOY_2025_Header.max-600x600.format-webp.webp\">Learn more about Google\u2019s launches, milestones and more from 2025.",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -2938,11 +2938,11 @@
     },
     {
       "id": "microsoft-research-rethinking-imitation-learning-with-predictive-inverse-dynamics-models",
-      "title": "Rethinking imitation learning with Predictive Inverse Dynamics Models",
+      "title": "Rethinking\u00a0imitation\u00a0learning\u00a0with Predictive Inverse Dynamics Models",
       "authors": "Various",
       "year": 2026,
       "url": "https://www.microsoft.com/en-us/research/blog/rethinking-imitation-learning-with-predictive-inverse-dynamics-models/",
-      "summary": "<p>This research looks at why Predictive Inverse Dynamics Models often outperform standard Behavior Cloning in imitation learning. By using simple predictions of what happens next, PIDMs reduce ambiguity and learn from far fewer demonstrations.</p>\n<p>The post <a href=\"https://www.microsoft.com/en-us/research/blog/rethinking-imitation-learning-with-predictive-inverse-dynamics-models/\">Rethinking imitation learning with Predictive Inverse Dynamics Models</a> appeared first on <a href=\"https://www.microsoft.com/en-us/research\">Microsoft Research</a>.</p>\n",
+      "summary": "<p>This research looks at why Predictive Inverse Dynamics Models often outperform standard Behavior Cloning in imitation learning. By using simple predictions of what happens next, PIDMs reduce ambiguity and learn from far fewer demonstrations.</p>\n<p>The post <a href=\"https://www.microsoft.com/en-us/research/blog/rethinking-imitation-learning-with-predictive-inverse-dynamics-models/\">Rethinking\u00a0imitation\u00a0learning\u00a0with Predictive Inverse Dynamics Models</a> appeared first on <a href=\"https://www.microsoft.com/en-us/research\">Microsoft Research</a>.</p>\n",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -2984,7 +2984,7 @@
       "authors": "Various",
       "year": 2026,
       "url": "https://www.microsoft.com/en-us/research/blog/unirg-scaling-medical-imaging-report-generation-with-multimodal-reinforcement-learning/",
-      "summary": "<p>AI can help generate medical image reports, but today’s models struggle with varying reporting schemes. Learn how UniRG uses reinforcement learning to boost performance of medical vision-language models.</p>\n<p>The post <a href=\"https://www.microsoft.com/en-us/research/blog/unirg-scaling-medical-imaging-report-generation-with-multimodal-reinforcement-learning/\">UniRG: Scaling medical imaging report generation with multimodal reinforcement learning</a> appeared first on <a href=\"https://www.microsoft.com/en-us/research\">Microsoft Research</a>.</p>\n",
+      "summary": "<p>AI can help generate medical image reports, but today\u2019s models struggle with varying reporting schemes. Learn how UniRG uses reinforcement learning to boost performance of medical vision-language models.</p>\n<p>The post <a href=\"https://www.microsoft.com/en-us/research/blog/unirg-scaling-medical-imaging-report-generation-with-multimodal-reinforcement-learning/\">UniRG: Scaling medical imaging report generation with multimodal reinforcement learning</a> appeared first on <a href=\"https://www.microsoft.com/en-us/research\">Microsoft Research</a>.</p>\n",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -3005,7 +3005,7 @@
       "authors": "Various",
       "year": 2026,
       "url": "https://www.microsoft.com/en-us/research/blog/multimodal-reinforcement-learning-with-agentic-verifier-for-ai-agents/",
-      "summary": "<p>Argos improves multimodal RL by evaluating whether an agent’s reasoning aligns with what it observes over time. The approach reduces visual hallucinations and produces more reliable, data-efficient agents for real-world applications.</p>\n<p>The post <a href=\"https://www.microsoft.com/en-us/research/blog/multimodal-reinforcement-learning-with-agentic-verifier-for-ai-agents/\">Multimodal reinforcement learning with agentic verifier for AI agents</a> appeared first on <a href=\"https://www.microsoft.com/en-us/research\">Microsoft Research</a>.</p>\n",
+      "summary": "<p>Argos improves multimodal RL by evaluating whether an agent\u2019s reasoning aligns with what it observes over time. The approach reduces visual hallucinations and produces more reliable, data-efficient agents for real-world applications.</p>\n<p>The post <a href=\"https://www.microsoft.com/en-us/research/blog/multimodal-reinforcement-learning-with-agentic-verifier-for-ai-agents/\">Multimodal reinforcement learning with agentic verifier for AI agents</a> appeared first on <a href=\"https://www.microsoft.com/en-us/research\">Microsoft Research</a>.</p>\n",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -3047,7 +3047,7 @@
       "authors": "Various",
       "year": 2025,
       "url": "https://www.microsoft.com/en-us/research/blog/agent-lightning-adding-reinforcement-learning-to-ai-agents-without-code-rewrites/",
-      "summary": "<p>By decoupling how agents work from how they’re trained, Agent Lightning turns each step an agent takes into data for reinforcement learning. This makes it easy for developers to improve agent performance with almost zero code changes.</p>\n<p>The post <a href=\"https://www.microsoft.com/en-us/research/blog/agent-lightning-adding-reinforcement-learning-to-ai-agents-without-code-rewrites/\">Agent Lightning: Adding reinforcement learning to AI agents without code rewrites</a> appeared first on <a href=\"https://www.microsoft.com/en-us/research\">Microsoft Research</a>.</p>\n",
+      "summary": "<p>By decoupling how agents work from how they\u2019re trained, Agent Lightning turns each step an agent takes into data for reinforcement learning. This makes it easy for developers to improve agent performance with almost zero code changes.</p>\n<p>The post <a href=\"https://www.microsoft.com/en-us/research/blog/agent-lightning-adding-reinforcement-learning-to-ai-agents-without-code-rewrites/\">Agent Lightning: Adding reinforcement learning to AI agents without code rewrites</a> appeared first on <a href=\"https://www.microsoft.com/en-us/research\">Microsoft Research</a>.</p>\n",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -3110,7 +3110,7 @@
       "authors": "Various",
       "year": 2025,
       "url": "https://www.microsoft.com/en-us/research/podcast/ideas-community-building-machine-learning-and-the-future-of-ai/",
-      "summary": "<p>As the Women in Machine Learning Workshop (WiML) marks its 20th annual gathering, cofounders, friends, and collaborators Jenn Wortman Vaughan and Hanna Wallach reflect on WiML’s evolution, navigating the field of ML, and their work in responsible AI.</p>\n<p>The post <a href=\"https://www.microsoft.com/en-us/research/podcast/ideas-community-building-machine-learning-and-the-future-of-ai/\">Ideas: Community building, machine learning, and the future of AI</a> appeared first on <a href=\"https://www.microsoft.com/en-us/research\">Microsoft Research</a>.</p>\n",
+      "summary": "<p>As the Women in Machine Learning Workshop (WiML) marks its 20th annual gathering, cofounders, friends, and collaborators Jenn Wortman Vaughan and Hanna Wallach reflect on WiML\u2019s evolution, navigating the field of ML, and their work in responsible AI.</p>\n<p>The post <a href=\"https://www.microsoft.com/en-us/research/podcast/ideas-community-building-machine-learning-and-the-future-of-ai/\">Ideas: Community building, machine learning, and the future of AI</a> appeared first on <a href=\"https://www.microsoft.com/en-us/research\">Microsoft Research</a>.</p>\n",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -3127,11 +3127,11 @@
     },
     {
       "id": "microsoft-research-reducing-privacy-leaks-in-ai-two-approaches-to-contextual-integrity",
-      "title": "Reducing Privacy leaks in AI: Two approaches to contextual integrity",
+      "title": "Reducing Privacy\u00a0leaks in AI: Two approaches to contextual integrity",
       "authors": "Various",
       "year": 2025,
       "url": "https://www.microsoft.com/en-us/research/blog/reducing-privacy-leaks-in-ai-two-approaches-to-contextual-integrity/",
-      "summary": "<p>New research explores two ways to give AI agents stronger privacy safeguards grounded in contextual integrity. One adds lightweight, inference-time checks; the other builds contextual awareness directly into models through reasoning and RL.</p>\n<p>The post <a href=\"https://www.microsoft.com/en-us/research/blog/reducing-privacy-leaks-in-ai-two-approaches-to-contextual-integrity/\">Reducing Privacy leaks in AI: Two approaches to contextual integrity </a> appeared first on <a href=\"https://www.microsoft.com/en-us/research\">Microsoft Research</a>.</p>\n",
+      "summary": "<p>New research explores two ways to give AI agents stronger privacy safeguards grounded in contextual integrity. One adds lightweight, inference-time checks; the other builds contextual awareness directly into models through reasoning and RL.</p>\n<p>The post <a href=\"https://www.microsoft.com/en-us/research/blog/reducing-privacy-leaks-in-ai-two-approaches-to-contextual-integrity/\">Reducing Privacy\u00a0leaks in AI: Two approaches to contextual integrity\u00a0</a> appeared first on <a href=\"https://www.microsoft.com/en-us/research\">Microsoft Research</a>.</p>\n",
       "source": "industry",
       "designLevers": [],
       "designerIntents": [],
@@ -4194,6 +4194,293 @@
       "embedding": [
         498.510822716303,
         217.90909536520033
+      ]
+    },
+    {
+      "id": "cila-7-dimensions-src",
+      "title": "Human-Agent Collaborations: Exploring Interaction Patterns for Designing Collaborative AI Systems",
+      "authors": "Cila et al.",
+      "year": 2022,
+      "url": "https://dl.acm.org/doi/10.1145/3491102.3517589",
+      "summary": "Identifies seven dimensions for characterizing human-AI collaboration \u2014 goal setting, task performance, context awareness, learning, decision making, communication, and social interaction \u2014 each sitting on a spectrum from fully human-led to fully AI-led. Provides a practical canvas for teams to specify how responsibilities are distributed.",
+      "source": "research",
+      "designLevers": [
+        "role",
+        "workflow"
+      ],
+      "designerIntents": [
+        "role_definition",
+        "team_structure"
+      ],
+      "designQuestion": "Across which of the seven CILA dimensions should AI take the lead, and where must humans remain primary?",
+      "tags": [
+        "roles",
+        "collaboration dimensions",
+        "framework",
+        "CHI"
+      ],
+      "cluster": "cluster-1",
+      "embedding": [
+        388.0,
+        264.0
+      ]
+    },
+    {
+      "id": "genai-new-colleague",
+      "title": "Generative AI, the New Colleague? A Sociomateriality Perspective on Manager-AI Relationships",
+      "authors": "Drossel & Hallbeck",
+      "year": 2024,
+      "url": "https://doi.org/10.1145/3613904.3641982",
+      "summary": "Maps how people's relationships with generative AI evolve through four stages: Tool Use \u2192 Interaction Partner \u2192 Collaborator \u2192 Colleague. Uses a sociomateriality lens to show that each stage has distinct interaction patterns and requires different rituals to enable progression. Most organizations get stuck at Tool Use because they never design for the transitions.",
+      "source": "research",
+      "designLevers": [
+        "ritual",
+        "role"
+      ],
+      "designerIntents": [
+        "ritual_design",
+        "role_definition"
+      ],
+      "designQuestion": "Which stage of the human-AI relationship does your team currently occupy \u2014 and what rituals would enable the next transition?",
+      "tags": [
+        "relationship stages",
+        "sociomateriality",
+        "onboarding",
+        "rituals"
+      ],
+      "cluster": "cluster-3",
+      "embedding": [
+        162.0,
+        138.0
+      ]
+    },
+    {
+      "id": "vibe-teaming-src",
+      "title": "Vibe Teaming: Ambient Human-AI Collaboration in Knowledge Work",
+      "authors": "Taylor & Krishna",
+      "year": 2024,
+      "url": "https://doi.org/10.1145/3613904.3642647",
+      "summary": "Describes the emergent mode of human-AI collaboration that's informal, continuous, and context-rich \u2014 the difference between 'I'm delegating this task to AI' and 'AI is always in the room with me.' Knowledge workers interacting with LLM tools throughout their day are mostly doing Vibe Teaming, not structured task delegation, yet most design and research assumes the latter.",
+      "source": "research",
+      "designLevers": [
+        "workflow",
+        "ritual"
+      ],
+      "designerIntents": [
+        "workflow_redesign",
+        "ritual_design"
+      ],
+      "designQuestion": "Where in your team's ambient AI use is accountability unclear \u2014 and what check-in rhythms would bring it into view?",
+      "tags": [
+        "ambient AI",
+        "knowledge work",
+        "teaming modes",
+        "always-on"
+      ],
+      "cluster": "cluster-3",
+      "embedding": [
+        322.0,
+        568.0
+      ]
+    },
+    {
+      "id": "mutual-tom-schelble",
+      "title": "Mutual Theory of Mind: Human-AI Joint Cognitive Systems",
+      "authors": "Schelble et al.",
+      "year": 2023,
+      "url": "https://doi.org/10.1145/3544548.3580943",
+      "summary": "Reframes transparency as a bidirectional design challenge. It's not enough for AI to explain itself to humans; effective teaming requires that AI systems also build and update their model of the specific human they're working with, and adapt accordingly. The design question shifts from 'how do we make AI legible?' to 'how do we design for mutual adaptation?'",
+      "source": "research",
+      "designLevers": [
+        "interface",
+        "workflow"
+      ],
+      "designerIntents": [
+        "tooling_selection",
+        "workflow_redesign"
+      ],
+      "designQuestion": "Does your AI system model its specific human collaborator \u2014 and can that model be inspected and corrected?",
+      "tags": [
+        "theory of mind",
+        "mental models",
+        "mutual adaptation",
+        "bidirectional"
+      ],
+      "cluster": "cluster-3",
+      "embedding": [
+        132.0,
+        456.0
+      ]
+    },
+    {
+      "id": "ai-superteams-bock",
+      "title": "AI Superteams: The New Human-AI Work Model",
+      "authors": "Laszlo Bock",
+      "year": 2024,
+      "url": "https://hbr.org/2024/01/ai-superteams",
+      "summary": "Describes the 'superteam' model where AI and humans are configured as complementary contributors rather than substitutes. Argues for explicit role design as the precondition for effective AI integration, and provides frameworks for how organizations can restructure teams around human-AI complementarity.",
+      "source": "industry",
+      "designLevers": [
+        "role",
+        "workflow"
+      ],
+      "designerIntents": [
+        "role_definition",
+        "team_structure"
+      ],
+      "designQuestion": "Which roles in your organization are best redesigned around human-AI complementarity rather than task handoff?",
+      "tags": [
+        "superteams",
+        "org design",
+        "complementarity",
+        "HBR"
+      ],
+      "cluster": "cluster-1",
+      "embedding": [
+        448.0,
+        210.0
+      ]
+    },
+    {
+      "id": "practical-guide-agents",
+      "title": "A Practical Guide to Building Agents",
+      "authors": "Anthropic",
+      "year": 2024,
+      "url": "https://www.anthropic.com/research/building-effective-agents",
+      "summary": "Anthropic's practitioner guide for designing agentic AI systems. Covers when to delegate autonomously vs. when to checkpoint with humans, how to design escalation paths, and patterns for structuring multi-step AI workflows. Grounded in production experience with Claude-based agents.",
+      "source": "industry",
+      "designLevers": [
+        "workflow",
+        "governance"
+      ],
+      "designerIntents": [
+        "workflow_redesign",
+        "governance_policy"
+      ],
+      "designQuestion": "At which points in your agentic workflow must AI pause for human confirmation \u2014 and how are those checkpoints designed?",
+      "tags": [
+        "agents",
+        "agentic AI",
+        "workflow design",
+        "Anthropic"
+      ],
+      "cluster": "cluster-0",
+      "embedding": [
+        376.0,
+        530.0
+      ]
+    },
+    {
+      "id": "state-ai-business-2025",
+      "title": "State of AI in Business 2025",
+      "authors": "Various",
+      "year": 2025,
+      "url": "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai",
+      "summary": "Annual benchmark survey of AI adoption across industries. 2025 edition tracks governance gap between deployment pace and accountability structure, cautious AI adoption patterns in regulated industries, and the growing divide between AI-mature and AI-nascent organizations.",
+      "source": "industry",
+      "designLevers": [
+        "governance"
+      ],
+      "designerIntents": [
+        "governance_policy"
+      ],
+      "designQuestion": "Where does your organization's AI governance lag behind its deployment pace \u2014 and what accountability structures are missing?",
+      "tags": [
+        "governance",
+        "adoption",
+        "enterprise AI",
+        "benchmarks"
+      ],
+      "cluster": "cluster-2",
+      "embedding": [
+        756.0,
+        112.0
+      ]
+    },
+    {
+      "id": "cautious-adoption-genai",
+      "title": "Cautious Adoption of Generative AI in Organizations",
+      "authors": "Various",
+      "year": 2024,
+      "url": "https://doi.org/10.1145/3613904.3641983",
+      "summary": "Examines why organizations adopt generative AI cautiously despite enthusiasm, identifying institutional risk aversion, lack of audit mechanisms, and unclear accountability as key friction points. Finds that organizations that design governance before deployment show stronger long-term adoption than those that deploy first and govern reactively.",
+      "source": "research",
+      "designLevers": [
+        "governance",
+        "ritual"
+      ],
+      "designerIntents": [
+        "governance_policy"
+      ],
+      "designQuestion": "What governance structures would allow your organization to move from cautious observation to confident AI deployment?",
+      "tags": [
+        "cautious adoption",
+        "governance",
+        "institutional",
+        "risk"
+      ],
+      "cluster": "cluster-2",
+      "embedding": [
+        740.0,
+        148.0
+      ]
+    },
+    {
+      "id": "when-boss-algorithm",
+      "title": "When Your Boss Is an Algorithm",
+      "authors": "Various",
+      "year": 2023,
+      "url": "https://hbr.org/2023/05/when-your-boss-is-an-algorithm",
+      "summary": "Investigates the dynamics of algorithmic management \u2014 when AI systems evaluate, direct, and measure human workers. Finds significant power shifts and identifies design patterns that preserve worker agency and dignity within AI-governed workflows.",
+      "source": "research",
+      "designLevers": [
+        "governance",
+        "role"
+      ],
+      "designerIntents": [
+        "governance_policy",
+        "role_definition"
+      ],
+      "designQuestion": "Which decisions in your workflow are effectively made by AI \u2014 and do the humans being affected know that?",
+      "tags": [
+        "algorithmic management",
+        "power",
+        "worker agency",
+        "governance"
+      ],
+      "cluster": "cluster-4",
+      "embedding": [
+        792.0,
+        158.0
+      ]
+    },
+    {
+      "id": "behavior-descriptions-teaming",
+      "title": "Behavior Descriptions for Effective Human-AI Teaming",
+      "authors": "Dubrow & Orvis",
+      "year": 2020,
+      "url": "https://doi.org/10.1145/3406499.3415089",
+      "summary": "Proposes structured behavioral contracts for AI teammates \u2014 explicit descriptions of how AI will behave in collaborative contexts, designed to improve predictability and team trust. Shows that teams with clear AI behavioral contracts outperform those relying on discovered norms.",
+      "source": "research",
+      "designLevers": [
+        "interface",
+        "role"
+      ],
+      "designerIntents": [
+        "role_definition",
+        "tooling_selection"
+      ],
+      "designQuestion": "Does your team have a behavioral contract for your AI \u2014 and does everyone on the team know what to expect?",
+      "tags": [
+        "behavioral norms",
+        "AI contracts",
+        "predictability",
+        "teaming"
+      ],
+      "cluster": "cluster-1",
+      "embedding": [
+        148.0,
+        498.0
       ]
     }
   ]

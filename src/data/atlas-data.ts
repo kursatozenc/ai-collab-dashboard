@@ -741,6 +741,127 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     labelPos: { x: 258, y: 190 },
     prominence: 0.65,
   },
+
+  // ── Roles + Boundaries (new) ─────────────────────────────────────────────
+  {
+    id: "cila-7-dimensions",
+    name: "CILA's 7 Collaboration Dimensions",
+    thesis:
+      "A practical canvas for specifying exactly how human and AI responsibilities are distributed across seven dimensions.",
+    why_it_matters:
+      "The CILA framework (Cila et al., CHI 2022) identifies seven dimensions for characterizing human-AI collaboration: goal setting, task performance, context awareness, learning, decision making, communication, and social interaction. Each dimension sits on a spectrum from fully human-led to fully AI-led. Rather than asking 'is AI a tool or teammate?' (binary), designers ask where each of the seven dimensions should sit for their specific context.",
+    key_tensions: [
+      "Granular role design vs. coordination overhead",
+      "Explicit role contracts vs. emergent collaboration",
+    ],
+    design_moves: [
+      "Use the 7 dimensions as a team charter canvas before deployment",
+      "Revisit the canvas quarterly as AI capabilities change",
+      "Make the dimension settings visible to all team members, not just designers",
+    ],
+    representative_source_ids: ["cila-7-dimensions-src"],
+    territory_ids: ["roles-boundaries"],
+    related_neighborhood_ids: ["tool-vs-teammate", "team-composition"],
+    labelPos: { x: 372, y: 292 },
+    prominence: 0.75,
+  },
+  {
+    id: "synthetic-authority",
+    name: "Synthetic Authority",
+    thesis:
+      "When AI acquires perceived authority it was never explicitly given — and why that happens by default.",
+    why_it_matters:
+      "AI systems accumulate perceived authority through interface design, confidence of presentation, frequency of use, and institutional embedding — regardless of whether that authority was formally assigned. Not deciding about AI authority is itself a decision that defaults toward accumulation. Teams need explicit authority audits as a governance practice.",
+    key_tensions: [
+      "Efficiency of deferring to AI vs. risks of unexamined authority",
+      "Explicit authority design vs. organic adoption patterns",
+    ],
+    design_moves: [
+      "Conduct an 'authority audit' before deployment: which decisions will AI recommendations influence?",
+      "Design visible override mechanisms that don't require justification",
+      "Surface AI's confidence level — distinguish 'AI suggested' from 'AI decided'",
+    ],
+    representative_source_ids: ["synthetic-authority"],
+    territory_ids: ["roles-boundaries"],
+    related_neighborhood_ids: ["identity-meaning", "power-fairness"],
+    labelPos: { x: 462, y: 358 },
+    prominence: 0.7,
+  },
+
+  // ── Workflow (new) ────────────────────────────────────────────────────────
+  {
+    id: "vibe-teaming",
+    name: "Vibe Teaming",
+    thesis:
+      "When collaboration is ambient, always-on, and not organized around discrete tasks — a fundamentally different teaming mode.",
+    why_it_matters:
+      "Vibe Teaming (Taylor & Krishna, 2024) describes the emergent mode of human-AI collaboration that's informal, continuous, and context-rich. It's the difference between 'I'm delegating this task to AI' and 'AI is always in the room with me.' Knowledge workers interacting with LLM tools throughout their day are mostly doing Vibe Teaming, not structured task delegation — yet most design and research assumes the latter.",
+    key_tensions: [
+      "Ambient availability vs. distraction and over-reliance",
+      "Informal collaboration vs. accountability for AI-influenced decisions",
+      "Always-on AI vs. human cognitive recovery time",
+    ],
+    design_moves: [
+      "Design AI 'off' modes and check-in rhythms alongside 'on' capabilities",
+      "Create norms around when ambient AI use should become explicit task delegation",
+      "Log AI touchpoints in ambient workflows so teams can reflect on AI's actual influence",
+    ],
+    representative_source_ids: ["vibe-teaming-src"],
+    territory_ids: ["workflow"],
+    related_neighborhood_ids: ["task-delegation", "co-creative-workflows"],
+    labelPos: { x: 318, y: 584 },
+    prominence: 0.75,
+  },
+
+  // ── Interactions + Modality (new) ─────────────────────────────────────────
+  {
+    id: "mutual-theory-of-mind",
+    name: "Mutual Theory of Mind",
+    thesis:
+      "Effective collaboration requires that AI models its human — not just that humans learn to model AI.",
+    why_it_matters:
+      "The Mutual Theory of Mind framework (Schelble et al., 2023) reframes transparency as a bidirectional design challenge. It's not enough for AI to explain itself to humans; effective teaming requires that AI systems also build and update their model of the specific human they're working with, and adapt accordingly. The design question shifts from 'how do we make AI legible?' to 'how do we design for mutual adaptation?'",
+    key_tensions: [
+      "AI personalization vs. human privacy and autonomy",
+      "Adaptive AI behavior vs. predictability and trust",
+      "User modeling vs. stereotyping or manipulation",
+    ],
+    design_moves: [
+      "Design explicit 'tell me about you' onboarding moments for AI teammates",
+      "Make AI's model of its human visible and correctable",
+      "Design for the AI to flag when it's operating outside its calibrated model of the user",
+    ],
+    representative_source_ids: ["mutual-tom-schelble"],
+    territory_ids: ["interactions-modality"],
+    related_neighborhood_ids: ["shared-understanding", "trust-calibration"],
+    labelPos: { x: 80, y: 478 },
+    prominence: 0.7,
+  },
+
+  // ── Rituals + Norms (new) ─────────────────────────────────────────────────
+  {
+    id: "relationship-stages",
+    name: "Relationship Stages",
+    thesis:
+      "Human-AI relationships evolve through recognizable stages — and transitions between stages require deliberate ritual design.",
+    why_it_matters:
+      "Using a sociomateriality lens, Drossel & Hallbeck (2024) map how people's relationships with generative AI evolve through four stages: Tool Use → Interaction Partner → Collaborator → Colleague. Each stage has distinct interaction patterns and requires different rituals to enable progression. Most organizations get stuck at the Tool Use stage because they never design for the transitions.",
+    key_tensions: [
+      "Organic relationship development vs. designed onboarding rituals",
+      "Individual relationship pace vs. team-level norm-setting",
+      "Deeper collaboration vs. increasing dependence",
+    ],
+    design_moves: [
+      "Design stage-appropriate onboarding: don't introduce collaboration norms before teams have basic fluency",
+      "Create 'relationship review' rituals — e.g., quarterly team reflections on how AI use has evolved",
+      "Name the stages explicitly so teams can recognize where they are and where they want to go",
+    ],
+    representative_source_ids: ["genai-new-colleague"],
+    territory_ids: ["rituals-norms"],
+    related_neighborhood_ids: ["onboarding-rituals", "ai-culture-norms"],
+    labelPos: { x: 140, y: 172 },
+    prominence: 0.75,
+  },
 ];
 
 // ─── Source Assignments ───────────────────────────────────────────────────────
@@ -1060,6 +1181,72 @@ export const SOURCE_ASSIGNMENTS: SourceAssignment[] = [
     neighborhood_ids: ["training-upskilling"],
     primary_layer: "organization",
   },
+  // New sources — Step 3
+  {
+    item_id: "cila-7-dimensions-src",
+    primary_territory: "roles-boundaries",
+    neighborhood_ids: ["cila-7-dimensions"],
+    primary_layer: "team",
+  },
+  {
+    item_id: "genai-new-colleague",
+    primary_territory: "rituals-norms",
+    neighborhood_ids: ["relationship-stages"],
+    primary_layer: "team",
+  },
+  {
+    item_id: "vibe-teaming-src",
+    primary_territory: "workflow",
+    neighborhood_ids: ["vibe-teaming"],
+    primary_layer: "workflow",
+  },
+  {
+    item_id: "mutual-tom-schelble",
+    primary_territory: "interactions-modality",
+    neighborhood_ids: ["mutual-theory-of-mind"],
+    primary_layer: "team",
+  },
+  {
+    item_id: "ai-superteams-bock",
+    primary_territory: "roles-boundaries",
+    secondary_territory: "workflow",
+    neighborhood_ids: ["team-composition"],
+    primary_layer: "organization",
+  },
+  {
+    item_id: "practical-guide-agents",
+    primary_territory: "workflow",
+    secondary_territory: "roles-boundaries",
+    neighborhood_ids: ["task-delegation", "human-in-the-loop"],
+    primary_layer: "workflow",
+  },
+  {
+    item_id: "state-ai-business-2025",
+    primary_territory: "governance",
+    neighborhood_ids: ["accountability-harm", "power-fairness"],
+    primary_layer: "organization",
+  },
+  {
+    item_id: "cautious-adoption-genai",
+    primary_territory: "governance",
+    secondary_territory: "rituals-norms",
+    neighborhood_ids: ["algorithmic-oversight"],
+    primary_layer: "organization",
+  },
+  {
+    item_id: "when-boss-algorithm",
+    primary_territory: "governance",
+    secondary_territory: "workflow",
+    neighborhood_ids: ["power-fairness", "algorithmic-oversight"],
+    primary_layer: "organization",
+  },
+  {
+    item_id: "behavior-descriptions-teaming",
+    primary_territory: "interactions-modality",
+    secondary_territory: "roles-boundaries",
+    neighborhood_ids: ["ai-behavioral-patterns", "mutual-theory-of-mind"],
+    primary_layer: "team",
+  },
 ];
 
 // ─── Source assignment lookup ─────────────────────────────────────────────────
@@ -1128,6 +1315,54 @@ export const ROUTES: Route[] = [
         narrative:
           "Finally: the governance layer. Who is responsible when something goes wrong? How does the organization set the rules and revise them? Governance designed after an incident is governance that comes too late.",
         source_ids: ["ethics-hat", "hcai-hat", "human-loop-orgs"],
+      },
+    ],
+  },
+  {
+    id: "integrating-ai-organization",
+    name: "Integrating AI Into Your Organization",
+    description:
+      "For leaders and change-makers navigating org-wide AI adoption — a path through governance, culture, and workflow redesign. Five stops through the structural landscape.",
+    stops: [
+      {
+        id: "org-stop-governance",
+        focus_id: "governance",
+        focus_type: "territory",
+        narrative:
+          "Start here: establish accountability chains and oversight structures before deployment, not after incidents. The Charter Hall is where the rules are set — or where, by default, they aren't.",
+        source_ids: ["ethics-hat", "hcai-hat", "state-ai-business-2025"],
+      },
+      {
+        id: "org-stop-rituals",
+        focus_id: "rituals-norms",
+        focus_type: "territory",
+        narrative:
+          "Build the cultural practices that make AI integration sustainable over time — not just policies, but habits. The Common Ground is where abstract governance becomes daily behaviour.",
+        source_ids: ["ai-culture", "when-ai-joins", "genai-new-colleague"],
+      },
+      {
+        id: "org-stop-workflow",
+        focus_id: "workflow",
+        focus_type: "territory",
+        narrative:
+          "Redesign how work is structured once AI is part of the team — handoffs, delegation patterns, and oversight moments. The Delegation Basin is where org strategy meets daily task flow.",
+        source_ids: ["human-loop-orgs", "practical-guide-agents", "vibe-teaming-src"],
+      },
+      {
+        id: "org-stop-roles",
+        focus_id: "roles-boundaries",
+        focus_type: "territory",
+        narrative:
+          "Define who does what — use the 7-dimension CILA framework to distribute responsibilities explicitly. The Boundary Cairn is where authority is assigned, or left dangerously ambiguous.",
+        source_ids: ["cila-7-dimensions-src", "ai-superteams-bock", "when-should-i-lead"],
+      },
+      {
+        id: "org-stop-trust",
+        focus_id: "trust-accountability",
+        focus_type: "territory",
+        narrative:
+          "Close the loop: build the trust calibration and repair mechanisms that keep the system healthy as AI capabilities grow. The Accountability Ridge runs through everything — you end here because trust is sustained, not installed.",
+        source_ids: ["trust-digital-teams", "shaping-trust", "cautious-adoption-genai"],
       },
     ],
   },

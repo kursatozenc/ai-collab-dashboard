@@ -255,10 +255,68 @@ export default function AtlasMap({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [onMapBackgroundClick]);
 
-  // Scroll wheel zoom
+  // Focused territory — derived from route stop or manual selection
+  const focusId = activeRouteStopFocusId ?? selectedTerritoryId;
+  const focusedTerritory = focusId ? TERRITORY_MAP.get(focusId) : null;
+
+  // Container ref — used for both scroll-wheel zoom and territory click zoom
   const containerRef = useRef<HTMLDivElement>(null);
   const wZoom = useRef({ scale: 1, tx: 0, ty: 0 });
 
+  // Apply a CSS-pixel transform to the container div (works in rendered space,
+  // avoiding SVG coordinate system confusion entirely)
+  const applyContainerTransform = useCallback(
+    (scale: number, tx: number, ty: number, animated = true) => {
+      const el = containerRef.current;
+      if (!el) return;
+      el.style.transition = animated
+        ? "transform 0.65s cubic-bezier(0.4, 0, 0.15, 1)"
+        : "none";
+      el.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+      el.style.transformOrigin = "0px 0px";
+      wZoom.current = { scale, tx, ty };
+    },
+    []
+  );
+
+  // Zoom to a territory — compute everything in CSS pixel space
+  const zoomToTerritory = useCallback(
+    (territory: (typeof TERRITORIES)[0]) => {
+      const el = containerRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const W = rect.width;
+      const H = rect.height;
+      // How the SVG maps its 900×680 viewBox onto the container
+      // preserveAspectRatio="xMidYMid slice" → scale by the LARGER ratio
+      const svgScale = Math.max(W / SVG_W, H / SVG_H);
+      // Territory center in rendered CSS pixels (relative to container top-left)
+      const tcx = territory.center.x * svgScale - (SVG_W * svgScale - W) / 2;
+      const tcy = territory.center.y * svgScale - (SVG_H * svgScale - H) / 2;
+      const ZOOM = 2.2;
+      const tx = W / 2 - ZOOM * tcx;
+      const ty = H / 2 - ZOOM * tcy;
+      applyContainerTransform(ZOOM, tx, ty);
+    },
+    [applyContainerTransform]
+  );
+
+  const resetContainerZoom = useCallback(() => {
+    applyContainerTransform(1, 0, 0);
+  }, [applyContainerTransform]);
+
+  // Zoom / reset when focused territory changes
+  useEffect(() => {
+    if (focusedTerritory) {
+      // Small delay lets the panel open first so the container rect is correct
+      const t = setTimeout(() => zoomToTerritory(focusedTerritory), 80);
+      return () => clearTimeout(t);
+    } else {
+      resetContainerZoom();
+    }
+  }, [focusedTerritory, zoomToTerritory, resetContainerZoom]);
+
+  // Scroll wheel zoom — fine-grain zoom toward cursor
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
@@ -269,14 +327,13 @@ export default function AtlasMap({
       const rect = el!.getBoundingClientRect();
       const mx = e.clientX - rect.left;
       const my = e.clientY - rect.top;
-      wZoom.current.tx = mx - (mx - wZoom.current.tx) * (newScale / wZoom.current.scale);
-      wZoom.current.ty = my - (my - wZoom.current.ty) * (newScale / wZoom.current.scale);
-      wZoom.current.scale = newScale;
-      el!.style.transform = `translate(${wZoom.current.tx}px, ${wZoom.current.ty}px) scale(${wZoom.current.scale})`;
+      const tx = mx - (mx - wZoom.current.tx) * (newScale / wZoom.current.scale);
+      const ty = my - (my - wZoom.current.ty) * (newScale / wZoom.current.scale);
+      applyContainerTransform(newScale, tx, ty, false);
     }
     el.addEventListener("wheel", onWheel, { passive: false });
     return () => el.removeEventListener("wheel", onWheel);
-  }, []);
+  }, [applyContainerTransform]);
 
   const CURSOR_R = 200;
   const MAX_PUSH = 18;
@@ -312,18 +369,6 @@ export default function AtlasMap({
     }
     return pins;
   }, [items, compareMode]);
-
-  // Compute zoom transform for selected territory or route stop
-  const focusId = activeRouteStopFocusId ?? selectedTerritoryId;
-  const focusedTerritory = focusId ? TERRITORY_MAP.get(focusId) : null;
-
-  const zoomTransform = useMemo(() => {
-    if (!focusedTerritory) return { scale: 1, tx: 0, ty: 0 };
-    const scale = 2.4;
-    const tx = SVG_W / 2 - focusedTerritory.center.x * scale;
-    const ty = SVG_H / 2 - focusedTerritory.center.y * scale;
-    return { scale, tx, ty };
-  }, [focusedTerritory]);
 
   const handleTerritoryClick = useCallback(
     (e: React.MouseEvent, id: string) => {
@@ -553,16 +598,8 @@ export default function AtlasMap({
 
 
 
-        {/* Main zoomable content group */}
-        <motion.g
-          animate={{
-            scale: zoomTransform.scale,
-            x: zoomTransform.tx,
-            y: zoomTransform.ty,
-          }}
-          transition={{ type: "spring", stiffness: 65, damping: 26, mass: 1.2 }}
-          style={{ transformOrigin: "0px 0px" }}
-        >
+        {/* Main zoomable content group — zoom handled by containerRef CSS transform */}
+        <g>
           {/* ── Territory connection lines (curved bezier network) ────────── */}
           {(() => {
             const CONN_DIST = 360;
@@ -990,7 +1027,7 @@ export default function AtlasMap({
               );
             })()}
           </AnimatePresence>
-        </motion.g>
+        </g>
 
         {/* ── Map legend ─────────────────────────────────────────────── */}
         <g transform="translate(20, 20)" style={{ pointerEvents: "none" }}>

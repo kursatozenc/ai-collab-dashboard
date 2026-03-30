@@ -210,8 +210,8 @@ function EntryOverlay({
         >
           {[
             { label: "territories", value: "6" },
-            { label: "research papers", value: "48" },
-            { label: "neighborhoods", value: "20" },
+            { label: "research papers", value: "58" },
+            { label: "neighborhoods", value: "25" },
           ].map((s) => (
             <div key={s.label} style={{ textAlign: "center" }}>
               <div
@@ -435,7 +435,7 @@ export default function Home() {
               fontFamily: "var(--font-inter), system-ui",
             }}
           >
-            A navigable scholarly landscape · 6 territories · 48 research sources
+            A navigable scholarly landscape · 6 territories · 58 research sources
           </p>
         </div>
 

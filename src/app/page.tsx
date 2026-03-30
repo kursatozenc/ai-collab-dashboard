@@ -377,6 +377,7 @@ export default function Home() {
 
   const showPanel =
     atlasState !== "entry" &&
+    atlasState !== "atlas" &&
     panelVariant !== null;
 
   const showEntryOverlay = atlasState === "entry";

@@ -26,8 +26,8 @@ export const TERRITORIES: Territory[] = [
     ],
     adjacency: ["workflow", "roles-boundaries", "trust-accountability"],
     landmark_name: "The Signal Exchange",
-    color: "#7a9e7e",
-    strokeColor: "#5a7a5e",
+    color: "#b8c8d8",
+    strokeColor: "#6888a8",
     svgPath:
       "M 155 332 C 222 332 277 390 277 462 C 277 534 222 592 155 592 C 88 592 33 534 33 462 C 33 390 88 332 155 332 Z",
     center: { x: 155, y: 462 },
@@ -58,8 +58,8 @@ export const TERRITORIES: Territory[] = [
       "governance",
     ],
     landmark_name: "The Delegation Basin",
-    color: "#b8956a",
-    strokeColor: "#8a6e48",
+    color: "#d8c890",
+    strokeColor: "#a89840",
     svgPath:
       "M 400 447 C 482 447 548 495 548 555 C 548 615 482 663 400 663 C 318 663 252 615 252 555 C 252 495 318 447 400 447 Z",
     center: { x: 400, y: 555 },
@@ -91,8 +91,8 @@ export const TERRITORIES: Territory[] = [
       "rituals-norms",
     ],
     landmark_name: "The Boundary Cairn",
-    color: "#6d8fad",
-    strokeColor: "#4d6f8d",
+    color: "#e8c9a0",
+    strokeColor: "#b8904a",
     svgPath:
       "M 420 156 C 502 156 568 211 568 278 C 568 345 502 400 420 400 C 338 400 272 345 272 278 C 272 211 338 156 420 156 Z",
     center: { x: 420, y: 278 },
@@ -118,8 +118,8 @@ export const TERRITORIES: Territory[] = [
     ],
     adjacency: ["trust-accountability", "roles-boundaries", "workflow"],
     landmark_name: "The Charter Hall",
-    color: "#8b6d6d",
-    strokeColor: "#6b4d4d",
+    color: "#c4cdd8",
+    strokeColor: "#7a8fa0",
     svgPath:
       "M 778 30 C 833 30 878 69 878 118 C 878 167 833 206 778 206 C 723 206 678 167 678 118 C 678 69 723 30 778 30 Z",
     center: { x: 778, y: 118 },
@@ -151,8 +151,8 @@ export const TERRITORIES: Territory[] = [
       "rituals-norms",
     ],
     landmark_name: "The Accountability Ridge",
-    color: "#9e8a5c",
-    strokeColor: "#7e6a3c",
+    color: "#d4b8c4",
+    strokeColor: "#9a6878",
     // Elongated vertical ridge — cross-cutting through center-east
     svgPath:
       "M 690 185 C 743 185 786 268 786 370 C 786 472 743 555 690 555 C 637 555 594 472 594 370 C 594 268 637 185 690 185 Z",
@@ -179,8 +179,8 @@ export const TERRITORIES: Territory[] = [
     ],
     adjacency: ["roles-boundaries", "trust-accountability", "governance"],
     landmark_name: "The Common Ground",
-    color: "#8e7ea8",
-    strokeColor: "#6e5e88",
+    color: "#c8d5b9",
+    strokeColor: "#8fa880",
     svgPath:
       "M 188 52 C 253 52 306 97 306 152 C 306 207 253 252 188 252 C 123 252 70 207 70 152 C 70 97 123 52 188 52 Z",
     center: { x: 188, y: 152 },

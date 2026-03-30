@@ -374,6 +374,7 @@ export default function AtlasMap({
       <svg
         ref={svgRef}
         viewBox={`0 0 ${SVG_W} ${SVG_H}`}
+        preserveAspectRatio="xMidYMid slice"
         width="100%"
         height="100%"
         style={{ display: "block", cursor: "default" }}
@@ -560,7 +561,7 @@ export default function AtlasMap({
             y: zoomTransform.ty,
           }}
           transition={{ type: "spring", stiffness: 65, damping: 26, mass: 1.2 }}
-          style={{ transformOrigin: "center center" }}
+          style={{ transformOrigin: "0px 0px" }}
         >
           {/* ── Territory connection lines (curved bezier network) ────────── */}
           {(() => {

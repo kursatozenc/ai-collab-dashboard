@@ -557,7 +557,7 @@ export default function Home() {
             flex: 1,
             position: "relative",
             overflow: "hidden",
-            background: "#f7f3ed",
+            background: "#f0e6cc",
             transition: "flex 0.3s ease",
           }}
         >

@@ -454,45 +454,45 @@ export default function AtlasMap({
             <stop offset="100%" stopColor="#c8d5b9" />
           </radialGradient>
 
-          {/* Terrain displacement — makes smooth ellipses look like organic landmasses */}
-          <filter id="terrainDisplace" x="-15%" y="-15%" width="130%" height="130%">
+          {/* Terrain displacement — organic landmass edges */}
+          <filter id="terrainDisplace" x="-20%" y="-20%" width="140%" height="140%">
             <feTurbulence
               type="fractalNoise"
-              baseFrequency="0.012 0.008"
-              numOctaves="3"
+              baseFrequency="0.015 0.010"
+              numOctaves="4"
               seed="42"
               result="noise"
             />
             <feDisplacementMap
               in="SourceGraphic"
               in2="noise"
-              scale="12"
+              scale="22"
               xChannelSelector="R"
               yChannelSelector="G"
             />
           </filter>
-          <filter id="terrainDisplaceSelected" x="-20%" y="-20%" width="140%" height="140%">
+          <filter id="terrainDisplaceSelected" x="-22%" y="-22%" width="144%" height="144%">
             <feTurbulence
               type="fractalNoise"
-              baseFrequency="0.012 0.008"
-              numOctaves="3"
+              baseFrequency="0.015 0.010"
+              numOctaves="4"
               seed="42"
               result="noise"
             />
             <feDisplacementMap
               in="SourceGraphic"
               in2="noise"
-              scale="12"
+              scale="22"
               xChannelSelector="R"
               yChannelSelector="G"
               result="displaced"
             />
             <feDropShadow
               dx="0"
-              dy="2"
-              stdDeviation="6"
+              dy="3"
+              stdDeviation="7"
               floodColor="#2d2926"
-              floodOpacity="0.12"
+              floodOpacity="0.14"
               in="displaced"
             />
           </filter>
@@ -513,6 +513,32 @@ export default function AtlasMap({
           fillOpacity={0.35}
           style={{ pointerEvents: "none" }}
         />
+
+        {/* Sea wave marks — hand-drawn water texture in open sea areas */}
+        <g style={{ pointerEvents: "none" }} opacity={0.28}>
+          {[
+            // bottom-right sea
+            [650,520],[690,535],[730,520],[770,535],[810,520],
+            [660,548],[700,562],[740,548],[780,562],[820,548],
+            [670,576],[710,590],[750,576],[790,590],
+            // upper-center sea
+            [310,40],[350,52],[390,40],[430,52],[470,40],[510,52],
+            [320,65],[360,78],[400,65],[440,78],[480,65],
+            // left-edge sea
+            [28,280],[28,300],[28,320],[28,340],
+            // between trust and governance (upper-right gap)
+            [600,190],[640,205],[680,190],
+            [610,218],[650,232],
+          ].map(([wx, wy], i) => (
+            <path
+              key={`wave-${i}`}
+              d={`M ${wx} ${wy} Q ${wx+6} ${wy-3} ${wx+12} ${wy} Q ${wx+18} ${wy+3} ${wx+24} ${wy}`}
+              fill="none"
+              stroke="#7a6a50"
+              strokeWidth={0.7}
+            />
+          ))}
+        </g>
 
         {/* Compass rose — clean 4-point cross */}
         <g transform="translate(852, 630)" opacity={0.55} style={{ pointerEvents: "none" }}>
@@ -616,7 +642,7 @@ export default function AtlasMap({
                     fill="none"
                     stroke={territory.strokeColor}
                     strokeWidth={1}
-                    strokeOpacity={isDimmed ? 0 : isTrustRidge ? 0.07 : 0.04}
+                    strokeOpacity={isDimmed ? 0 : isTrustRidge ? 0.10 : 0.07}
                     filter="url(#terrainDisplace)"
                     style={{
                       transform: `scale(1.19)`,
@@ -629,7 +655,7 @@ export default function AtlasMap({
                     fill="none"
                     stroke={territory.strokeColor}
                     strokeWidth={1}
-                    strokeOpacity={isDimmed ? 0 : isTrustRidge ? 0.13 : 0.08}
+                    strokeOpacity={isDimmed ? 0 : isTrustRidge ? 0.18 : 0.13}
                     filter="url(#terrainDisplace)"
                     style={{
                       transform: `scale(1.13)`,
@@ -642,7 +668,7 @@ export default function AtlasMap({
                     fill="none"
                     stroke={territory.strokeColor}
                     strokeWidth={1}
-                    strokeOpacity={isDimmed ? 0 : isTrustRidge ? 0.20 : 0.14}
+                    strokeOpacity={isDimmed ? 0 : isTrustRidge ? 0.28 : 0.20}
                     filter="url(#terrainDisplace)"
                     style={{
                       transform: `scale(1.08)`,
@@ -654,8 +680,8 @@ export default function AtlasMap({
                     d={territory.svgPath}
                     fill="none"
                     stroke={territory.strokeColor}
-                    strokeWidth={1}
-                    strokeOpacity={isDimmed ? 0 : isTrustRidge ? 0.30 : 0.22}
+                    strokeWidth={1.25}
+                    strokeOpacity={isDimmed ? 0 : isTrustRidge ? 0.40 : 0.32}
                     filter="url(#terrainDisplace)"
                     style={{
                       transform: `scale(1.04)`,
@@ -687,8 +713,8 @@ export default function AtlasMap({
                         : 0.55
                     }
                     stroke={territory.strokeColor}
-                    strokeWidth={isSelected ? 2.25 : 1.5}
-                    strokeOpacity={isDimmed ? 0.12 : isSelected ? 0.85 : 0.55}
+                    strokeWidth={isSelected ? 3 : 2.5}
+                    strokeOpacity={isDimmed ? 0.12 : isSelected ? 0.90 : 0.70}
                     animate={{
                       fillOpacity: isDimmed
                         ? 0.10
@@ -698,6 +724,20 @@ export default function AtlasMap({
                     }}
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                     filter={isSelected ? "url(#terrainDisplaceSelected)" : "url(#terrainDisplace)"}
+                  />
+                  {/* Inner coastline — double-line island effect from map references */}
+                  <path
+                    d={territory.svgPath}
+                    fill="none"
+                    stroke={territory.strokeColor}
+                    strokeWidth={0.75}
+                    strokeOpacity={isDimmed ? 0 : 0.45}
+                    filter="url(#terrainDisplace)"
+                    style={{
+                      transform: `scale(0.91)`,
+                      transformOrigin: `${territory.center.x}px ${territory.center.y}px`,
+                      pointerEvents: "none",
+                    }}
                   />
                   {/* Selected ring highlight */}
                   {isSelected && (

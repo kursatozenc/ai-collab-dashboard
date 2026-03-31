@@ -284,9 +284,11 @@ export default function AtlasMap({
     (territory: (typeof TERRITORIES)[0]) => {
       const el = containerRef.current;
       if (!el) return;
-      const rect = el.getBoundingClientRect();
-      const W = rect.width;
-      const H = rect.height;
+      // offsetWidth/offsetHeight give the natural layout size, unaffected by
+      // the current CSS transform — getBoundingClientRect() would return scaled
+      // dimensions if the container is already zoomed, breaking the math.
+      const W = el.offsetWidth;
+      const H = el.offsetHeight;
       // How the SVG maps its 900×680 viewBox onto the container
       // preserveAspectRatio="xMidYMid slice" → scale by the LARGER ratio
       const svgScale = Math.max(W / SVG_W, H / SVG_H);

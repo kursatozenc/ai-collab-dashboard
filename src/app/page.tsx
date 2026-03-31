@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { RadarItem, AtlasState, CompareMode } from "../types";
 import AtlasMap from "../components/AtlasMap";
@@ -255,10 +255,16 @@ export default function Home() {
   const [activeRouteId, setActiveRouteId] = useState<string | null>(null);
   const [routeStopIndex, setRouteStopIndex] = useState(0);
   const [compareMode, setCompareMode] = useState<CompareMode>("both");
+  // Remembers which state to return to when a source panel is closed
+  const sourceReturnStateRef = useRef<AtlasState | null>(null);
 
   // ── Derived: which territory the map camera focuses on ────────────────────
+  // Also works when atlasState is "source" opened from within a route
   const activeRouteFocusId = useMemo(() => {
-    if (atlasState !== "route" || !activeRouteId) return null;
+    const isInRoute =
+      atlasState === "route" ||
+      (atlasState === "source" && sourceReturnStateRef.current === "route");
+    if (!isInRoute || !activeRouteId) return null;
     const route = ROUTES.find((r) => r.id === activeRouteId);
     if (!route) return null;
     return route.stops[routeStopIndex]?.focus_id ?? null;
@@ -319,16 +325,23 @@ export default function Home() {
   }, []);
 
   const handleSourceClick = useCallback((item: RadarItem) => {
+    sourceReturnStateRef.current = atlasState; // remember where we came from
     setSelectedSourceItem(item);
     setAtlasState("source");
-  }, []);
+  }, [atlasState]);
 
   const handleMapBackgroundClick = useCallback(() => {
     if (atlasState === "entry") return;
     if (atlasState === "route") return; // don't dismiss route on bg click
     if (selectedSourceItem) {
+      const returnState = sourceReturnStateRef.current;
+      sourceReturnStateRef.current = null;
       setSelectedSourceItem(null);
-      setAtlasState(selectedNeighborhoodId ? "neighborhood" : selectedTerritoryId ? "territory" : "atlas");
+      if (returnState === "route") {
+        setAtlasState("route");
+      } else {
+        setAtlasState(selectedNeighborhoodId ? "neighborhood" : selectedTerritoryId ? "territory" : "atlas");
+      }
       return;
     }
     if (selectedNeighborhoodId) {
@@ -345,8 +358,14 @@ export default function Home() {
 
   const handlePanelClose = useCallback(() => {
     if (atlasState === "source") {
+      const returnState = sourceReturnStateRef.current;
+      sourceReturnStateRef.current = null;
       setSelectedSourceItem(null);
-      setAtlasState(selectedNeighborhoodId ? "neighborhood" : selectedTerritoryId ? "territory" : "atlas");
+      if (returnState === "route") {
+        setAtlasState("route"); // restore route — activeRouteId & routeStopIndex unchanged
+      } else {
+        setAtlasState(selectedNeighborhoodId ? "neighborhood" : selectedTerritoryId ? "territory" : "atlas");
+      }
     } else if (atlasState === "neighborhood") {
       setSelectedNeighborhoodId(null);
       setAtlasState(selectedTerritoryId ? "territory" : "atlas");
